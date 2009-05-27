@@ -1,0 +1,12 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1><%=t("new_layout")%></h1>
+
+<%= error_messages_for :layout %>
+
+<% form_for(:layout, :url => collection_url, :html => { :multipart => true }) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p class="form-buttons">
+    <%= button t("create") %>
+  </p>
+<% end %>

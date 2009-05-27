@@ -1,0 +1,36 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_layout"), new_object_url, :icon => 'add' %></p>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+
+<h1><%=t("listing_layouts")%></h1>
+<table class="index">
+  <thead>
+    <tr>
+      <th><%= t("name") %></th>
+      <th><%= t("location") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @layouts.each do |layout|%>
+      <tr>
+        <td><%= layout.name %></td>
+        <td><%= layout.location %></td>
+        <td class="actions">
+          <%=link_to_edit layout %> &nbsp; 
+          <%=link_to_delete layout %>
+      </tr>
+    <% end %>
+    <% if @layouts.empty? %>
+      <tr><td colspan="3">None.</td></tr>
+    <% end %>    
+  </tbody>
+</table>

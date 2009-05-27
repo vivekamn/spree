@@ -1,0 +1,14 @@
+<% f.field_container :name do %>
+  <%= f.label :name, t("name")%><br />
+  <%=f.text_field :name %>
+<% end %>
+<p>
+  <%= f.label :location, t("location")%><br />
+  <%=f.text_field :location %>
+</p>
+<div id="image-listing">
+  <tr>
+    <td><%= t("thumbnail") %>:</td>
+    <td><%= f.file_field :screenshot, :size => 50 %></td>      
+  </tr>
+</div>

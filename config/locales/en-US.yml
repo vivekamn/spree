@@ -520,3 +520,10 @@ en-US:
   zone_based: "Zone Based"
   zone_setting_description: "Collections of countries, states or other zones to be used in various calculations."
   zones: Zones              
+  location: Location
+  new_layout: New Layout
+  editing_layout: Editing Layout
+  layouts: Layouts
+  layout_setting_description: "Create and manage taxon specific layouts."
+  listing_layouts: Listing Layouts
+  thumbnail: Thumbnail

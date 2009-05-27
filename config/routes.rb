@@ -86,6 +86,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :shipments
     admin.resources :shipping_methods
     admin.resources :shipping_categories  
+    admin.resources :layouts
   end                   
 
   
