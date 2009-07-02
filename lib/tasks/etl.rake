@@ -3,7 +3,7 @@
 # for turning data residing in existing tables into YML files or 
 # loading YML files into the database.
 #
-# Much of this code was taken from the rails tasks themselves and adapted herein.
+# Much of this code was taken from the rails tasks themselves and adapted (and extended) herein.
 #
 # Author: Michael Lang, mwlang@cybrains.net
 # 

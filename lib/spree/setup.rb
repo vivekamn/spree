@@ -28,6 +28,7 @@ module Spree
       
       @config = config
       @admin = create_admin_user(config[:admin_password], config[:admin_email])
+      load_default_data
       load_sample_data if sample_data?
       announce "Finished.\n\n"
     end
@@ -52,6 +53,14 @@ module Spree
       admin.roles << role
       admin.save      
       admin      
+    end
+
+    # Loads default data necessary for basic spree functionality
+    def load_default_data
+      ActiveRecord::Base.establish_connection(RAILS_ENV.to_sym)
+      Dir.glob(File.join(SPREE_ROOT, "db", 'default', '*.{yml,csv}')).each do |fixture_file|
+        Fixtures.create_fixtures("#{SPREE_ROOT}/db/default", File.basename(fixture_file, '.*'))
+      end
     end
     
     # Uses a special set of fixtures to load sample data
@@ -101,7 +110,7 @@ module Spree
       
       def prompt_for_admin_email
         email = ask('Email [spree@example.com]: ', String) do |q|
-          q.echo = false
+          q.echo = true
           q.whitespace = :strip
         end
         email = "spree@example.com" if email.blank?
@@ -112,7 +121,7 @@ module Spree
       def sample_data?
         return true if ENV['AUTO_ACCEPT']
         sample = ask('Load Sample Data? [y]: ', String) do |q|
-          q.echo = false
+          q.echo = true
           q.whitespace = :strip
         end
         sample == "" or sample == "y" or sample == "yes" or sample == "true"
