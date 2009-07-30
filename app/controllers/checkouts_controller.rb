@@ -77,7 +77,7 @@ class CheckoutsController < Spree::BaseController
     @order.shipping_methods.collect do |ship_method| 
       { :id   => ship_method.id, 
         :name => ship_method.name, 
-        :rate => number_to_currency(ship_method.calculate_shipping(fake_shipment)) }
+        :rate => number_to_currency(fake_shipment.calculate_shipping) }
     end
   end
   

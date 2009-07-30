@@ -1,5 +1,6 @@
 class Zone < ActiveRecord::Base
   has_many :zone_members
+  
   validates_presence_of :name
   validates_uniqueness_of :name
   after_save :remove_defunct_members

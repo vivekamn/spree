@@ -2,13 +2,19 @@ class Shipment < ActiveRecord::Base
   belongs_to :order
   belongs_to :shipping_method
   belongs_to :address
+  has_one    :charge,   :as => :charge_source
+  has_calculator :default => Calculator::Shipping
 
   before_create :generate_shipment_number
-#  after_save :recalculate_tax
   after_save :transition_order
-
+  after_save :create_shipping_charge
+  
   attr_accessor :special_instructions 
-  accepts_nested_attributes_for :address 
+  accepts_nested_attributes_for :address
+
+  def calculate_shipping
+    calculator.compute(self)
+  end
      
   def shipped?
     self.shipped_at
@@ -19,7 +25,18 @@ class Shipment < ActiveRecord::Base
     self.shipped_at = Time.now
   end
 
-  private  
+  def create_shipping_charge
+    if shipping_method
+      self.charge ||= ShippingCharge.create({
+          :order => order,
+          :description => "#{I18n.t(:shipping)} (#{shipping_method.name})",
+          :charge_source => self,
+        })
+    end
+  end
+
+  private
+
   def generate_shipment_number
     record = true
     while record
@@ -40,9 +57,4 @@ class Shipment < ActiveRecord::Base
     order.ship!                                        
     order.state_events.create(:name => I18n.t('ship'), :user => current_user, :previous_state => order.state_was)
   end
-  
-#  def recalculate_tax
-#    return unless order && order.respond_to?(:calculate_tax)      
-#    order.update_attribute("tax_amount", order.calculate_tax)
-#  end
 end

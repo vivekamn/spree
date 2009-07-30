@@ -211,6 +211,10 @@ module Admin::BaseHelper
       
       form.label("preferred_#{key}", t(key)+": ") +
         preference_field(form, "preferred_#{key}", :type => type)
-    }.join("")
+    }.join("<br />")
+  end
+
+  def calculator_fields(form)
+    render :partial => "admin/shared/calculator_fields", :locals => {:f => form}
   end
 end

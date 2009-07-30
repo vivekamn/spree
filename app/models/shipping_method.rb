@@ -1,24 +1,15 @@
 class ShippingMethod < ActiveRecord::Base
   belongs_to :zone
-  has_one :calculator, :as => :calculable, :dependent => :destroy
-                                    
-  accepts_nested_attributes_for :calculator
+  has_many :shipping_rates
+
+  has_calculator
    
-  def calculator_type
-    calculator.class.to_s if calculator
-  end
-  
-  def calculator_type=(calculator_type)
-    # does nothing - just here to satisfy the form
-  end
-  
   def calculate_shipping(shipment)
-    return 0 unless zone.include?(shipment.address)
-    return calculator.calculate_shipping(shipment)
+    shipment.calculate_shipping
   end   
   
   def available?(order)
-    return true unless calculator.respond_to?(:available?)
-    calculator.available?(order)    
+    zone.include?(order.ship_address) &&
+      calculator && calculator.available?(order)
   end
 end

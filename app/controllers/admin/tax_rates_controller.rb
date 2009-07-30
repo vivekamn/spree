@@ -20,8 +20,9 @@ class Admin::TaxRatesController < Admin::BaseController
     
   private 
   
-    def load_data     
-      @available_zones = Zone.find :all, :order => :name
-      @available_categories = TaxCategory.find :all, :order => :name
-    end
+  def load_data
+    @available_zones = Zone.find :all, :order => :name
+    @available_categories = TaxCategory.find :all, :order => :name
+    @calculators = Calculator.all_available_for(@object)
+  end
 end

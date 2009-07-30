@@ -17,7 +17,6 @@ class Admin::CouponsController < Admin::BaseController
   end
   
   def load_data     
-    # TODO - remove hard coded
-    @coupon_calculators = [FlatRateCouponCalculator, FlatPercentCouponCalculator]
+    @calculators = Calculator.all_available_for(@object)
   end  
 end

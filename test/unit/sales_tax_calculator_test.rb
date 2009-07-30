@@ -9,13 +9,13 @@ class SalesTaxCalculatorTest < ActiveSupport::TestCase
     end
     
     should "return zero if no rates provided" do
-      assert_equal 0, Spree::SalesTaxCalculator.calculate_tax(@order, [])
+      assert_equal 0, Calculator::SalesTax.calculate_tax(@order, [])
     end
     
     context "for order where no line item contains a taxable product" do                                                                 
       setup { @order.line_items = [Factory(:line_item, :variant => Factory(:variant, :product => @non_taxable))] }
       should "return zero if none of the line items contains a taxable product" do
-        assert_equal 0, Spree::SalesTaxCalculator.calculate_tax(@order, [])
+        assert_equal 0, Calculator::SalesTax.calculate_tax(@order, [])
       end
     end       
     
@@ -26,7 +26,7 @@ class SalesTaxCalculatorTest < ActiveSupport::TestCase
         @tax_rate = TaxRate.new(:amount => 0.05, :tax_category => @tax_category)
       end
       should "tax only the taxable line items" do
-        assert_equal 5, Spree::SalesTaxCalculator.calculate_tax(@order, [@tax_rate])
+        assert_equal 5, Calculator::SalesTax.calculate_tax(@order, [@tax_rate])
       end
     end
     
