@@ -196,6 +196,7 @@ en-US:
   backordering_is_allowed: "Backordering {{not}} allowed"
   bill_address: "Bill Address"
   billing_address: "Billing Address"
+  calculator: "Calculator"
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
   cancel: cancel
   canceled: Canceled
@@ -229,7 +230,6 @@ en-US:
   country: Country
   country_based: "Country Based"
   coupon: Coupon                                                                             
-  coupon_calculator: Coupon Calculator
   coupons: Coupons
   coupons_description: Manage coupons
   create: Create
@@ -475,7 +475,6 @@ en-US:
   shipped: Shipped
   shipping: Shipping
   shipping_address: "Shipping Address"
-  shipping_calculator: Calculator
   shipping_categories: "Shipping Categories"
   shipping_categories_description: "Manage shipping categories to identify which products can be shipped via which method"
   shipping_cost: Cost

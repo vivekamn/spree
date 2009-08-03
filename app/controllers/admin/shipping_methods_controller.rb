@@ -17,7 +17,6 @@ class Admin::ShippingMethodsController < Admin::BaseController
   end
   
   def load_data
-    build_object
     @available_zones = Zone.find :all, :order => :name                      
     @calculators = Calculator.all_available_for(@object)
   end    
