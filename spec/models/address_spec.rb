@@ -34,21 +34,23 @@ describe Address do
     end
   end
 
-  it "should require a state name when the associated country don't have states" do
+  it "should require a state name when there is no state object" do
     @address.attributes = valid_address_attributes.with(:state_name => "")
 
     @address.should_not be_valid
-    @address.errors.full_messages.should include("#{'state_name'.humanize} #{I18n.translate("activerecord.errors.messages.blank")}")
+    # @address.errors.full_messages.should include("#{'state_name'.humanize} #{I18n.translate("activerecord.errors.messages.blank")}")
+    @address.errors.full_messages.should include("#{'state_name'.humanize} is required if state is empty")
   end
 
-  it "should require a state when the associated country have states" do
+  it "should require a state when there is no state_name" do
     @address.attributes = valid_address_attributes.with(
       :country => Country.new(:states => [State.new(:name => "A State", :abbr => "ST")]),
       :state_name => ""
     )
 
     @address.should_not be_valid
-    @address.errors.full_messages.should include("#{'state'.humanize} #{I18n.translate("activerecord.errors.messages.blank")}")
+    # @address.errors.full_messages.should include("#{'state'.humanize} #{I18n.translate("activerecord.errors.messages.blank")}")
+    @address.errors.full_messages.should include("#{'state'.humanize} is required if state_name is empty")
   end
   
   it "should be valid when having correct information" do

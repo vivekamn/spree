@@ -1,6 +1,7 @@
 class Address < ActiveRecord::Base
   belongs_to :country
   belongs_to :state
+  before_validation :switch_state
   
   has_many :checkouts, :foreign_key => "bill_address_id"
   has_many :shipments
@@ -9,11 +10,13 @@ class Address < ActiveRecord::Base
   validates_presence_of :lastname
   validates_presence_of :address1
   validates_presence_of :city
-  validates_presence_of :state, :if => Proc.new { |address| address.state_name.blank? && Spree::Config[:address_requires_state] }
-  validates_presence_of :state_name, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
   validates_presence_of :zipcode
   validates_presence_of :country
   validates_presence_of :phone
+
+  def validate
+    validate_state_info
+  end
 
   # disconnected since there's no code to display error messages yet OR matching client-side validation
   def phone_validate
@@ -22,6 +25,33 @@ class Address < ActiveRecord::Base
     valid_chars = (phone =~ /^[-+()\/\s\d]+$/)
     if !(n_digits > 5 && valid_chars)
       errors.add(:phone, "is invalid")
+    end
+  end
+
+  # only one of {state,state_name} can be set at any time
+  def validate_state_info
+    if state && state_name 
+      errors.add(:state,      "and state name can't both be set together")
+      errors.add(:state_name, "and state can't both be set together")
+    else
+      if Spree::Config[:address_requires_state]
+        if state.blank? && state_name.blank? 
+          errors.add(:state,      "is required if state_name is empty")
+          errors.add(:state_name, "is required if state is empty")
+        end
+      else
+        errors.add(:state,      "must be empty") if state
+        errors.add(:state_name, "must be empty") if state_name
+      end
+    end
+  end
+
+  # if moving from one to the other, then clear the field which is set in the last saved version
+  def switch_state
+    if id && state && state_name
+      persisted = Address.find(self.id)
+      self.state      = nil if persisted.state      
+      self.state_name = nil if persisted.state_name 
     end
   end
 
