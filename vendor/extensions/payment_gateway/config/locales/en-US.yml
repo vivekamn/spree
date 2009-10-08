@@ -1,0 +1,10 @@
+en-US:
+  gateways: "Gateways"
+  new_gateway: "New Gateway"
+  editing_gateway: "Editing Gateway"
+  gateway_settings_warning: "If you are changing the gateway type, you must save first before you can edit the gateway settings"
+  login: Login
+  active: "Active"
+  provider: "Provider"
+  configured: Configured
+  environment: "Environment"
