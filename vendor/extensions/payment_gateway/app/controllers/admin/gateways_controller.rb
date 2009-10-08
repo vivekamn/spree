@@ -3,7 +3,7 @@ class Admin::GatewaysController < Admin::BaseController
   before_filter :load_data
 
   update.before do
-		if params[:gateway] && params[:gateway][:type]
+		if params[:gateway] && params[:gateway][:type] && @object.type.to_s != params[:gateway][:type]
 			@object.type = params[:gateway][:type]
 			@object.save!
 			

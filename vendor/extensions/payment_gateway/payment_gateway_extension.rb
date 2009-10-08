@@ -15,8 +15,11 @@ class PaymentGatewayExtension < Spree::Extension
 
 		#register all payment gateways
 		[
+			Gateway::Bogus,
       Gateway::AuthorizeNet,
-      Gateway::Linkpoint
+      Gateway::Linkpoint,
+			Gateway::PayPal,
+			Gateway::Protx
     ].each{|gw|
       begin
         gw.register  

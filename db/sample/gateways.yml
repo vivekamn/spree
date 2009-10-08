@@ -1,0 +1,18 @@
+bogus_dev:
+  name: Bogus Development
+  description: Bogus payment gateway for development.
+  mode: development
+  active: true
+  type: Gateway::Bogus
+bogus_test:
+  name: Bogus Test
+  description: Bogus payment gateway for test.
+  mode: test
+  active: true
+  type: Gateway::Bogus
+bogus_prod:
+  name: Bogus Production
+  description: Bogus payment gateway for production.
+  mode: production
+  active: true
+  type: Gateway::Bogus

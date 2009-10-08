@@ -1,23 +1,14 @@
-# Specify this gateway in environment.rb and use the following credit card numbers for testing purposes
-#
-# VISA: 4111111111111111
-# MC:   5500000000000004
-# AMEX: 340000000000009
-# DISC: 6011000000000004
-# 
-# NOTE: Based on ActiveMerchant's Bogus Gateway with some added improvements
-module Spree #:nodoc:
-  class BogusGateway
-    TEST_VISA = "4111111111111111" 
+class Gateway::Bogus < Gateway
+	  TEST_VISA = "4111111111111111" 
     TEST_MC = "5500000000000004"
     TEST_AMEX = "340000000000009"  
     TEST_DISC = "6011000000000004"
     
     VALID_CCS = ["1", TEST_VISA, TEST_MC, TEST_AMEX, TEST_DISC]
-    
-    def initialize(options = {})
 
-    end
+		def preferences
+			{}
+		end
     
     def authorize(money, creditcard, options = {})      
       if VALID_CCS.include? creditcard.number 
@@ -63,6 +54,9 @@ module Spree #:nodoc:
     def test?
       true
     end
-    
-  end
+
+		def provider
+			self
+		end
+
 end

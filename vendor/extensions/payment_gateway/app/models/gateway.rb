@@ -12,8 +12,11 @@ class Gateway < ActiveRecord::Base
   def self.providers
     @@providers.to_a
   end
-
-
+ 
+	def validate
+		errors.add_to_base I18n.translate("only_one_active_gateway_per_environment") if self.active && Gateway.exists?(:active => true, :environment => self.environment) 
+	end
+ 
 	def options
 		options = {}
 		self.preferences.each do |key,value| 
@@ -22,7 +25,7 @@ class Gateway < ActiveRecord::Base
 			options[key.to_sym] = value
 		end
 		
-		options.length == prefs.length ? options : nil
+		options.length == preferences.length ? options : nil
 	end
 	
 	def method_missing(method, *args)
