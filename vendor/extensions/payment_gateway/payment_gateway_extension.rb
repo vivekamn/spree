@@ -19,7 +19,8 @@ class PaymentGatewayExtension < Spree::Extension
       Gateway::AuthorizeNet,
       Gateway::Linkpoint,
 			Gateway::PayPal,
-			Gateway::Protx
+			Gateway::Protx,
+			Gateway::Beanstream
     ].each{|gw|
       begin
         gw.register  

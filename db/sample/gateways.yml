@@ -1,18 +1,21 @@
 bogus_dev:
   name: Bogus Development
   description: Bogus payment gateway for development.
-  mode: development
+  environment: development
+  mode: test
   active: true
   type: Gateway::Bogus
 bogus_test:
   name: Bogus Test
   description: Bogus payment gateway for test.
+  environment: test
   mode: test
   active: true
   type: Gateway::Bogus
 bogus_prod:
   name: Bogus Production
   description: Bogus payment gateway for production.
-  mode: production
+  environment: production
+  mode: live
   active: true
   type: Gateway::Bogus

@@ -26,8 +26,8 @@
       <tr id="<%= dom_id gateway %>">
         <td width="120px"><%= gateway.name %></td>
         <td width="140px"><%= gateway.type %></td>
-        <td width="100px"><%= gateway.mode.to_s.titleize  %></td>
         <td width="100px"><%= gateway.environment.to_s.titleize %></td>
+        <td width="100px"><%= gateway.mode.to_s.titleize  %></td>
         <td width="80px"><%= gateway.active.to_s.titleize %></td>
         <td width="100px"><%= (!gateway.options.nil?).to_s.titleize %></td>
         <td>
