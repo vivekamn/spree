@@ -9,7 +9,9 @@
   </tr>
   <tr>
     <td><label><%=t("environment")%></label></td>
-    <td><%= text_field :gateway, :environment, {"style" => "width:120px"} %></td>
+    <td>
+      <%= collection_select(:gateway, :environment, Configuration.configurations.keys, :to_s, :titleize, {}, {:id => "gtwy-env"}) %>
+    </td>
   </tr>
   <tr>
     <td><label><%=t("server")%></label></td>
