@@ -7,9 +7,12 @@ en-US:
   active: "Active"
   provider: "Provider"
   configured: Configured
-  mode: Mode
+  server: Server
+  test_mode: Test Mode
   signature: Signature
   currency_code: "Currency Code"
   pem: PEM
   environment: "Environment"
   only_one_active_gateway_per_environment: You can only have one Active gateway per environment.
+  test: "Test"
+  live: "Live"

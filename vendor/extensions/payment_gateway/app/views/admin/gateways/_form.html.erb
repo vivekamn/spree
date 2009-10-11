@@ -12,8 +12,30 @@
     <td><%= text_field :gateway, :environment, {"style" => "width:120px"} %></td>
   </tr>
   <tr>
-    <td><label><%=t("mode")%></label></td>
-    <td><%= text_field :gateway, :mode, {"style" => "width:120px"} %></td>
+    <td><label><%=t("server")%></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:gateway, :server, "test" ) %>
+        <%= t("test") %>
+      </label> &nbsp; 
+      <label class="sub">
+        <%= radio_button(:gateway, :server, "live" ) %>
+        <%= t("live") %>
+      </label>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%=t("test_mode")%></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:gateway, :test_mode, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp; 
+      <label class="sub">
+        <%= radio_button(:gateway, :test_mode, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
   </tr>
   <tr>
     <td><label><%= t("active") %></label></td>

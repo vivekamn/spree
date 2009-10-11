@@ -12,20 +12,32 @@ class Gateway < ActiveRecord::Base
   def self.providers
     @@providers.to_a
   end
+  
+  def provider_class
+    raise "You must implement provider_class method for this gateway."
+  end
+  
+  def provider
+    ActiveMerchant::Billing::Base.gateway_mode = server.to_sym
+    gateway_options = options
+    gateway_options[:test] = true if test_mode
+		@provider ||= provider_class.new(gateway_options)
+  end 
  
 	def validate
 		errors.add_to_base I18n.translate("only_one_active_gateway_per_environment") if self.active && Gateway.exists?(:active => true, :environment => self.environment) 
 	end
  
 	def options
-		options = {}
-		self.preferences.each do |key,value| 
-			next false if value.nil? || value.empty?
-
-			options[key.to_sym] = value
-		end
-		
-		options.length == preferences.length ? options : nil
+	  #self.respond_to? :preferences ? self.preferences : {}
+    options_hash = {}
+    self.preferences.each do |key,value| 
+      #next false if value.nil? || value.empty?    
+      options_hash[key.to_sym] = value
+    end
+    options_hash
+    # 
+    # options.length == preferences.length ? options : nil
 	end
 	
 	def method_missing(method, *args)

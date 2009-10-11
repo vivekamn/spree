@@ -11,7 +11,8 @@ class MoveToConfigurableGateways < ActiveRecord::Migration
 			t.text :description
 			t.boolean :active, :default => true
 			t.string :environment, :default => "development"
-			t.string :mode, :default => "test"
+			t.string :server, :default => "test"
+			t.boolean :test_mode, :default => "true"
 		  t.timestamps
 		end
   end
