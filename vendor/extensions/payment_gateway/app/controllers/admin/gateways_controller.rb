@@ -5,7 +5,7 @@ class Admin::GatewaysController < Admin::BaseController
   update.before do
 		if params[:gateway] && params[:gateway][:type] && @object.type.to_s != params[:gateway][:type]
 			@object.type = params[:gateway][:type]
-			@object.save!
+			@object.save
 			
 			load_object			
 		end
