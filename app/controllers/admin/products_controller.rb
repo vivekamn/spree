@@ -14,6 +14,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   update.before :update_before
+  edit.before :build_currencies
 
   create.response do |wants|
     # go to edit form after creating as new product
@@ -109,6 +110,13 @@ class Admin::ProductsController < Admin::BaseController
       return unless params[:clear_product_properties]
       params[:product] ||= {}
       params[:product][:product_property_attributes] ||= {} if params[:product][:product_property_attributes].nil?
+    end
+
+    def build_currencies
+      @default_currency = Currency.find(:first, :conditions => {:default => true})
+      Currency.find(:all).each do |currency|
+        @product.master.prices.build(:currency_id => currency.id) unless @product.prices.any? {|p| p.currency_id == currency.id}
+      end
     end
 
 end

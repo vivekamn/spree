@@ -25,9 +25,19 @@
     <% hook :admin_product_form_right, locals do %>
       <% f.field_container :price do %>
         <%= f.label :price, t("master_price")%> <span class="required">*</span><br />
-        <%= f.text_field :price, :value => number_with_precision(@product.price, 2)  %>
-        <%= f.error_message_on :price %>
-      <% end %>
+        <%=  select_tag("currency_id", options_for_select(Currency.all.collect {|c| [ c.name, c.id ] }, @default_currency.id), :style => "float:left;width:100px;margin-right:16px;") %>
+        <% f.fields_for :master do |master_form| %>
+
+          <% master_form.fields_for :prices do |price_form| %>
+            <span id="price_for_<%= price_form.object.currency_id %>" style="display:<%= price_form.object.currency.default ? "block" : "none" %>;">
+              <%= price_form.text_field :amount, :style => "float:left;width:100px;" %>
+              <%= price_form.hidden_field :currency_id %>
+            </span>
+          <% end %>
+
+        <% end %>
+
+       <% end %>
 
       <% f.field_container :cost_price do %>
         <%= f.label :cost_price, t("cost_price")%><br />
@@ -101,4 +111,20 @@
   <% Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product) }.each do |field| %>
     <%= render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f} %>
   <% end %>
+<% end %>
+
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      var selected_price = <%= @default_currency.id %>;
+      jQuery("select[name='currency_id']").change(function(){
+        jQuery("#price_for_" + this.value).show();
+
+        jQuery("#price_for_" + selected_price).hide();
+        selected_price = this.value;
+      });
+
+    });
+  </script>
 <% end %>

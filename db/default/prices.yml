@@ -1,0 +1,76 @@
+small-red-baseball-amount:
+  variant: small-red-baseball
+  amount: 19.99
+  currency: usd
+small-blue-baseball-amount:
+  variant: small-blue-baseball
+  amount: 19.99
+  currency: usd
+small-green-baseball-amount:
+  variant: small-green-baseball
+  amount: 19.99
+  currency: usd
+med-red-baseball-amount:
+  variant: med-red-baseball
+  amount: 19.99
+  currency: usd
+med-blue-baseball-amount:
+  variant: med-blue-baseball
+  amount: 19.99
+  currency: usd
+med-green-baseball-amount:
+  variant: med-green-baseball
+  amount: 19.99
+  currency: usd
+large-red-baseball-amount:
+  variant: large-red-baseball
+  amount: 19.99
+  currency: usd
+large-blue-baseball-amount:
+  variant: large-blue-baseball
+  amount: 19.99
+  currency: usd
+large-green-baseball-amount:
+  variant: large-green-baseball
+  amount: 19.99
+  currency: usd
+xlarge-green-baseball-amount:
+  variant: xlarge-green-baseball
+  amount: 21.99
+  currency: usd
+ror_baseball_jersey-amount:
+  variant: ror_baseball_jersey
+  amount: 19.99
+  currency: usd
+ror_tote_v-amount:
+  variant: ror_tote_v
+  amount: 15.99
+  currency: usd
+ror_bag_v-amount:
+  variant: ror_bag_v
+  amount: 22.99
+  currency: usd
+ror_jr_spaghetti_v-amount:
+  variant: ror_jr_spaghetti_v
+  amount: 19.99
+  currency: usd
+ror_mug_v-amount:
+  variant: ror_mug_v
+  amount: 13.99
+  currency: usd
+ror_ringer_v-amount:
+  variant: ror_ringer_v
+  amount: 17.99
+  currency: usd
+ror_stein_v-amount:
+  variant: ror_stein_v
+  amount: 16.99
+  currency: usd
+apache_baseball_v-amount:
+  variant: apache_baseball_v
+  amount: 19.99
+  currency: usd
+ruby_baseball_v-amount:
+  variant: ruby_baseball_v
+  amount: 19.99
+  currency: usd

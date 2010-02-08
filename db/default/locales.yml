@@ -1,0 +1,101 @@
+en-US:
+  name: "English (US)"
+  code: "en-US"
+  enabled: true
+  default: true
+  position: 0
+  currencies: usd
+da:
+  name: "Dansk (DK)"
+  code: "da"
+  enabled: true
+  position: 1
+  currencies: euro
+de-CH:
+  name: "Deutsch (Schweiz)"
+  code: "de-CH"
+  enabled: true
+  position: 2
+  currencies: euro
+de:
+  name: "Deutsch"
+  code: "de"
+  enabled: true
+  position: 3
+  currencies: euro
+en-GB:
+  name: "English (UK)"
+  code: "en-GB"
+  enabled: true
+  position: 4
+es:
+  name: "Español (España)"
+  code: "es"
+  enabled: true
+  position: 5
+  currencies: euro
+fi:
+  name: "Finnish"
+  code: "fi"
+  enabled: true
+  position: 6
+  currencies: euro
+fr-FR:
+  name: "Français (FR)"
+  code: "fr-FR"
+  enabled: true
+  position: 7
+  currencies: euro
+it:
+  name: "Italian"
+  code: "it"
+  enabled: true
+  position: 8
+  currencies: euro
+jp:
+  name: "Japanese"
+  code: "jp"
+  enabled: true
+  position: 9
+mx:
+  name: "Español (México)"
+  code: "mx"
+  enabled: true
+  position: 10
+nb-NO:
+  name: "Norsk"
+  code: "nb-NO"
+  enabled: true
+  position: 11
+nl-BE:
+  name: "Nederlands (BE)"
+  code: "nl-BE"
+  enabled: true
+  position: 12
+  currencies: euro
+nl-NL:
+  name: "Nederlands (NL)"
+  code: "nl-NL"
+  enabled: true
+  position: 13
+  currencies: euro
+pl:
+  name: "Polski"
+  code: "pl"
+  enabled: true
+  position: 14
+pt-BR:
+  name: "Português (Brasil)"
+  code: "pt-BR"
+  enabled: true
+  position: 15
+pt-PT:
+  name: "Português"
+  code: "pt-PT"
+  enabled: true
+  position: 16
+ru-RU:
+  name: "Русский (RU)"
+  code: "ru-RU"
+  enabled: true
+  position: 17

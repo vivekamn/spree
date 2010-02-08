@@ -1,0 +1,12 @@
+usd:
+  name: US Dollars
+  code: USD
+  rate: 0.0
+  default: true
+  enabled: true
+euro:
+  name: Euro
+  code: EUR
+  rate: 0.67
+  default: false
+  enabled: true

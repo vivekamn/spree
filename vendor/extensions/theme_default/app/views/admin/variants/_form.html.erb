@@ -19,8 +19,15 @@
     <p><%= f.label :sku, t("sku") %><br />
     <%= f.text_field :sku %></p>
 
-    <p><%= f.label :price, t("price") %>:<br />
-    <%= f.text_field :price, :value => number_with_precision(@variant.price, 2)  %></p>
+		<p><%= f.label :prices, t("prices") %>: <br/>
+			<%=  select_tag("currency_id", options_for_select(Currency.all.collect {|c| [ c.name, c.id ] }, @default_currency.id), :style => "float:left;width:100px;margin-right:16px;") %>
+			<% f.fields_for :prices do |price_form| %>
+				<span id="price_for_<%= price_form.object.currency_id %>" style="display:<%= price_form.object.currency.default ? "block" : "none" %>;">
+					<%= price_form.text_field :amount, :style => "float:left;width:100px;" %>
+					<%= price_form.hidden_field :currency_id %>
+				</span>
+			<% end %>
+		</p>
 
     <p><%= f.label :cost_price, t("cost_price") %>:<br />
     <%= f.text_field :cost_price, :value => number_with_precision(@variant.cost_price, 2) %></p>
@@ -36,3 +43,19 @@
 
   </div>
 </div>
+
+<% content_for :head do %>
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			var selected_price = <%= @default_currency.id %>;
+
+			jQuery("select[name='currency_id']").change(function(){
+				jQuery("#price_for_" + this.value).show();
+
+				jQuery("#price_for_" + selected_price).hide();
+				selected_price = this.value;
+			});
+
+		});
+	</script>
+<% end %>

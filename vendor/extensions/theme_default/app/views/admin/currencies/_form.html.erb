@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <td><label><%=t("name")%></label></td>
+    <td><%= f.text_field :name, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("code")%></label></td>
+    <td><%= f.text_field :code, {"style" => "width:100px"}%></td>
+  </tr>
+  <tr>
+    <td><label><%=t("rate")%></label></td>
+    <td><%= f.text_field :rate, {"style" => "width:50px"}%></td>
+  </tr>
+  <tr>
+    <td><label><%=t("default")%></label></td>
+    <td>
+      <label class="sub">
+        <%= f.radio_button(:default, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= f.radio_button(:default, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%= t("enabled") %></label></td>
+    <td>
+      <label class="sub">
+        <%= f.radio_button(:enabled, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= f.radio_button(:enabled, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%= t("locales") %></label></td>
+    <td>
+      <% Locale.find(:all, :conditions => {:enabled => true}, :order => :position).each do |locale| %>
+        <%= check_box_tag "currency[locale_ids][]", locale.id, @currency.locales.include?(locale) %>
+        <%= locale.name %>
+      <% end %>
+    </td>
+  </tr>
+</table>

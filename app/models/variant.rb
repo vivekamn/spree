@@ -6,9 +6,9 @@ class Variant < ActiveRecord::Base
   has_many :line_items
   has_and_belongs_to_many :option_values
   has_many :images, :as => :viewable, :order => :position, :dependent => :destroy
+  has_many :prices, :dependent => :destroy
 
   validate :check_price
-  validates_presence_of :price
   validates_numericality_of :cost_price, :allow_nil => true
 
   before_save :touch_product
@@ -22,6 +22,48 @@ class Variant < ActiveRecord::Base
               {:name => 'Height', :only => [:variant], :format => "%.2f"},
               {:name => 'Width',  :only => [:variant], :format => "%.2f"},
               {:name => 'Depth',  :only => [:variant], :format => "%.2f"} ]
+
+  #denotes if variant is priced in the default currency
+  attr_reader :priced
+
+  accepts_nested_attributes_for :prices, :reject_if => proc { |attrs| attrs['amount'].blank? }
+
+  # mutli-currency aware price
+  def price(currency=nil)
+    currency = Currency.find(:first, :conditions => {:code => currency}) if currency.is_a? String
+    currency ||= Currency.find(:first, :conditions => {:default => true}) if currency.nil?
+
+    currency_price = prices.detect { |p| p.currency_id == currency.id }
+    if currency_price.nil?
+      if currency.default
+        @priced = false
+        amount = I18n.t('not_priced')
+      else
+        @priced = true
+        amount ||= self.price() * currency.rate
+      end
+    else
+      @priced = true
+      amount ||= currency_price.amount
+    end
+  end
+
+  # mutli-currency aware price setter (using default currency)
+  def price=(amount)
+    currency ||= Currency.find(:first, :conditions => {:default => true}) if currency.nil?
+    set_price(amount, currency)
+  end
+
+  # mutli-currency aware price setter (with specific currency)
+  def set_price(amount, currency)
+    currency = Currency.find(:first, :conditions => {:code => currency}) if currency.is_a? String
+
+    p = Price.find_or_initialize_by_currency_id_and_variant_id(currency.id, id)
+    p.amount = amount
+    prices << p if p.new_record?
+
+    return p
+  end
 
   # Returns number of inventory units for this variant (new records haven't been saved to database, yet)
   def on_hand

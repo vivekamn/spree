@@ -16,6 +16,8 @@
     <li<%= ' class="active"' if controller.controller_name == 'shipping_methods' %>><%= link_to t("shipping_methods"), admin_shipping_methods_path %></li>
     <li<%= ' class="active"' if controller.controller_name == 'inventory_settings' %>><%= link_to t("inventory_settings"), admin_inventory_settings_path %></li>
     <li<%= ' class="active"' if controller.controller_name == 'trackers' %>><%= link_to t("analytics_trackers"), admin_trackers_path %></li>
+    <li<%= ' class="active"' if controller.controller_name == 'currencies' %>><%= link_to t("currencies"), admin_currencies_path %></li>
+    <li<%= ' class="active"' if controller.controller_name == 'locales' %>><%= link_to t("locales"), admin_locales_path %></li>
     <% end %>
     <li<%= ' class="active"' if controller.controller_name == 'configurations' %>><%= link_to t("complete_list"), admin_configurations_path %></li>
   </ul>

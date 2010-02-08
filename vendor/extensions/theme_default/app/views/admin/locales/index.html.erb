@@ -1,0 +1,35 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_ot_link">
+      <%= button_link_to t("new_locale"), new_admin_locale_url, :icon => 'add' %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= "#{t("actions.listing")} #{t("locales")}" %></h1>
+
+<table class="index">
+  <tr>
+    <th><%= t("code") %></td>
+      <th><%= t("name") %></td>
+      <th><%= t("default") %></td>
+      <th><%= t("enabled") %></td>
+    <th>&nbsp;</th>
+  </tr>
+<% @locales.each do |locale| %>
+  <tr "<%= dom_id locale %>">
+    <td><%= locale.code %></td>
+    <td><%= locale.name %></td>
+    <td><%= locale.default.to_s.titleize %></td>
+    <td><%= locale.enabled.to_s.titleize %></td>
+    <td class="actions">
+      <%= link_to_edit locale %>
+      &nbsp;
+      <%= link_to_delete locale %>
+    </td>
+  </tr>
+<% end %>
+</table>

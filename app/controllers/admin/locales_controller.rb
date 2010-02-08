@@ -1,4 +1,4 @@
-class Admin::LocalizationController < ApplicationController
+class Admin::LocalesController < Admin::BaseController
   resource_controller
 
   update.wants.html { redirect_to collection_url }

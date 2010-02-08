@@ -1,0 +1,37 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_ot_link">
+      <%= button_link_to t("new_currency"), new_admin_currency_url, :icon => 'add' %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= "#{t("actions.listing")} #{t("currencies")}" %></h1>
+
+<table class="index">
+  <tr>
+    <th><%= t("code") %></td>
+      <th><%= t("name") %></td>
+      <th><%= t("rate") %></td>
+      <th><%= t("default") %></td>
+      <th><%= t("enabled") %></td>
+    <th>&nbsp;</th>
+  </tr>
+  <% @currencies.each do |currency| %>
+    <tr "<%= dom_id currency %>">
+      <td><%= currency.code %></td>
+      <td><%= currency.name %></td>
+      <td><%= currency.rate %></td>
+      <td><%= currency.default.to_s.titleize %></td>
+      <td><%= currency.enabled.to_s.titleize %></td>
+      <td class="actions">
+        <%= link_to_edit currency %>
+        &nbsp;
+        <%= link_to_delete currency %>
+      </td>
+    </tr>
+  <% end %>
+</table>

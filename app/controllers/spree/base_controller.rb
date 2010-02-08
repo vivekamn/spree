@@ -3,7 +3,7 @@ class Spree::BaseController < ActionController::Base
   helper :application, :hook
   before_filter :instantiate_controller_and_action_names
   filter_parameter_logging :password, :password_confirmation, :number, :verification_value
-  helper_method :current_user_session, :current_user, :title, :title=, :get_taxonomies, :current_gateway
+  helper_method :current_user_session, :current_user, :title, :title=, :get_taxonomies, :current_gateway, :available_locales, :available_currencies
 
   # Pick a unique cookie name to distinguish our session data from others'
   session_options['session_key'] = '_spree_session_id'
@@ -60,11 +60,11 @@ class Spree::BaseController < ActionController::Base
   def default_title
     Spree::Config[:site_name]
   end
-  
+
   def accurate_title
     return nil
   end
-  
+
   def reject_unknown_object
     # workaround to catch problems with loading errors for permalink ids (reconsider RC permalink hack elsewhere?)
     begin
@@ -173,6 +173,14 @@ class Spree::BaseController < ActionController::Base
 
   def current_gateway
     @current_gateway ||= Gateway.current
+  end
+
+  def available_locales
+    @locales ||= Locale.find(:all, :conditions => {:enabled => true})
+  end
+
+  def available_currencies
+    @currencies ||= Currency.find(:all, :conditions => {:enabled => true})
   end
 
 end

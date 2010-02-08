@@ -33,7 +33,9 @@ class Product < ActiveRecord::Base
     :class_name => 'Variant',
     :conditions => ["variants.is_master = ? AND variants.deleted_at IS NULL", true]
 
-  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master, :cost_price
+  has_many :prices, :through => :master
+
+  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master, :set_price, :cost_price, :priced
 
   after_create :set_master_variant_defaults
   after_create :add_properties_and_option_types_from_prototype
@@ -54,7 +56,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :price
 
-  accepts_nested_attributes_for :product_properties
+  accepts_nested_attributes_for :master, :product_properties
+  accepts_nested_attributes_for :prices, :reject_if => proc { |attrs| attrs['amount'].blank? }
 
   make_permalink
 
@@ -67,7 +70,7 @@ class Product < ActiveRecord::Base
   named_scope :on_hand,     { :conditions => "products.count_on_hand > 0" }
   named_scope :not_deleted, { :conditions => "products.deleted_at is null" }
   named_scope :available,   lambda { |*args| { :conditions => ["products.available_on <= ?", args.first || Time.zone.now] } }
-  
+
   if (ActiveRecord::Base.connection.adapter_name == 'PostgreSQL')
     named_scope :group_by_products_id, { :group => "products." + Product.column_names.join(", products.") } if ActiveRecord::Base.connection.tables.include?("products")
   else

@@ -2,6 +2,20 @@
 en-US: 
   'no': "No"
   'yes': "Yes"
+  editing_currency: "Editing Currency"
+  only_one_default_currency: "Only one currency can be set as default at a time."
+  editing_locale: "Editing Locale"
+  prices: Prices
+  only_one_default_locale: "Only one locale can be set as default at a time."
+  Not_priced: "Not Priced"
+  default: Default
+  enabled: Enabled
+  new_currency: New Currency
+  currencies: Currencies
+  currencies_setting_description: "Configure available currencies and exchange rates."
+  locales: Locales
+  new_locale: "New Locale"
+  locales_setting_description: "Configure available locales"
   5_biggest_spenders: "5 Biggest Spenders"
   a_copy_of_all_mail_will_be_sent_to_the_following_addresses: A copy of all mail be sent to the following addresses
   abbreviation: Abbreviation
