@@ -1,0 +1,6 @@
+<% content_for :title do %>Home<% end %>  
+   
+<%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" />", @featured_product %>  
+   
+<%= @featured_product.description %> 
+

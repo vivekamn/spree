@@ -1,0 +1,167 @@
+html,body{
+  margin:0;
+  padding:0
+}
+
+body{
+  font: 76% arial,sans-serif;
+  text-align:center
+}
+
+a{
+  color: #981793;
+}
+
+div#topbar{
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #000000;
+  height: 20px;
+  margin-bottom: 40px;
+  width:100%;
+}
+
+div#container{
+  text-align: left;
+  width: 800px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+div#header{
+  color: #000000;
+  background-color: #CCCCCC;
+  border-width: 1px 1px 0 1px;
+  border-style: solid;
+  border-color: #000000;
+  height: 22px;
+}
+
+div#navigation{
+  background: #B9CAFF;
+  padding: 0 0 0 10px;
+}
+
+div#navigation ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+div#navigation ul li{
+  display: inline;
+  line-height: 20px;
+}
+
+div#navigation ul li a{
+  width: 188px;
+  padding: 4px;
+  text-decoration: none;
+  background-color: #003366;
+  color: #FFFFFF;
+}
+
+div#navigation ul li a:hover {
+  text-decoration: none;
+  background-color: #336699;
+  color: #FFFFFF;
+}
+
+div#wrapper{
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+}
+
+div#wrap_top_spacer{
+
+}
+
+div#wrap_bottom_spacer{
+  clear: both;
+}
+
+div#content{
+  float: left;
+  width: 579px;
+  padding: 10px;
+  border-width: 0 1px 0 0;
+  border-style: solid;
+  border-color: #000000;
+}
+
+div#content p{
+  line-height: 1.4;
+}
+
+div#sidebar{
+  float: right;
+  width: 198px;
+}
+
+div#extra{
+  /*background: #B4E7FF;*/
+  padding: 10px;
+}
+
+div#footer{
+  clear: both;
+  background-color: #CCCCCC;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #000000;
+}
+
+div#footer p{
+  margin: 0;
+  padding:5px 10px;
+}
+
+div#language-bar{
+  float: right;
+}
+
+div#topbar_left{
+  float: left;
+}
+ 
+#language-bar ul {
+  float: none;
+  display: table;
+  list-style-image: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#language-bar li {
+  display: table-cell;
+  padding: 2px;
+  position: relative;
+}
+
+.notice{
+  background-color: #FFFF99;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFFF66;
+  padding: .5em;
+}
+
+.warning{
+  background-color: #FFCC99;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FFCC66;
+  padding: .5em;
+}
+
+.error{
+  background-color: #FF0000;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #FF0033;
+  padding: .5em;
+}
+
+

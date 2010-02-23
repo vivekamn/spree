@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <title>My Store - <%= yield(:title) || "Spree!" %></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <%= stylesheets %>
+    <%= stylesheet_link_tag 'trc.css', :media => 'all', :cache => false %>
+    <%= javascript_include_tag :defaults, :cache => false %>
+    <%= javascript_include_tag 'jquery-1.3.2.min' %>
+    <%= javascript_include_tag 'spree' %>
+    <%= javascript_include_tag 'curvycorners' %>
+    <%= javascript_include_tag 'masti' %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <div id="topbar">
+      <div id="topbar_left">
+        <!--elements for the top left of the page could go here-->
+      </div>
+      <% if Spree::Config[:allow_locale_switching] %>
+        <%= render :partial => 'shared/language_bar' %>
+      <% end %>
+    </div>
+    <div id="container">
+      <div id="header">
+        <div id="navigation">
+          <ul>
+            <li><%= link_to_unless_current "Home", :action => "index" %></li>
+            <li><%= link_to_unless_current "Products", "/products" %></li>
+              <% if logged_in? -%>
+                <li><%= link_to_unless_current t('my_account'), user_path(current_user) %></li>
+                <li><%= link_to_unless_current t('logout'), logout_path %></li>
+              <% else %>
+            <li><%= link_to_unless_current t('log_in'), login_path %></li>
+            <% end -%>
+            <% if store_menu? %>
+              <%= render :partial => 'shared/store_menu' %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div id="wrapper">
+        <div id="wrap_top_spacer"></div>
+        <div id="content">
+          <% if flash[:notice] %>
+            <p class="notice">
+              <%= flash[:notice] %>
+            </p>
+          <% end %>
+          <% if flash[:warning] %>
+            <p class="warning">
+              <%= flash[:warning] %>
+            </p>
+          <% end %>
+          <% if flash[:error] %>
+            <p class="error">
+              <%= flash[:error] %>
+            </p>
+          <% end %>
+          <%= yield %>
+        </div>
+        <div id="sidebar">
+          <div id="extra">
+            <a href="http://www.theroamingcoder.com/"><img src="/images/TheRoamingCoder_Small.png" /></a><br/><br/>
+            <%= yield :sidebar %>
+          </div> <!--/extra-->
+        </div><!--/sidebar-->
+        <div id="wrap_bottom_spacer"></div>
+      </div><!--/wrapper-->
+      <div id="footer">
+        <p>This is a demo site for an <a href="http://www.theroamingcoder.com/?q=node/11">article on my blog.</a></p>
+      </div>
+    </div><!--/container-->
+  </body>
+</html>
+
