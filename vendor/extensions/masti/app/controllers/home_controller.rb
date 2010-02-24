@@ -1,8 +1,8 @@
 class HomeController < Spree::BaseController
 
   def index
-    @products = Product.find(:all)  
-    @featured_product = @products[0]
+    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
+    @featured_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
   end
 
   def update_assets

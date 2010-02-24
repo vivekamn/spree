@@ -1,0 +1,2 @@
+module Admin::DealsHelper
+end

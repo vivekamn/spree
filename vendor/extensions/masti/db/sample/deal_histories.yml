@@ -1,0 +1,6 @@
+first_history:
+  product_id: 248786582
+  is_active: true
+  deal_started_at: <%= Time.now.to_s(:db) %>
+  deal_completed_at: <%= Time.now.advance(:months => 1).to_s(:db) %>
+
