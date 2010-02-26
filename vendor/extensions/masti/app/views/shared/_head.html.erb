@@ -1,0 +1,38 @@
+<div class="toplogo">
+  <div class="logopart"><img src="images/logo.gif" width="305" height="71" /></div>
+  <div class="logoright">
+    <% if current_user %>
+      <div class="loggedinpart">
+        <div class="fl username">Logged in as <%= current_user.email %></div>
+        <div class="fl username"><%= link_to 'Account', user_path(current_user) %></div>
+        <div class="fl username"><%= link_to 'Logout', logout_path %></div>
+      </div>
+    <% else %>
+      <div class="join"><img src="images/join.gif" width="239" height="25" /></div>
+      <% form_tag user_session_path do  %>
+        <div class="submitpart"> 
+          <div class="fl username">User Name :</div>
+          <div class="fl pt6"><%= text_field :user_session, 'login', :class => 'textfield' %></div>
+          <div class="fl username">Password :</div>
+          <div class="fl pt6"><%= password_field :user_session, 'password', :class => 'textfield' %></div>
+          <div class="fl submit"><%= image_submit_tag 'submit.gif', :width=>"60", :height=>"25" %></div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="emailpart">
+      <div class="fl"><img src="images/email.gif" width="239" height="25" /></div>
+      <div class="w190"><input name="" type="text" class="textfield1"/></div>
+      <div class="fl"><img src="images/go.gif" width="35" height="25" /></div>
+    </div>
+  </div>
+</div>
+<div class="navouter">
+  <div class="fl"><img src="images/leftcurve.gif" width="5" height="47" /></div>
+  <div class="navinner">
+    <div class="navleft"><a href="#"><img src="images/deal.gif" width="71" height="23" border="0"/></a></div>
+    <div class="navleft"><a href="#"><img src="images/how.gif" width="184" height="23" border="0"/></a></div>
+    <div class="navleft1"><a href="#"><img src="images/get.gif" width="104" height="23" border="0"/></a> </div>
+  </div>
+  <div class="fl"><img src="images/rightcurve.gif" width="5" height="47" /></div>
+</div>
+
