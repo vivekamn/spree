@@ -6,7 +6,7 @@
 <%= @featured_product.description %> 
 -->
 <div class="bannerouter">
-<div class="banerleft"><img src="images/banner.jpg" width="570" height="333" /></div>
+<div class="banerleft"><%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" border=\"0\" />", @featured_product %><!--img src="images/banner.jpg" width="570" height="333" /--></div>
 <div class="banerrightout">
 <div class="dealbg">Value: Rs.2450 Discount: 10% <br/>
 You save: Rs.245</div>

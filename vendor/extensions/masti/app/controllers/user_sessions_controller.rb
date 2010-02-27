@@ -75,7 +75,7 @@ class UserSessionsController < Spree::BaseController
     @user.save do |result|
       if result
         flash[:notice] = t(:user_created_successfully) unless session[:return_to]
-        redirect_back_or_default products_url
+        redirect_back_or_default home_url
       else
         flash[:notice] = t(:missing_required_information)
         redirect_to :controller => :users, :action => :new, :user => {:openid_identifier => @user.openid_identifier}

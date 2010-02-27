@@ -8,7 +8,7 @@
         <div class="fl username"><%= link_to 'Logout', logout_path %></div>
       </div>
     <% else %>
-      <div class="join"><img src="images/join.gif" width="239" height="25" /></div>
+      <div class="join"><%= link_to "<img src='images/join.gif' width='239' height='25' border='0' />", signup_path %></div>
       <% form_tag user_session_path do  %>
         <div class="submitpart"> 
           <div class="fl username">User Name :</div>
