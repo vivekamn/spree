@@ -20,10 +20,12 @@
       <% end %>
     <% end %>
     <div class="emailpart">
+  <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
       <div class="fl"><img src="images/email.gif" width="239" height="25" /></div>
-      <div class="w190"><input name="" type="text" class="textfield1"/></div>
-      <div class="fl"><img src="images/go.gif" width="35" height="25" /></div>
-    </div>
+      <div class="w190"><%=f.text_field :email,:class=>"textfield1" %></div>
+      <div class="fl"><%= image_submit_tag("go.gif",:border=>0)%></div>
+	<%end%>    
+	</div>
   </div>
 </div>
 <div class="navouter">
@@ -35,4 +37,20 @@
   </div>
   <div class="fl"><img src="images/rightcurve.gif" width="5" height="47" /></div>
 </div>
-
+<script type="text/javascript">
+	 function submitForm_on_enter(e,formName)
+                {
+                var keynum;
+                if(window.event) // IE
+                	{
+                	keynum = e.keyCode;
+                	}
+                else if(e.which) // Netscape/Firefox/Opera
+                	{
+                	keynum = e.which;
+                	}
+                if(keynum == 13){
+                    submitForm(formName);                    
+                }
+            }
+</script>
