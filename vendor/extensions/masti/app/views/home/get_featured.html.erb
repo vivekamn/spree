@@ -1,0 +1,155 @@
+<style>
+	h1{
+		color:#00A0F6;
+	}
+</style>
+<table><tr><td height="10px"></td></tr></table>
+
+<div id="addenquiry" style="margin-left:60px">
+	<center>
+<%form_for :enquiry , :url => {:controller => "home" ,:action => "create"} ,:html => {:id => "enquiry_form"} do |f|%>
+	<h1>Ready to schedule your masthideal?</h1>
+    <table border="0" cellspacing="10" cellpadding="5" style="margin:15px 0px 0px 20px;">
+	    <tr> 
+			<td width="25%">First Name:</td>
+			<td><%=f.text_field :first_name %>
+			<div id="error_firstname" class="errormesg" style="color:red;"></div></td>
+	  	</tr>
+		<tr> 
+			<td width="25%">Last Name:</td>
+			<td><%=f.text_field :last_name %>
+			<div class="errormesg" id="error_lastname" style="color:red;"></div></td>
+	  	</tr>
+		<tr>
+			<td width="25%">Company:</td>
+			<td><%=f.text_field :company %>
+			<div class="errormesg" id="error_company" style="color:red;"></div></td>
+		</tr>
+		<tr>
+			<td width="25%">Phone No:</td>
+			<td><%=f.text_field :phone_no %>
+			<div class="errormesg" id="error_phone" style="color:red;"></div></td>
+		</tr>        
+		<tr>
+			<td width="25%">Email:</td>
+			<td><%=f.text_field :email  %>
+			<div class="errormesg" id="enquiry_email_msg" style="color:red;"></div></td>
+	  	</tr>		
+		<tr>
+			<td width="25%">City:</td>
+			<td><%=f.text_field :city %>
+			<div class="errormesg" id="error_city" style="color:red;"></div></td>
+		</tr>		
+		<tr>
+			<td colspan="2">Tell us a little bit about what you would like to feature on masthideal.:</td>						
+		</tr>
+		<tr>
+			<td colspan="2"><%= f.text_area :query, :rows => 5, :cols=> 47 %>
+			<div class="errormesg" id="error_text" style="color:red;"></div></td>
+		</tr>
+		<tr>
+            <td class="cancel">
+		   <%= submit_tag "Save",:onclick=> "return email_validate();",:style=>"background-color:#008AD5" %>
+			<input type="button" style="background-color:#008AD5;" value="Cancel" onclick="javascript:submitUrl('/home')">
+            <td>&nbsp;</td>
+        </tr>
+		
+   </table>
+   
+<%end%>
+</center>
+</div>
+<div id="upfooterwhite"></div>
+
+<script type="text/javascript">
+	
+	function email_validate(){
+		//alert("its comming");
+	var error_msg_div = document.getElementById('enquiry_email_msg');
+	var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+	var email_name = document.getElementById('enquiry_email').value;
+	var first_name = document.getElementById('enquiry_first_name').value;
+	var last_name = document.getElementById('enquiry_last_name').value;
+	var comp_name = document.getElementById('enquiry_company').value;
+	var city_name = document.getElementById('enquiry_city').value;
+	var phone_number = document.getElementById('enquiry_phone_no').value;
+	var text_query = document.getElementById('enquiry_query').value;
+	
+	//alert("query value === = "+text_query);
+	alert("last name==="+last_name);
+	
+	var flag_em=true;
+	
+	
+	if(first_name == '' || first_name == null ){
+		document.getElementById('error_firstname').innerHTML="Please enter the First name";
+		flag_em=false;
+	}else{
+		document.getElementById('error_firstname').innerHTML="";
+	}
+	if(last_name == '' || last_name == null ){
+		alert("its comming");
+		document.getElementById('error_lastname').innerHTML = "Please enter the Last name";
+		flag_em=false;
+	}else{
+		document.getElementById('error_lastname').innerHTML ="";
+	}
+	if(comp_name == '' || comp_name == null){
+		document.getElementById('error_company').innerHTML = "Please enter the Company name";
+		flag_em=false;
+	}else{
+		document.getElementById('error_company').innerHTML = "";
+	}
+	if(city_name == '' || city_name == null){
+		document.getElementById('error_city').innerHTML = "Please enter the  city";
+		flag_em=false;
+	}else{
+		document.getElementById('error_city').innerHTML = "";
+	}
+	if(phone_number =='' || phone_number == null){
+		document.getElementById('error_phone').innerHTML = "Please enter the Phone number";
+		flag_em=false;
+	}else{
+		document.getElementById('error_phone').innerHTML = "";
+	}
+	if(text_query == '' || text_query == null){
+		document.getElementById('error_text').innerHTML = "Please enter the Last name";
+		flag_em=false;
+	}else{
+		document.getElementById('error_text').innerHTML = "";
+	}
+	
+	if (email_name != ''){
+		if (email_name.length != 0){
+		 email_my = new String(email_name);
+		 email_value = EMAIL_REGEX.test(email_my); 
+		 alert(email_value +"==email value")
+		 if(email_value != 1){
+		 	alert("inside true true");
+			error_msg_div.innerHTML = "Please enter valid E-mail";
+			flag_em=false;	
+		 }
+		}
+		else{
+			alert("false inside false");
+			error_msg_div.innerHTML = "Please enter valid E-mail";
+			flag_em=false;	
+		}
+	}else{
+		error_msg_div.innerHTML = "Please enter valid E-mail";
+		flag_em=false;
+	}
+	alert("hi");
+	if(!flag_em){
+		alert(flag_em);
+		return flag_em;
+	}else{
+		error_msg_div.innerHTML = "";
+		alert(flag_em);
+		return flag_em;
+	}
+		
+}
+</script>
+
+
