@@ -22,8 +22,10 @@
     <div class="emailpart">
   <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
       <div class="fl"><img src="images/email.gif" width="239" height="25" /></div>
-      <div class="w190"><%=f.text_field :email,:class=>"textfield1" %></div>
-      <div class="fl"><%= image_submit_tag("go.gif",:border=>0)%></div>
+      <div class="w190"><%=f.text_field :email,:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %><br/>
+	  <div class="errormesg" id="error_email" style="color:red;"></div>
+	  </div>
+      <div class="fl"><%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %></div>
 	<%end%>    
 	</div>
   </div>
@@ -53,4 +55,31 @@
                     submitForm(formName);                    
                 }
             }
+			
+	function email_validate_head(){
+		var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+		var flag_em = true;
+		var email_name = document.getElementById('deals_notification_email').value;
+		var error_msg_div = document.getElementById('error_email');
+		if (email_name != ''){
+		if (email_name.length != 0){
+		 email_my = new String(email_name);
+		 email_value = EMAIL_REGEX.test(email_my); 
+		 if(email_value != 1){
+			error_msg_div.innerHTML = "Please enter valid E-mail";
+			flag_em=false;	
+		 }
+		}
+		else{
+			error_msg_div.innerHTML = "Please enter valid E-mail";
+			flag_em=false;	
+		}
+	}else{
+		error_msg_div.innerHTML = "Please enter valid E-mail";
+		flag_em=false;
+	}
+	
+	return flag_em;
+	
+	}
 </script>
