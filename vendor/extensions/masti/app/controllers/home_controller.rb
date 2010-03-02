@@ -6,35 +6,52 @@ class HomeController < Spree::BaseController
     @featured_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
   end
   
-  def contact_us
-    
+  
+  #to get the email id from the user and store it in the deal notifications table
+  def email_deal_notify
+      @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
+      if @deals_notify.nil?
+        @deals_notify = DealsNotification.new(params[:deals_notification])
+        if @deals_notify.save
+          flash[:success]="Thank you for registering to Masthi Deal Newsletter."      
+        else
+          flash[:error]="E-mail subscription Failed."
+        end
+    else
+      #if the user have already subscribed means it will show error
+      flash[:error]="You Have already Subscribed to Masthi Deal Newsletter."      
+    end
+    redirect_to :back
   end
   
-  def get_featured
-    
-  end    
   
+  #getting the featured deal informations from the user
   def create
     @enquiry=Enquiry.new(params[:enquiry])
     if @enquiry.save
+      flash[:success]="Scheduled your MasthiDeal Successfully."      
       redirect_to home_url
     else
+      flash[:error]="Oops You are missing Something."      
       redirect_to get_featured_path
     end
 
   end
   
   def about_us
-    
   end
   
   def how_masti_works
-    
   end
   
   def faq
-    
   end
+  
+  def contact_us
+  end
+  
+  def get_featured
+  end  
   
   def update_assets
     # copy the assets from extensions public dir into #{RAILS_ROOT}/public
