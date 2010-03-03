@@ -7,7 +7,8 @@ class HomeController < Spree::BaseController
   end
   
   
-  #to get the email id from the user and store it in the deal notifications table
+#to get the email id from the user and store it in the deal notifications table
+
   def email_deal_notify
       @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
       if @deals_notify.nil?
@@ -29,7 +30,7 @@ class HomeController < Spree::BaseController
   def create
     @enquiry=Enquiry.new(params[:enquiry])
     if @enquiry.save
-      flash[:success]="Scheduled your MasthiDeal Successfully."      
+      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
       redirect_to home_url
     else
       flash[:error]="Oops You are missing Something."      
@@ -38,7 +39,17 @@ class HomeController < Spree::BaseController
 
   end
   
+  def progress_bar
+      if params[:current]>=params[:min]
+        bought_percent = 300
+      else
+          bought_percent = (params[:current]*300)/params[:min]
+      end
+    render(:text =>bought_percent)
+  end
+  
   def about_us
+    
   end
   
   def how_masti_works
