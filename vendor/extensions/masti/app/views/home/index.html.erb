@@ -105,7 +105,7 @@ Mins: 48 Secs: 36
 <script>
 	just_call_porgress_bar();
 	function just_call_porgress_bar(){
-		new Ajax.Request('/progress_bar?current=<%=@featured_product.currently_bought_count%>&min=<%=@featured_product.minimum_number%>',{
+		new Ajax.Request('/progress_bar?id=<%=@featured_product.id%>',{
 asynchronous:true, evalScripts:true, onComplete:function(request){
 	if (request.responseText != null){
 		document.getElementById('bought').style.display = '';

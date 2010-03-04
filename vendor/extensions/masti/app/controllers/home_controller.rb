@@ -40,11 +40,13 @@ class HomeController < Spree::BaseController
   end
   
   def progress_bar
-      if params[:current]>=params[:min]
+    current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
+      if current_deal.currently_bought_count>=current_deal.minimum_number
         bought_percent = 300
       else
-          bought_percent = (params[:current]*300)/params[:min]
+          bought_percent = (current_deal.currently_bought_count*300)/current_deal.minimum_number
       end
+      puts bought_percent
     render(:text =>bought_percent)
   end
   
