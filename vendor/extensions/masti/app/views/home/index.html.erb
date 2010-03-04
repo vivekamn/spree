@@ -22,8 +22,8 @@
 <div class="bannerouter">
 <div class="banerleft"><%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" border=\"0\" />", @featured_product %><!--img src="images/banner.jpg" width="570" height="333" /--></div>
 <div class="banerrightout">
-<div class="dealbg">Value: Rs.2450 Discount: 10% <br/>
-You save: Rs.245</div>
+  <div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>
+    You save: Rs.<%= @saving %></div>
 <div class="bought" id="bought" style="display:none;">
 <div class="bought1">
 	<!--<img src="images/box.gif" width="309" height="12" />

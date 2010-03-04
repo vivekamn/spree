@@ -4,6 +4,9 @@ class HomeController < Spree::BaseController
   def index
     deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
+    @price = @featured_product.price
+    @discount = @featured_product.discount
+    @saving = @price*@discount/100
   end
   
   
