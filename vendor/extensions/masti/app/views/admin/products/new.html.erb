@@ -13,14 +13,14 @@
 
   <div class="yui-gb">
     <div class="yui-u first">
-
       <% unless @product.has_variants? %>
-      <% f.field_container :sku do %>
-        <%= f.label :sku, t("sku") %><br />
-        <%= f.text_field :sku, :size => 16 %>
-        <%= f.error_message_on :sku %>
+        <% f.field_container :sku do %>
+          <%= f.label :sku, t("sku") %><br />
+          <%= f.text_field :sku, :size => 16 %>
+          <%= f.error_message_on :sku %>
+        <% end %>
       <% end %>
-      <% end %>
+
 
       <p>
         <%= f.label :prototype_id, t("prototype") %><br />
@@ -47,7 +47,7 @@
     <div class="yui-u">
 
       <% f.field_container :discount do %>
-        <%= f.label :discount, t("discount")%> <span class="required">*</span><br />
+        <%= f.label :discount, t("discount") %> <span class="required">*</span><br />
         <%= f.text_field :discount  %>
         <%= f.error_message_on :discount%>
       <% end %>
@@ -57,8 +57,6 @@
         <%= f.text_field :minimum_number %>
         <%= f.error_message_on :minimum_number%>
       </p>
-
-
     </div>    
   </div>
   <div class="yui-gb">
@@ -82,9 +80,9 @@
         <%= f.error_message_on :validity_from%>
         <%= f.unobtrusive_date_text_picker :validity_from, :style=>"width:150px" %>
       <% end %>
-
-    </div>        
+    </div> 
   </div>
+
 
   <%= render :partial => 'admin/shared/new_resource_links' %>
 
