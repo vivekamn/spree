@@ -37,7 +37,7 @@
       <% end %>
 
       <p>
-        <%= f.label :available_on, t("available_on") %><br />
+        <%= f.label :available_on, t("available_on") %><span class="required">*</span><br />
         <%= f.error_message_on :available_on %>
         <%= f.unobtrusive_date_text_picker :available_on, :style=>"width:150px" %>
       </p>
@@ -68,7 +68,7 @@
       <% end %>
 
       <p>
-        <%= f.label :validity_to, t("validity_to") %><br />
+        <%= f.label :validity_to, t("validity_to") %><span class="required">*</span><br />
         <%= f.error_message_on :validity_to %>
         <%= f.unobtrusive_date_text_picker :validity_to, :style=>"width:150px" %>
       </p>      
