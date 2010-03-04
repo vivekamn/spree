@@ -5,13 +5,33 @@
    
 <%= @featured_product.description %> 
 -->
+<%= javascript_include_tag "prototype" %>
+<style>
+.progress_bar {
+    background-color:#000000; 
+	width: 300px;
+    height:10px
+}
+
+.progress_barred {
+        background-color:#E60000; 
+        height:10px
+}
+</style>
+
 <div class="bannerouter">
 <div class="banerleft"><%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" border=\"0\" />", @featured_product %><!--img src="images/banner.jpg" width="570" height="333" /--></div>
 <div class="banerrightout">
 <div class="dealbg">Value: Rs.2450 Discount: 10% <br/>
 You save: Rs.245</div>
-<div class="bought">
-<div class="bought1"><img src="images/box.gif" width="309" height="12" /><br/><br/></div>
+<div class="bought" id="bought" style="display:none;">
+<div class="bought1">
+	<!--<img src="images/box.gif" width="309" height="12" />
+	<br/><br/>-->
+<div class="progress_bar">
+    <div class="progress_barred" id="progress" style="float:left;"></div>
+</div>	
+</div>
 <div class="bought1">If 50 people buy in to this deal before time runs out we all save big... but it won't happen without 50. </div>
 </div>
 <div class="bought1"><img src="images/buydeal.gif" width="368" height="110" /></div>
@@ -82,3 +102,19 @@ Mins: 48 Secs: 36
 
 
 </div>
+<script>
+	just_call_porgress_bar();
+	function just_call_porgress_bar(){
+		new Ajax.Request('/progress_bar?id=<%=@featured_product.id%>',{
+asynchronous:true, evalScripts:true, onComplete:function(request){
+	if (request.responseText != null){
+		document.getElementById('bought').style.display = '';
+		document.getElementById('progress').style.width=request.responseText+'px';
+	}
+	else{
+		document.getElementById('progress').style.width=0;
+	}
+	}});
+
+	}
+</script>
