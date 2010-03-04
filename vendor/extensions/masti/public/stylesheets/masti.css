@@ -6,7 +6,7 @@ body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:Verdana, Geneva
 }
 a{ outline:none;
 }
-.toplogo{ background:url(../images/topbg.gif) no-repeat; width:938px; height:110px; float:left;
+.toplogo{ background:#fff; width:938px; float:left;
 }
 .fl{ float:left;
 }
@@ -14,19 +14,17 @@ a{ outline:none;
 }
 .logoright{ width:538px; float:left;
 }
-.join{ padding-left:123px; width:415px; float:left; padding-top:8px;
+.join{ padding-left:25px; width:415px; float:left; padding-top:8px;
 }
-.submitpart{ padding-left:59px; width:479px; float:left; padding-top:9px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#646464; padding-bottom:8px;
+.submitpart{ padding-left:33px; width:479px; float:left; padding-top:9px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#646464; padding-bottom:8px;
 }
-.loggedinpart{ padding-left:123px; width:415px; float:left; padding-top:8px; font-family:Verdana, Geneva, sans-serif; font-size:12px; color:#646464; padding-bottom:8px;
-}
-.textfield{ border:1px solid #e5e5e5; height:13px; width:91px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
+.textfield{ border:1px solid #e5e5e5; height:13px; width:105px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
 }
 .username{ padding:8px 5px 0 0;
 }
-.pt6{ padding-top:6px; width:110px;
+.pt6{ padding-top:6px; width:126px;
 }
-.submit{ padding-top:3px; width:110px;
+.submit{ padding-top:3px; width:70px;
 }
 .emailpart{ padding-left:27px; width:511px; float:left; padding-top:5px; font-size:11px; color:#646464; padding-bottom:8px;
 }
@@ -92,12 +90,14 @@ a{ outline:none;
 }
 .footertop3{ width:179px; float:left; background:#4e4e4e; padding:18px 0 0 56px; height:134px; color: #a1a1a1; line-height:24px;
 }
-.footertop4{ width:179px; float:left; background:#5c5c5c; padding:18px 0 0 56px; height:134px; color: #a1a1a1; line-height:24px;
+.footertop4{ width:179px; float:left; background:#5c5c5c; padding:18px 0 0 56px; height:82px; color: #a1a1a1; line-height:24px;
+}
+.footertop5{ width:235px; float:left; background:#333; padding:10px 0 0 0px; height:42px; color: #a1a1a1; text-align:center; line-height:18px;
 }
 .company{ font-size:11px; color:#a1a1a1;  text-decoration:none; 
 }
 .company:hover{ font-size:11px; color:#fff; text-decoration:none;
 }
-.footerbg{ width:810px; float:left; background:url(../images/footerbg.gif) repeat-x; padding:20px 64px 0 64px; height:22px; color:#a1a1a1; 
+.footerbg{ width:810px; float:left; background:url(../images/footbg.gif) repeat-y; padding:20px 64px 0 64px; height:22px; color:#a1a1a1; 
 }
 
