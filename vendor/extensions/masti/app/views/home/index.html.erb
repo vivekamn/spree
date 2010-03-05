@@ -68,8 +68,10 @@
 
 <div class="rightsidecontent">
 <div class="rightsidetime"><span class="time">Time left</span><br/>
-Days: 179 Hours: 9<br/>
-Mins: 48 Secs: 36
+<div id="countdown_time"></div>
+
+<!--Days: 179 Hours: 9<br/>
+Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
 <div class="dealinfo"><img src="images/dimensions.gif" width="94" height="20" /></div>
@@ -98,7 +100,7 @@ Mins: 48 Secs: 36
 </ul>
 </div></div>
 </div></div>
-
+<input type="hidden" name="end_time" id="end_time" value="<%=@featured_product.deal_expiry_date %>" >
 
 
 </div>
@@ -117,4 +119,23 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
 	}});
 
 	}
+	updateTime();
+  function updateTime() {
+
+  today = new Date();
+  expiry_datetime = document.getElementById("end_time").value;
+  expiry_date =new Date(expiry_datetime);
+  msPerDay = 24 * 60 * 60 * 1000 ;
+  timeLeft = (expiry_date.getTime() - today.getTime());
+  e_daysLeft = timeLeft / msPerDay;
+  daysLeft = Math.floor(e_daysLeft);
+  e_hrsLeft = (e_daysLeft - daysLeft)*24;
+  hrsLeft = Math.floor(e_hrsLeft);
+  e_minsLeft = (e_hrsLeft - hrsLeft)*60;
+  minsLeft = Math.floor(e_minsLeft);
+  scesLeft = Math.floor((e_minsLeft-minsLeft)*60);
+  document.getElementById("countdown_time").innerHTML="Days:   " + daysLeft + " Hours:  " + hrsLeft +"<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
+  setTimeout('updateTime()', 1000 );
+
+}
 </script>
