@@ -25,17 +25,17 @@
 <div class="banerrightout">
   <div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>
     You save: Rs.<%= @saving %></div>
-<div class="bought" id="bought" style="display:none;">
+<div class="bought" id="bought" >
 <div class="bought1">
 	<!--<img src="images/box.gif" width="309" height="12" />
 	<br/><br/>-->
-	<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%=@featured_product.currently_bought_count %> Bought</span><br/><br/>
+	<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
 <div class="progress_bar">
 	
-    <div class="progress_barred" id="progress" style="float:left;"></div>
+  <div class="progress_barred" id="progress" style="float:left;width: <%= progress_bar @featured_product %>px"></div>
 </div>	
 </div>
-<div class="bought1">If 50 people buy in to this deal before time runs out we all save big... but it won't happen without 50. </div>
+<div class="bought1">If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. </div>
 </div>
 <div class="bought1"><img src="/images/buydeal.gif" /></div>
 </div>
@@ -109,21 +109,7 @@ Mins: 48 Secs: 36-->
 
 </div>
 <script>
-	just_call_porgress_bar();
-	function just_call_porgress_bar(){
-		new Ajax.Request('/progress_bar?id=<%=@featured_product.id%>',{
-asynchronous:true, evalScripts:true, onComplete:function(request){
-	if (request.responseText != null){
-		document.getElementById('bought').style.display = '';
-		document.getElementById('progress').style.width=request.responseText+'px';
-	}
-	else{
-		document.getElementById('progress').style.width=0;
-	}
-	}});
-
-	}
-	updateTime();
+  updateTime();
   function updateTime() {
 
   today = new Date();

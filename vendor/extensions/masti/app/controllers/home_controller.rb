@@ -4,9 +4,10 @@ class HomeController < Spree::BaseController
   def index
     deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
-    @price = @featured_product.price
+    @price = @featured_product.price.to_i
     @discount = @featured_product.discount
-    @saving = @price*@discount/100
+    @saving = (@price*@discount/100).to_i
+    @bought_count = @featured_product.currently_bought_count
   end
   
   
@@ -39,17 +40,6 @@ class HomeController < Spree::BaseController
       flash[:error]="Oops You are missing Something."      
       redirect_to get_featured_path
     end
-
-  end
-  
-  def progress_bar
-    current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
-      if current_deal.currently_bought_count>=current_deal.minimum_number
-        bought_percent = 300
-      else
-          bought_percent = (current_deal.currently_bought_count*300)/current_deal.minimum_number
-      end
-    render(:text =>bought_percent)
   end
   
   def terms_conditions
