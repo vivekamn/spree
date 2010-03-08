@@ -49,8 +49,11 @@ class HomeController < Spree::BaseController
       else
           bought_percent = (current_deal.currently_bought_count*300)/current_deal.minimum_number
       end
-      puts bought_percent
     render(:text =>bought_percent)
+  end
+  
+  def terms_conditions
+    
   end
   
   def about_us

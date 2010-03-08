@@ -17,6 +17,9 @@ map.faq '/faq',:controller => "home", :action => "faq"
 map.get_featured '/get-featured',:controller=>"home",:action=>"get_featured"
 map.contact_us '/contact-us',:controller=>"home",:action=>"contact_us"
 map.progress_bar '/progress_bar',:controller=>"home",:action=>"progress_bar"
+map.terms_conditions '/terms-conditions',:controller=>"home",:action=>"terms_conditions"
+ 
+ 
  map.resources :orders, :member => {:address_info => :get}, :has_many => [:line_items, :creditcards, :creditcard_payments]
   map.resources :orders, :member => {:fatal_shipping => :get} do |order|
     order.resources :shipments, :member => {:shipping_method => :get}
