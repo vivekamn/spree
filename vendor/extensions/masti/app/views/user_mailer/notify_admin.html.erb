@@ -1,0 +1,30 @@
+Dear <%= @user.login %>,
+
+This is to inform you that the deal for the Product '<%= @product.name%>' from the Vendor '<%# @vendor_name %>'
+
+is going to finish on '<%= @product.deal_expiry_date%>'. Following are the details....
+
+Product Details:
+
+Title: <%= @product.name%>
+
+Minimum no. of buyers required: <%= @product.minimum_number%>
+
+Maximum no. of buyers allowed: <%= @product.maximum_number %>
+		
+Total no. of buyers: <%= @product.currently_bought_count%>
+
+Deal Expiry Date: <%= @product.deal_expiry_date%>
+
+
+Vendor Details:
+
+Name: <%# @vendor_name%>
+
+Email: <%# @vendor_email%>
+
+Phone No.: <%# @vendor_phone_no%>
+
+
+
+The MasthiDeal Team
