@@ -25,3 +25,14 @@ end
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :cron_log, "#{RAILS_ROOT}/log/cron_log123.log"
+set :environment, RAILS_ENV
+
+every 1.day, :at => '12:00am' do
+  runner "DealHistory.notify_admin_one_day_before"  
+end
+
+#every 1.minute do
+every 1.day, :at => '11:59pm' do  
+  runner "DealHistory.notify_deal_closed"  
+end

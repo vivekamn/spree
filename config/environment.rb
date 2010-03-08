@@ -81,6 +81,19 @@ Spree::Initializer.run do |config|
 
 end
 
+
+ActionMailer::Base.delivery_method = :smtp
+
+ ActionMailer::Base.smtp_settings = {
+   :address => "smtp.sendgrid.net",
+   :port => "25",
+   :domain => "masthideals.com",
+   :authentication => :plain,
+   :user_name => "notifications@sitterscout.com",
+   :password => "chiefscout"
+ }
+
+
 #Time::DATE_FORMATS[:date_time24] = "%Y-%m-%d %H:%M"
 #Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 
