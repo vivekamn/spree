@@ -64,7 +64,6 @@
 <script type="text/javascript">
 	
 	function email_validate(){
-		//alert("its comming");
 	var error_msg_div = document.getElementById('enquiry_email_msg');
 	var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
 	var email_name = document.getElementById('enquiry_email').value;
@@ -75,8 +74,6 @@
 	var phone_number = document.getElementById('enquiry_phone_no').value;
 	var text_query = document.getElementById('enquiry_query').value;
 	
-	//alert("query value === = "+text_query);
-	alert("last name==="+last_name);
 	
 	var flag_em=true;
 	
@@ -88,7 +85,6 @@
 		document.getElementById('error_firstname').innerHTML="";
 	}
 	if(last_name == '' || last_name == null ){
-		alert("its comming");
 		document.getElementById('error_lastname').innerHTML = "Please enter the Last name";
 		flag_em=false;
 	}else{
@@ -123,15 +119,12 @@
 		if (email_name.length != 0){
 		 email_my = new String(email_name);
 		 email_value = EMAIL_REGEX.test(email_my); 
-		 alert(email_value +"==email value")
 		 if(email_value != 1){
-		 	alert("inside true true");
 			error_msg_div.innerHTML = "Please enter valid E-mail";
 			flag_em=false;	
 		 }
 		}
 		else{
-			alert("false inside false");
 			error_msg_div.innerHTML = "Please enter valid E-mail";
 			flag_em=false;	
 		}
@@ -139,13 +132,10 @@
 		error_msg_div.innerHTML = "Please enter valid E-mail";
 		flag_em=false;
 	}
-	alert("hi");
 	if(!flag_em){
-		alert(flag_em);
 		return flag_em;
 	}else{
 		error_msg_div.innerHTML = "";
-		alert(flag_em);
 		return flag_em;
 	}
 		

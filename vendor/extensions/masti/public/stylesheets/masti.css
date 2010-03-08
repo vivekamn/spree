@@ -32,13 +32,14 @@ a{ outline:none;
 }
 .w190{ padding-top:2px; width:190px; float:left;
 }
-.navouter{ width:938px; float:left; background:url(../images/centercurve.gif) repeat-x; height:47px;
+
+.navinner{ width:938px; float:left; height:37px;
 }
-.navinner{ width:928px; float:left; background:url(../images/centercurve.gif) repeat-x; height:47px;
+.thedeal{ width:311px; float:left; height:37px; 
 }
-.navleft{ padding:13px 93px 0 93px; float:left; background:url(../images/line.gif) right no-repeat; height:34px;
+.howwork{ width:315px; float:left; height:37px; 
 }
-.navleft1{ padding:13px 93px 0 93px; float:left; height:34px;
+.getfeatures{ width:312px; float:left; height:37px; 
 }
 .bannerouter{ width:938px; float:left;
 }
@@ -48,7 +49,7 @@ a{ outline:none;
 }
 .dealbg{ background:url(../images/dealbg.gif) no-repeat; width:261px; height:69px; padding:37px 0 0 107px; text-align:center; color:#507200; font-size:14px; font-weight:bold; 
 }
-.bought{ background:url(../images/bought.gif) no-repeat; width:309px; height:69px; padding:48px 28px 0 31px; text-align:center; color:#507200; font-size:16px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#414141;  
+.bought{ background:url(../images/bought.gif) no-repeat; width:309px; height:97px; padding:20px 28px 0 31px; text-align:center; color:#507200; font-size:16px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#414141;  
 }
 .bought1{ width:309px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
 }
@@ -92,7 +93,7 @@ a{ outline:none;
 }
 .footertop4{ width:179px; float:left; background:#5c5c5c; padding:18px 0 0 56px; height:82px; color: #a1a1a1; line-height:24px;
 }
-.footertop5{ width:235px; float:left; background:#333; padding:10px 0 0 0px; height:42px; color: #a1a1a1; text-align:center; line-height:18px;
+.footertop5{ width:235px; float:left; background:#333; padding:10px 0 0 0px; height:42px; color: #a1a1a1; text-align:center; line-height:18px;font-size:11px;
 }
 .company{ font-size:11px; color:#a1a1a1;  text-decoration:none; 
 }
@@ -100,4 +101,3 @@ a{ outline:none;
 }
 .footerbg{ width:810px; float:left; background:url(../images/footbg.gif) repeat-y; padding:20px 64px 0 64px; height:22px; color:#a1a1a1; 
 }
-

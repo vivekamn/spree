@@ -61,6 +61,7 @@ class HomeController < Spree::BaseController
   end
   
   def how_masti_works
+    @bar_selected="how_masthi_works"
   end
   
   def faq
@@ -70,6 +71,7 @@ class HomeController < Spree::BaseController
   end
   
   def get_featured
+    @bar_selected="get_featured"
   end  
   
   def update_assets

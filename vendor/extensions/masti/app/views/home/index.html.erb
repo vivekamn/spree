@@ -5,6 +5,7 @@
    
 <%= @featured_product.description %> 
 -->
+
 <%= javascript_include_tag "prototype" %>
 <style>
 .progress_bar {
@@ -28,13 +29,15 @@
 <div class="bought1">
 	<!--<img src="images/box.gif" width="309" height="12" />
 	<br/><br/>-->
+	<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%=@featured_product.currently_bought_count %> Bought</span><br/><br/>
 <div class="progress_bar">
+	
     <div class="progress_barred" id="progress" style="float:left;"></div>
 </div>	
 </div>
 <div class="bought1">If 50 people buy in to this deal before time runs out we all save big... but it won't happen without 50. </div>
 </div>
-<div class="bought1"><img src="images/buydeal.gif" width="368" height="110" /></div>
+<div class="bought1"><img src="/images/buydeal.gif" /></div>
 </div>
 </div>
 
@@ -42,7 +45,8 @@
 <div class="sharetext"><%=render :partial=>'/shared/share_with_friends'%></div>
 <!--<div class="icon">
 <img src="images/icon1.gif" width="39" height="39" /> &nbsp;<img src="images/icon2.gif" width="39" height="39" /> &nbsp;<img src="images/icon3.gif" width="39" height="39" />
-</div>-->
+</div>
+-->
 </div>
 <div class="contentouter">
 <div class="leftsidecontent">
@@ -74,7 +78,7 @@
 Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
-<div class="dealinfo"><img src="images/dimensions.gif" width="94" height="20" /></div>
+<div class="dealinfo"><img src="images/dimensions.gif" width="82" height="20" /></div>
 <div class="dealinfocontent1 pb10">
 <div class="points">
 <ul>
@@ -87,7 +91,7 @@ Mins: 48 Secs: 36-->
 </div></div>
 
 
-<div class="dealinfo"><img src="images/system.gif" width="181" height="24" /></div>
+<div class="dealinfo"><img src="images/system.gif" width="77" height="24" /></div>
 <div class="dealinfocontent1">
 <div class="points">
 <ul>
