@@ -17,8 +17,7 @@
       <%= link_to image_tag('/images/checkout.png') + t("checkout"), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
     </div>
   </div>
-  <% end -%>
-  <p><%=link_to t("continue_shopping"), products_path, :class => 'button continue' %></p>
+  <% end -%>  
   <% unless @order.line_items.empty? -%>
   <p id="clear_cart_link">
     <%= link_to t("empty_cart"), object_url, :method => :delete, :class => 'button empty'  %>
