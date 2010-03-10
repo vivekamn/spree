@@ -1,5 +1,15 @@
 class DealHistory < ActiveRecord::Base
- 
+  has_one :product
+  def swith_off
+    self.is_active=true
+    self.save!
+  end
+  
+  def sell_out   
+    self.sold_out=true
+    self.save!
+  end
+  
   def deal_notify    
     if (self.is_active == true)
       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
