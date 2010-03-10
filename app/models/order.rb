@@ -15,9 +15,7 @@ class Order < ActiveRecord::Base
   has_many :line_items, :extend => Totaling, :dependent => :destroy
   has_many :inventory_units
 
-  has_many :payments,            :extend => Totaling
-  has_many :creditcard_payments, :extend => Totaling
-  has_many :creditcards, :through => :creditcard_payments, :uniq => true
+  has_many :payments, :as => :payable, :extend => Totaling
 
   has_one :checkout
   has_one :bill_address, :through => :checkout
@@ -295,10 +293,11 @@ class Order < ActiveRecord::Base
   def update_totals!
     update_totals
 
-    if self.payments.total < self.total
+    payments_total = self.payments.total
+    if payments_total < self.total
       #Total is higher so balance_due
       self.under_paid
-    elsif self.payments.total > self.total
+    elsif payments_total > self.total
       #Total is lower so credit_owed
       self.over_paid
     end
@@ -326,7 +325,7 @@ class Order < ActiveRecord::Base
     [0, total - payments.total].max
   end
 
-  def has_balance_outstanding?
+  def outstanding_balance?
     outstanding_balance > 0
   end
 
@@ -334,8 +333,14 @@ class Order < ActiveRecord::Base
     [0, payments.total - total].max
   end
 
-  def has_credit_outstanding?
+  def outstanding_credit?
     outstanding_credit > 0
+  end
+
+
+  def creditcards
+    creditcard_ids = (payments.from_creditcard + checkout.payments.from_creditcard).map(&:source_id).uniq
+    Creditcard.scoped(:conditions => {:id => creditcard_ids})
   end
 
   private

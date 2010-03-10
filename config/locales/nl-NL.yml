@@ -1,4 +1,4 @@
---- 
+---
 nl-NL: 
   'no': "No"
   'yes': "Yes"
@@ -17,15 +17,18 @@ nl-NL:
     listing: Lijst
     new: Nieuw
     update: Update
+  active: "Active"
   activerecord: 
     attributes: 
       address: 
         address1: "Adres lijn 1"
         address2: "Adres lijn 2"
         city: Woonplaats
-        firstname: Voornaam
-        lastname: Achternaam
+        country: "Country"
+        first_name: "First Name"
+        last_name: "Last Name"
         phone: Telefoon
+        state: "State"
         zipcode: Postcode
       checkout:
         bill_address:
@@ -78,6 +81,15 @@ nl-NL:
         on_hand: "Op Voorraad"
         shipping_category: "Verzend-categorie"
         tax_category: "Tax Category"
+      product_group:
+        name: "Name"
+        product_count: "Product count"
+        product_scopes: "Product scopes"
+        products: "Products"
+        url: "URL"
+      product_scope:
+        arguments: "Arguments"
+        description: "Description"
       property: 
         name: Naam
         presentation: Presentatie
@@ -148,6 +160,9 @@ nl-NL:
       product: 
         one: Product
         other: Producten
+      product_group:
+        one: "Product group"
+        other: "Product groups"
       property: 
         one: Eigenschap
         other: Eigenschappen
@@ -165,7 +180,7 @@ nl-NL:
         other: Shipments
       shipping_category: 
         one: "Verzend-categorie"
-        other: "Verzend-categorieën"
+        other: "Verzend-categorieÃ«n"
       state: 
         one: Status
         other: Statussen
@@ -180,7 +195,7 @@ nl-NL:
         other: Taxons
       taxonomy: 
         one: Taxonomie
-        other: Taxonomieën
+        other: TaxonomieÃ«n
       user: 
         one: Gebruiker
         other: Gebruikers
@@ -198,6 +213,7 @@ nl-NL:
   add_option_value: "Optie Waarde Toevoegen"
   add_product: "Add Product"
   add_product_properties: "Add Product Properties"
+  add_scope: "Add a scope"
   add_state: "Status Toevoegen"
   add_to_cart: "Toevoegen aan Winkelwagen"
   add_zone: "Zone toevoegen"
@@ -240,9 +256,6 @@ nl-NL:
   bill_address: "Factuuradres"
   billing: Billing
   billing_address: "Factuuradres"
-  billing_integration: Billing Integration
-  billing_integrations: Billing Integrations
-  billing_integrations_description: "Configure your settings for third party billing integrations such as Paypal, Google Checkout, etc."
   by_day: "by day"
   calculator: Calculator
   calculator_settings_warning: "If you are changing the calculator type, you must save first before you can edit the calculator settings"
@@ -255,7 +268,7 @@ nl-NL:
   card_number: "Kaartnummer"
   card_type_is: Card type is
   cart: Winkelwagen
-  categories: Categorieën
+  categories: CategorieÃ«n
   category: Categorie
   change: Wijzig
   change_language: "Taalkeuze"
@@ -268,6 +281,7 @@ nl-NL:
     # keys correspond to Checkout state names:
     address: Address
     complete: Complete
+    confirm: Confirm
     delivery: Delivery
     payment: Payment
   cheque: Cheque
@@ -282,6 +296,7 @@ nl-NL:
   configuration: Configuratie
   configuration_options: "Configuratie Opties"
   configurations: Configuraties
+  configured: Configured
   confirm: Bevestig
   confirm_delete: "Confirm Deletion"
   confirm_password: "Wachtwoord bevestiging"
@@ -328,7 +343,9 @@ nl-NL:
   editing_coupon: Editing Coupon
   editing_option_type: "Optie Type Wijzigen"
   editing_option_types: "Optie Types Wijzigen"
+  editing_payment_method: Editing Payment Method
   editing_product: "Product Wijzigen"
+  editing_product_group: "Editing Product Group"
   editing_property: "Eigenschap Wijzigen"
   editing_prototype: "Prototype Wijzigen"
   editing_shipping_category: "Wijzigen verzend-categorie"
@@ -349,6 +366,7 @@ nl-NL:
   enable_mail_delivery: "Mail aflevering aanzetten"
   enable_mail_queue: "Enable Mail Queue"
   enter_exactly_as_shown_on_card: Please enter exactly as shown on the card
+  environment: "Environment"
   error: fout
   event: Gebeurtenis
   existing_customer: "Bestaande Klant"
@@ -359,6 +377,8 @@ nl-NL:
   extensions: Extensies
   filename: Bestandsnaam
   final_confirmation: "Definitieve bevestiging"
+  finalize: Finalize
+  finalized_payments: Finalized Payments
   first_item: First Item Cost
   first_name: "Voornaam"
   flat_percent: Flat Percent
@@ -372,6 +392,7 @@ nl-NL:
   gateway_configuration: "Gateway configuration"
   gateway_error: "Gateway Fout"
   gateway_setting_description: "Selecteer een betalings-gateway en stel deze in."
+  gateway_settings_warning: "If you are changing the gateway type, you must save first before you can edit the gateway settings"
   general: "General"
   general_settings: "Algemene Instellingen"
   general_settings_description: "Algemene Spree Instellingen."
@@ -415,12 +436,14 @@ nl-NL:
   last_name: "Achternaam"
   last_year: "Last Year"
   list: Lijst
-  listing_categories: "Lijst Categorieën"
+  listing_categories: "Lijst CategorieÃ«n"
   listing_option_types: "Lijst Optie Types"
   listing_orders: "Lijst Bestellingen"
+  listing_product_groups: "Listing Product Groups"
   listing_reports: "Lijst Rapporten"
-  listing_tax_categories: "Lijst BTW categorieën"
+  listing_tax_categories: "Lijst BTW categorieÃ«n"
   listing_users: "Lijst Gebruikers"
+  live: "Live"
   loading: Loading
   locale_changed: "Regionale Instellingen Gewijzigd"
   log_in: "Inloggen"
@@ -462,6 +485,7 @@ nl-NL:
   new_option_value: "Nieuwe Optie Waarde"
   new_order: "New Order"
   new_payment: "New Payment"
+  new_payment_method: New Payment Method
   new_product: "Nieuw Product"
   new_product_group: New Product Group
   new_property: "Nieuwe Eigenschap"
@@ -483,6 +507,7 @@ nl-NL:
   next: Volgende
   no_items_in_cart: "Geen producten in Winkelwagen"
   no_match_found: "Geen gelijke gevonden"
+  no_payment_methods_available: "Can't check out, no payment methods are configured for this environment"
   no_products_found: "No products found"
   no_shipping_methods_available: "No shipping methods available, please change your address and try again."
   no_user_found: "No user was found with that email address"
@@ -535,7 +560,12 @@ nl-NL:
   payment: Betaling
   payment_gateway: "Betalings-Gateway"
   payment_information: "Informatie Betaling"
+  payment_method: Payment Method
+  payment_methods: Payment Methods
+  payment_methods_setting_description: Configure methods customers can use to pay
+  payment_updated: Payment Updated
   payments: Betalingen
+  pending_payments: Pending Payments
   permalink: Permalink
   phone: Telefoon
   place_order: Bestellen
@@ -579,7 +609,7 @@ nl-NL:
         name: Ascend by product name
       ascend_by_updated_at:
         name: Ascend by actualization date
-      by_popularity:
+      descend_by_popularity:
         name: Sort by popularity(most popular first)
       descend_by_master_price:
         name: Descend by product master price
@@ -603,7 +633,7 @@ nl-NL:
         args:
           words: Words
         description: "(separated by space or comma)"
-        name: "Product name or meta heywords have following"
+        name: "Product name or meta keywords have following"
         sentence: name or keywords contain <em>%s</em>
       in_taxons:
         args:
@@ -674,6 +704,8 @@ nl-NL:
   property: Eigenschap
   prototype: Prototype
   prototypes: Prototypes
+  provider: "Provider"
+  provider_settings_warning: "If you are changing the provider type, you must save first before you can edit the provider settings"
   qty: Aantal
   quantity_shipped: Quantity Shipped
   range: "Range"
@@ -716,6 +748,8 @@ nl-NL:
   sales_totals_description: "Omzet voor alle bestellingen"
   save_and_continue: Save and Continue
   save_preferences: "Instellingen Opslaan"           
+  scope: Scope
+  scopes: Scopes
   search: Zoek
   search_results: "Search results for '{{keywords}}'"
   secure_connection_type: "Secure Connection Type"
@@ -727,6 +761,7 @@ nl-NL:
   send_copy_of_orders_mails_to: "Zend kopie van bestelmails naar"      
   send_mails_as: "Zend mail als"                    
   send_order_mails_as: "Zend bestelmaild als"
+  server: Server
   server_error: "The server returned an error"  
   settings: Settings
   ship: Verzenden
@@ -739,8 +774,8 @@ nl-NL:
   shipped: Verzonden
   shipping: Aflevering
   shipping_address: "Afleveringsadres"
-  shipping_categories: "Verzend-categorieën"
-  shipping_categories_description: "Beheer verzend-categorieën om duidelijk te maken op welke wijze producten verzonden kunnen worden"
+  shipping_categories: "Verzend-categorieÃ«n"
+  shipping_categories_description: "Beheer verzend-categorieÃ«n om duidelijk te maken op welke wijze producten verzonden kunnen worden"
   shipping_category: Shipping Category
   shipping_cost: Kosten
   shipping_error: "Fout bij aflevering"
@@ -759,6 +794,7 @@ nl-NL:
   show_only_complete_orders: "Toon enkel afgewerkte bestellingen"
   show_out_of_stock_products: "Toon producten die niet voorradig zijn"
   show_price_inc_vat: "Show price including VAT"
+  showing_first_n: "Showing first {{n}}"
   sign_up: "Registreer"
   site_name: "Site naam"
   site_url: "Site URL"
@@ -798,8 +834,8 @@ nl-NL:
   subtract: Verreken
   system: Systeem
   tax: BTW
-  tax_categories: "BTW Categorieën"
-  tax_categories_setting_description: "Instellen BTW categorieën om aan te duiden welke producten onderhevig zijn aan BTW."
+  tax_categories: "BTW CategorieÃ«n"
+  tax_categories_setting_description: "Instellen BTW categorieÃ«n om aan te duiden welke producten onderhevig zijn aan BTW."
   tax_category: "BTW Categorie"
   tax_rates: "Tax Rates"
   tax_rates_description: Tax rates setup and configuration.
@@ -809,12 +845,14 @@ nl-NL:
   tax_type: "BTW Type"
   taxon: Taxon
   taxon_edit: Edit Taxon
-  taxonomies: Taxonomieën
-  taxonomies_setting_description: "Aanmaken en wijzigen taxonomieën"
+  taxonomies: TaxonomieÃ«n
+  taxonomies_setting_description: "Aanmaken en wijzigen taxonomieÃ«n"
   taxonomy_edit: "Edit taxonomy"
   taxonomy_tree_error: "The requested change has not been accepted and the tree has been returned to its previous state, please try again."
   taxonomy_tree_instruction: "* Right click a child in the tree to access the menu for adding, deleting or sorting a child."
   taxons: Taxons
+  test: "Test"
+  test_mode: Test Mode
   thank_you_for_your_order: "Hartelijk dank voor uw bestelling. U kan deze pagina afdrukken als bewijs van bestelling."
   this_file_language: "Nederlands (NL)"
   this_month: "This Month"

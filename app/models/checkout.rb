@@ -1,7 +1,7 @@
 class Checkout < ActiveRecord::Base
   extend ValidationGroup::ActiveRecord::ActsMethods
 
-  before_save :check_addresses_on_duplication
+  before_update :check_addresses_on_duplication, :if => "!ship_address.nil? && !bill_address.nil?"
   after_save :process_coupon_code
   after_save :update_order_shipment
   before_validation :clone_billing_address, :if => "@use_billing"
@@ -9,13 +9,12 @@ class Checkout < ActiveRecord::Base
   belongs_to :order
   belongs_to :bill_address, :foreign_key => "bill_address_id", :class_name => "Address"
   belongs_to :ship_address, :foreign_key => "ship_address_id", :class_name => "Address"
-  belongs_to :shipping_method
-
-  has_one :creditcard
+  belongs_to :shipping_method  
+  has_many :payments, :as => :payable
 
   accepts_nested_attributes_for :bill_address
   accepts_nested_attributes_for :ship_address
-  accepts_nested_attributes_for :creditcard
+  accepts_nested_attributes_for :payments
 
   attr_accessor :coupon_code
   attr_accessor :use_billing
@@ -63,7 +62,8 @@ class Checkout < ActiveRecord::Base
     event :next do
       transition :to => 'delivery', :from  => 'address'
       transition :to => 'payment', :from => 'delivery'
-      transition :to => 'complete', :from => 'payment'
+      transition :to => 'confirm', :from => 'payment'
+      transition :to => 'complete', :from => 'confirm'
     end
   end
   def self.state_names
@@ -74,20 +74,24 @@ class Checkout < ActiveRecord::Base
     return [] unless ship_address
     ShippingMethod.all_available(order)
   end
-
+  
+  def payment
+    payments.first
+  end
+  
   private
 
   def check_addresses_on_duplication
     if order.user
       if order.user.ship_address.nil?
         order.user.update_attribute(:ship_address, ship_address)
-      elsif ship_address.nil? || ship_address.same_as?(order.user.ship_address)
-        self.ship_address = order.user.ship_address
+      elsif ship_address.same_as?(order.user.ship_address)
+        #self.ship_address = order.user.ship_address
       end
       if order.user.bill_address.nil?
         order.user.update_attribute(:bill_address, bill_address)
-      elsif bill_address.nil? || bill_address.same_as?(order.user.bill_address)
-        self.bill_address = order.user.bill_address
+      elsif bill_address.same_as?(order.user.bill_address)
+        #self.bill_address = order.user.bill_address
       end
     end
     true
@@ -109,13 +113,7 @@ class Checkout < ActiveRecord::Base
 
   def process_payment
     return if order.payments.total == order.total
-    begin
-      if Spree::Config[:auto_capture]
-        creditcard.purchase(order.total.to_f)
-      else
-        creditcard.authorize(order.total.to_f)
-      end
-    end
+    payments.each(&:process!)
   end
 
   def process_coupon_code

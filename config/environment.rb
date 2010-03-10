@@ -6,7 +6,7 @@
  
 # Specifies gem version of Rails to use when vendor/rails is not present
 SPREE_GEM_VERSION = '0.10.99' unless defined? SPREE_GEM_VERSION
- 
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
  

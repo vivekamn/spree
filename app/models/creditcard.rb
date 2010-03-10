@@ -1,9 +1,6 @@
 class Creditcard < ActiveRecord::Base         
-  belongs_to :checkout
-  has_many :creditcard_payments
-  has_many :creditcard_txns
-  alias :txns :creditcard_txns
-  
+  has_many :payments, :as => :source
+
   before_save :set_last_digits
   
   validates_numericality_of :month, :integer => true
@@ -11,8 +8,16 @@ class Creditcard < ActiveRecord::Base
   validates_presence_of :number, :unless => :has_payment_profile?, :on => :create
   validates_presence_of :verification_value, :unless => :has_payment_profile?, :on => :create
   
-  def has_payment_profile?
-    gateway_customer_profile_id.present?
+  
+  def process!(payment)
+    begin
+      if Spree::Config[:auto_capture]
+        purchase(payment.amount.to_f, payment)
+        payment.finalize!
+      else
+        authorize(payment.amount.to_f, payment)
+      end
+    end
   end
   
   def set_last_digits
@@ -46,18 +51,12 @@ class Creditcard < ActiveRecord::Base
   
   alias :attributes_with_quotes_default :attributes_with_quotes
   
-  def authorization
-    #find the transaction associated with the original authorization/capture
-    txns.find(:first,
-              :conditions => ["txn_type = ? AND response_code IS NOT NULL", CreditcardTxn::TxnType::AUTHORIZE.to_s],
-              :order => 'created_at DESC')
-  end
 
-  def can_capture?
-    authorization && txns.count(:conditions => {:txn_type => CreditcardTxn::TxnType::CAPTURE}) == 0
-  end
+  
   
   private
+  
+  
   # Override default behavior of Rails attr_readonly so that its never written to the database (not even on create)
   def attributes_with_quotes(include_primary_key = true, include_readonly_attributes = true, attribute_names = @attributes.keys)
     attributes_with_quotes_default(include_primary_key, false, attribute_names)

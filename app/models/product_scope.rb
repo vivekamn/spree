@@ -24,12 +24,24 @@ class ProductScope < ActiveRecord::Base
     another_scope.send(self.name, *self.arguments)
   end
 
-  # checks validity of the named scope (if it's safe and can be applied on Product)
+  def before_validation_on_create
+    # Add default empty arguments so scope validates and errors aren't caused when previewing it
+    if args = Scopes::Product.arguments_for_scope_name(name)
+      self.arguments ||= ['']*args.length
+    end
+  end
+  
+  # checks validity of the named scope (if its safe and can be applied on Product)
   def validate
-    errors.add(:name, "is not propper scope name") unless Product.condition?(self.name)
-    apply_on(Product)
+    errors.add(:name, "is not a valid scope name") unless Product.condition?(self.name)
+    apply_on(Product).limit(0) != nil
   rescue Exception
-    errors.add(:arguments, "arguments are incorrect")
+    errors.add(:arguments, "are incorrect")
+  end
+
+  # test ordering scope by looking for name pattern or :order clause
+  def is_ordering?
+    name =~ /^(ascend_by|descend_by)/ || apply_on(Product).scope(:find)[:order].present?
   end
 
   def to_sentence

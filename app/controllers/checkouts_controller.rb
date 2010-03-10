@@ -5,6 +5,7 @@ class CheckoutsController < Spree::BaseController
   before_filter :load_data
   before_filter :set_state
   before_filter :enforce_registration, :except => :register
+  before_filter :ensure_payment_methods
   helper :users
 
   resource_controller :singleton
@@ -16,19 +17,21 @@ class CheckoutsController < Spree::BaseController
   # GET /checkout is invalid but we'll assume a bookmark or user error and just redirect to edit (assuming checkout is still in progress)
   show.wants.html { redirect_to edit_object_url }
 
-  edit.before :edit_hooks, :set_user
+  edit.before :edit_hooks
   delivery.edit_hook :load_available_methods
   address.edit_hook :set_ip_address
-  payment.edit_hook :load_available_integrations
+  payment.edit_hook :load_available_payment_methods
+  update.before :clear_payments_if_in_payment_state
 
   # customized verison of the standard r_c update method (since we need to handle gateway errors, etc)
-  def update
+  def update      
     load_object
 
     # call the edit hooks for the current step in case we experience validation failure and need to edit again
     edit_hooks
     @checkout.enable_validation_group(@checkout.state.to_sym)
-
+    @prev_state = @checkout.state
+    
     before :update
 
     begin
@@ -72,6 +75,17 @@ class CheckoutsController < Spree::BaseController
 
   private
 
+  def object_params
+    # For payment step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
+    if object.payment?
+      if source_params = params.delete(:payment_source)[params[:checkout][:payments_attributes].first[:payment_method_id].underscore]
+        params[:checkout][:payments_attributes].first[:source_attributes] = source_params
+      end
+      params[:checkout][:payments_attributes].first[:amount] = @order.total
+    end
+    params[:checkout]
+  end
+
   # Calls edit hooks registered for the current step
   def edit_hooks
     edit_hook @checkout.state.to_sym
@@ -100,7 +114,6 @@ class CheckoutsController < Spree::BaseController
       end
       @object.ship_address ||= Address.default
       @object.bill_address ||= Address.default
-      @object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
     end
     @object.email ||= params[:checkout][:email] if params[:checkout]
     @object.email ||= current_user.email if current_user
@@ -138,8 +151,19 @@ class CheckoutsController < Spree::BaseController
     @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
   end
 
-  def load_available_integrations
-    @billing_integrations = BillingIntegration.find(:all, :conditions => {:active => true, :environment => ENV['RAILS_ENV']})
+  def clear_payments_if_in_payment_state
+    if @checkout.payment?
+      @checkout.payments.clear
+    end
+  end
+  
+  def load_available_payment_methods 
+    @payment_methods = PaymentMethod.available   
+    if @checkout.payment and @checkout.payment.payment_method
+      @payment_method = @checkout.payment.payment_method
+    else
+      @payment_method = @payment_methods.first
+    end
   end
 
   def set_ip_address
@@ -183,14 +207,16 @@ class CheckoutsController < Spree::BaseController
     redirect_to register_order_checkout_url(parent_object)
   end
 
-  def set_user
-    if object.order.user.nil? && current_user
-      object.order.user = current_user
-      object.order.save
-    end
-  end
-  
   def accurate_title
     I18n.t(:checkout)
   end
+  
+  def ensure_payment_methods
+    if PaymentMethod.available.none?
+      flash[:error] = t(:no_payment_methods_available)
+      redirect_to edit_order_path(params[:order_id])
+      false
+    end
+  end
+  
 end
