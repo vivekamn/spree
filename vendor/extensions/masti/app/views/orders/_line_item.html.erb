@@ -20,7 +20,8 @@
   </td>
   <td>
     <% hook :cart_item_price, locals do %>
-      <%=  product_price(line_item) %>
+      <!--<%=  product_price(line_item) %>-->
+	  Rs. <%=line_item.price%>
     <% end %>
   </td>
   <td>
@@ -31,7 +32,8 @@
 
   <td>
     <% hook :cart_item_total, locals do %>
-      <%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>
+	Rs. <%=line_item.price * line_item.quantity%>
+      <!--<%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>-->
     <% end %>
   </td>
   <td>
