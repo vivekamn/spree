@@ -105,7 +105,8 @@ def self.sufficient_inventory(line_item)
   status="available"
       variant = line_item.variant
       quantity = line_item.quantity
-      product=variant.product      
+      product=variant.product 
+      current_deal=DealHistory.find_by_is_active(true)
       if product.deal_expiry_date<Time.now
         status="expired"
         current_deal.sell_out
