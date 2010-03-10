@@ -16,7 +16,7 @@ module HomeHelper
     end
   end
   
-  def deal_on deal, product
+  def deal_on product
     if product.currently_bought_count>=product.minimum_number
       return true
     else

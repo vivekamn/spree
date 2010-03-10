@@ -39,7 +39,7 @@
 </div>
 <div class="bought1">
 	<%if @deal and deal_live @deal, @featured_product%>
-	<%if deal_on @deal,@featured_product %>
+	<%if deal_on @featured_product %>
 	Hurray, the deal is already on. Just go ahead to get your masthi savings 
 	<%else%>
 	If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
@@ -122,6 +122,7 @@ Mins: 48 Secs: 36-->
 </div></div>
 </div></div>
 <input type="hidden" name="end_time" id="end_time" value="<%=@featured_product.deal_expiry_date %>" >
+<input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 
 
 </div>
@@ -148,7 +149,7 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   expiry_date =new Date(expiry_datetime);
   msPerDay = 24 * 60 * 60 * 1000 ;
   timeLeft = (expiry_date.getTime() - today.getTime());
-  if (timeLeft > 0) {
+  if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
   	e_daysLeft = timeLeft / msPerDay;
   	daysLeft = Math.floor(e_daysLeft);
   	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
