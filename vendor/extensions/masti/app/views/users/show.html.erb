@@ -63,7 +63,7 @@
 		</td>
 		<td align="right">
 			<% if admin?%>
-				<%=link_to "View all Orders",home_url %>
+				<%=link_to "View all Orders","/admin/orders" %>
 			<%end%>
 		</td>
 	</tr>
@@ -93,8 +93,8 @@
 			  </thead>
 			  <tbody>
 			  <% @orders.each do |order| %>
+			  <% order.line_items.each do |item| %>
 			    <tr class="<%= cycle('even', 'odd') %>">
-			    	<% order.line_items.each do |item| %>
 			      <td><%= item.variant.product.name %></td>
 			      <td><%=order.created_at.to_date%></td>
 			      <td><%= t(order.state).titleize %></td>
