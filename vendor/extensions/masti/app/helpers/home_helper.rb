@@ -7,5 +7,21 @@ module HomeHelper
           bought_percent = (current_deal.currently_bought_count*300)/current_deal.minimum_number
       end
   end
+  
+  def deal_live deal, product    
+    if deal.sold_out==true or  product.deal_expiry_date<=Time.now      
+      return false
+    else     
+      return true
+    end
+  end
+  
+  def deal_on deal, product
+    if product.currently_bought_count>=product.minimum_number
+      return true
+    else
+      return false
+    end
+  end
 
 end

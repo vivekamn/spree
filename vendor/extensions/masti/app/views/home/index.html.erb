@@ -18,6 +18,9 @@
         background-color:#E60000; 
         height:10px
 }
+.bought1.img{
+	border=0;
+}
 </style>
 
 <div class="bannerouter">
@@ -35,9 +38,24 @@
   <div class="progress_barred" id="progress" style="float:left;width: <%= progress_bar @featured_product %>px"></div>
 </div>	
 </div>
-<div class="bought1">If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. </div>
+<div class="bought1">
+	<%if @deal and deal_live @deal, @featured_product%>
+	<%if deal_on @deal,@featured_product %>
+	Hurray, the deal is already on. Just go ahead to get your masthi savings 
+	<%else%>
+	If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
+	<%end%>
+	<%end%>
+	</div>
 </div>
-<div class="bought1"><img src="/images/buydeal.gif" /></div>
+<div class="bought1">
+	<%if @deal and deal_live @deal, @featured_product%>
+	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>
+	<%else%>
+	Deal over
+	<%end%>
+	
+	</div>
 </div>
 </div>
 
@@ -117,15 +135,19 @@ Mins: 48 Secs: 36-->
   expiry_date =new Date(expiry_datetime);
   msPerDay = 24 * 60 * 60 * 1000 ;
   timeLeft = (expiry_date.getTime() - today.getTime());
-  e_daysLeft = timeLeft / msPerDay;
-  daysLeft = Math.floor(e_daysLeft);
-  e_hrsLeft = (e_daysLeft - daysLeft)*24;
-  hrsLeft = Math.floor(e_hrsLeft);
-  e_minsLeft = (e_hrsLeft - hrsLeft)*60;
-  minsLeft = Math.floor(e_minsLeft);
-  scesLeft = Math.floor((e_minsLeft-minsLeft)*60);
-  document.getElementById("countdown_time").innerHTML="Days:   " + daysLeft + " Hours:  " + hrsLeft +"<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
-  setTimeout('updateTime()', 1000 );
-
+  if (timeLeft > 0) {
+  	e_daysLeft = timeLeft / msPerDay;
+  	daysLeft = Math.floor(e_daysLeft);
+  	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+  	hrsLeft = Math.floor(e_hrsLeft);
+  	e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+  	minsLeft = Math.floor(e_minsLeft);
+  	scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
+  	document.getElementById("countdown_time").innerHTML = "Days:   " + daysLeft + " Hours:  " + hrsLeft + "<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
+  	setTimeout('updateTime()', 1000);
+  }
+  else{
+  	document.getElementById("countdown_time").innerHTML = "Days: 0  "  + " Hours: 0 " + "<br/> Mins:  0 " + " Secs:  0 ";
+  }
 }
 </script>

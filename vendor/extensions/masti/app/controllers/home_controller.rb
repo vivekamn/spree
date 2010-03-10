@@ -2,8 +2,8 @@ class HomeController < Spree::BaseController
 
 #   before_filter :require_user,:only=>[:get_featured]
   def index
-    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
-    @featured_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
+    @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
+    @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
     @price = @featured_product.price.to_i
     @discount = @featured_product.discount
     @saving = (@price*@discount/100).to_i
