@@ -28,7 +28,15 @@ class HomeController < Spree::BaseController
     end
     redirect_to :back
   end
-  
+ 
+  def voucher
+    @order=Order.find(params[:id])
+    line_items_coll=@order.line_items
+    line_items_coll.each do |item|
+      @item=item
+      @product=item.variant.product
+    end
+  end
   
   #getting the featured deal informations from the user
   def create
@@ -40,6 +48,16 @@ class HomeController < Spree::BaseController
       flash[:error]="Oops You are missing Something."      
       redirect_to get_featured_path
     end
+  end
+  
+  def progress_bar
+    current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
+      if current_deal.currently_bought_count>=current_deal.minimum_number
+        bought_percent = 300
+      else
+          bought_percent = (current_deal.currently_bought_count*300)/current_deal.minimum_number
+      end
+    render(:text =>bought_percent)
   end
   
   def terms_conditions

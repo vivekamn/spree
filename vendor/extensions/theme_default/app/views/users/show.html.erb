@@ -18,7 +18,7 @@
 
 <h2><%= t("my_orders") %></h2>
  
-<table class="order-summary" width="545">
+<table class="order-summary" width="545" border="1" style="margin-left:40px">
   <thead>
     <tr>
       <th><%= t("order_number") %></th>
@@ -35,7 +35,7 @@
       <td><%=order.created_at.to_date%></td>
       <td><%= t(order.state).titleize %></td>
       <td><%= order.user.email if order.user %></td>
-      <td><%= number_to_currency order.total %></td>
+      <td>Rs <%= order.total %></td>
     </tr>
   <% end %>
   </tbody>

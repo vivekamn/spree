@@ -9,6 +9,7 @@ map.get_featured '/get-featured',:controller=>"home",:action=>"get_featured"
 map.contact_us '/contact-us',:controller=>"home",:action=>"contact_us"
 map.progress_bar '/progress_bar',:controller=>"home",:action=>"progress_bar"
 map.terms_conditions '/terms-conditions',:controller=>"home",:action=>"terms_conditions"
+map.voucher '/voucher' ,:controller=>"home",:action=>"voucher"
 # map.namespace :admin do |admin|
 #   admin.resources :whatever
 # end  
