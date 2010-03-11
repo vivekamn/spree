@@ -1,7 +1,7 @@
 <!--
 <% content_for :title do %>Home<% end %>  
    
-<%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" />", @featured_product %>  
+<%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:large) + "\" align=\"left\" />", @featured_product %>  
    
 <%= @featured_product.description %> 
 -->
@@ -24,7 +24,9 @@
 </style>
 
 <div class="bannerouter">
-<div class="banerleft"><%= link_to "<img src=\"" + @featured_product.images.first.attachment.url(:product) + "\" align=\"left\" border=\"0\" />", @featured_product %><!--img src="images/banner.jpg" width="570" height="333" /--></div>
+  <div class="banerleft">
+    <%= link_to image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %>
+  </div>
 <div class="banerrightout">
   <div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>
     You save: Rs.<%= @saving %></div>

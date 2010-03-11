@@ -25,7 +25,24 @@ class MastiExtension < Spree::Extension
      {:name => 'catch_message', :only => [:product]},
      {:name => 'location', :only => [:product]}
   ]
+
+    Product.class_eval do
+      validates_presence_of :discount
+      validates_presence_of :available_on
+      validates_presence_of :minimum_number
+      validates_presence_of :deal_expiry_date
+      validates_presence_of :validity_from
+      validates_presence_of :validity_to
+      validates_numericality_of :count_on_hand     
+    end 
+
+    Image.attachment_definitions[:attachment][:styles] = {:mini => '48x48>', 
+                                                          :small => '100x100>', 
+                                                          :product => '240x240>',
+                                                          :large => '400x400>'}
     
+
+
 
     # make your helper avaliable in all views
     # Spree::BaseController.class_eval do
