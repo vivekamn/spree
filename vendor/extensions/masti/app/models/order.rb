@@ -184,7 +184,7 @@ class Order < ActiveRecord::Base
     else
       current_item = LineItem.new(:quantity => quantity)
       current_item.variant = variant
-      current_item.price   = variant.price
+      current_item.price   = variant.price-((variant.price*variant.product.discount)/100)
       self.line_items << current_item
     end
 
@@ -353,13 +353,19 @@ class Order < ActiveRecord::Base
       end         
       if @status=="available"        
       @out_of_stock_items = InventoryUnit.sell_units(self)
-      update_totals unless @out_of_stock_items.empty?
+      if !@out_of_stock_items.empty?
+      update_totals 
+      @status='out_of_stock'
+      end
       shipment.inventory_units = inventory_units
      save!
      if email       
       InventoryUnit.deal_status_update(self)
     end    
-  else  
+  else 
+    if @status=='out_of_stock'
+      @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
+    end
     logger.info "status not available and cancelling order"    
     self.cancel!
      end

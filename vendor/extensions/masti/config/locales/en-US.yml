@@ -1,6 +1,6 @@
 en-US:
   discount: "Discount"
-  minimum_number: "Mnimum Number"
+  minimum_number: "Minimum Number"
   deal_expiry_date: "Deal Expiry Date" 
   validity_from: "Validity From"
   validity_to: "Validity To"
@@ -447,6 +447,7 @@ en-US:
   mark_shipped: "Mark Shipped"
   master_price: "Master Price"
   max_items: Max Items
+  maximum_number: "Maximum Number"
   meta_description: "Meta Description"
   meta_keywords: "Meta Keywords"
   metadata: "Metadata"
@@ -511,6 +512,8 @@ en-US:
   order_not_in_system: That order number is not valid on this site.
   order_number: Order
   order_operation_authorize: Authorize
+  order_out_of_stock: "Your order could not be processed as the following item is out of stock:"
+  order_sold_out: "Sorry, the item you requested is already sold out to the maximum allowed orders"
   order_processed_but_following_items_are_out_of_stock: "Your order has been processed, but following items are out of stock:"
   order_processed_successfully: "Your order has been processed successfully"
   order_summary: Order Summary
@@ -549,6 +552,7 @@ en-US:
   preview: Preview
   previous: Previous
   price: Price
+  price_with_discount: Discount Price
   price_with_vat_included: "{{price}} (inc. VAT)"
   problem_authorizing_card: "Problem authorizing credit card"
   problem_capturing_card: "Problem capturing credit card"
