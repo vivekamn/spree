@@ -8,6 +8,10 @@ class HomeController < Spree::BaseController
     @discount = @featured_product.discount
     @saving = (@price*@discount/100).to_i
     @bought_count = @featured_product.currently_bought_count
+#    Time.zone="UTC"
+#    @exp_time=Time.zone.parse(@featured_product.deal_expiry_date.to_s)
+#    puts "#{Time.now}========="
+#    puts "#{Time.parse(@featured_product.deal_expiry_date.to_s)}"
   end
   
   

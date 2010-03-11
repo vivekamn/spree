@@ -1,5 +1,5 @@
 class DealHistory < ActiveRecord::Base
-  has_one :product
+  belongs_to :product
   def swith_off
     self.is_active=true
     self.save!

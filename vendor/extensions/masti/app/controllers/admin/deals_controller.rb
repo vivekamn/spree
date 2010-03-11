@@ -14,5 +14,14 @@ class Admin::DealsController < ApplicationController
     new_deal.deal_notify
     redirect_to admin_products_url
   end
+  
+  def make_soldout
+    product=Product.find(params[:id])
+    active_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
+    active_deal.deal_completed_at = Time.now
+    active_deal.sold_out = 1
+    active_deal.save
+    redirect_to admin_products_url(:flag=>'sold_out')
+  end
 
 end

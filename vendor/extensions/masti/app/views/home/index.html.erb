@@ -121,7 +121,7 @@ Mins: 48 Secs: 36-->
 </ul>
 </div></div>
 </div></div>
-<input type="hidden" name="end_time" id="end_time" value="<%=Time.parse(@featured_product.deal_expiry_date.to_s) %>" >
+<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date %>" >
 <input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 
 
