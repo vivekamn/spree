@@ -153,9 +153,7 @@ end
       end
     end    
     out_of_stock_items
-  end
-
-
+  end 
 
   def can_restock?
     %w(sold shipped).include?(state)

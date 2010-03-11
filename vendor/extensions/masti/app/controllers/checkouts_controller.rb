@@ -104,7 +104,7 @@ class CheckoutsController < Spree::BaseController
       end
       @object.ship_address ||= Address.default
       @object.bill_address ||= Address.default
-      @object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
+      #@object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
     end
     @object.email ||= params[:checkout][:email] if params[:checkout]
     @object.email ||= current_user.email if current_user
@@ -153,12 +153,12 @@ class CheckoutsController < Spree::BaseController
     @checkout.update_attribute(:ip_address, request.env['REMOTE_ADDR'])
   end
 
-  def complete_order   
-    if @checkout.order.deal_status=="available"
-    if @checkout.order.out_of_stock_items.empty?
+  def complete_order  
+    status=@checkout.order.deal_status
+    if status=="available"    
       flash[:notice] = t('order_processed_successfully')
-    else
-      flash[:notice] = t('order_processed_but_following_items_are_out_of_stock')
+    elsif status=="out_of_stock"
+      flash[:notice] = t('order_out_of_stock')
       flash[:notice] += '<ul>'
       @checkout.order.out_of_stock_items.each do |item|
         flash[:notice] += '<li>' + t(:count_of_reduced_by,
@@ -169,7 +169,7 @@ class CheckoutsController < Spree::BaseController
       flash[:notice] += '<ul>'
     end
     
-  end
+  
   @checkout.order.deal_status
   end
 

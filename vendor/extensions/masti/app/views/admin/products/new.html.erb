@@ -57,6 +57,8 @@
         <%= f.text_field :minimum_number %>
         <%= f.error_message_on :minimum_number%>
       </p>
+	  
+	 
     </div>    
   </div>
   <div class="yui-gb">
@@ -81,6 +83,15 @@
         <%= f.unobtrusive_date_text_picker :validity_from, :style=>"width:150px" %>
       <% end %>
     </div> 
+	
+	<div class="yui-u">
+		 <p>
+        <%= f.label :count_on_hand, t("maximum_number") %><span class="required">*</span><br />
+        <%= f.text_field :count_on_hand %>
+        <%= f.error_message_on :count_on_hand%>
+      </p>
+	  
+	</div>
   </div>
 
 
