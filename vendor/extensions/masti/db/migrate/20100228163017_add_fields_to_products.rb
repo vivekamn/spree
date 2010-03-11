@@ -3,7 +3,7 @@ class AddFieldsToProducts < ActiveRecord::Migration
     add_column :products, :discount, :integer, :default => 0, :null => false
     add_column :products, :minimum_number, :integer, :default => 50, :null => false
     add_column :products, :currently_bought_count, :integer, :default => 10, :null => false
-    add_column :products, :deal_expiry_date, :datetime, :null => false
+    add_column :products, :deal_expiry_date, :datetime, :null => false, :default => Time.now + 3.months
     add_column :products, :contact_info, :string
     add_column :products, :validity_from, :datetime
     add_column :products, :validity_to, :datetime

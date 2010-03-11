@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
   has_many :line_items, :extend => Totaling, :dependent => :destroy
   has_many :inventory_units
 
-  has_many :payments,            :extend => Totaling
+  has_many :payments, :as => :payable, :extend => Totaling
   has_many :creditcard_payments, :extend => Totaling
   has_many :creditcards, :through => :creditcard_payments, :uniq => true
 
