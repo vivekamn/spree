@@ -289,6 +289,7 @@ en-US:
   confirm: Confirm
   confirm_delete: "Confirm Deletion"
   confirm_password: "Password Confirmation"
+  contact_person_name: Contact Person
   continue: Continue
   continue_shopping: "Continue shopping"
   copy_all_mails_to: Copy All Mails To
@@ -677,6 +678,7 @@ en-US:
         name: "With property value"
         sentence: with property <em>%s</em> and value <em>%s</em>
   products: Products
+  phone_no: Phone Number
   products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
   properties: Properties
   property: Property
@@ -865,6 +867,8 @@ en-US:
   variants: Variants
   vat: "VAT"
   version: Version
+  vendor: Vendor
+  vendors: Vendors
   view_shipping_options: "View shipping options"
   void: Void
   website: Website

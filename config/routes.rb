@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :example_wufoos
+
 
   # Loads all extension routes in the order they are specified.
   map.load_extension_routes

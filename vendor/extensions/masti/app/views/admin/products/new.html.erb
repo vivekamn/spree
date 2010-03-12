@@ -76,12 +76,17 @@
       </p>      
     </div>
    <div class="yui-u">
-
+	 <p>
       <% f.field_container :validity_from do %>
         <%= f.label :validity_from, t("validity_from")%> <span class="required">*</span><br />
         <%= f.error_message_on :validity_from%>
         <%= f.unobtrusive_date_text_picker :validity_from, :style=>"width:150px" %>
       <% end %>
+	 </p>
+	 <p>
+        <%= f.label :vendor_id, t("vendor") %><span class="required">*</span><br />
+        <%= f.collection_select :vendor_id, Vendor.all, :id, :name, :include_blank => true %> <%= link_to "Add a Vendor", :controller=>'admin/vendors', :action=>'index'%>
+     </p>
     </div> 
 	
 	<div class="yui-u">
