@@ -22,7 +22,7 @@ class HomeController < Spree::BaseController
       if @deals_notify.nil?
         @deals_notify = DealsNotification.new(params[:deals_notification])
         if @deals_notify.save
-          flash[:success]="Thank you for registering to Masthi Deal Newsletter."      
+          flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com."      
         else
           flash[:error]="E-mail subscription Failed."
         end
@@ -43,14 +43,26 @@ class HomeController < Spree::BaseController
   end
   
   #getting the featured deal informations from the user
+#  def create
+#    @enquiry=Enquiry.new(params[:enquiry])
+#    if @enquiry.save
+#      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
+#      redirect_to home_url
+#    else
+#      flash[:error]="Oops You are missing Something."      
+#      redirect_to get_featured_path
+#    end
+#  end
+  
   def create
     @enquiry=Enquiry.new(params[:enquiry])
-    if @enquiry.save
+    begin
+    @enquiry.save!
       flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
-      redirect_to home_url
-    else
-      flash[:error]="Oops You are missing Something."      
-      redirect_to get_featured_path
+      redirect_to home_url    
+  rescue Exception=>e
+     flash[:error]=e.message      
+      redirect_to :back
     end
   end
   
@@ -84,7 +96,11 @@ class HomeController < Spree::BaseController
   
   def get_featured
     @bar_selected="get_featured"
-  end  
+  end 
+  
+  def other_cities
+    
+  end 
   
   def update_assets
     # copy the assets from extensions public dir into #{RAILS_ROOT}/public

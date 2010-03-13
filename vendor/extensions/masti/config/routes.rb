@@ -10,6 +10,10 @@ map.contact_us '/contact-us',:controller=>"home",:action=>"contact_us"
 map.progress_bar '/progress_bar',:controller=>"home",:action=>"progress_bar"
 map.terms_conditions '/terms-conditions',:controller=>"home",:action=>"terms_conditions"
 map.voucher '/voucher' ,:controller=>"home",:action=>"voucher"
+map.chennai '/chennai', :controller=>'home', :action=>'index'
+map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
+map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
+map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  
