@@ -8,13 +8,13 @@ div.inner input[type=text], div.inner select { width: 80%; }
     <div class="inner">
       <p class="field">&nbsp;</p>
       <p id="bfname" class="field">
-        <%= bill_form.label :firstname, t(:first_name) %>
-        <%= bill_form.text_field :firstname, :class => 'required' -%><span class="req">*</span>
+        <%= bill_form.label :name, t(:name) %>
+        <%= bill_form.text_field :name, :class => 'required' -%><span class="req">*</span>
       </p>
-      <p id="blname" class="field">
+      <!--p id="blname" class="field">
         <%= bill_form.label :lastname, t(:last_name) %>
         <%= bill_form.text_field :lastname, :class => 'required' -%><span class="req">*</span>
-      </p>
+      </p-->
       <p id="baddress" class="field">
         <%= bill_form.label :address1, t(:street_address) %>
         <%= bill_form.text_field :address1, :class => 'required' -%><span class="req">*</span>
@@ -77,7 +77,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
     </div>
   <% end %>
 </fieldset>
-<fieldset id='shipping'>
+<!--fieldset id='shipping'>
   <% checkout_form.fields_for :ship_address do |ship_form| %>
     <legend><%= t("shipping_address")%></legend>
     <p class="field checkbox">
@@ -155,7 +155,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
       </p>
     </div>
   <% end %>
-</fieldset>
+</fieldset -->
 
 <hr class="space" />
 <div class="form-buttons">

@@ -12,28 +12,25 @@ class Checkout < ActiveRecord::Base
   belongs_to :shipping_method
 
   has_one :creditcard
-has_many :payments, :as => :payable # to be commented or rremoved
-accepts_nested_attributes_for :payments # to be removed
+  has_many :payments, :as => :payable # to be commented or rremoved
+  accepts_nested_attributes_for :payments # to be removed
   accepts_nested_attributes_for :bill_address
-  accepts_nested_attributes_for :ship_address
-  accepts_nested_attributes_for :creditcard
+#  accepts_nested_attributes_for :ship_address
+#  accepts_nested_attributes_for :creditcard
 
   attr_accessor :coupon_code
   attr_accessor :use_billing
 
-  validates_presence_of :order_id, :shipping_method_id
+  validates_presence_of :order_id#, :shipping_method_id
   validates_format_of :email, :with => /^\S+@\S+\.\S+$/, :allow_blank => true
 
   validation_group :register, :fields => ["email"]
 
-  validation_group :address, :fields=>["bill_address.firstname", "bill_address.lastname", "bill_address.phone",
-                                       "bill_address.zipcode", "bill_address.state", "bill_address.lastname",
+  validation_group :address, :fields=>["bill_address.name", "bill_address.phone",
+                                       "bill_address.zipcode", "bill_address.state", 
                                        "bill_address.address1", "bill_address.city", "bill_address.statename",
-                                       "bill_address.zipcode", "ship_address.firstname", "ship_address.lastname", "ship_address.phone",
-                                       "ship_address.zipcode", "ship_address.state", "ship_address.lastname",
-                                       "ship_address.address1", "ship_address.city", "ship_address.statename",
-                                       "ship_address.zipcode"]
-  validation_group :delivery, :fields => ["shipping_method_id"]
+                                       "bill_address.zipcode"]
+#  validation_group :delivery, :fields => ["shipping_method_id"]
 
   def completed_at
     order.completed_at
@@ -62,9 +59,9 @@ accepts_nested_attributes_for :payments # to be removed
     after_transition :to => 'complete', :do => :complete_order
     #before_transition :to => 'complete', :do => :process_payment # to be removed
     event :next do
-      transition :to => 'delivery', :from  => 'address'
+      transition :to => 'complete', :from  => 'address'
       #transition :to => 'payment', :from => 'delivery'
-      transition :to => 'complete', :from => 'delivery'
+      #transition :to => 'complete', :from => 'delivery'
       #transition :to => 'complete', :from => 'payment'
     end
   end
