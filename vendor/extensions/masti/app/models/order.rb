@@ -364,6 +364,7 @@ class Order < ActiveRecord::Base
     end    
   else 
     if @status=='out_of_stock'
+      @out_of_stock_items=[]
       @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
     end
     logger.info "status not available and cancelling order"    
