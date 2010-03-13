@@ -78,6 +78,8 @@
 	function email_validate(){
 	var error_msg_div = document.getElementById('enquiry_email_msg');
 	var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+	var NAME_REGEX = /^[A-Za-z]+$/;
+	var PHONE_REGEX	= /^[0-9]+$/;
 	var email_name = document.getElementById('enquiry_email').value;
 	var first_name = document.getElementById('enquiry_first_name').value;
 	var last_name = document.getElementById('enquiry_last_name').value;
@@ -87,17 +89,18 @@
 	var text_query = document.getElementById('enquiry_query').value;
 	
 	
-	var flag_em=true;
+	var flag_em=true;	
 	
-	
-	if(first_name == '' || first_name == null ){
-		document.getElementById('error_firstname').innerHTML="Please enter the First name";
+		 first_value = NAME_REGEX.test(new String(first_name)); 	
+	if(first_name == '' || first_name == null || first_value!=1 ){
+		document.getElementById('error_firstname').innerHTML="Please enter proper First name";
 		flag_em=false;
 	}else{
 		document.getElementById('error_firstname').innerHTML="";
-	}
-	if(last_name == '' || last_name == null ){
-		document.getElementById('error_lastname').innerHTML = "Please enter the Last name";
+	}	
+		 last_value = NAME_REGEX.test(new String(last_name)); 
+	if(last_name == '' || last_name == null || last_value!=1 ){
+		document.getElementById('error_lastname').innerHTML = "Please enter proper Last name";
 		flag_em=false;
 	}else{
 		document.getElementById('error_lastname').innerHTML ="";
@@ -107,21 +110,23 @@
 		flag_em=false;
 	}else{
 		document.getElementById('error_company').innerHTML = "";
-	}
-	if(city_name == '' || city_name == null){
-		document.getElementById('error_city').innerHTML = "Please enter the  city";
+	}	
+		 city_value = NAME_REGEX.test(new String(city_name)); 	
+	if(city_name == '' || city_name == null || city_value!=1){
+		document.getElementById('error_city').innerHTML = "Please enter proper  city";
 		flag_em=false;
 	}else{
 		document.getElementById('error_city').innerHTML = "";
-	}
-	if(phone_number =='' || phone_number == null){
-		document.getElementById('error_phone').innerHTML = "Please enter the Phone number";
+	}	
+		 phone_value = PHONE_REGEX.test(new String(phone_number)); 
+	if(phone_number =='' || phone_number == null || phone_value!=1){
+		document.getElementById('error_phone').innerHTML = "Please enter proper Phone number";
 		flag_em=false;
 	}else{
 		document.getElementById('error_phone').innerHTML = "";
 	}
 	if(text_query == '' || text_query == null){
-		document.getElementById('error_text').innerHTML = "Please enter the Last name";
+		document.getElementById('error_text').innerHTML = "Please enter proper description";
 		flag_em=false;
 	}else{
 		document.getElementById('error_text').innerHTML = "";
