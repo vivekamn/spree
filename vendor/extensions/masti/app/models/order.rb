@@ -184,7 +184,7 @@ class Order < ActiveRecord::Base
     else
       current_item = LineItem.new(:quantity => quantity)
       current_item.variant = variant
-      current_item.price   = variant.price-((variant.price*variant.product.discount)/100)
+      current_item.price   = (variant.price-((variant.price*variant.product.discount)/100)).to_i
       self.line_items << current_item
     end
 
