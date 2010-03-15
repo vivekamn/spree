@@ -148,3 +148,29 @@ a{ outline:none;
 	}
 	
 /*h1,h2,h3end*/
+
+ * /* For flash errors */
+.errorExplanation {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  padding: 0.8em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #f4b4b4 url(../images/shadow_top.png) 0px -50px repeat-x;
+  color: #000000;
+  border: 1px solid #000000;
+}
+.errorExplanation p { margin: 0px; }
+.errorExplanation ul { margin-bottom: 0px; }
+.errorExplanation h2 {
+  font-weight: bold;
+  font-size: 1em;
+  margin: 0px;
+}
+.fieldWithErrors { clear: none; }
+.no_margin_or_padding {
+  margin: 0;
+  padding: 0;
+}
+ */

@@ -1,7 +1,10 @@
 <% @body_id = 'cart' %>
+<%= error_messages_for :order  %>
 
-<h1><%= t("shopping_cart")%></h1>
-
+<div class="bannerouter">
+<div class="shoppingout1">
+<div class="shoppinginner"><img src="/images/iworuld.gif" width="303" height="41" /></div>
+<div class="shoppinginner"><div class="shoptable">
 <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
 <% hook :inside_cart_form do %>
 
@@ -10,19 +13,21 @@
   <% end %>
 
   <% unless @order.line_items.empty? -%>
-  <div id="subtotal">
-    <h3><%= "#{t("subtotal")}: #{order_price(@order)}" %></h3>
-    <div class="links">
-      <%= link_to image_tag('/images/update.png') + t("update"), '#', :class => 'button checkout primary', :onclick => "$('form#updatecart').submit(); return false;" %>
-      <%= link_to image_tag('/images/checkout.png') + t("checkout"), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
-    </div>
+  <div id="subtotal" align="right">
+    <h2><%= "#{t("subtotal")}: #{order_price(@order)}" %></h2>   
   </div>
   <% end -%>  
-  <% unless @order.line_items.empty? -%>
-  <p id="clear_cart_link">
-    <%= link_to t("empty_cart"), object_url, :method => :delete, :class => 'button empty'  %>
-  </p>
-  <% end -%>
 
 <% end %>
 <% end -%>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	function update_price(){
+		document.getElementById('updatecart').submit();
+	}
+
+	</script>
+	
