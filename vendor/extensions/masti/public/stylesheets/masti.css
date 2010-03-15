@@ -2,7 +2,7 @@ body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:Verdana, Geneva
 }
 .main{ width:960px; margin:0 auto;
 }
-.outer{ width:938px; float:left; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;
+.outer{ width:938px; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;background-color:white;
 }
 a{ outline:none;
 }
@@ -18,7 +18,7 @@ a{ outline:none;
 }
 .submitpart{ padding-left:33px; width:479px; float:left; padding-top:9px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#646464; padding-bottom:8px;
 }
-.textfield{ border:1px solid #e5e5e5; height:13px; width:105px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
+.textfield{ border:1px solid #e5e5e5; height:16px; width:105px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
 }
 .username{ padding:8px 5px 0 0;
 }
@@ -41,7 +41,7 @@ a{ outline:none;
 }
 .getfeatures{ width:312px; float:left; height:37px; 
 }
-.bannerouter{ width:938px; float:left;
+.bannerouter{ width:938px; float:left;background-color:white;
 }
 .banerleft{ width:570px; float:left;
 }
@@ -53,7 +53,7 @@ a{ outline:none;
 }
 .bought1{ width:309px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
 }
-.sharetis{ width:938px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background:url(../images/sharebg.gif) no-repeat right;
+.sharetis{ width:938px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background:url(../images/sharebg.gif) no-repeat right;background-color:white;
 }
 .sharetext{ width:163px; float:left; padding-top:18px; text-align:center; text-decoration:underline;
 }
@@ -100,4 +100,30 @@ a{ outline:none;
 .company:hover{ font-size:11px; color:#fff; text-decoration:none;
 }
 .footerbg{ width:810px; float:left; background:url(../images/footbg.gif) repeat-y; padding:20px 64px 0 64px; height:22px; color:#a1a1a1; 
+}
+
+
+
+/*shopping cart*/
+.shoppingout{ width:893px; padding:0 0 0 45px; background:url(../images/tiles.gif) no-repeat; background-position:left bottom; float:left;
+}
+.shoppingout1{ width:858px; padding:50px 40px 0 40px; background:url(../images/tiles.gif) no-repeat; background-position:left bottom; float:left;
+}
+.shoppinginner{ width:858px; float:left;
+}
+.shoppingleft{ width:360px; float:left; padding-top:50px; 
+}
+.shoppingright{ width:433px; float:left;  background:url(../images/line1.gif) no-repeat; background-position:left center bottom; padding-left:100px; padding-top:20px;
+}
+.textbox{ width:183px; height:19px; background:url(../images/textbg.gif) no-repeat; border:none; padding-left:10px; padding-top:5px; font-size:11px; color:#457700;
+}
+.button{ background:url(../images/submit1.gif) no-repeat; width:91px; height:42px; border:none; cursor:pointer;
+}
+.shoptable{ padding-top:20px; padding-left:20px; padding-right:20px;  padding-bottom:80px; 
+}
+.bd{ border-left:1px solid #999; border-right:1px solid #999; border-top:1px solid #999;
+}
+.bd1{ border-right:1px solid #999; border-top:1px solid #999;
+}
+.bd2{ border-bottom:1px solid #999;
 }
