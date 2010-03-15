@@ -146,8 +146,12 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   expiry_datetime = document.getElementById("end_time").value;
   expiry_date =new Date(expiry_datetime);
   msPerDay = 24 * 60 * 60 * 1000 ;
-  timeLeft = (expiry_date.getTime() - today.getTime());
-  if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
+  
+  timeLeft = (expiry_date.getTime() - today.getTime());   
+  //alert(expiry_date);
+  
+  
+ if (timeLeft >= 0 && document.getElementById("deal_live_status").value=='true') {
   	e_daysLeft = timeLeft / msPerDay;
   	daysLeft = Math.floor(e_daysLeft);
   	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
@@ -158,6 +162,9 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   	document.getElementById("countdown_time").innerHTML = "Days:   " + daysLeft + " Hours:  " + hrsLeft + "<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
   	setTimeout('updateTime()', 1000);
   }
+ else if(timeLeft>=-3000){		
+		window.location.reload();
+	} 
   else{
   	document.getElementById("countdown_time").innerHTML = "Days: 0  "  + " Hours: 0 " + "<br/> Mins:  0 " + " Secs:  0 ";
   }
