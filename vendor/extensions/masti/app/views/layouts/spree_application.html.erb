@@ -1,5 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<%= stylesheet_link_tag 'masti' %>	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MasthiDeals-The Power of Group Buying</title>
+<link href="/stylesheets/masti.css" rel="stylesheet" type="text/css" />
 <style>
-	.flash.notice {
+.flash.notice {
 -moz-background-clip:border;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
@@ -25,17 +32,7 @@ font-size:1.3em;
 margin-bottom:1em;
 padding:0.8em;
 }
-
 </style>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<%= stylesheet_link_tag 'masti' %>	
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>MasthiDeals-The Power of Group Buying</title>
-<link href="/stylesheets/masti.css" rel="stylesheet" type="text/css" />
-<%# stylesheet_tags %>
 <%= javascript_include_tag 'jquery-1.3.2.min', 'jquery.validate.min.js', :cache => 'jquery-core' %>
 <%= javascript_include_tag "head.js" %>
 <% unless I18n.locale.to_s[0..1] == 'en' -%>
@@ -47,20 +44,20 @@ padding:0.8em;
 <body onload="MM_preloadImages('images/dealon.gif','images/howon.gif','images/geton.gif')">
   <div class="main">
     <div class="outer">
-      <%= render :partial => "shared/head" %>
+    	<%= render :partial => "shared/head" %>
 		
-	<div id="content">
-      <% if flash[:success] %>
-      <div class="flash notice"><%= flash[:success] %></div>
-      <% end %>
-      <% if flash[:error] %>
-      <div class="flash errors"><%= flash[:error] %></div>
-      <% end %>
-	  
-	
-      <%= yield %>
+		<div class="bannerouter">
+	      <% if flash[:success] %>
+	      <div class="flash notice"><%= flash[:success] %></div>
+	      <% end %>
+	      <% if flash[:error] %>
+	      <div class="flash errors"><%= flash[:error] %></div>
+	      <% end %>
 
-    <%= render :partial => 'shared/footer'%>
+      	<%= yield %>
+		</div>
+		<%= render :partial => 'shared/footer'%>
+	</div>
   </div>
 </body>
 </html>

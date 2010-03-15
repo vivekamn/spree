@@ -24,22 +24,18 @@
 </style>
 
 <div class="bannerouter">
-  <div class="banerleft">
-    <%= link_to image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %>
-  </div>
-<div class="banerrightout">
-  <div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>
-    You save: Rs.<%= @saving %></div>
-<div class="bought" id="bought" style="display:none;">
-<div class="bought1">
-	<!--<img src="images/box.gif" width="309" height="12" />
-	<br/><br/>-->
-	<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
-<div class="progress_bar">
-  <div class="progress_barred" id="progress" style="float:left;"></div>
-</div>	
-</div>
-<div class="bought1">
+	<div class="banerleft"><%= link_to image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %></div>
+	<div class="banerrightout">
+  		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
+		<div class="bought" id="bought" style="display:none;">
+			<div class="bought1">
+				<!--<img src="images/box.gif" width="309" height="12" /><br/><br/>-->
+				<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
+				<div class="progress_bar">
+  					<div class="progress_barred" id="progress" style="float:left;"></div>
+				</div>	
+			</div>
+			<div class="bought1">
 	<%if @deal and deal_live @deal, @featured_product%>
 	<%if deal_on @featured_product %>
 	Hurray, the deal is already on. Just go ahead to get your masthi savings 
@@ -123,7 +119,7 @@ Mins: 48 Secs: 36-->
 </ul>
 </div></div>
 </div></div>
-<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date %>" >
+<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
 <input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 
 
