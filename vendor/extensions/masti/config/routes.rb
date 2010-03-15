@@ -17,3 +17,4 @@ map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  
+map.order_failure 'orders/order_failure', :controller=>'orders', :action=>'failure'

@@ -3,18 +3,13 @@
 
   <% if params.has_key? :checkout_complete %>
   	<br/><br/>
-  	<h3><%= t('thank_you_for_your_order') %></h3>   
+  	<h3><%= t('proceed_to_pay_after_checkout') %></h3>   
   <% else %>
   	| <%= link_to t('my_account'), user_path(current_user) if current_user%>
   <% end %>
-  <br/><br/>
-	<% if !params[:status]%>
-  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
-	<%else%>
-	<%= render :partial => params[:status], :locals => {:order => @order} -%>
-	<%end%>
-  <br/>
-  <%= link_to t('back_to_store'), home_path %>  
+  <br/><br/>	
+  <% if params.has_key? :checkout_complete %>
+  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>	 
 </div>
 <form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction">
 	<input name="account_id" type="hidden" value="6246" />
@@ -40,3 +35,8 @@
 	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
 	<%= submit_tag t("proceed_to_pay"), :class => 'button primary' %>
 </form>
+<%else%>
+	<%= render :partial => 'failure', :locals => {:order => @order} -%>
+	<%end%>
+  <br/>
+  <%= link_to t('back_to_store'), home_path %> 
