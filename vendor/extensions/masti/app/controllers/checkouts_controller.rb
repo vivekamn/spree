@@ -47,14 +47,31 @@ class CheckoutsController < Spree::BaseController
         after :update_fails
         set_flash :update_fails
       end
+      render 'edit'
     rescue Spree::GatewayError => ge
       logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
       flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
+    rescue Exception => e
+      logger.info "order not complete in checkout---------------"+e.message
+      if @order.line_items[0].failure_status[0][:count]       
+      flash[:error] = t('order_out_of_stock')
+      flash[:error] += '<ul>'     
+        flash[:error] += '<li>' + @order.line_items[0].variant.name + " less by " + @order.line_items[0].failure_status[0][:count].to_s+ "units"+
+                          '</li>'     
+      flash[:error] += '<ul>'
+    elsif @order.line_items[0].failure_status[0][:expired]   
+      flash[:error] = t('order_expired')
+      flash[:error] += '<ul>'     
+        flash[:error] += '<li>' + @order.line_items[0].failure_status[0][:expired].to_s+
+                          '</li>'     
+      flash[:error] += '<ul>'          
+    end    
+    redirect_to order_url(@order, {:order_token => @order.token})
     end
-
-    render 'edit'
   end
-
+  
+  
+  
   def register
     load_object
     @user = User.new
@@ -178,7 +195,7 @@ class CheckoutsController < Spree::BaseController
   def complete_order  
     status=@checkout.order.deal_status
     if status=="available"    
-      flash[:notice] = t('order_processed_successfully')
+      flash[:notice] = t('order_processed_successfully_but_payment')
     elsif status=="out_of_stock"
       flash[:notice] = t('order_out_of_stock')
       flash[:notice] += '<ul>'

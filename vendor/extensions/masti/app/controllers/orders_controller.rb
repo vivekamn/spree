@@ -15,11 +15,6 @@ def index
   create
 end
 
-def failure
-    flash.now[:error] = "unable to complete your order"
-    logger.info @order.line_items[0].failure_status[0][:count].to_s+"cccccccccccccccccccc"
-  end
-
   # override the default r_c behavior (remove flash - redirect to edit details instead of show)
   create do
     flash nil     
