@@ -1,0 +1,37 @@
+<div class="bannerouter">
+<div class="shoppingout">
+<div class="shoppingleft">
+  <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="51" colspan="2"><img src="images/newcustomer.gif" width="233" height="35" /></td>
+      </tr>
+    <tr>
+      <td width="34%" height="35">Email :</td>
+      <td width="66%"><%= f.text_field :email, :class=>"textbox" %>
+        </td>
+    </tr>
+    <tr>
+      <td width="34%" height="35">Password :</td>
+      <td width="66%"><div id="password-credentials" style="<%=password_style(@user)%>"><%= f.password_field :password, :class=>"textbox"  %><div>
+        </td>
+    </tr>
+    <tr>
+      <td width="34%" height="35">Confirm :</td>
+      <td width="66%"><div id="password-credentials" style="<%=password_style(@user)%>"> <%= f.password_field :password_confirmation,:class=>"textbox"%>
+    </tr>
+    <tr>
+      <td height="61" colspan="2"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> <%= t("or") %>   <%= link_to t("login_as_existing"), login_path %></p>
+        </td>
+      </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</div>  
+<div class="shoppingright"><img src="images/shopping.gif" width="403" height="305" /></div>
+</div>
+</div>
+
+
+<%= hook :signup_below_password_fields %>
