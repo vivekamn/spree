@@ -63,7 +63,7 @@ Spree::Initializer.run do |config|
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
-  config.time_zone = "Eastern Time (US & Canada)"
+#  config.time_zone = "Eastern Time (US & Canada)"
  
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
