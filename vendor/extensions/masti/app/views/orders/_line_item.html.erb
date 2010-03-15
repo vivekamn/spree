@@ -1,5 +1,5 @@
-<tr class="<%= cycle('', 'alt') %>">
-  <td>
+<tr align="center">
+  <td width="16%" height="98" class="bd bd2">
     <%- locals = {:item_form => item_form, :variant => variant, :line_item => line_item} -%>
     <% hook :cart_item_image, locals do %>
       <%= item_form.hidden_field :variant_id %>
@@ -11,35 +11,31 @@
       <% end %>
     <% end %>
   </td>
-  <td>
+ <td width="44%" class="bd1 bd2" align="center">
     <% hook :cart_item_description, locals do %>
-      <h4><%= link_to variant.product.name,  home_path %></h4>
+     <%= link_to variant.product.name,  home_path %>
       <%= variant_options variant %>
-      <%= truncate(variant.product.description, :length => 100, :omission => "...") %>
+      <br /><%= truncate(variant.product.description, :length => 100, :omission => "...") %>
     <% end %>
   </td>
-  <td>
+  <td width="15%" class="bd1 bd2">
     <% hook :cart_item_price, locals do %>
       <!--<%=  product_price(line_item) %>-->
-	  Rs. <%=line_item.price%>
+	  <strong>Rs. <%=line_item.price%></strong
     <% end %>
   </td>
-  <td>
+  <td width="9%" class="bd1 bd2 plr">
     <% hook :cart_item_quantity, locals do %>
-      <%= item_form.text_field :quantity, :size => 3 %>
+      <%= item_form.text_field :quantity, :size => 3, :onkeyup => 'update_price();' %>
     <% end %>
   </td>
 
-  <td>
+  <td width="16%" class="bd1 bd2">
     <% hook :cart_item_total, locals do %>
-	Rs. <%=line_item.price * line_item.quantity%>
+	<strong><%=order_price(@order)%></strong>
       <!--<%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>-->
     <% end %>
   </td>
-  <td>
-    <% hook :cart_item_delete, locals do %>
-      <%= link_to image_tag('/images/admin/icons/delete.png'), order_line_item_path(@order, line_item), :method => :delete %>
-    <% end %>
-  </td>
+  
 
 </tr>
