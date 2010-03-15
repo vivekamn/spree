@@ -136,12 +136,9 @@ end
         logger.info "status is available and updating inventories"
         quantity.times do
           order.inventory_units.create(:variant => variant, :state => "sold")
-        end
-        logger.info "befoooooooooooooooooooooore"
-        variant.update_attribute(:count_on_hand, remaining_quantity)
-        logger.info "bbbbbbbbbbbbbbbbbbbbbbb1"
-        bought=variant.product.currently_bought_count+quantity
-        logger.info "afffffffffffffffffffffff"
+        end        
+        variant.update_attribute(:count_on_hand, remaining_quantity)        
+        bought=variant.product.currently_bought_count+quantity        
         if remaining_quantity==0 
           logger.info "deal is going to be over and hence set sold out"
           current_deal.sell_out
