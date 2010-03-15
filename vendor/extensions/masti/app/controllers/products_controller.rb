@@ -7,7 +7,8 @@ class ProductsController < Spree::BaseController
   resource_controller
   helper :taxons
   actions :show, :index
-def show 
+def show
+  session[:order_id] = nil
   redirect_to :controller=>'orders', :product=>@product.id
 end
   include Spree::Search

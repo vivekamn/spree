@@ -22,7 +22,7 @@ class HomeController < Spree::BaseController
       if @deals_notify.nil?
         @deals_notify = DealsNotification.new(params[:deals_notification])
         if @deals_notify.save
-          flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com."      
+          flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
         else
           flash[:error]="E-mail subscription Failed."
         end
