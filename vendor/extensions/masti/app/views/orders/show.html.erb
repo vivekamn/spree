@@ -13,8 +13,8 @@
 </div>
 <form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction">
 	<input name="account_id" type="hidden" value="6246" />
-	<input name="return_url" type="hidden" size="60" value="http://www.mastideal.com/orders/<%=@order.number%>?DR={DR}" />
-	<input name="mode" type="hidden" value="test" />
+        <input name="return_url" type="hidden" size="60" value="<%= payment_response_url %>?DR={DR}" />
+	<input name="mode" type="hidden" value="TEST" />
 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
 	<input name="amount" type="hidden" value="<%=@order.total%>"/>
 	<input name="description" type="hidden" value="<%=@order.state%>" />

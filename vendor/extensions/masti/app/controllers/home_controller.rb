@@ -1,5 +1,6 @@
 class HomeController < Spree::BaseController
-
+    require 'RubyRc4.rb'
+    require 'base64'
 #   before_filter :require_user,:only=>[:get_featured]
   def index
     @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
@@ -13,6 +14,23 @@ class HomeController < Spree::BaseController
 #    puts "#{Time.now}========="
 #    puts "#{Time.parse(@featured_product.deal_expiry_date.to_s)}"
   end
+
+  def payment_response
+    @key = '5fa2c2ffb54022d1b4e849668119e7b5'
+    @DR = params[:DR]
+    @response_text =[]
+    unless @DR.nil?
+      @DR.gsub!(/ /,'+') 
+      @encrypted_data = Base64.decode64(@DR)
+      @decryptor = RubyRc4.new(@key)
+      @plain_text = @decryptor.encrypt(@encrypted_data)
+      @plain_text.split(/&/).each_with_index do |item, i|
+        key, val = item.split(/=/)
+        @response_text << "#{key}=#{val}"
+      end
+    end
+  end  
+
   
   
 #to get the email id from the user and store it in the deal notifications table

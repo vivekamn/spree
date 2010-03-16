@@ -1,4 +1,4 @@
-class RubyRc4
+class RubyRc4 
   def initialize(str)
     @q1, @q2 = 0, 0
     @key = []
