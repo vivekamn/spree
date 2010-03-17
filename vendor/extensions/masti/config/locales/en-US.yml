@@ -4,6 +4,8 @@ en-US:
   deal_expiry_date: "Deal Expiry Date" 
   validity_from: "Validity From"
   validity_to: "Validity To"
+  currently_bought_count: "Currently Bought Count"
+  catch_message: "Catch Messages"
   'no': "No"
   'yes': "Yes"
   5_biggest_spenders: "5 Biggest Spenders"
