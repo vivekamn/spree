@@ -55,7 +55,7 @@ a{ outline:none;
 }
 .sharetis{ width:938px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background:url(../images/sharebg.gif) no-repeat right;background-color:white;
 }
-.sharetext{ width:163px; float:left; padding-top:18px; text-align:center; text-decoration:underline;
+.sharetext{ float:left; padding-top:18px; text-align:center; text-decoration:underline;
 }
 .icon{ width:163px; float:left; padding-top:19px;
 }
@@ -176,4 +176,113 @@ a{ outline:none;
   margin: 0;
   padding: 0;
 }
- */
+li ul { margin: 0 1.5em; }
+li ol { margin: 0 1.5em; }
+ul {
+  margin: 0 1.5em 1.5em 1.5em;
+  list-style-type: disc;
+}
+ol {
+  margin: 0 1.5em 1.5em 1.5em;
+  list-style-type: decimal;
+}
+
+ol.progress-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+  font-size: 12px;
+}
+ol.progress-steps li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: block;
+  float: left;
+  color: #999999;
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-image: url(../images/step-progress/incomplete-incomplete.gif);
+}
+ol.progress-steps li span {
+  padding: 5px 14px 7px 24px;
+  display: block;
+  float: left;
+  background-position: top right;
+  background-repeat: no-repeat;
+}
+ol.progress-steps li a {
+  text-decoration: none;
+  color: #333333;
+}
+ol.progress-steps li.current-first span { padding-left: 14px; }
+ol.progress-steps li.completed-first span { padding-left: 14px; }
+ol.progress-steps li.current-first { background-image: url(../images/step-progress/current-first.gif); }
+ol.progress-steps li.completed-first { background-image: url(../images/step-progress/completed-first.gif) !important; }
+ol.progress-steps li.current { color: #ffffff; }
+ol.progress-steps li.current-first { color: #ffffff; }
+ol.progress-steps li.current-last { color: #ffffff; }
+ol.progress-steps li.completed { background-image: url(../images/step-progress/completed-completed.gif); }
+ol.progress-steps li.current { background-image: url(../images/step-progress/completed-current.gif); }
+ol.progress-steps li.current-last { background-image: url(../images/step-progress/completed-current.gif); }
+ol.progress-steps li.next { background-image: url(../images/step-progress/current-incomplete.gif); }
+ol.progress-steps li.next-last { background-image: url(../images/step-progress/current-incomplete.gif); }
+ol.progress-steps li.last span { background-image: url(../images/step-progress/incomplete-right.gif); }
+ol.progress-steps li.next-last span { background-image: url(../images/step-progress/incomplete-right.gif); }
+ol.progress-steps li.current-last span { background-image: url(../images/step-progress/current-right.gif); }
+div#checkout { position: relative; }
+div#checkout .progress-steps {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+}
+form p.field span.req {
+  color: red;
+  float: left;
+  margin-left: 2px;
+  position: relative;
+  top: -3px;
+}
+span.req {
+  color: red;
+  float: left;
+  margin-left: 2px;
+  position: relative;
+  top: -3px;
+}
+table th {
+  background: transparent;
+  border-bottom: 1px solid #dddddd;
+}
+
+th, td, caption {
+padding:4px 10px 4px 5px;
+}
+table {
+  margin-bottom: 1.4em;
+  width: 100%;
+}
+
+thead th { background: #c3d9ff; }
+th, td, caption { padding: 4px 10px 4px 5px; }
+tr.even td { background: #e5ecf9; }
+tfoot { font-style: italic; }
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+strong { font-weight: bold; }
+fieldset { margin-bottom: 1em; }
+legend {
+  font-size: 150%;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+th { font-weight: bold; }

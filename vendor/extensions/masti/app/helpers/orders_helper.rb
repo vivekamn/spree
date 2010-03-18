@@ -13,5 +13,14 @@ module OrdersHelper
     amount
     #options.delete(:format_as_currency) ? number_to_currency(amount) : amount
   end
+  
+  def get_quantities(variant)
+    quantities = []    
+    
+    variant.count_on_hand.times do |count|
+      quantities << [count+1, count+1]
+    end
+    return quantities  
+  end
 
 end
