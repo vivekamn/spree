@@ -110,7 +110,11 @@
 			      <td><%=item.quantity-%></td>
 				  <td>Rs <%=item.price-%></td>
 			      <td>Rs <%= order.total %></td>
-				  <td><a href="/voucher?id=<%=order.id%>">View Voucher</a></td>
+				  <td>
+					<% if item.variant.product.currently_bought_count>=item.variant.product.minimum_number %> 
+				  		<a href="/voucher?id=<%=order.id%>">View Voucher</a>
+					<%end%>
+				</td>
 				  <%end%>
 			    </tr>
 			  <% end %>
