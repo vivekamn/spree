@@ -24,7 +24,7 @@
 </style>
 
 <div class="bannerouter">
-	<div class="banerleft"><%= link_to image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %></div>
+	<div class="banerleft"><%=  image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %></div>
 	<div class="banerrightout">
   		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
 		<div class="bought" id="bought" style="display:none;">
@@ -49,7 +49,7 @@
 	<%if @deal and deal_live @deal, @featured_product%>
 	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>
 	<%else%>
-	Deal over
+	<%= image_tag "soldout3.jpg" %>
 	<%end%>
 	
 	</div>
@@ -66,7 +66,14 @@
 <div class="contentouter">
 <div class="leftsidecontent">
 <div class="dealinfo"><img src="images/info.gif" width="82" height="20" /></div>
-<div class="dealinfocontent"> &nbsp;Warranty: 1 Year (manufacturer)</div>
+<div class="dealinfocontent" style="height:auto;"> 
+<!--
+&nbsp;Warranty: 1 Year (manufacturer)
+-->
+Nobody knows how to take care of the feet like the Japanese. Have you SEEN those delicate, Beautifully-groomed feet on which Japanese women move west. And now that fabulous treatment,known toonly a few-there are these rare aromatic oils,you see-is coming your way from Areopagus, the best Japanese spa inthe city.With a price-tag of Rs 300 for what costs Rs 600, you won't even have to,well,foot a step bill.
+
+
+</div>
 <div class="dealinfo"><img src="images/feature.gif" width="70" height="20" /></div>
 <div class="dealinfocontent1">
 <div class="points">
@@ -90,7 +97,10 @@ Mins: 48 Secs: 36-->
 <div class="dealinfocontent1 pb10">
 <div class="points">
 <ul>
-  <%=  @featured_product.catch_message %>
+<li>Valid from 12/02/10 to 11/04/10</li>
+<li>Can't combine with other promotions</li>
+<!--<li>Thickness :0.5"</li>-->
+
 
 </ul>
 </div></div>
@@ -100,10 +110,10 @@ Mins: 48 Secs: 36-->
 <div class="dealinfocontent1">
 <div class="points">
 <ul>
-<li>Windows 2000/XP/Vista</li>
-<li>Mac OS 10.X or above for USB 
-2.0 speeds</li>
-<li>Available USB port(obviously)</li>
+<li>The first Japanese Spa in Mumbai</li>
+<li>Body, Foot, Head Massages everthing under one roof, 
+beautiful Ambience and decor</li>
+<li>I entered the spa in a Japanese fashion and my eyes were wide open with a bissful surprise</li>
 
 
 </ul>
@@ -129,19 +139,21 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
 	}});
 
 	}
+  var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
   updateTime();
   function updateTime() {
 
   today = new Date();
   expiry_datetime = document.getElementById("end_time").value;
-  expiry_date =new Date(expiry_datetime);
+  var todayy = today.getYear();
+  if (todayy < 1000)
+	todayy+=1900;
+  var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+  var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
+  timeLeft = Date.parse(exp)-Date.parse(curr);
   msPerDay = 24 * 60 * 60 * 1000 ;
   
-  timeLeft = (expiry_date.getTime() - today.getTime());   
-  //alert(expiry_date);
-  
-  
- if (timeLeft >= 0 && document.getElementById("deal_live_status").value=='true') {
+  if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
   	e_daysLeft = timeLeft / msPerDay;
   	daysLeft = Math.floor(e_daysLeft);
   	e_hrsLeft = (e_daysLeft - daysLeft) * 24;

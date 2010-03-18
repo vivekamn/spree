@@ -1,28 +1,4 @@
-<style>
-	h1{
-		color:#00A0F6;
-	}
-	h2{
-		color:#363636;
-		font-family:Verdana,Geneva,sans-serif;
-		font-size:14px;
-		font-weight:bold;
-		
-	}
-	h3{
-		color:#848484;
-		font-family:Verdana,Geneva,sans-serif;
-		font-size:11px;
-		line-height:21px;
-		font-weight:normal;
-	}
-	.tes{
-		-moz-border-radius-bottomleft:0.5em;
-		-moz-border-radius-bottomright:0.5em;
-		-moz-border-radius-topleft:0.5em;
-		-moz-border-radius-topright:0.5em;
-	}
-</style>
+<!--
 <table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;border:0px;">
 	<tr>
 		<td>
@@ -35,16 +11,36 @@
 			<%# image_tag "bg1.gif",:border=>"0px", :alt => 'Peek-A-Boo Patterns',:width=>"250px"%>
 		</td>
 	</tr>
-</table>
-<table class="tes" style="margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
-       <tr>
+</table>-->
+<div class="bannerouter">
+<div class="shoppingout2">
+<div class="shoppinginner">
+	
+	<div style="float:left;"><span style="font-size:35px;color:#6CAB16;font:Times;">MY </span><span style="font-size:35px;color:#214D76;font:Times;">ACCOUNT</span></div>
+	<div style="float:right;">
+		<% if admin?%>
+			<%=link_to "View all Orders","/admin/orders" %>&nbsp;&nbsp;&nbsp;&nbsp;<%=link_to "View all Products","/admin/products" %>
+		<%end%>
+	</div>
+	
+
+</div>
+<div class="shoppinginner"><div class="shoptable">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">       <tr>
            <td colspan='2' width="100%">
 			<% hook :account_summary do %>
 			<table>
 			  <tr>
-			    <td><%= t("email") %>:</td>
+			    <td><strong><%= t("email") %> &nbsp;&nbsp;: </strong></td>
 			    <td>
 			      <%= @user.email %>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><strong>Mobile &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.phone_no %>
 			    </td>
 			  </tr>
 			</table>
@@ -54,7 +50,11 @@
 		</td>
 	</tr>
 </table>
-<table><tr><td height="10px"></td></tr></table>
+</div>
+</div>
+</div>
+</div>
+<!--
 
 <table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;border:0px;">
 	<tr>
@@ -74,7 +74,16 @@
 		</td>
 	</tr>
 </table>
-<table class="tes" style="margin-bottom:10px;margin-left: 30px;align:center;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
+-->
+<div class="bannerouter">
+<div class="shoppingout1" style="padding:0 40px 0;">
+<div class="shoppinginner">
+	<!--<img src="/images/iworuld.gif" width="303" height="41" />-->
+	<span style="font-size:35px;color:#6CAB16;font:Times;">MY </span><span style="font-size:35px;color:#214D76;font:Times;">ORDERS</span>
+</div>
+<div class="shoppinginner"><div class="shoptable">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 
        <tr>
            <td colspan='2' width="100%" align="center">
@@ -115,7 +124,10 @@
 	</tr>
 </table>
 <table style="margin-top:20px;"><tr height="10px"></tr><td><div style="height:10px;"></div></td></table>
-
+</div>
+</div>
+</div>
+</div>
 
 
 

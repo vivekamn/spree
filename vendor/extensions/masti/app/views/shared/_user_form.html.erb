@@ -22,6 +22,12 @@
 	  <td width="4%" height="35"> :</td>
       <td width="66%"><div id="password-credentials" style="<%=password_style(@user)%>"> <%= f.password_field :password_confirmation,:class=>"textbox"%>
     </tr>
+	<tr>
+      <td width="30%" height="35">Moblie</td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= f.text_field :phone_no, :class=>"textbox" %>
+        </td>
+    </tr>
     <tr>
       <td height="61" colspan="3"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
         </td>
@@ -29,6 +35,7 @@
     <tr>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
+	  <td>&nbsp;</td>
     </tr>
   </table>
 </div>  

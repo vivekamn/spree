@@ -109,6 +109,9 @@ a{ outline:none;
 }
 .shoppingout1{ width:858px; padding:50px 40px 0 40px; background:url(../images/tiles.gif) no-repeat; background-position:left bottom; float:left;
 }
+.shoppingout2{ width:858px; padding:50px 40px 0 40px; float:left;
+}
+
 .shoppinginner{ width:858px; float:left;
 }
 .shoppingleft{ width:360px; float:left; padding-top:50px; 
