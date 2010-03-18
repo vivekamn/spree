@@ -1,0 +1,45 @@
+<div class="bannerouter">
+<div class="shoppingout">
+<div class="shoppingleft">
+	<% form_tag user_session_path do  %>
+  <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="51" colspan="3"><span style="font-size:35px;color:#6CAB16;font:Times;">Existing </span><span style="font-size:35px;color:#214D76;font:Times;">Customer</span><!--<img src="images/newcustomer.gif" width="233" height="35" />-->
+	  </td>
+      </tr>
+    <tr>
+      <td width="30%" height="35">Email</td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= text_field :user_session, 'login', :class=>"textbox" %>
+        </td>
+    </tr>
+    <tr>
+      <td width="30%" height="35">Password</td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= password_field :user_session, 'password', :class=>"textbox"  %>
+        </td>
+    </tr>
+	<tr>
+		<td height="61" colspan="3">
+			<label>
+		      <%= check_box :user_session, :remember_me %>
+		      <%= label :user_session, :remember_me, t('remember_me') %>
+		   </label>
+		</td>
+	</tr>	
+    <tr>
+      <td height="61" colspan="3"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
+        </td>
+      </tr>
+	  
+<% end %>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+    </tr>
+  </table>
+</div>  
+<div class="shoppingright"><img src="images/shopping.gif" width="403" height="305" /></div>
+</div>
+</div>
