@@ -1,7 +1,7 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<br /><table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
   <tr>
-    <td width="100%" height="297">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td width="100%">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
     <tr align="center">
       <% hook :cart_items_headers do %>
         <th width="16%" height="34" class="bd"><%= t("item") %></th>
@@ -16,7 +16,7 @@
       <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
     <% end %>
 <tr align="center">	                
-         <td colspan=5 align="right"> <%= link_to image_tag('/images/checkout.gif', :border=>0), edit_order_checkout_url(@order), :class => 'button checkout primary' %></td>
+         <td colspan=5 align="right"> <div align="right"><%= link_to image_tag('/images/checkout.gif', :border=>0), edit_order_checkout_url(@order), :class => 'button checkout primary' %></div></td>
        </tr>
     <% if @order.line_items.empty? -%>
       <tr id="none">

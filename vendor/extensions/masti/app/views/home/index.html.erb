@@ -24,7 +24,7 @@
 </style>
 
 <div class="bannerouter">
-	<div class="banerleft"><%=  image_tag(@featured_product.images.first.attachment.url(:large), :border => "0") %></div>
+	<div class="banerleft"><%= image_tag(@featured_product.images.first.attachment.url(:large)) %></div>
 	<div class="banerrightout">
   		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
 		<div class="bought" id="bought" style="display:none;">

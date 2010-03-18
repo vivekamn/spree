@@ -25,8 +25,8 @@
     <% end %>
   </td>
   <td width="9%" class="bd1 bd2 plr">
-    <% hook :cart_item_quantity, locals do %>
-      <%= item_form.text_field :quantity, :size => 3, :onkeyup => 'update_price();' %>
+    <% hook :cart_item_quantity, locals do %>      
+	  <%=item_form.select :quantity, get_quantities(variant), {}, { :onchange=>'update_price();' } %>	 
     <% end %>
   </td>
 

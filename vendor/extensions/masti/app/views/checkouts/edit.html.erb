@@ -2,10 +2,11 @@
 <%- content_for :head do -%>
   <%= javascript_include_tag  'checkout', '/states' %>
 <%- end -%>
+<br />
 <div id="checkout">
-  <h1><%= t("checkout")%></h1>
+  
   <%= checkout_progress %>
-
+<br /><br />
   <%= error_messages_for :checkout %>
   <% hook :checkout_summary_box do %>
     <div id="checkout-summary" style="background-color:#C3C9DF;float:right;margin-top:10px;padding:20px;width:180px;">

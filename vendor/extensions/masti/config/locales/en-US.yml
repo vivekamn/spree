@@ -39,6 +39,7 @@ en-US:
           city: "Billing address city"
           firstname: "Billing address first name"
           lastname: "Billing address last name"
+          name: "Billing address name"
           phone: "Billing address phone"
           state: "Billing address state"
           zipcode: "Billing address zipcode"
@@ -436,7 +437,7 @@ en-US:
   logged_in_succesfully: "Logged in successfully"
   logged_out: "You have been logged out."
   login_as_existing: "Log In as Existing Customer"
-  login_failed: "Login authentication failed."
+  login_failed: "The given username / password does not match. Please try again."
   login_name: Login
   logout: Logout
   look_for_similar_items: Look for similar items
@@ -811,7 +812,7 @@ en-US:
   store: Store
   street_address: "Street Address"
   street_address_2: "Street Address (cont'd)"
-  subtotal: Subtotal
+  subtotal: Sub Total
   subtract: Subtract
   system: System
   tax: Tax
