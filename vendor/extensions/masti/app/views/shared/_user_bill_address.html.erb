@@ -1,0 +1,31 @@
+
+<table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+      <td width="30%" height="35"><%= bill_form.label :name, t(:name) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.text_field :name, :class => 'textbox' -%></td>
+	 
+        
+    </tr>
+     <tr>
+      <td width="30%" height="35"><%= bill_form.label :address1, t(:street_address) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.text_field :address1, :class => 'textbox' -%> 
+        </td>		
+    </tr>   
+	<tr>
+      <td width="30%" height="35"> <%= bill_form.label :city, t(:city) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.text_field :city, :class => 'textbox' -%>
+	  <%= bill_form.hidden_field :state_id, :class => 'required' -%>
+        </td>		
+    </tr>   
+	<tr>
+      <td width="30%" height="35"> <%= bill_form.label :zipcode, t(:zip) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.text_field :zipcode, :class => 'textbox' -%>
+	  <%= bill_form.hidden_field :country_id, :class => 'required' -%>
+	   <%= bill_form.hidden_field :phone, :class => 'required' -%>
+        </td>		
+    </tr>     
+     </table>
