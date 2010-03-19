@@ -9,7 +9,7 @@ module CheckoutsHelper
       state_index = Checkout.state_names.index(state)
 
       if state_index < current_index
-        css_classes <<'completed'
+        css_classes << 'completed'
         text = link_to text, edit_order_checkout_url(@order, :step => state)
       end
       

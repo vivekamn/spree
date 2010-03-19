@@ -19,10 +19,19 @@ class UserSessionsController < Spree::BaseController
     else
       create_user(params[:user_session])
     end
+    
+    if @user_session.record
+      order = @user_session.record.orders.last(:conditions => {:completed_at => nil})
+      if order
+        session[:order_token] = order.token
+        session[:order_id] = order.id
+      end
+    end
   end
 
   def destroy
     current_user_session.destroy
+    session.clear
     flash[:notice] = t("logged_out")
     redirect_to home_url
   end
