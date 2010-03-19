@@ -37,7 +37,8 @@ class UsersController < Spree::BaseController
     if @user.update_attributes(params[:user]) and @user.bill_address.update_attributes(params[:user][:bill_address_attributes])     
       flash[:success] = t("account_updated")
       render :action => :edit
-    else      
+    else
+      flash[:error] = "Oops ! You are missing something"
       render :action => :edit
     end
   end
