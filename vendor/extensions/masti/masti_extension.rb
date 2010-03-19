@@ -40,6 +40,7 @@ class MastiExtension < Spree::Extension
     end 
     
      User.class_eval do
+       accepts_nested_attributes_for :bill_address      
       attr_accessible :phone_no
       validates_presence_of :phone_no
       validates_numericality_of :phone_no
@@ -47,6 +48,7 @@ class MastiExtension < Spree::Extension
     end 
 
 Address.class_eval do
+  has_one :user, :foreign_key => "bill_address_id"
       validates_presence_of :name, :message=>"can't be blank" 
       validates_format_of :name, :with=>/^(([A-Za-z]+\s+[A-Za-z]+$)|([A-Za-z]+$))/, :message=>"cannot have non-alphabets other than space"
       validates_numericality_of :zipcode, :message=>"can't be anything else other than number"
