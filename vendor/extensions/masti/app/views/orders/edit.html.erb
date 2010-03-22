@@ -14,7 +14,7 @@
 
   <% unless @order.line_items.empty? -%>
   <div id="subtotal" align="right">
-    <h2><%= "#{t("subtotal")}: #{order_price(@order)}" %></h2>   
+    <h2><%= "#{t("subtotal")}: Rs.  #{order_price(@order).to_i}" %></h2>   
   </div>
   <% end -%>  
 

@@ -42,7 +42,7 @@
 	<input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
 	<input name="ship_country" type="hidden" value="IND" />
 	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-	<div align="right" style="margin-right: 30px;"><%= image_submit_tag "submit1.gif", :class => 'button' %>  </div>
+	<div align="right" style="margin-right: 30px;"><%= image_submit_tag "proceed.gif"%>  </div>
 </form>
 <%else%>
 	<%= render :partial => 'failure', :locals => {:order => @order} -%>

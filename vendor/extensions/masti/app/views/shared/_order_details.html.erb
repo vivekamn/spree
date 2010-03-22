@@ -14,9 +14,9 @@
         <%- locals = {:item => item} -%>
         <% hook :order_details_line_item_row, locals do %>
           <td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
-          <td class="price">Rs.<%=  item.price -%></td>
+          <td class="price">Rs.<%=  item.price.to_i -%></td>
           <td class="qty"><%=item.quantity-%></td>
-          <td class="total"><span> Rs. <%=(item.price * item.quantity)-%></span></td>
+          <td class="total"><span> Rs. <%=(item.price * item.quantity).to_i-%></span></td>
         <% end %>
       </tr>
     <% end %>
@@ -25,7 +25,7 @@
     <tbody id='subtotal'>
       <tr class="total" id="subtotal-row">
         <td colspan="3"><b><%= t('subtotal') %>:</b></td>
-        <td class="total"><span>Rs.<%=  @order.item_total -%></span></td>
+        <td class="total"><span>Rs.<%=  @order.item_total.to_i -%></span></td>
       </tr>
     </tbody>
   <% end %>
@@ -53,7 +53,7 @@
     <tbody id='order-total'>
       <tr class="total">
         <td colspan="3"><b><%= t('order_total') %>:</b></td>
-        <td class="total"><span id="order_total">Rs. <%=@order.total -%></span></td>
+        <td class="total"><span id="order_total">Rs. <%=@order.total.to_i -%></span></td>
       </tr>
     </tbody>
   <% end %>

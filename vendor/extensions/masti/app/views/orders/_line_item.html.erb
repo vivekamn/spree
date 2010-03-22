@@ -21,7 +21,7 @@
   <td width="15%" class="bd1 bd2">
     <% hook :cart_item_price, locals do %>
       <!--<%=  product_price(line_item) %>-->
-	  <strong>Rs. <%=line_item.price%></strong
+	  <strong>Rs. <%=line_item.price.to_i%></strong>
     <% end %>
   </td>
   <td width="9%" class="bd1 bd2 plr">
@@ -32,7 +32,7 @@
 
   <td width="16%" class="bd1 bd2">
     <% hook :cart_item_total, locals do %>
-	<strong><%=order_price(@order)%></strong>
+	<strong>Rs. <%=order_price(@order).to_i%></strong>
       <!--<%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>-->
     <% end %>
   </td>
