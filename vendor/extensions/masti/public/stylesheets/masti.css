@@ -251,33 +251,6 @@ span.req {
   position: relative;
   top: -3px;
 }
-table th {
-  background: transparent;
-  border-bottom: 1px solid #dddddd;
-}
-
-th, td, caption {
-padding:4px 10px 4px 5px;
-}
-table {
-  margin-bottom: 1.4em;
-  width: 100%;
-}
-
-thead th { background: #c3d9ff; }
-th, td, caption { padding: 4px 10px 4px 5px; }
-tr.even td { background: #e5ecf9; }
-tfoot { font-style: italic; }
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
 strong { font-weight: bold; }
 fieldset { margin-bottom: 1em; }
 legend {
