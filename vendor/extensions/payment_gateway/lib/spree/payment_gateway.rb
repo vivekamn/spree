@@ -67,11 +67,7 @@ module Spree
     def void(payment)
       return unless transaction = purchase_or_authorize_transaction_for_payment(payment)
 
-      if payment_gateway.payment_profiles_supported?
-        response = payment_gateway.credit((transaction.amount * 100).round, self, transaction.response_code, minimal_gateway_options(payment))
-      else
-        response = payment_gateway.void(transaction.response_code, minimal_gateway_options(payment))
-      end      
+      response = payment_gateway.void(transaction.response_code, self, minimal_gateway_options(payment))
       gateway_error_from_response(response) unless response.success?
 
       # create a transaction to reflect the void
@@ -82,6 +78,7 @@ module Spree
         :txn_type => CreditcardTxn::TxnType::VOID
       )
       payment.update_attribute(:amount, 0.00)
+      payment.order.update_totals!
       payment.finalize!
     end
 
@@ -195,15 +192,6 @@ module Spree
     def payment_gateway
       @payment_gateway ||= Gateway.current
     end  
-    
-    # TODO: Want to do this after_save but there is a possible danger of infinite loop which number_changed? check is intended to prevent.
-    # Removed the check to number_changed? and relying on the !has_payment_profile? to not re-create if we have a profile
-    def create_payment_profile
-      return unless payment_gateway.payment_profiles_supported? and number and !has_payment_profile?
-      payment_gateway.create_profile(self, {})
-    rescue ActiveMerchant::ConnectionError => e
-      gateway_error I18n.t(:unable_to_connect_to_gateway)
-    end
 
     private
 

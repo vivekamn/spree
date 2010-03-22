@@ -33,7 +33,8 @@ class Product < ActiveRecord::Base
     :class_name => 'Variant',
     :conditions => ["variants.is_master = ? AND variants.deleted_at IS NULL", true]
 
-  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master, :cost_price
+  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master
+  delegate_belongs_to :master, :cost_price if Variant.table_exists? && Variant.column_names.include?("cost_price")
 
   after_create :set_master_variant_defaults
   after_create :add_properties_and_option_types_from_prototype
@@ -185,6 +186,13 @@ class Product < ActiveRecord::Base
   # their own definition.
   def deleted?
     deleted_at
+  end
+
+  # split variants list into hash which shows mapping of opt value onto matching variants
+  # eg categorise_variants_from_option(color) => {"red" -> [...], "blue" -> [...]}
+  def categorise_variants_from_option(opt_type)
+    return {} unless option_types.include?(opt_type)
+    variants.active.group_by {|v| v.option_values.detect {|o| o.option_type == opt_type} }
   end
 
   private

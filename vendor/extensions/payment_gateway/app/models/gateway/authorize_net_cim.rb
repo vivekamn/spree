@@ -27,8 +27,8 @@ class Gateway::AuthorizeNetCim < Gateway
     create_transaction(amount, creditcard, :refund, :trans_id => response_code)
   end
   
-  def void(amount, creditcard, response_code, gateway_options)
-    create_transaction(amount, creditcard, :void, :trans_id => response_code)
+  def void(response_code, creditcard, gateway_options)
+    create_transaction(nil, creditcard, :void, :trans_id => response_code)
   end
   
   def payment_profiles_supported?
@@ -36,10 +36,10 @@ class Gateway::AuthorizeNetCim < Gateway
   end
 
   # Create a new CIM customer profile ready to accept a payment
-  def create_profile(creditcard, gateway_options)
-    if creditcard.gateway_customer_profile_id.nil?
-      profile_hash = create_customer_profile(creditcard, gateway_options)
-      creditcard.update_attributes(:gateway_customer_profile_id => profile_hash[:customer_profile_id], :gateway_payment_profile_id => profile_hash[:customer_payment_profile_id])
+  def create_profile(payment)
+    if payment.source.gateway_customer_profile_id.nil?
+      profile_hash = create_customer_profile(payment)
+      payment.source.update_attributes(:gateway_customer_profile_id => profile_hash[:customer_profile_id], :gateway_payment_profile_id => profile_hash[:customer_payment_profile_id])
     end
   end
 
@@ -52,7 +52,9 @@ class Gateway::AuthorizeNetCim < Gateway
     def create_transaction(amount, creditcard, transaction_type, options = {})
       #create_profile(creditcard, creditcard.gateway_options)
       creditcard.save
-      amount = "%.2f" % (amount/100.0) # This gateway requires formated decimal, not cents
+      if amount
+        amount = "%.2f" % (amount/100.0) # This gateway requires formated decimal, not cents
+      end
       transaction_options = {
         :type => transaction_type, 
         :amount => amount,
@@ -67,23 +69,23 @@ class Gateway::AuthorizeNetCim < Gateway
     end
   
     # Create a new CIM customer profile ready to accept a payment
-    def create_customer_profile(creditcard, gateway_options)
-      options = options_for_create_customer_profile(creditcard, gateway_options)
+    def create_customer_profile(payment)
+      options = options_for_create_customer_profile(payment)
       response = cim_gateway.create_customer_profile(options)
       if response.success?
         { :customer_profile_id => response.params["customer_profile_id"], 
           :customer_payment_profile_id => response.params["customer_payment_profile_id_list"].values.first }
       else
-        creditcard.gateway_error(response)
+        payment.source.gateway_error(response)
       end
     end
 
-    def options_for_create_customer_profile(creditcard, gateway_options)
+    def options_for_create_customer_profile(payment)
         {:profile => { :merchant_customer_id => "#{Time.now.to_f}",
           #:ship_to_list => generate_address_hash(creditcard.checkout.ship_address),
           :payment_profiles => {
-            #:bill_to => generate_address_hash(creditcard.checkout.bill_address),
-            :payment => { :credit_card => creditcard}
+            :bill_to => generate_address_hash(payment.order.bill_address),
+            :payment => { :credit_card => payment.source}
           }
         }}
     end

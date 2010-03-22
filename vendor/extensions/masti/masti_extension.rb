@@ -47,8 +47,8 @@ class MastiExtension < Spree::Extension
       validates_length_of :phone_no, :is=>10
     end 
 
-Address.class_eval do
-  has_one :user, :foreign_key => "bill_address_id"
+    Address.class_eval do
+      has_one :user, :foreign_key => "bill_address_id"
       validates_presence_of :name, :message=>"can't be blank" 
       validates_format_of :name, :with=>/^(([A-Za-z]+\s+[A-Za-z]+$)|([A-Za-z]+$))/, :message=>"cannot have non-alphabets other than space"
       validates_numericality_of :zipcode, :message=>"can't be anything else other than number"
