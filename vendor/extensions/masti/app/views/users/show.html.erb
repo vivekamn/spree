@@ -31,6 +31,12 @@
            <td colspan='2' width="100%">
 			<% hook :account_summary do %>
 			<table>
+				<tr>
+			    <td><strong><%= t("name") %> &nbsp;&nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.name %>
+			    </td>
+			  </tr>
 			  <tr>
 			    <td><strong><%= t("email") %> &nbsp;&nbsp;: </strong></td>
 			    <td>
@@ -41,6 +47,36 @@
 			    <td><strong>Mobile &nbsp;: </strong></td>
 			    <td>
 			      <%= @user.phone_no %>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><strong>Street Address &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.address1 %>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><strong>City &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.city %>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><strong>State &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.state.name %>
+			    </td>
+			  </tr>
+			  <tr>
+			    <td><strong>Country &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.country.name %>
+			    </td>
+			  </tr>
+			   <tr>
+			    <td><strong>Phone &nbsp;: </strong></td>
+			    <td>
+			      <%= @user.bill_address.phone %>
 			    </td>
 			  </tr>
 			</table>

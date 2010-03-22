@@ -500,7 +500,7 @@ en-US:
   none_available: "None Available"
   not: not
   note: Note
-  on_hand: "On Hand"
+  on_hand: "On Hand (Maximum Number)"
   operation: Operation
   option_Values: "Option Values"
   option_types: "Option Types"

@@ -65,8 +65,8 @@ Address.class_eval do
 
 
     # make your helper avaliable in all views
-    # Spree::BaseController.class_eval do
-    #   helper YourHelper
-    # end
+     Spree::BaseController.class_eval do
+       helper HomeHelper
+     end
   end
 end

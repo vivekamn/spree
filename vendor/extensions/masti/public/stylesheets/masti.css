@@ -118,7 +118,7 @@ a{ outline:none;
 }
 .shoppingright{ width:433px; float:left;  background:url(../images/line1.gif) no-repeat; background-position:left center bottom; padding-left:100px; padding-top:20px;
 }
-.textbox{ width:183px; height:19px; background:url(../images/textbg.gif) no-repeat; border:none; padding-left:10px; padding-top:5px; font-size:11px; color:#457700;
+.textbox{ width:183px; height:24px; background:url(../images/textbg.gif) no-repeat; border:none; padding-left:10px; padding-top:5px; font-size:11px; color:#457700;
 }
 .button{ background:url(../images/submit1.gif) no-repeat; width:91px; height:42px; border:none; cursor:pointer;
 }

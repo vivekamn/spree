@@ -14,7 +14,7 @@ module UsersHelper
     end
     
   end
-  
+ 
   private 
   def show_openid
     Spree::Config[:allow_openid] and @user.openid_identifier

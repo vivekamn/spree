@@ -8,7 +8,7 @@ class Spree::BaseController < ActionController::Base
 
   # Pick a unique cookie name to distinguish our session data from others'
   session_options['session_key'] = '_spree_session_id'
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  #protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   include RoleRequirementSystem
   include EasyRoleRequirementSystem

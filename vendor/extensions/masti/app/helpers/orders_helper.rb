@@ -8,8 +8,7 @@ module OrdersHelper
     options[:show_vat_text] = Spree::Config[:show_price_inc_vat]
 
     amount =  order.item_total
-    amount += Calculator::Vat.calculate_tax(order) if Spree::Config[:show_price_inc_vat]
-    amount = "Rs. "+amount.to_s
+    amount += Calculator::Vat.calculate_tax(order) if Spree::Config[:show_price_inc_vat] 
     amount
     #options.delete(:format_as_currency) ? number_to_currency(amount) : amount
   end

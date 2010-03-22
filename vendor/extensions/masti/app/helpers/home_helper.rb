@@ -23,5 +23,23 @@ module HomeHelper
       return false
     end
   end
+  
+   def get_states
+    states=[]
+    state=State.find(1061493609)
+    states<<[state.name, state.id]
+  end
+  
+  def get_countries
+    countries=[]
+    country = Country.find(92)
+    countries<<[country.name, country.id]
+  end
+  
+  def get_cities
+    cities=[]
+    city=City.find_by_state_id(1061493609)
+    cities<<[city.name, city.name]
+  end
 
 end

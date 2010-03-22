@@ -36,7 +36,7 @@
 	  	</tr>		
 		<tr>
 			<td width="25%">City:</td>
-			<td><%=f.text_field :city %>
+			<td><%=f.select :city, get_cities, {} %>
 			<div class="errormesg" id="error_city" style="color:red;"></div></td>
 		</tr>		
 		<tr>

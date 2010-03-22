@@ -16,16 +16,35 @@
 	<tr>
       <td width="30%" height="35"> <%= bill_form.label :city, t(:city) %><span class="req" style="float:none;">*</span></td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= bill_form.text_field :city, :class => 'textbox' -%>
-	  <%= bill_form.hidden_field :state_id, :class => 'required' -%>
+      <td width="66%"><%= bill_form.select :city, get_cities, {}, :class => 'textbox' -%>	  
+        </td>		
+    </tr>  
+	<tr>
+      <td width="30%" height="35"> <%= bill_form.label :state, t(:state) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.select :state_id, get_states, {}, :class=>'textbox', :width=>'30' -%>
+	  
         </td>		
     </tr>   
 	<tr>
       <td width="30%" height="35"> <%= bill_form.label :zipcode, t(:zip) %><span class="req" style="float:none;">*</span></td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= bill_form.text_field :zipcode, :class => 'textbox' -%>
-	  <%= bill_form.hidden_field :country_id, :class => 'required' -%>
-	   <%= bill_form.hidden_field :phone, :class => 'required' -%>
+      <td width="66%"><%= bill_form.text_field :zipcode, :class => 'textbox' -%>	 
         </td>		
     </tr>     
+	<tr>
+      <td width="30%" height="35"> <%= bill_form.label :country, t(:country) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.select :country_id, get_countries, {}, :class=>'textbox' -%>  
+	   
+        </td>		
+    </tr> 
+	
+	<tr>
+      <td width="30%" height="35"> <%= bill_form.label :phone, t(:phone) %><span class="req" style="float:none;">*</span></td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= bill_form.text_field :phone, :class => 'textbox' -%> 
+	   
+        </td>		
+    </tr> 
      </table>
