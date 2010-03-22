@@ -1,7 +1,7 @@
 module CheckoutsHelper
 
   def checkout_progress
-    steps = Checkout.state_names.reject { |n| n == "complete" }.map do |state|
+    steps = Checkout.state_names.map do |state|
       text = t("checkout_steps.#{state}")
 
       css_classes = []
@@ -24,12 +24,4 @@ module CheckoutsHelper
     content_tag('ol', steps.join("\n"), :class => 'progress-steps', :id => "checkout-step-#{@checkout.state}") + '<br clear="left" />'
   end
   
-  def billing_firstname
-    @checkout.bill_address.firstname  rescue ''
-  end
-
-  def billing_lastname
-    @checkout.bill_address.lastname  rescue ''
-  end
-
 end

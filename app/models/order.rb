@@ -16,6 +16,8 @@ class Order < ActiveRecord::Base
   has_many :inventory_units
 
   has_many :payments, :as => :payable, :extend => Totaling
+  has_many :creditcard_payments, :extend => Totaling
+  has_many :creditcards, :through => :creditcard_payments, :uniq => true
 
   has_one :checkout
   has_one :bill_address, :through => :checkout
@@ -173,7 +175,7 @@ class Order < ActiveRecord::Base
     checkout_complete
   end
 
-  def add_variant(variant, quantity=1)
+  def add_variant(variant, quantity=1)    
     current_item = contains?(variant)
     if current_item
       current_item.increment_quantity unless quantity > 1
@@ -182,7 +184,7 @@ class Order < ActiveRecord::Base
     else
       current_item = LineItem.new(:quantity => quantity)
       current_item.variant = variant
-      current_item.price   = variant.price
+      current_item.price   = (variant.price-((variant.price*variant.product.discount)/100)).to_i
       self.line_items << current_item
     end
 
@@ -293,11 +295,10 @@ class Order < ActiveRecord::Base
   def update_totals!
     update_totals
 
-    payments_total = self.payments.total
-    if payments_total < self.total
+    if self.payments.total < self.total
       #Total is higher so balance_due
       self.under_paid
-    elsif payments_total > self.total
+    elsif self.payments.total > self.total
       #Total is lower so credit_owed
       self.over_paid
     end
@@ -316,6 +317,9 @@ class Order < ActiveRecord::Base
     "#{address.firstname} #{address.lastname}" if address
   end
 
+  def deal_status
+    @status
+  end
 
   def out_of_stock_items
     @out_of_stock_items
@@ -325,7 +329,7 @@ class Order < ActiveRecord::Base
     [0, total - payments.total].max
   end
 
-  def outstanding_balance?
+  def has_balance_outstanding?
     outstanding_balance > 0
   end
 
@@ -333,45 +337,56 @@ class Order < ActiveRecord::Base
     [0, payments.total - total].max
   end
 
-  def outstanding_credit?
+  def has_credit_outstanding?
     outstanding_credit > 0
-  end
-
-
-  def creditcards
-    creditcard_ids = (payments.from_creditcard + checkout.payments.from_creditcard).map(&:source_id).uniq
-    Creditcard.scoped(:conditions => {:id => creditcard_ids})
   end
 
   private
 
   def complete_order
+    @status="available"
     self.adjustments.each(&:update_amount)
-    update_attribute(:completed_at, Time.now)
-
-    if email
-      OrderMailer.deliver_confirm(self)
-    end
-
+    update_attribute(:completed_at, Time.now)    
     begin
+      self.line_items.each do |line_item|  
+      @status=InventoryUnit.sufficient_inventory(line_item)
+      end         
+      if @status=="available"        
       @out_of_stock_items = InventoryUnit.sell_units(self)
-      update_totals unless @out_of_stock_items.empty?
+      if !@out_of_stock_items.empty?
+      update_totals 
+      @status='out_of_stock'
+      end
       shipment.inventory_units = inventory_units
-      save!
+     save!
+     if email       
+      InventoryUnit.deal_status_update(self)
+    end    
+  else 
+    if @status=='out_of_stock'
+      @out_of_stock_items=[]
+      @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
+    end
+    logger.info "status not available and cancelling order"    
+    self.cancel!
+     end
     rescue Exception => e
-      logger.error "Problem saving authorized order: #{e.message}"
-      logger.error self.to_yaml
+      logger.error "Problem saving authorized order and hence cancelling: #{e.message}"
+      self.cancel!
+      #logger.error self.to_yaml      
     end
   end
 
   def cancel_order
     restock_inventory
-    OrderMailer.deliver_cancel(self)
+    #OrderMailer.deliver_cancel(self)
   end
 
   def restock_inventory
+    if inventory_units
     inventory_units.each do |inventory_unit|
       inventory_unit.restock! if inventory_unit.can_restock?
+    end
     end
   end
 

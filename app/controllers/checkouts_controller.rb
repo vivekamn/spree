@@ -17,7 +17,7 @@ class CheckoutsController < Spree::BaseController
   # GET /checkout is invalid but we'll assume a bookmark or user error and just redirect to edit (assuming checkout is still in progress)
   show.wants.html { redirect_to edit_object_url }
 
-  edit.before :edit_hooks
+  edit.before :edit_hooks, :set_user
   delivery.edit_hook :load_available_methods
   address.edit_hook :set_ip_address
   payment.edit_hook :load_available_payment_methods
@@ -47,14 +47,31 @@ class CheckoutsController < Spree::BaseController
         after :update_fails
         set_flash :update_fails
       end
+      render 'edit'
     rescue Spree::GatewayError => ge
       logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
       flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
+    rescue Exception => e
+      logger.info "order not complete in checkout---------------"+e.message
+      if @order.line_items[0].failure_status[0][:count]       
+      flash[:error] = t('order_out_of_stock')
+      flash[:error] += '<ul>'     
+        flash[:error] += '<li>' + @order.line_items[0].variant.name + " less by " + @order.line_items[0].failure_status[0][:count].to_s+ "units"+
+                          '</li>'     
+      flash[:error] += '<ul>'
+    elsif @order.line_items[0].failure_status[0][:expired]   
+      flash[:error] = t('order_expired')
+      flash[:error] += '<ul>'     
+        flash[:error] += '<li>' + @order.line_items[0].failure_status[0][:expired].to_s+
+                          '</li>'     
+      flash[:error] += '<ul>'          
+    end    
+    redirect_to order_url(@order, {:order_token => @order.token})
     end
-
-    render 'edit'
   end
-
+  
+  
+  
   def register
     load_object
     @user = User.new
@@ -96,11 +113,15 @@ class CheckoutsController < Spree::BaseController
   end
 
   def complete_checkout
-    complete_order
+    status=complete_order
     order_params = {:checkout_complete => true}
     session[:order_id] = nil
     flash[:commerce_tracking] = "Track Me in GA"
+    if status == 'available'
     redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token})
+  else
+    redirect_to order_url(@order, {:status => status})
+    end
   end
 
   def object
@@ -114,6 +135,7 @@ class CheckoutsController < Spree::BaseController
       end
       @object.ship_address ||= Address.default
       @object.bill_address ||= Address.default
+      #@object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
     end
     @object.email ||= params[:checkout][:email] if params[:checkout]
     @object.email ||= current_user.email if current_user
@@ -170,11 +192,12 @@ class CheckoutsController < Spree::BaseController
     @checkout.update_attribute(:ip_address, request.env['REMOTE_ADDR'])
   end
 
-  def complete_order
-    if @checkout.order.out_of_stock_items.empty?
-      flash[:notice] = t('order_processed_successfully')
-    else
-      flash[:notice] = t('order_processed_but_following_items_are_out_of_stock')
+  def complete_order  
+    status=@checkout.order.deal_status
+    if status=="available"    
+      flash[:notice] = t('order_processed_successfully_but_payment')
+    elsif status=="out_of_stock"
+      flash[:notice] = t('order_out_of_stock')
       flash[:notice] += '<ul>'
       @checkout.order.out_of_stock_items.each do |item|
         flash[:notice] += '<li>' + t(:count_of_reduced_by,
@@ -184,6 +207,9 @@ class CheckoutsController < Spree::BaseController
       end
       flash[:notice] += '<ul>'
     end
+    
+  
+  @checkout.order.deal_status
   end
 
   def rate_hash
@@ -192,7 +218,7 @@ class CheckoutsController < Spree::BaseController
         @checkout.shipment.shipping_method = ship_method
         { :id => ship_method.id,
           :name => ship_method.name,
-          :rate => number_to_currency(ship_method.calculate_cost(@checkout.shipment)) }
+          :rate => (ship_method.calculate_cost(@checkout.shipment)) }
       end
     rescue Spree::ShippingError => ship_error
       flash[:error] = ship_error.to_s
@@ -207,6 +233,13 @@ class CheckoutsController < Spree::BaseController
     redirect_to register_order_checkout_url(parent_object)
   end
 
+  def set_user
+    if object.order.user.nil? && current_user
+      object.order.user = current_user
+      object.order.save
+    end
+  end
+  
   def accurate_title
     I18n.t(:checkout)
   end

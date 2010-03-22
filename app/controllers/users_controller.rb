@@ -13,14 +13,14 @@ class UsersController < Spree::BaseController
 	def create
 	  @user = User.new(params[:user])
 	  @user.save do |result|
-	    if result
+	    if result       
 	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
 	      @user.roles << Role.find_by_name("admin") unless admin_created?
 	      respond_to do |format|
-	        format.html { redirect_back_or_default products_url }
+	        format.html { redirect_back_or_default home_url }
 	        format.js { render :js => true.to_json }
 	      end
-	    else
+	    else            
 	      respond_to do |format|
 	        format.html { render :action => :new }
 	        format.js { render :js => @user.errors.to_json }
@@ -33,11 +33,12 @@ class UsersController < Spree::BaseController
   new_action.before :new_action_before
 
   def update
-    @user = current_user
-    if @user.update_attributes(params[:user])
-      flash[:notice] = t("account_updated")
-      redirect_to account_url
+    @user = current_user          
+    if @user.update_attributes(params[:user]) and @user.bill_address.update_attributes(params[:user][:bill_address_attributes])     
+      flash[:success] = t("account_updated")
+      render :action => :edit
     else
+      flash[:error] = "Oops ! You are missing something"
       render :action => :edit
     end
   end
@@ -45,7 +46,9 @@ class UsersController < Spree::BaseController
   private
 
     def object
+      user=current_user
       @object ||= current_user
+      #@object.bill_address ||= user.bill_address.clone unless user.bill_address.nil?
     end
     
     def show_before

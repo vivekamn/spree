@@ -1,4 +1,9 @@
 module Admin::ProductsHelper
+  
+  def current_product
+    return DealHistory.find(:first, :conditions => ['is_active = ?', true])
+  end
+  
   def option_type_select(so)
     select(:new_variant, 
            so.option_type.presentation, 
