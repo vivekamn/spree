@@ -40,9 +40,11 @@
     <td class="actions">
       <% hook :admin_products_index_row_actions, locals do %>
 	  	<%if deal.product_id==product.id %>
-			<%if params[:flag].nil?%>
+			<%if params[:flag].nil? and product.deal_expiry_date>Time.now%>
 				<a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
-		    <%else%>
+		    <%elsif product.deal_expiry_date<=Time.now%>
+				<span style="color:red">Expired</span>
+				<%else%>
 				<span style="color:red">Sold out</span>
 			<%end%>
         <!--<span class="colored_link" style="color:#E86857"><%# link_to "Make Sold Out",:controller => 'admin/deals',:action=>'make_soldout', :id => product.id %></span>-->

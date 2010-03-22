@@ -18,8 +18,8 @@
         background-color:#E60000; 
         height:10px
 }
-.bought1.img{
-	border=0;
+img{
+	border:0;
 }
 </style>
 
@@ -41,18 +41,19 @@
 	Hurray, the deal is already on. Just go ahead to get your masthi savings 
 	<%else%>
 	If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
-	<%end%>
+	<%end%>	
 	<%end%>
 	</div>
 </div>
-<div class="bought1">
+
 	<%if @deal and deal_live @deal, @featured_product%>
-	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>
-	<%else%>
-	<%= image_tag "soldout3.jpg" %>
-	<%end%>
-	
+	<div class="bought1">
+	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>	
 	</div>
+	<%else%><div style="margin-top: -20px">
+	<%= image_tag "soldout3.jpg"%></div>
+	<%end%>	
+	
 </div>
 </div>
 
@@ -70,8 +71,10 @@
 <!--
 &nbsp;Warranty: 1 Year (manufacturer)
 -->
+<%= @featured_product.name %>
+<!--
 Nobody knows how to take care of the feet like the Japanese. Have you SEEN those delicate, Beautifully-groomed feet on which Japanese women move west. And now that fabulous treatment,known toonly a few-there are these rare aromatic oils,you see-is coming your way from Areopagus, the best Japanese spa inthe city.With a price-tag of Rs 300 for what costs Rs 600, you won't even have to,well,foot a step bill.
-
+-->
 
 </div>
 <div class="dealinfo"><img src="images/feature.gif" width="70" height="20" /></div>
@@ -93,7 +96,7 @@ Nobody knows how to take care of the feet like the Japanese. Have you SEEN those
 Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
-<div class="dealinfo"><img src="images/dimensions.gif" width="82" height="20" /></div>
+<div class="dealinfo"><img src="/images/dimensions.gif" width="82" height="20" /></div>
 <div class="dealinfocontent1 pb10">
 <div class="points">
 <ul>
@@ -101,14 +104,14 @@ Mins: 48 Secs: 36-->
 <!--	
 <li>Valid from 12/02/10 to 11/04/10</li>
 <li>Can't combine with other promotions</li>
-<!--<li>Thickness :0.5"</li>-->
+<li>Thickness :0.5"</li>-->
 
 
 </ul>
 </div></div>
 
 
-<div class="dealinfo"><img src="images/system.gif" width="77" height="24" /></div>
+<div class="dealinfo"><img src="/images/system1.gif" width="77" height="24" /></div>
 <div class="dealinfocontent1">
 <div class="points">
 <ul>
@@ -151,10 +154,9 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   if (todayy < 1000)
 	todayy+=1900;
   var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-  var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
+   var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
   timeLeft = Date.parse(exp)-Date.parse(curr);
-  msPerDay = 24 * 60 * 60 * 1000 ;
-  
+  msPerDay = 24 * 60 * 60 * 1000 ;  
   if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
   	e_daysLeft = timeLeft / msPerDay;
   	daysLeft = Math.floor(e_daysLeft);
@@ -166,7 +168,7 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   	document.getElementById("countdown_time").innerHTML = "Days:   " + daysLeft + " Hours:  " + hrsLeft + "<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
   	setTimeout('updateTime()', 1000);
   }
- else if(timeLeft>=-3000){		
+ else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
 		window.location.reload();
 	} 
   else{
