@@ -102,7 +102,7 @@ a{ outline:none;
 .footerbg{ width:810px; float:left; background:url(../images/footbg.gif) repeat-y; padding:20px 64px 0 64px; height:22px; color:#a1a1a1; 
 }
 
-
+.tiles{background:url(../images/tiles.gif) no-repeat; background-position:left bottom; float:left;}
 
 /*shopping cart*/
 .shoppingout{ width:893px; padding:0 0 0 45px; background:url(../images/tiles.gif) no-repeat; background-position:left bottom; float:left;
