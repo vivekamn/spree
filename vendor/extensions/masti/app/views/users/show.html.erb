@@ -12,11 +12,12 @@
 		</td>
 	</tr>
 </table>-->
+<%= error_messages_for :user %>
 <div class="bannerouter">
 <div class="shoppingout2">
 <div class="shoppinginner">
 	
-	<div style="float:left;"><span style="font-size:35px;color:#6CAB16;font:Times;">MY </span><span style="font-size:35px;color:#214D76;font:Times;">ACCOUNT</span></div>
+	<div style="float:left;"><span class="green">MY </span><span class="blue">ACCOUNT</span></div>
 	<div style="float:right;">
 		<% if admin?%>
 			<%=link_to "View all Orders","/admin/orders" %>&nbsp;&nbsp;&nbsp;&nbsp;<%=link_to "View all Products","/admin/products" %>
@@ -31,12 +32,13 @@
            <td colspan='2' width="100%">
 			<% hook :account_summary do %>
 			<table>
+				<%if @user.bill_address%>
 				<tr>
 			    <td><strong><%= t("name") %> &nbsp;&nbsp;: </strong></td>
 			    <td>
 			      <%= @user.bill_address.name %>
 			    </td>
-			  </tr>
+			  </tr><%end%>
 			  <tr>
 			    <td><strong><%= t("email") %> &nbsp;&nbsp;: </strong></td>
 			    <td>
@@ -49,6 +51,7 @@
 			      <%= @user.phone_no %>
 			    </td>
 			  </tr>
+			  <%if @user.bill_address%>
 			  <tr>
 			    <td><strong>Street Address &nbsp;: </strong></td>
 			    <td>
@@ -64,7 +67,7 @@
 			  <tr>
 			    <td><strong>State &nbsp;: </strong></td>
 			    <td>
-			      <%= @user.bill_address.state.name %>
+			      <%= @user.bill_address.state.name if @user.bill_address.state %>
 			    </td>
 			  </tr>
 			  <tr>
@@ -78,7 +81,7 @@
 			    <td>
 			      <%= @user.bill_address.phone %>
 			    </td>
-			  </tr>
+			  </tr><%end%>
 			</table>
 			<p><%= link_to t('edit'), edit_object_url %></p>
 			
@@ -115,7 +118,7 @@
 <div class="shoppingout1" style="padding:0 40px 0;">
 <div class="shoppinginner">
 	<!--<img src="/images/iworuld.gif" width="303" height="41" />-->
-	<span style="font-size:35px;color:#6CAB16;font:Times;">MY </span><span style="font-size:35px;color:#214D76;font:Times;">ORDERS</span>
+	<span class="green">MY </span><span class="blue">ORDERS</span>
 </div>
 <div class="shoppinginner"><div class="shoptable">
 
