@@ -11,7 +11,7 @@ class UsersController < Spree::BaseController
 	#Cannot use resource_controller for create action
 	#as openID expects block passed to user.save method
 	def create
-	  @user = User.new(params[:user])
+	  @user = User.new(params[:user])    
 	  @user.save do |result|
 	    if result       
 	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
@@ -33,22 +33,39 @@ class UsersController < Spree::BaseController
   new_action.before :new_action_before
 
   def update
-    @user = current_user          
-    if @user.update_attributes(params[:user]) and @user.bill_address.update_attributes(params[:user][:bill_address_attributes])     
+    #load_object
+    @user = current_user if current_user     
+    begin  
+      bill_address=@user.bill_address
+      if  @user.update_attributes(params[:user]) and bill_address.update_attributes!(params[:user][:bill_address_attributes])     
       flash[:success] = t("account_updated")
-      render :action => :edit
+      flash[:error] = nil
+      render :action => :edit  
     else
-      flash[:error] = "Oops ! You are missing something"
+      #flash[:error] = bill_address.errors.to_s
+      render :action => :edit  
+      end
+      
+      
+    rescue Exception=>e      
+      logger.info "unable to update user................"+e.message      
+      flash[:error] = e.message 
+      flash[:success] = nil
       render :action => :edit
     end
   end
+  
+#  def edit
+#    @user||=current_user
+#    @user.bill_address ||= Address.default    
+#  end
 
   private
 
-    def object
-      user=current_user
-      @object ||= current_user
-      #@object.bill_address ||= user.bill_address.clone unless user.bill_address.nil?
+    def object      
+      @object ||= current_user      
+      @object.bill_address ||= Address.default
+      @object
     end
     
     def show_before

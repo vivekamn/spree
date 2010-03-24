@@ -1,6 +1,7 @@
 <%= error_messages_for :user %>
-<h1><%= t("editing_user") %></h1>
 <div class="bannerouter">
+	<br />
+	<span class="green" style="font-size:30px; padding-left: 10px;">Editing</span><span class="blue" style="font-size:30px;"> User</span>
 <div class="shoppingout">	
 
 	<% form_for @user, :url => object_url, :html => { :method => :put } do |f| %>
@@ -9,7 +10,7 @@
     <tr>
       <td width="30%" height="35">Email</td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= f.text_field :email, :class=>"textbox" %>
+      <td width="66%"><%=@user.email%><%= f.hidden_field :email, :class=>"textbox" %>
         </td>
     </tr>
     <tr>
@@ -38,8 +39,7 @@
 <div class="shoppingright">
 	
 	<% f.fields_for :bill_address do |bill_form| %>
-		<%=render '/shared/user_bill_address', :bill_form=>bill_form %>		
-		 
+		<%=render '/shared/user_bill_address', :bill_form=>bill_form %>				
 	<%end%>   
 	
 </div>

@@ -40,6 +40,7 @@ class MastiExtension < Spree::Extension
     end 
     
      User.class_eval do
+       #attr_accessible :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address      
       attr_accessible :phone_no
       validates_presence_of :phone_no
@@ -48,11 +49,19 @@ class MastiExtension < Spree::Extension
     end 
 
 Address.class_eval do
+  attr_accessible :name, :city, :state_id, :country, :address1, :zipcode, :phone
   has_one :user, :foreign_key => "bill_address_id"
-      validates_presence_of :name, :message=>"can't be blank" 
-      validates_format_of :name, :with=>/^(([A-Za-z]+\s+[A-Za-z]+$)|([A-Za-z]+$))/, :message=>"cannot have non-alphabets other than space"
-      validates_numericality_of :zipcode, :message=>"can't be anything else other than number"
-    end
+      validates_presence_of :name
+      validates_format_of :name, :with=>/^(([A-Za-z]+\s+[A-Za-z]+$)|([A-Za-z]+$))/
+      #validates_presence_of :state
+      validates_numericality_of :zipcode
+      validates_numericality_of :phone
+      #validates_length_of :phone, :is=>10
+  end
+  
+ AppConfiguration.class_eval do   
+    preference :default_country_id, :integer, :default => 92
+ end
 
 
     Image.attachment_definitions[:attachment][:styles] = {:mini => '48x48>', 
