@@ -33,7 +33,7 @@ class HomeController < Spree::BaseController
     end
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
       @checkout=@order.checkout
-      if @order.state!='paid' # check if user is paying again for a paid order
+      if @order.state=='new' # check if user is paying again for a paid order or cancelled order
     if @response_txt['ResponseMessage']=='Transaction Successful'      
       @order.pay!             
       InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails      
@@ -41,7 +41,7 @@ class HomeController < Spree::BaseController
       @order.cancel! if @order.state!='canceled'     
     end
   else
-    @message = "Already Paid Order "
+    @err_message = "Already Paid or Cancelled Order "
     end
   end 
  
