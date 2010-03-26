@@ -6,8 +6,11 @@
 		padding-right: 20px;
 		padding-top: 20px;
 	}
+	.center{text-align:center;}
 </style>
+<div class="tiles">
 <div id="order">
+	
  <!-- <%= link_to t('back_to_store'), home_path %> -->
 
   <% if params.has_key? :checkout_complete %>
@@ -20,9 +23,10 @@
   <% if params.has_key? :checkout_complete %>
   <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>	 
 </div>
-<form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction">
+
+<form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction" onsubmit="return checkState();">
 	<input name="account_id" type="hidden" value="6246" />
-        <input name="return_url" type="hidden" size="60" value="<%= payment_response_url %>?DR={DR}" />
+        <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
 	<input name="mode" type="hidden" value="TEST" />
 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
 	<input name="amount" type="hidden" value="<%=@order.total%>"/>
@@ -42,10 +46,25 @@
 	<input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
 	<input name="ship_country" type="hidden" value="IND" />
 	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-	<div align="right" style="margin-right: 30px;"><%= image_submit_tag "proceed.gif"%>  </div>
+	<div align="right"><%= image_submit_tag "proceed.gif"%>  </div>
 </form>
 <%else%>
 	<%= render :partial => 'failure', :locals => {:order => @order} -%>
 	<%end%>
   <br/>
+ </div>
+ <script type="text/javascript">
+ 	function checkState(){
+ 	var state='<%=@order.state%>'
+ 	if(state=='new'){
+		return true;
+	}
+	else{
+		alert('This order is a cancelled or already paid order')
+		return false;
+	}
+	}
+	
+ 
+ 	</script>
   <!--<%= link_to t('back_to_store'), home_path %>--> 

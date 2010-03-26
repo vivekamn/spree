@@ -1,7 +1,56 @@
-
 <div class="bannerouter">
-
-  <% @response_text.each do |res| %>
-    <%= res %> <br/>
-  <% end %>
+	<div class="tiles">
+<table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;">
+	
+</table>
+<table  style="margin-bottom: 30px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
+       <tr><%if !@err_message%>
+           <td colspan='2' width="100%">
+           	<% if @order.state=='paid'%>
+				<p>
+					<h3>
+						Your order has went through successful payment process and a confirmation mail has been sent to <%=@order.checkout.email%>
+	Please note your payment details for further correspondence.
+					</h3> 
+				</p>				
+				
+				<h2>Payment Details</h2>
+				<table>
+					<tr>
+						<td>Payment ID:</td>
+						<td><%=@response_txt['PaymentID']%></td>
+					</tr>
+					<tr>
+						<td>Amount</td>
+						<td><%=@response_txt['Amount']%></td>
+					</tr>
+					<tr>
+						<td>Merchant Ref No</td>
+						<td><%=@response_txt['MerchantRefNo']%></td>
+					</tr>
+					<tr>
+						<td>Date</td>
+						<td><%=@response_txt['DateCreated']%></td>
+					</tr>
+					<tr>
+						<td>Date</td>
+						<td><%=@response_txt['DateCreated']%></td>
+					</tr>
+				</table>
+				<%else%>
+				<p>
+					<h3>
+						We are sorry, your order was cancelled as your payment process was not completed properly. Please try again placing an order.
+					</h3>
+				</p>
+				<%end%>					
+		</td>
+		<%else%>
+		<td colspan='2' width="100%">
+			This order is placed and paid already. Current payment process cannot be accepted
+		</td>
+		<%end%>
+	</tr>
+</table>
+<table><tr><td height="10px"></td></tr></table></div>
 </div>
