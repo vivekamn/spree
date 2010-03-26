@@ -23,7 +23,11 @@ function MM_swapImage() { //v3.0
 }
 //-->
 </script>
-
+<style>
+	a{
+		text-decoration: none;
+	}	
+</style>
 <div class="toplogo">
   <div class="logopart"><img src="/images/logo.gif" width="305" height="71" /></div>
   <div class="logoright">
@@ -34,7 +38,7 @@ function MM_swapImage() { //v3.0
         <div class="fl username"><%= link_to 'Logout', logout_path %></div>
       </div>
     <% else %>
-      <div class="join"><%= link_to "<img src='/images/join.gif' width='239' height='25' border='0' />", signup_path %></div>
+      <div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign</span><span class='blue' style='font-size:16px'> Up</span> <span style='color:#848484;'>with</span> <span class='green' style='font-size:16px'>Masthi</span><span class='blue' style='font-size:16px'> Deals</span>", signup_path %></div>
       <% form_tag user_session_path do  %>
         <div class="submitpart"> 
           <div class="fl username">User Name :</div>
