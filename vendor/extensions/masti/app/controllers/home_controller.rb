@@ -18,6 +18,7 @@ class HomeController < Spree::BaseController
   def payment_response
     @key = '5fa2c2ffb54022d1b4e849668119e7b5'
     @DR = params[:DR]
+    @response_txt={}
     @response_text =[]
     unless @DR.nil?
       @DR.gsub!(/ /,'+') 
@@ -26,10 +27,24 @@ class HomeController < Spree::BaseController
       @plain_text = @decryptor.encrypt(@encrypted_data)
       @plain_text.split(/&/).each_with_index do |item, i|
         key, val = item.split(/=/)
+        @response_txt[key]=val
         @response_text << "#{key}=#{val}"
       end
     end
-  end  
+    @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
+      @checkout=@order.checkout
+      if @order.state!='paid' # check if user is paying again for a paid order
+    if @response_txt['ResponseMessage']=='Transaction Successful'      
+      @order.pay!             
+      InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails      
+    else
+      @order.cancel! if @order.state!='canceled'     
+    end
+  else
+    @message = "Already Paid Order "
+    end
+  end 
+ 
 
   
   

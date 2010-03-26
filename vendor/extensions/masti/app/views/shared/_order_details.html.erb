@@ -1,4 +1,4 @@
-<table class="index" width="70%" align="center">
+<table class="index" width="70%" align="center" cellpadding=5 cellspacing=2>
   <tbody id='line-items'>
     <tr>
       <% hook :order_details_line_items_headers do %>
@@ -13,10 +13,10 @@
       <tr>
         <%- locals = {:item => item} -%>
         <% hook :order_details_line_item_row, locals do %>
-          <td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
-          <td class="price">Rs.<%=  item.price.to_i -%></td>
-          <td class="qty"><%=item.quantity-%></td>
-          <td class="total"><span> Rs. <%=(item.price * item.quantity).to_i-%></span></td>
+          <td width="300"><center><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></center></td>
+          <td class="price"><center>Rs.<%=  item.price.to_i -%></center></td>
+          <td class="qty"><center><%=item.quantity-%></center></td>
+          <td class="total"><center><span> Rs. <%=(item.price * item.quantity).to_i-%></span></center></td>
         <% end %>
       </tr>
     <% end %>
@@ -25,7 +25,7 @@
     <tbody id='subtotal'>
       <tr class="total" id="subtotal-row">
         <td colspan="3"><b><%= t('subtotal') %>:</b></td>
-        <td class="total"><span>Rs.<%=  @order.item_total.to_i -%></span></td>
+        <td class="total"><span><center>Rs.<%=  @order.item_total.to_i -%></center></span></td>
       </tr>
     </tbody>
   <% end %>
@@ -34,7 +34,7 @@
       <% @order.charges.each do |charge| %>
         <tr class="total">
           <td colspan="3"><strong> Rs. <%=charge.description %></strong></td>
-          <td class="total"><span>  Rs. <%=charge.amount -%></span></td>
+          <td class="total"><center><span>  Rs. <%=charge.amount -%></span></center></td>
         </tr>
       <% end %>
     </tbody>
@@ -44,7 +44,7 @@
       <% @order.credits.each do |credit| %>
         <tr class="total">
           <td colspan="3"><%= credit.description %></td>
-          <td class="total"><span> Rs. <%=credit.amount -%></span></td>
+          <td class="total"><center><span> Rs. <%=credit.amount -%></span></center></td>
         </tr>
       <% end %>
     </tbody>
@@ -53,7 +53,7 @@
     <tbody id='order-total'>
       <tr class="total">
         <td colspan="3"><b><%= t('order_total') %>:</b></td>
-        <td class="total"><span id="order_total">Rs. <%=@order.total.to_i -%></span></td>
+        <td class="total"><center><span id="order_total">Rs. <%=@order.total.to_i -%></span></center></td>
       </tr>
     </tbody>
   <% end %>

@@ -6,7 +6,7 @@
 </style>
 <fieldset id='billing'>
   <% checkout_form.fields_for :bill_address do |bill_form| %>
-    <legend><strong><%= t("billing_address")%></strong></legend>
+    <legend><strong><span style="color:#6CAB16;font:Times;">Billing</span><span style="color:#214D76;font:Times;"> Address</span></strong></legend>
     <div class="inner">  
 <div class="shoppingleft">
 	<%=render '/shared/user_bill_address', :bill_form=>bill_form%>

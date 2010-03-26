@@ -13,7 +13,7 @@ class Checkout < ActiveRecord::Base
   has_many :payments, :as => :payable
 
   has_one :creditcard
-  has_many :payments, :as => :payable 
+  #has_many :payments, :as => :payable 
   accepts_nested_attributes_for :payments 
   accepts_nested_attributes_for :bill_address
 #  accepts_nested_attributes_for :ship_address
@@ -58,7 +58,7 @@ class Checkout < ActiveRecord::Base
   # checkout state machine (see http://github.com/pluginaweek/state_machine/tree/master for details)
   state_machine :initial => 'address' do
     after_transition :to => 'complete', :do => :complete_order
-    #before_transition :to => 'complete', :do => :process_payment # to be removed
+    before_transition :to => 'complete', :do => :process_payment # to be removed
     event :next do
       transition :to => 'complete', :from  => 'address'
       #transition :to => 'payment', :from => 'delivery'
@@ -73,6 +73,10 @@ class Checkout < ActiveRecord::Base
   def shipping_methods
     return [] unless ship_address
     ShippingMethod.all_available(order)
+  end
+  
+  def payment    
+    payments.first
   end
   
   def payment?
@@ -108,10 +112,10 @@ class Checkout < ActiveRecord::Base
 
   def complete_order
     order.complete!
-    order.pay! if Spree::Config[:auto_capture]
+    #order.pay! if Spree::Config[:auto_capture]
   end
 
-  def process_payment
+  def process_payment    
     return if order.payments.total == order.total
     payments.each(&:process!)
   end

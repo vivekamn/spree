@@ -3,19 +3,19 @@
   <%= javascript_include_tag  'checkout', '/states' %>
 <%- end -%>
 <br />
-<div id="checkout">
-  
+
+<div id="checkout" style="padding:10px;">  
   <%= checkout_progress %>
 <br /><br />
   <%= error_messages_for :checkout %>
   <% hook :checkout_summary_box do %>
-    <div id="checkout-summary" style="background-color:#C3C9DF;float:right;margin-top:10px;padding:20px;width:180px;">
+    <div id="checkout-summary" style="background-color:#C3C9DF;float:right;margin-top:14px;padding:20px;width:180px;">
       <%= render :partial => "summary" %>
     </div>
-  <% end %>
-  <% form_for @checkout, :url => object_url, :html => { :method => :put, :id => "checkout_form_#{@checkout.state}"} do |checkout_form| %>
+  <% end %>     
+   <% form_for @checkout, :url => object_url, :html => { :method => :put, :id => "checkout_form_#{@checkout.state}"} do |checkout_form| %>
     <%= render @checkout.state, :checkout_form => checkout_form %>    
     <input type="hidden" name="step" value="<%= @checkout.state %>">
-    <input id="post-final" type="submit" style="display:none"/>
-  <% end %>
+    <input id="post-final" type="submit" style="display:none"/> 
+  <%end%>
 </div>

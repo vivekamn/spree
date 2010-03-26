@@ -24,7 +24,7 @@ class CheckoutsController < Spree::BaseController
   update.before :clear_payments_if_in_payment_state
 
   # customized verison of the standard r_c update method (since we need to handle gateway errors, etc)
-  def update      
+  def update          
     load_object
 
     # call the edit hooks for the current step in case we experience validation failure and need to edit again
@@ -35,24 +35,25 @@ class CheckoutsController < Spree::BaseController
     before :update
 
     begin
-      if object.update_attributes object_params
-        update_hooks
-        @order.update_totals!
-        after :update
-        next_step
+      if object.update_attributes object_params        
+        update_hooks        
+        @order.update_totals!        
+        after :update        
+        next_step             
         if @checkout.completed_at
           return complete_checkout
         end
       else
         after :update_fails
         set_flash :update_fails
-      end
+      end     
       render 'edit'
     rescue Spree::GatewayError => ge
       logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
       flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
     rescue Exception => e
       logger.info "order not complete in checkout---------------"+e.message
+      if @order.line_items
       if @order.line_items[0].failure_status[0][:count]       
       flash[:error] = t('order_out_of_stock')
       flash[:error] += '<ul>'     
@@ -65,12 +66,11 @@ class CheckoutsController < Spree::BaseController
         flash[:error] += '<li>' + @order.line_items[0].failure_status[0][:expired].to_s+
                           '</li>'     
       flash[:error] += '<ul>'          
-    end    
+    end  
+    end
     redirect_to order_url(@order, {:order_token => @order.token})
     end
-  end
-  
-  
+  end  
   
   def register
     load_object
@@ -92,13 +92,14 @@ class CheckoutsController < Spree::BaseController
 
   private
 
-  def object_params
+  def object_params     
     # For payment step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
-    if object.payment?
+    if object.payment?      
       if source_params = params.delete(:payment_source)[params[:checkout][:payments_attributes].first[:payment_method_id].underscore]
         params[:checkout][:payments_attributes].first[:source_attributes] = source_params
       end
       params[:checkout][:payments_attributes].first[:amount] = @order.total
+      logger.info params[:checkout][:payments_attributes].first[:amount].to_s
     end
     params[:checkout]
   end
@@ -118,7 +119,7 @@ class CheckoutsController < Spree::BaseController
     session[:order_id] = nil
     flash[:commerce_tracking] = "Track Me in GA"
     if status == 'available'
-    redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token})
+    redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token, :response_txt=>@response_txt})
   else
     redirect_to order_url(@order, {:status => status})
     end
@@ -126,15 +127,16 @@ class CheckoutsController < Spree::BaseController
 
   def object
     return @object if @object
-    @object = parent_object.checkout
+    @object = parent_object.checkout     
     unless params[:checkout] and params[:checkout][:coupon_code]
       # do not create these defaults if we're merely updating coupon code, otherwise we'll have a validation error
-      if user = parent_object.user || current_user
-        @object.ship_address ||= user.ship_address.clone unless user.ship_address.nil?
+      if user = parent_object.user || current_user         
+        #@object.ship_address ||= user.ship_address.clone unless user.ship_address.nil?
         @object.bill_address ||= user.bill_address.clone unless user.bill_address.nil?
-      end
+      end      
       @object.ship_address ||= Address.default
       @object.bill_address ||= Address.default
+      @object.bill_address.country_id=user.bill_address.country_id if @object.bill_address.country_id.nil?      
       #@object.creditcard   ||= Creditcard.new(:month => Date.today.month, :year => Date.today.year)
     end
     @object.email ||= params[:checkout][:email] if params[:checkout]
@@ -154,11 +156,13 @@ class CheckoutsController < Spree::BaseController
     @states = default_country.states.sort
 
     # prevent editing of a complete checkout
-    redirect_to order_url(parent_object) if parent_object.checkout_complete
+    if parent_object.checkout_complete
+      redirect_to order_url(parent_object)     
+    end    
   end
 
-  def set_state
-    object.state = params[:step] || Checkout.state_machine.initial_state(nil).name
+  def set_state    
+    object.state = params[:step] || Checkout.state_machine.initial_state(nil).name     
     flash[:analytics] = "/checkout/#{object.state}"
   end
 
@@ -179,13 +183,13 @@ class CheckoutsController < Spree::BaseController
     end
   end
   
-  def load_available_payment_methods 
+  def load_available_payment_methods     
     @payment_methods = PaymentMethod.available   
     if @checkout.payment and @checkout.payment.payment_method
       @payment_method = @checkout.payment.payment_method
     else
       @payment_method = @payment_methods.first
-    end
+    end    
   end
 
   def set_ip_address
@@ -206,8 +210,7 @@ class CheckoutsController < Spree::BaseController
                           '</li>'
       end
       flash[:notice] += '<ul>'
-    end
-    
+    end 
   
   @checkout.order.deal_status
   end
@@ -250,6 +253,5 @@ class CheckoutsController < Spree::BaseController
       redirect_to edit_order_path(params[:order_id])
       false
     end
-  end
-  
+  end  
 end

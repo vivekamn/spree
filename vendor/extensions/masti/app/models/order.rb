@@ -71,7 +71,7 @@ class Order < ActiveRecord::Base
     after_transition :to => 'canceled', :do => :cancel_order
     after_transition :to => 'returned', :do => :restock_inventory
     after_transition :to => 'resumed', :do => :restore_state
-    after_transition :to => 'paid', :do => :make_shipments_ready
+    #after_transition :to => 'paid', :do => :make_shipments_ready
     after_transition :to => 'shipped', :do => :make_shipments_shipped
     after_transition :to => 'balance_due', :do => :make_shipments_pending
 
@@ -358,10 +358,7 @@ class Order < ActiveRecord::Base
       @status='out_of_stock'
       end
       shipment.inventory_units = inventory_units
-     save!
-     if email       
-      InventoryUnit.deal_status_update(self)
-    end    
+     save!       
   else 
     if @status=='out_of_stock'
       @out_of_stock_items=[]

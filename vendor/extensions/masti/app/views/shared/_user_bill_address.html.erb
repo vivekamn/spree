@@ -35,8 +35,7 @@
 	<tr>
       <td width="30%" height="35"> <%= bill_form.label :country, t(:country) %><span class="req" style="float:none;">*</span></td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= bill_form.select :country_id, get_countries, {}, :class=>'textbox' -%>  
-	   
+      <td width="66%"><%= bill_form.select :country_id, get_countries, {}, :class=>'textbox', :width=>'30' -%> 	   
         </td>		
     </tr> 
 	

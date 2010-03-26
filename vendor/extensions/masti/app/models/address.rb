@@ -34,7 +34,7 @@ class Address < ActiveRecord::Base
     end
   end
 
-  def self.default
+  def self.default    
     new :country => Country.find(Spree::Config[:default_country_id])
   end
 
@@ -71,6 +71,7 @@ class Address < ActiveRecord::Base
   end
 
   def clone
+    logger.info "in clone........"+self.country_id.to_s+self.id.to_s
     Address.new(self.attributes.except("id", "updated_at", "created_at"))
   end
 
