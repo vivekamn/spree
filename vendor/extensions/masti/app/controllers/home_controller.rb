@@ -32,16 +32,38 @@ class HomeController < Spree::BaseController
       end
     end
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
-      @checkout=@order.checkout
-      if @order.state=='new' # check if user is paying again for a paid order or cancelled order
-    if @response_txt['ResponseMessage']=='Transaction Successful'      
-      @order.pay!             
-      InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails      
+    if @order.state=='new' # check if user is paying again for a paid order or cancelled order
+      if @response_txt['ResponseMessage']=='Transaction Successful'
+        @status=@order.update_payment
+        if @status!='out_of_stock' and @status!='sold_out'
+          logger.info "about to accept the payment..........."
+          @order.pay!  # accept the payment    
+          logger.info "order updated as paid after successful payment response received.........."
+          InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails 
+          logger.info "confirmation mails sent...................." 
+        else          
+          @order.update_attribute(:state, 'credit_owed') 
+           # mark as over paid so that it can be reimbursed to users
+          logger.info "order under count after payment and marked as over paid"
+          if @status=="out_of_stock"
+            logger.info "retrieving out of stock items.............."
+            flash[:error] = 'Following out of stock'
+            flash[:error] += '<ul>'
+            @order.out_of_stock_items.each do |item|
+              flash[:error] += '<li>' + t(:count_of_reduced_by,
+                              :name => item[:line_item].variant.name,
+                              :count => item[:count]) +
+                          '</li>'
+            end
+            flash[:error] += '<ul>'
+          end                
+        end
+      else
+        @order.cancel! if @order.state!='canceled'   # just mark the order as cancel as payment failed
+        logger.info "payment failed and order cancelled"  
+      end
     else
-      @order.cancel! if @order.state!='canceled'     
-    end
-  else
-    @err_message = "Already Paid or Cancelled Order "
+      @err_message = "Already Paid or Cancelled Order "
     end
   end 
  

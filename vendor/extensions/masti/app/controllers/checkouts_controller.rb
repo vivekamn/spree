@@ -57,7 +57,7 @@ class CheckoutsController < Spree::BaseController
       if @order.line_items[0].failure_status[0][:count]       
       flash[:error] = t('order_out_of_stock')
       flash[:error] += '<ul>'     
-        flash[:error] += '<li>' + @order.line_items[0].variant.name + " less by " + @order.line_items[0].failure_status[0][:count].to_s+ "units"+
+        flash[:error] += '<li>' + @order.line_items[0].variant.name + " less by " + @order.line_items[0].failure_status[0][:count].to_s+ " units"+
                           '</li>'     
       flash[:error] += '<ul>'
     elsif @order.line_items[0].failure_status[0][:expired]   
@@ -114,15 +114,15 @@ class CheckoutsController < Spree::BaseController
   end
 
   def complete_checkout
-    status=complete_order
+    #status=complete_order
     order_params = {:checkout_complete => true}
     session[:order_id] = nil
     flash[:commerce_tracking] = "Track Me in GA"
-    if status == 'available'
-    redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token, :response_txt=>@response_txt})
-  else
-    redirect_to order_url(@order, {:status => status})
-    end
+    #if status == 'available'
+    redirect_to order_url(@order, {:checkout_complete => true, :order_token => @order.token})
+  #else
+    #redirect_to order_url(@order, {:status => status})
+    #end
   end
 
   def object
@@ -157,6 +157,7 @@ class CheckoutsController < Spree::BaseController
 
     # prevent editing of a complete checkout
     if parent_object.checkout_complete
+      logger.info "editing of a complete checkout prevented"
       redirect_to order_url(parent_object)     
     end    
   end
