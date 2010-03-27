@@ -30,7 +30,7 @@ class UserMailer < ActionMailer::Base
       subject  "MasthiDeal:  deal over notification"
     end
     sent_on        Time.now.utc
-     body          "user" => user,"product"=>product
+     body          "user" => user,"product"=>product,"vedor"=>product.vendor
  end
  
  def notify_users_deal_cancel(user_emails, product)

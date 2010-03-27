@@ -1,6 +1,6 @@
 Dear <%= @user.login %>,
 
-This is to inform you that the deal for the Product '<%= @product.name%>' from the Vendor '<%# @vendor_name %>'
+This is to inform you that the deal for the Product '<%= @product.name%>' from the Vendor '<%= @vendor.name %>'
 
 is going to finish on '<%= @product.deal_expiry_date%>'. Following are the details....
 
@@ -19,11 +19,11 @@ Deal Expiry Date: <%= @product.deal_expiry_date%>
 
 Vendor Details:
 
-Name: <%# @vendor_name%>
+Name: <%= @vendor.name%>
 
-Email: <%# @vendor_email%>
+Email: <%= @vendor.email%>
 
-Phone No.: <%# @vendor_phone_no%>
+Phone No.: <%= @vendor.phone_no%>
 
 
 

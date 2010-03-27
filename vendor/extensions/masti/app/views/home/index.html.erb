@@ -18,7 +18,7 @@ img{
 </style>
 
 <div class="bannerouter">
-	<div class="banerleft"><%if @featured_product.images and @featured_product.images.first %><%= image_tag(@featured_product.images.first.attachment.url(:large)) %><%end%></div>
+	<div class="banerleft"><%if @featured_product.images and @featured_product.images.first %><%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px;") %><%end%></div>
 	<div class="banerrightout">
   		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
 		<div class="bought" id="bought" style="display:none;">
@@ -52,7 +52,12 @@ img{
 </div>
 
 <div class="sharetis">
-<div class="sharetext"><%=render :partial=>'/shared/share_with_friends'%></div>
+<div class="sharetext">
+	<div style="margin-left:20px">
+		<%=render :partial=>'/shared/share_with_friends'%>
+	</div>	
+	
+</div>
 <!--<div class="icon">
 <img src="images/icon1.gif" width="39" height="39" /> &nbsp;<img src="images/icon2.gif" width="39" height="39" /> &nbsp;<img src="images/icon3.gif" width="39" height="39" />
 </div>
@@ -65,7 +70,9 @@ img{
 <!--
 &nbsp;Warranty: 1 Year (manufacturer)
 -->
+<div width="350px" style="width: 380px;">
 <%= @featured_product.name %>
+</div>
 <!--
 Nobody knows how to take care of the feet like the Japanese. Have you SEEN those delicate, Beautifully-groomed feet on which Japanese women move west. And now that fabulous treatment,known toonly a few-there are these rare aromatic oils,you see-is coming your way from Areopagus, the best Japanese spa inthe city.With a price-tag of Rs 300 for what costs Rs 600, you won't even have to,well,foot a step bill.
 -->
@@ -73,7 +80,7 @@ Nobody knows how to take care of the feet like the Japanese. Have you SEEN those
 </div>
 <div class="dealinfo"><img src="images/feature.gif" width="70" height="20" /></div>
 <div class="dealinfocontent1">
-<div class="points">
+<div class="points" style="width:380px">
   <ul>
 
     <%= @featured_product.description %>

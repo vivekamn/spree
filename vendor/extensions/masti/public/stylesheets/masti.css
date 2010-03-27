@@ -69,11 +69,11 @@ a{ outline:none;
 }
 .dealinfocontent1{ width:403px; float:left; background:url(../images/bg1.gif) no-repeat top; font-size:12px; color:#414141; padding-top:15px;
 }
-.points{ width:300px; float:left; padding-right:10px;
+.points{ width:380px; float:left; padding-right:10px;
 }
-.points ul{ width:300px; padding:5px 0 5px 5px; margin:0;
+.points ul{ width:380px; padding:5px 0 5px 5px; margin:0;
 }
-.points ul li{ width:285px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+.points ul li{ width:380px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
 }
 .rightsidecontent{ width:409px; float:left;
 }
