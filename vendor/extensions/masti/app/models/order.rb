@@ -51,12 +51,14 @@ class Order < ActiveRecord::Base
   named_scope :by_customer, lambda {|customer| {:include => :user, :conditions => ["users.email = ?", customer]}}
   named_scope :by_state, lambda {|state| {:conditions => ["state = ?", state]}}
   named_scope :checkout_complete, {:include => :checkout, :conditions => ["orders.completed_at IS NOT NULL"]}
+  named_scope :payment_success, {:include => :checkout, :conditions => ["orders.state ='paid'"]}
   make_permalink :field => :number
 
   # attr_accessible is a nightmare with attachment_fu, so use attr_protected instead.
   attr_protected :charge_total, :item_total, :total, :user, :number, :state, :token
 
-  def checkout_complete; !!completed_at; end
+  def checkout_complete; !!completed_at; end  
+    
 
   def to_param
     self.number if self.number
@@ -68,10 +70,10 @@ class Order < ActiveRecord::Base
   state_machine :initial => 'in_progress' do
     after_transition :to => 'in_progress', :do => lambda {|order| order.update_attribute(:checkout_complete, false)}
     after_transition :to => 'new', :do => :complete_order
-    after_transition :to => 'canceled', :do => :cancel_order
+    #after_transition :to => 'canceled', :do => :cancel_order
     after_transition :to => 'returned', :do => :restock_inventory
     after_transition :to => 'resumed', :do => :restore_state
-    #after_transition :to => 'paid', :do => :make_shipments_ready
+    after_transition :to => 'paid', :do => :make_shipments_ready
     after_transition :to => 'shipped', :do => :make_shipments_shipped
     after_transition :to => 'balance_due', :do => :make_shipments_pending
 
@@ -89,12 +91,12 @@ class Order < ActiveRecord::Base
     end
     event :pay do
       transition :to => 'paid', :if => :allow_pay?
-    end
+    end    
     event :under_paid do
       transition :to => 'balance_due', :from => ['paid', 'new', 'credit_owed', 'shipped', 'awaiting_return']
     end
     event :over_paid do
-      transition :to => 'credit_owed', :from => ['paid', 'new', 'balance_due', 'shipped', 'awaiting_return']
+      transition :to => 'credit_owed', :from => 'new'#, :from => ['paid', 'new', 'balance_due', 'shipped', 'awaiting_return']
     end
     event :ship do
       transition :to => 'shipped', :from  => 'paid'
@@ -320,6 +322,40 @@ class Order < ActiveRecord::Base
   def deal_status
     @status
   end
+  
+  
+  def update_payment   
+    status='available'
+  begin      
+      self.line_items.each do |line_item|  
+      status=InventoryUnit.sufficient_inventory(line_item)
+      end         
+      if status=="available"        
+      @out_of_stock_items = InventoryUnit.sell_units(self)
+      if !@out_of_stock_items.empty?
+      update_totals 
+      status='out_of_stock'
+      end
+      shipment.inventory_units = inventory_units
+     save!       
+  else 
+    if status=='out_of_stock'
+      @out_of_stock_items=[]
+      @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
+    end
+    logger.info "status not available affter payment........"    
+    #self.cancel!
+     end
+    rescue Exception => e
+      logger.error "Problem saving authorized order and hence cancelling: #{e.message}"
+      #self.cancel!
+      #logger.error self.to_yaml      
+    end
+    status
+    end
+
+  
+  
 
   def out_of_stock_items
     @out_of_stock_items
@@ -347,31 +383,31 @@ class Order < ActiveRecord::Base
     @status="available"
     self.adjustments.each(&:update_amount)
     update_attribute(:completed_at, Time.now)    
-    begin
-      self.line_items.each do |line_item|  
-      @status=InventoryUnit.sufficient_inventory(line_item)
-      end         
-      if @status=="available"        
-      @out_of_stock_items = InventoryUnit.sell_units(self)
-      if !@out_of_stock_items.empty?
-      update_totals 
-      @status='out_of_stock'
-      end
-      shipment.inventory_units = inventory_units
-     save!       
-  else 
-    if @status=='out_of_stock'
-      @out_of_stock_items=[]
-      @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
-    end
-    logger.info "status not available and cancelling order"    
-    self.cancel!
-     end
-    rescue Exception => e
-      logger.error "Problem saving authorized order and hence cancelling: #{e.message}"
-      self.cancel!
-      #logger.error self.to_yaml      
-    end
+#    begin
+#      self.line_items.each do |line_item|  
+#      @status=InventoryUnit.sufficient_inventory(line_item)
+#      end         
+#      if @status=="available"        
+#      @out_of_stock_items = InventoryUnit.sell_units(self)
+#      if !@out_of_stock_items.empty?
+#      update_totals 
+#      @status='out_of_stock'
+#      end
+#      shipment.inventory_units = inventory_units
+#     save!       
+#  else 
+#    if @status=='out_of_stock'
+#      @out_of_stock_items=[]
+#      @out_of_stock_items << {:line_item => self.line_items[0], :count => -(self.line_items[0].variant.count_on_hand-self.line_items[0].quantity)}
+#    end
+#    logger.info "status not available and cancelling order"    
+#    self.cancel!
+#     end
+#    rescue Exception => e
+#      logger.error "Problem saving authorized order and hence cancelling: #{e.message}"
+#      self.cancel!
+#      #logger.error self.to_yaml      
+#    end
   end
 
   def cancel_order
@@ -405,6 +441,5 @@ class Order < ActiveRecord::Base
 
   def create_shipment
     self.shipments << Shipment.create(:order => self)
-  end
-
+  end  
 end

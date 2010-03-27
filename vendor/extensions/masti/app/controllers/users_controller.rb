@@ -69,7 +69,7 @@ class UsersController < Spree::BaseController
     end
     
     def show_before
-      @orders = @user.orders.checkout_complete 
+      @orders = @user.orders.payment_success
     end
     
     def new_action_before
