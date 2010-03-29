@@ -352,7 +352,25 @@ class Order < ActiveRecord::Base
       #logger.error self.to_yaml      
     end
     status
-    end
+  end
+  
+  
+  def update_payment_info(response_text)
+    amount=response_text['Amount'].to_i  
+    status='new' if self.state=='new'
+    status='duplicate' if self.state!='new'  
+    logger.info "current payment status is....."+status+" as order is of state......"+self.state
+    transaction=Transaction.new(:amount=>amount, :response_code=>response_text['ResponseCode'], :avs_response=>response_text['ResponseMessage'], :original_creditcard_txn_id=>response_text['PaymentID'], :date_created=>response_text['DateCreated'])
+    payment=Payment.new(:amount=>amount, :status=>status)
+    transaction.payment=payment
+    payment.payable=self     
+    if transaction.save and payment.save!    
+    logger.info "saved successfully..............."    
+  end
+  end
+  
+  
+  
 
   
   

@@ -7,12 +7,12 @@ class Payment < ActiveRecord::Base
   alias :txns :transactions
   
   after_save :create_payment_profile, :if => :payment_profiles_supported?
-  after_save :check_payments, :if => :order_payment?
+  #after_save :check_payments, :if => :order_payment?
   after_destroy :check_payments, :if => :order_payment?
 
   accepts_nested_attributes_for :source
   
-  validate :amount_is_valid_for_outstanding_balance_or_credit, :if => :order_payment? 
+  #validate :amount_is_valid_for_outstanding_balance_or_credit, :if => :order_payment? 
   validates_presence_of :payment_method, :if => Proc.new { |payable| payable.is_a? Checkout }
 
   named_scope :from_creditcard, :conditions => {:source_type => 'Creditcard'}

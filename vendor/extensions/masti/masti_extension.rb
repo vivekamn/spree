@@ -59,6 +59,10 @@ Address.class_eval do
       #validates_length_of :phone, :is=>10
   end
   
+  Transaction.class_eval do
+    validates_uniqueness_of :original_creditcard_txn_id, :on=>:save, :message=>"Payment with this ID already exists"
+  end
+  
  AppConfiguration.class_eval do   
     preference :default_country_id, :integer, :default => 92
  end
