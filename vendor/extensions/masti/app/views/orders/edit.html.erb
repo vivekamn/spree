@@ -4,7 +4,7 @@
 <div class="bannerouter">
 <div class="shoppingout1">
 <div class="shoppinginner"><img src="/images/iworuld.gif" width="303" height="41" /></div>
-<div class="shoppinginner"><div class="shoptable">
+<div class="shoppinginner"><div class="shoptable" style="padding:0px">
 <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
 <% hook :inside_cart_form do %>
 
