@@ -78,8 +78,22 @@ Spree::Initializer.run do |config|
   # All files from config/locales/*.rb,yml are added automatically.
   #config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   config.i18n.default_locale = :'en-US'
- 
+  
 end
+ 
+ 
+ActionMailer::Base.delivery_method = :smtp
+
+ ActionMailer::Base.smtp_settings = {
+   :address => "smtp.sendgrid.net",
+   :port => "25",
+   :domain => "sitterscout.com",
+   :authentication => :plain,
+   :user_name => "notifications@sitterscout.com",
+   :password => "chiefscout"
+ }
+
+ 
  
 Time::DATE_FORMATS[:date_time24] = "%Y-%m-%d %H:%M"
 Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
