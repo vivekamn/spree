@@ -23,7 +23,7 @@ class MastiExtension < Spree::Extension
      {:name => 'validity_from', :only => [:product]},
      {:name => 'validity_to', :only => [:product]},
      {:name => 'catch_message', :only => [:product]},
-     {:name => 'location', :only => [:product]}
+     {:name => 'location', :only => [:product]},        
   ]
 
     Product.class_eval do
@@ -37,6 +37,22 @@ class MastiExtension < Spree::Extension
       validates_numericality_of :count_on_hand  
       validates_presence_of :vendor_id
       delegate_belongs_to :master, :count_on_hand
+      validate :minimum_less_than_maximum, :deal_expiry
+      def minimum_less_than_maximum
+        if minimum_number and count_on_hand and count_on_hand>0
+          if count_on_hand<minimum_number
+            errors.add(:count_on_hand, "Minimum number should be less than Maximum number")
+          end
+        end
+      end
+      def deal_expiry
+        if deal_expiry_date<=Time.now
+          errors.add(:deal_expiry_date, "should not be in past")
+        end        
+        if validity_from and validity_to and validity_from >= validity_to
+          errors.add(:validity_from, "should be before validity_to date")
+        end
+      end
     end 
     
      User.class_eval do
