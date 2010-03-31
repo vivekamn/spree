@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
    recipients     recipients
    subject        "New product in Masti Deal - #{product.name}" 
    sent_on        Time.now.utc
-   body          "product" => product 
+   body          "product" => product,"url"=>default_url_options[:host]
  end
  
   def notify_admin(user, product, msg)
