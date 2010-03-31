@@ -11,7 +11,7 @@
            	<% if @order.state=='paid'%>
 				<p>
 					<h3>
-						Your order has went through successful payment process and a confirmation mail has been sent to <%=@order.checkout.email%>
+						Your order has gone through successful payment process and a confirmation mail has been sent to <%=@order.checkout.email%>
 	Please note your payment details for further correspondence.
 					</h3> 
 				</p>
@@ -39,11 +39,7 @@
 					<tr>
 						<td>Date</td>
 						<td><%=@response_txt['DateCreated']%></td>
-					</tr>
-					<tr>
-						<td>Date</td>
-						<td><%=@response_txt['DateCreated']%></td>
-					</tr>
+					</tr>					
 				</table>
 				<%else%>
 				<p>
