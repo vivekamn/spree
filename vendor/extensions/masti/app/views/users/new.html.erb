@@ -1,3 +1,10 @@
+<style>
+	.login_exists{
+		font-size:18px;
+	}
+
+	</style>
+
 <%= error_messages_for :user %>
 <!--<table class="tes" style="margin-top: 20px;margin-bottom: 20px;margin-left: 0px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" align="center" width="95%"  border="0" cellpadding="0" cellspacing="10" >
        <tr>
@@ -14,13 +21,9 @@
 				      <% hook :signup_inside_form do %>
 				        <%= render 'shared/user_form', :f => f %>
 				        <!--<p><%= submit_tag t("create"), :class => 'button primary', :style=>"background-color:#009FF5;color:white" %> <%= t("or") %>   <%= link_to t("login_as_existing"), login_path %></p>-->
-				      <% end %>
-				
-				    <% end %>
-				    
-				
-				  <% end %>
-				
+				      <% end %>				
+				    <% end %>	 				
+				  <% end %>				
 		<!--		</div>
 			</td>
 		</tr>
