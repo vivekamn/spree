@@ -28,19 +28,20 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
+        attr_accessible :reviews, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount
       validates_presence_of :discount
       validates_presence_of :available_on
       validates_presence_of :minimum_number
       validates_presence_of :deal_expiry_date
       validates_presence_of :validity_from
-      validates_presence_of :validity_to
+      validates_presence_of :validity_to      
       validates_numericality_of :count_on_hand  
       validates_presence_of :vendor_id
       delegate_belongs_to :master, :count_on_hand
       validate :minimum_less_than_maximum, :deal_expiry
-      def minimum_less_than_maximum
-        if minimum_number and count_on_hand and count_on_hand>0
-          if count_on_hand<minimum_number
+      def minimum_less_than_maximum       
+        if minimum_number and count_on_hand and count_on_hand>0          
+          if count_on_hand<minimum_number           
             errors.add(:count_on_hand, "Minimum number should be less than Maximum number")
           end
         end

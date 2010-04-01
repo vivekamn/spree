@@ -62,10 +62,12 @@
         <%= f.text_field :sku, :size => 16 %>
       </p-->
       <% unless @product.has_variants? %>
+	  <% f.field_container :price do %>
         <p>
-          <%= f.label :on_hand, t("on_hand")%><br />
-          <%= f.text_field :on_hand, :size => 4 %>
+          <%= f.label :count_on_hand, t("on_hand")%><br />
+          <%= f.text_field :count_on_hand, :size => 4 %>
         </p>
+		<%end%>
         <!--ul id="shipping-specs">
           <li>
             <%= f.label :weight, t("weight")%>
@@ -105,7 +107,7 @@
       <%= f.text_area :catch_message, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
       <%= f.error_message_on :catch_message%>
     <% end %>
-  </div>  
+  </div>     
   <div class="yui-u">    
     <% f.field_container :minimum_number do %>
       <%= f.label :minimum_number, t("minimum_number") %> <span class="required">*</span><br />
@@ -119,9 +121,16 @@
       <%= f.error_message_on :currently_bought_count%>
     <% end %>
   </div>
+  <div class="yui-u first">
+    <% f.field_container :reviews do %>
+      <%= f.label :reviews, t("reviews")%><br />
+      <%= f.text_area :reviews, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
+      <%= f.error_message_on :reviews%>
+    <% end %>
+  </div> 
+
 </div>      
-
-
+ 
 
 <h2><%= t("metadata") %></h2>
 <% hook :admin_product_form_meta, locals do %>
