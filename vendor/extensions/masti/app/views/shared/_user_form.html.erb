@@ -30,7 +30,7 @@
     </tr>
     <tr>
       <td height="61" colspan="3"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
-        </td>
+        <%= t("or") %> <span class='login_exists'><%= link_to "<span class='green' style='font-size:16px; font-weight:bold;'>Log In as</span> <span class='blue' style='font-size:16px; font-weight:bold;'>Existing Customer</span>", login_path %></span></td>
       </tr>
     <tr>
       <td>&nbsp;</td>
