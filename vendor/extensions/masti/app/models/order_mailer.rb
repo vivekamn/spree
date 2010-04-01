@@ -1,6 +1,7 @@
 class OrderMailer < ActionMailer::QueueMailer
   helper "spree/base"
-  
+  default_url_options[:host] = Spree::Config[:site_url]
+  @url= default_url_options[:host]
   def confirm(order, resend = false)
     @subject    = (resend ? "[RESEND] " : "") 
     @subject    += 'Thanks for your order at Masthi Deals'

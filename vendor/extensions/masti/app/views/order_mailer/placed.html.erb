@@ -1,7 +1,8 @@
 Dear <%=@order.email%>,
 
 Thanks for your order at MasthiDeals. Your order is placed for "Deal info". Subject to the deal going “live”, we will send you your printable voucher on the day the deal ends to your registered email address with 
-<a href="www.mastideal.com">masthideals.com.</a> 
+
+<%=@url%>
 
 Your voucher quantity : <%=@order.line_items[0].quantity%>
 
