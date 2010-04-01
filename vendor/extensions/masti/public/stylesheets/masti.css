@@ -53,7 +53,7 @@ a{ outline:none;
 }
 .bought1{ width:309px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
 }
-.sharetis{ width:938px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background:url(../images/sharebg.gif) no-repeat right;background-color:white;
+.sharetis{ width:616px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background-color:white;
 }
 .sharetext{ float:left; padding-top:18px; text-align:center; text-decoration:underline;
 }
@@ -270,3 +270,12 @@ th { font-weight: bold; }
 		color:#214D76;
 		font:Times;
 	}
+.chat{
+	 width:322px;
+	 float:right; 
+	 height:80px; 
+	 font-family:"Times New Roman", Times, serif;
+	 font-size:18px; color:#5c6164;
+	 background:url(../images/sharebg.gif) no-repeat left;
+	 background-color:white;
+}

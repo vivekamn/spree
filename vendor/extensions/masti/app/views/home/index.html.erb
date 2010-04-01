@@ -19,8 +19,8 @@ img{
 
 <div class="bannerouter">
 	<div class="banerleft" align="center"><%if @featured_product.images and @featured_product.images.first %>
-	
-	<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px;") %><%end%></div>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px;") %><%end%>
+	</div>
 	
 	<div class="banerrightout">
   		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
@@ -50,47 +50,49 @@ img{
 	<%else%><div style="margin-top: -80px;margin-left:80px">
 	<%= image_tag "soldout3.png",:height=>"150px",:width=>"180px"%></div>
 	<%end%>	
-	<!-- Beginning of meebo me widget code.
-Want to talk with visitors on your page?  
-Go to http://www.meebome.com/ and get your widget! -->
-<div style="" id="chat_text_div" width="300px">
-<table width="300px" align="center">
-		<tbody><tr>
-			<td align="center">
-				<a href="javascript:show_chat();"><img width="100px" height="100px" alt="Chat" src="/images/chat.png"/></a>
-			</td>
-			
-		</tr>
-	
-</tbody></table></div>
-<div style="display:none;align:right;width:300px;" id="chat_div" cellpadding="0px" cellspacing="0px">
-	<table width="300px" align="right">
-		<tr>
-			<td align="right">
-				<embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed>
-			</td>
-			<td valign="top">
-				<%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-			</td>
-		</tr>
-	</table>
-	
-</div>	
-</div>
-</div>
 
-<div class="sharetis">
-<div class="sharetext">
-	<div style="margin-left:20px">
-		<%=render :partial=>'/shared/share_with_friends'%>
-		<br/>
-	</div>	
-	
 </div>
+</div>
+<div class="sharetis">
+		<div class="sharetext">
+				<div style="margin-left:20px">
+					<%=render :partial=>'/shared/share_with_friends'%>
+					<br/>
+				</div>	
+			</div>
+
 <!--<div class="icon">
 <img src="images/icon1.gif" width="39" height="39" /> &nbsp;<img src="images/icon2.gif" width="39" height="39" /> &nbsp;<img src="images/icon3.gif" width="39" height="39" />
 </div>
 -->
+</div>
+<div class="chat">
+		<!-- Beginning of meebo me widget code.
+		Want to talk with visitors on your page?  
+		Go to http://www.meebome.com/ and get your widget! -->
+		<div style="margin-top:-25px" id="chat_text_div" width="300px">
+		<table width="300px" align="center">
+				<tbody><tr>
+					<td align="center">
+						<a href="javascript:show_chat();"><img width="100px" height="100px" alt="Chat" src="/images/chat.png"/></a>
+					</td>
+					
+				</tr>
+			
+		</tbody></table></div>
+		<div style="display:none;align:right;width:300px;" id="chat_div" cellpadding="0px" cellspacing="0px">
+			<table width="300px" align="right">
+				<tr>
+					<td align="right">
+						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?iBcrtgbdrm"/><embed src="http://widget.meebo.com/mm.swf?iBcrtgbdrm" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
+					</td>
+					<td valign="top">
+						<%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+					</td>
+				</tr>
+			</table>
+			
+		</div>	
 </div>
 <div class="contentouter">
 <div class="leftsidecontent">
