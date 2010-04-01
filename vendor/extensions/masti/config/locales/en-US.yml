@@ -84,7 +84,7 @@ en-US:
         name: Name
         on_hand: "On Hand"
         shipping_category: "Shipping Category"
-        tax_category: "Tax Category"
+        tax_category: "Tax Category"        
       property:
         name: Name
         presentation: Presentation
@@ -455,7 +455,7 @@ en-US:
   maximum_number: "Maximum Number"
   meta_description: "Meta Description"
   meta_keywords: "Meta Keywords"
-  metadata: "Metadata"
+  metadata: "Metadata"  
   missing_required_information: "Missing Required Information"
   month: "Month"  
   my_account: "My Account"
@@ -724,6 +724,7 @@ en-US:
   return_authorizations: Return Authorizations
   return_quantity: Return Quantity
   returned: Returned
+  reviews: Reviews
   rma_number: RMA Number
   rma_value: RMA Value
   roles: Roles
