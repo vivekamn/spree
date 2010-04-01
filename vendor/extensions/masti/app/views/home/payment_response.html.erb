@@ -11,14 +11,14 @@
            	<% if @order.state=='paid'%>
 				<p>
 					<h3>
-						Your order has gone through successful payment process and a confirmation mail has been sent to <%=@order.checkout.email%>
+						Your order has gone through successful payment process and a confirmation mail has been sent to <%=@order.checkout.email%>.
 	Please note your payment details for further correspondence.
 					</h3> 
 				</p>
 				<%elsif @order.state=='credit_owed'%>
 				<p>
 					<h3>
-						We are sorry, though your payment was successful, the item you ordered was <%=@status%>. But do not worry, the amount will be credited back to your account at the earliest. Please preserve your following payment details till we credit back.
+						We are sorry, though your payment was successful, the item you ordered was <%=@status%>. But do not worry, the amount will not be debited from your account. Please preserve your following payment details for further queries.
 					</h3>
 				</p>				
 				<%end%>
@@ -30,7 +30,7 @@
 					</tr>
 					<tr>
 						<td>Amount</td>
-						<td><%=@response_txt['Amount']%></td>
+						<td>Rs. <%=@response_txt['Amount']%></td>
 					</tr>
 					<tr>
 						<td>Merchant Ref No</td>
