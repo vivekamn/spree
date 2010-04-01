@@ -60,4 +60,11 @@ class UserMailer < ActionMailer::Base
    
  end
  
+ def notify_credit_owed_to_admin(user, order)
+    from           "customersupport@masthideal.com"
+    recipients     user.email
+    subject  "MasthiDeal: Credit Owed for a payment"
+    sent_on        Time.now.utc
+    body           "order"=>order
+ end
 end

@@ -80,6 +80,7 @@ class InventoryUnit < ActiveRecord::Base
 
 def self.deal_status_update(order)
   begin
+    if order.state!='credit_owed'
   order.line_items.each do |line_item|    
     product=line_item.variant.product
     old_count=product.currently_bought_count - line_item.quantity   
@@ -95,6 +96,13 @@ def self.deal_status_update(order)
      end    
 
 end
+else
+  OrderMailer.deliver_credit_owed(order)  
+  logger.info "credit owed mailed to........." +order.email
+  admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+  UserMailer.deliver_notify_credit_owed_to_admin(admin, order)
+  logger.info "and mailed to admin also........."
+  end
 rescue Exception => e
   logger.error "problem sending order mails"+e.message
 end

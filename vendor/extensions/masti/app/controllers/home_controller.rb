@@ -46,7 +46,7 @@ class HomeController < Spree::BaseController
         else          
           @order.update_attribute(:state, 'credit_owed') 
            # mark as over paid so that it can be reimbursed to users
-          logger.info "order under count after payment and marked as over paid"
+          logger.info "order under count after payment success and marked as over paid"
           if @status=="out_of_stock"
             logger.info "retrieving out of stock items.............."
             flash[:error] = 'Following out of stock'
@@ -58,7 +58,8 @@ class HomeController < Spree::BaseController
                           '</li>'
             end
             flash[:error] += '<ul>'
-          end                
+          end   
+          InventoryUnit.deal_status_update(@order) if @order.email
         end
       else
         @order.cancel! if @order.state!='canceled'   # just mark the order as cancel as payment failed
@@ -70,7 +71,7 @@ class HomeController < Spree::BaseController
   rescue Exception=>e
     logger.info e.message
     #flash[:error]=e.message
-    @err_message = "Already Paid or Cancelled Order "
+    redirect_to :action=>'payment_failure'
     end
   end 
  
