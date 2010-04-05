@@ -9,10 +9,6 @@ class HomeController < Spree::BaseController
     @discount = @featured_product.discount
     @saving = (@price*@discount/100).to_i
     @bought_count = @featured_product.currently_bought_count
-#    Time.zone="UTC"
-#    @exp_time=Time.zone.parse(@featured_product.deal_expiry_date.to_s)
-#    puts "#{Time.now}========="
-#    puts "#{Time.parse(@featured_product.deal_expiry_date.to_s)}"
   end
 
   def payment_response
@@ -91,7 +87,7 @@ class HomeController < Spree::BaseController
         end
     else
       #if the user have already subscribed means it will show error
-      flash[:error]="You Have already Subscribed to Masthi Deal Newsletter."      
+      flash[:error]="You Have already Subscribed to Masthi Deal Newsletter. Would you like to register another email id?"      
     end
     redirect_to :back
   end

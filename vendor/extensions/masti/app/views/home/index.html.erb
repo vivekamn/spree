@@ -54,9 +54,44 @@ img{
 </div>
 </div>
 <div class="sharetis">
-		<div class="sharetext">
+		<div class="sharetext" style="text-decoration:none;">
 				<div style="margin-left:20px">
-					<%=render :partial=>'/shared/share_with_friends'%>
+					<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+					<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://richardxthripp.thripp.com/wp-content/plugins/tweet-this/icons/tt-twitter-micro2.png" class="nothumb" style="margin-bottom: -5px;"></a>
+					<!--<script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script><script>if (WIDGETBOX) WIDGETBOX.renderWidget('50d68c5e-084e-4c92-9362-ff66826aa92a');</script><noscript>Get the <a href="http://www.widgetbox.com/widget/facebook-share">Share on Facebook</a> widget and many other <a href="http://www.widgetbox.com/">great free widgets</a> at <a href="http://www.widgetbox.com">Widgetbox</a>! Not seeing a widget? (<a href="http://docs.widgetbox.com/using-widgets/installing-widgets/why-cant-i-see-my-widget/">More info</a>)</noscript>
+<a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php">Share</a>
+<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><br/>
+					
+						<script type="text/javascript" src="http://cdn.socialtwist.com/2009042015794/script.js">
+				</script>
+				<a class="st-taf" href="http://tellafriend.socialtwist.com:80" 
+				onclick="return false;" style="border:0;padding:0;margin:0;">
+				<img alt="SocialTwist? Tell-a-Friend" style="border:0;padding:0;margin:0;" 
+				src="http://images.socialtwist.com/2009042015794/button.png"
+				onmouseout="hideHoverMap(this)" 
+				onmouseover="showHoverMap(this, '2009042015794', window.location, document.title)" 
+				onclick="cw(this, {id:'2009042015794', link: window.location, title: document.title });"/></a><br/>-->
+<a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
+<a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
+<a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" />ShareThis</a>
+<script type="text/javascript">
+	var shared_object = SHARETHIS.addEntry({
+	content:"this is the conten of the share this",
+	title:  "hi-12345",
+	summary: 'Sharing is good Masthi Deals.',
+	icon:'http://localhost:3000/images/logo.gif',
+	url: document.location.href
+});
+
+shared_object.attachButton(document.getElementById("ck_sharethis"));
+shared_object.attachChicklet("email", document.getElementById("ck_email"));
+shared_object.attachChicklet("facebook", document.getElementById("ck_facebook"));
+shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
+</script>
+
+
+					<%#render :partial=>'/shared/share_with_friends'%>
 					<br/>
 				</div>	
 			</div>
@@ -87,7 +122,7 @@ img{
 						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
 					</td>
 					<td valign="top" width="18px">
-						<%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+						<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
 					</td>
 				</tr>
 			</table>
@@ -96,12 +131,14 @@ img{
 </div>
 <div class="contentouter">
 <div class="leftsidecontent">
-<div class="dealinfo"><img src="images/info.gif" width="82" height="20" /></div>
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Deal</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Info</span>
+</div>
 <div class="dealinfocontent" style="height:auto;"> 
 <!--
 &nbsp;Warranty: 1 Year (manufacturer)
 -->
-<div width="350px" style="width: 380px;">
+<div width="350px" style="width: 380px;" id="prod_name">
 <%= @featured_product.name %>
 </div>
 <!--
@@ -109,7 +146,9 @@ Nobody knows how to take care of the feet like the Japanese. Have you SEEN those
 -->
 
 </div>
-<div class="dealinfo"><img src="images/feature.gif" width="70" height="20" /></div>
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Details</span>
+</div>
 <div class="dealinfocontent1">
 <div class="points" style="width:380px">
   <ul>
@@ -128,7 +167,9 @@ Nobody knows how to take care of the feet like the Japanese. Have you SEEN those
 Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
-<div class="dealinfo"><img src="/images/dimensions.gif" width="82" height="20" /></div>
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Catch</span>
+</div>
 <div class="dealinfocontent1 pb10">
 <div class="points">
 <ul>
@@ -143,7 +184,9 @@ Mins: 48 Secs: 36-->
 </div></div>
 
 
-<div class="dealinfo"><img src="/images/system1.gif" width="77" height="24" /></div>
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Some</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Reviews</span>
+</div>
 <div class="dealinfocontent1">
 <div class="points">
 <ul>

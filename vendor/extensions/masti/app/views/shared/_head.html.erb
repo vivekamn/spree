@@ -52,7 +52,7 @@ function MM_swapImage() { //v3.0
     <div class="emailpart">
   <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
       <div class="fl"><img src="/images/email.gif" width="239" height="25" /></div>
-      <div class="w190"><%=f.text_field :email,:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %><br/>
+      <div class="w190"><%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %><br/>
 	  <div class="errormesg" id="error_email" style="color:red;"></div>
 	  </div>
       <div class="fl"><%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %></div>
@@ -80,4 +80,14 @@ function MM_swapImage() { //v3.0
   </div>
   <!--<div class="fl"><img src="/images/rightcurve.gif" width="5" height="47" /></div>-->
 </div>
-
+<script type="text/javascript">
+	function clear_email(){
+		document.getElementById('deals_notification_email').value="";
+	}
+	function load_email(){
+		if (document.getElementById('deals_notification_email').value=="")
+		{
+			document.getElementById('deals_notification_email').value="E-mail id";
+		}
+	}
+</script>

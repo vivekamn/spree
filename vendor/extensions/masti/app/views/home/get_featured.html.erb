@@ -11,37 +11,62 @@
            <td colspan='2' width="100%">	
     <table border="0" cellspacing="10" cellpadding="5" style="margin:15px 0px 0px 20px;">
 	    <tr> 
-			<td width="25%">First Name:</td>
+			<td width="25%">First Name:
+						 <font color="red">
+                            *
+                          </font>
+						  </td>
 			<td><%=f.text_field :first_name %>
 			<div id="error_firstname" class="errormesg" style="color:red;"></div></td>
 	  	</tr>
 		<tr> 
-			<td width="25%">Last Name:</td>
+			<td width="25%">Last Name:
+				<font color="red">
+                	*
+              </font>
+			</td>
 			<td><%=f.text_field :last_name %>
 			<div class="errormesg" id="error_lastname" style="color:red;"></div></td>
 	  	</tr>
 		<tr>
-			<td width="25%">Company:</td>
+			<td width="25%">Company:
+				<font color="red">
+                	*
+              </font>
+			
+			</td>
 			<td><%=f.text_field :company %>
 			<div class="errormesg" id="error_company" style="color:red;"></div></td>
 		</tr>
 		<tr>
-			<td width="25%">Phone No:</td>
+			<td width="25%">Phone No:
+				<font color="red">
+                	*
+              </font>
+			</td>
 			<td><%=f.text_field :phone_no %>
 			<div class="errormesg" id="error_phone" style="color:red;"></div></td>
 		</tr>        
 		<tr>
-			<td width="25%">Email:</td>
+			<td width="25%">Email:
+				<font color="red">
+                	*
+              </font>
+			</td>
 			<td><%=f.text_field :email  %>
 			<div class="errormesg" id="enquiry_email_msg" style="color:red;"></div></td>
 	  	</tr>		
 		<tr>
-			<td width="25%">City:</td>
+			<td width="25%">City:
+				<font color="red">
+                	*
+              </font>
+			</td>
 			<td><%=f.select :city, get_cities, {} %>
 			<div class="errormesg" id="error_city" style="color:red;"></div></td>
 		</tr>		
 		<tr>
-			<td colspan="2">Tell us a little bit about what you would like to feature on masthideal.:</td>						
+			<td colspan="2">Tell us a little bit about what you would like to feature on masthideal.:<font color="red">*</font></td>						
 		</tr>
 		<tr>
 			<td colspan="2"><%= f.text_area :query, :rows => 5, :cols=> 47 %>
