@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<link rel="SHORTCUT ICON" href="/favicon.ico" />
 <%= stylesheet_link_tag 'masti' %>	
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Great Deals Exclusive for MasthiDeals members!</title>
@@ -46,7 +47,7 @@ a.stbar.chicklet {height:16px;line-height:16px;}
 </style>
 </head>
 
-<body onload="MM_preloadImages('images/dealon.gif','images/howon.gif','images/geton.gif')">
+<body onload="MM_preloadImages('/images/dealon.gif','/images/howon.gif','/images/geton.gif')">
   <div class="main">
     <div class="outer">
       <%= render :partial => "shared/head" %>
@@ -58,7 +59,9 @@ a.stbar.chicklet {height:16px;line-height:16px;}
 	      <% if flash[:error] %>
 	      <div class="flash errors"><%= flash[:error] %></div>
 	      <% end %>
-
+		  <% if flash[:notice] %>
+	      <div class="flash errors"><%= flash[:notice] %></div>
+	      <% end %>
       	<%= yield %>
 		</div>
 		<%= render :partial => 'shared/footer'%>
