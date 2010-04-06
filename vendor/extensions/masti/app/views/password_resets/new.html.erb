@@ -1,0 +1,19 @@
+<style>
+	.green, .blue{
+		font-size: 28px;
+	}
+</style>
+<div class='shoppingout1' style="padding:10px 20px 10px 20px;">
+<span class='green'>Forgot</span> <span class='blue'>Password</span><br /><br />
+
+<%= t(:instructions_to_reset_password) %>
+<br />
+<br />
+ 
+<% form_tag password_resets_path do %>
+  <label><%= t(:email) %>:</label><br /><br />
+  <%= text_field_tag "email", '', :class=>'textbox' %><br />
+  <br />
+  <%= submit_tag t("reset_password") %>
+<% end %>
+</div>
