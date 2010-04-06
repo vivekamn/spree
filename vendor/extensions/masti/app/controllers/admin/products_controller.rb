@@ -99,14 +99,12 @@ class Admin::ProductsController < Admin::BaseController
     end
 
     # set the default tax_category if applicable
-    def create_before 
-      logger.info "innnnnnnnnnnnnnn create"
+    def create_before       
       return unless Spree::Config[:default_tax_category]
       @product.tax_category ||= TaxCategory.find_by_name Spree::Config[:default_tax_category]
     end
 
-    def update_before
-      logger.info "innnnnnnnnnnnn update"+params[:product][:deal_expiry_date].to_s
+    def update_before      
 #      if params[:product][:deal_expiry_date].to_date<=Time.now.to_date
 #          flash[:error]="cannot be in past"
 #        end
