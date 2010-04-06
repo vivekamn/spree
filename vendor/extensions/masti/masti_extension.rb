@@ -34,11 +34,11 @@ class MastiExtension < Spree::Extension
       validates_presence_of :minimum_number
       validates_presence_of :deal_expiry_date
       validates_presence_of :validity_from
-      validates_presence_of :validity_to      
-      validates_numericality_of :count_on_hand  
+      validates_presence_of :validity_to        
       validates_presence_of :vendor_id
       delegate_belongs_to :master, :count_on_hand
-      validate :minimum_less_than_maximum, :deal_expiry
+      validates_presence_of :count_on_hand       
+      validate :minimum_less_than_maximum, :deal_expiry, :on=>:create
       def minimum_less_than_maximum       
         if minimum_number and count_on_hand and count_on_hand>0          
           if count_on_hand<minimum_number           
@@ -46,7 +46,7 @@ class MastiExtension < Spree::Extension
           end
         end
       end
-      def deal_expiry
+      def deal_expiry        
         if deal_expiry_date<=Time.now
           errors.add(:deal_expiry_date, "should not be in past")
         end        
@@ -54,7 +54,8 @@ class MastiExtension < Spree::Extension
           errors.add(:validity_from, "should be before validity_to date")
         end
       end
-    end 
+    end    
+    
     
      User.class_eval do
        #attr_accessible :bill_address, :bill_address_attributes

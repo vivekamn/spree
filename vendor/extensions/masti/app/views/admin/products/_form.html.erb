@@ -64,7 +64,7 @@
       <% unless @product.has_variants? %>
 	  <% f.field_container :price do %>
         <p>
-          <%= f.label :count_on_hand, t("on_hand")%><br />
+          <%= f.label :on_hand, t("on_hand")%><br />
           <%= f.text_field :count_on_hand, :size => 4 %>
         </p>
 		<%end%>

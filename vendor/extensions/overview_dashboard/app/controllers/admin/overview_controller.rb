@@ -137,6 +137,6 @@ class Admin::OverviewController < Admin::BaseController
   end
 
   def out_of_stock_products
-    Product.find(:all, :conditions => {:count_on_hand => 0}, :limit => 5)
+    Product.find(:all, :conditions => {:vendor_id => 0}, :limit => 5)
   end
 end

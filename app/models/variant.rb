@@ -8,7 +8,8 @@ class Variant < ActiveRecord::Base
   has_many :images, :as => :viewable, :order => :position, :dependent => :destroy
 
   validate :check_price
-  validates_presence_of :price
+  validates_presence_of :price, :count_on_hand
+   validates_numericality_of :price, :count_on_hand
   validates_numericality_of :cost_price, :allow_nil => true
 
   before_save :touch_product
@@ -88,7 +89,7 @@ class Variant < ActiveRecord::Base
   # Ensures a new variant takes the product master price when price is not supplied
   def check_price
     if self.price.nil?
-      raise "Must supply price for variant or master.price for product." if self == product.master
+      raise "Must supply price for variant or master.price for product." if self == product.master      
       self.price = product.master.price
     end
   end

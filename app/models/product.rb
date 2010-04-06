@@ -33,7 +33,7 @@ class Product < ActiveRecord::Base
     :class_name => 'Variant',
     :conditions => ["variants.is_master = ? AND variants.deleted_at IS NULL", true]
 
-  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master, :cost_price
+  delegate_belongs_to :master, :sku, :price, :weight, :height, :width, :depth, :is_master, :cost_price, :on_hand
 
   after_create :set_master_variant_defaults
   after_create :add_properties_and_option_types_from_prototype
@@ -52,7 +52,7 @@ class Product < ActiveRecord::Base
     :dependent => :destroy
 
   validates_presence_of :name
-  validates_presence_of :price
+  validates_presence_of :price 
 
   accepts_nested_attributes_for :product_properties
 
