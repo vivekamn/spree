@@ -67,7 +67,7 @@ class UserSessionsController < Spree::BaseController
       else
         respond_to do |format|
           format.html {
-            flash.now[:error] = t("login_failed")
+            flash.now[:error] = t("login_failed")+' <a href="password_resets/new">Forgot Password?</a>'.to_html
             render :action => :new
           }
           format.js { render :json => false }
