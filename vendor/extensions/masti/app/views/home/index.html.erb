@@ -54,12 +54,13 @@ img{
 </div>
 </div>
 <div class="sharetis">
+	
 		<div class="sharetext" style="text-decoration:none;">
 				<div style="margin-left:20px">
-					<!--<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+					<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 					<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://richardxthripp.thripp.com/wp-content/plugins/tweet-this/icons/tt-twitter-micro2.png" class="nothumb" style="margin-bottom: -5px;"></a>
 					<a href="mailto:?subject=Great Deals Exclusive for MasthiDeals members&body=<%=@featured_product.name%>">E-mail</a>
-					<script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script><script>if (WIDGETBOX) WIDGETBOX.renderWidget('50d68c5e-084e-4c92-9362-ff66826aa92a');</script><noscript>Get the <a href="http://www.widgetbox.com/widget/facebook-share">Share on Facebook</a> widget and many other <a href="http://www.widgetbox.com/">great free widgets</a> at <a href="http://www.widgetbox.com">Widgetbox</a>! Not seeing a widget? (<a href="http://docs.widgetbox.com/using-widgets/installing-widgets/why-cant-i-see-my-widget/">More info</a>)</noscript>
+					<!--<script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script><script>if (WIDGETBOX) WIDGETBOX.renderWidget('50d68c5e-084e-4c92-9362-ff66826aa92a');</script><noscript>Get the <a href="http://www.widgetbox.com/widget/facebook-share">Share on Facebook</a> widget and many other <a href="http://www.widgetbox.com/">great free widgets</a> at <a href="http://www.widgetbox.com">Widgetbox</a>! Not seeing a widget? (<a href="http://docs.widgetbox.com/using-widgets/installing-widgets/why-cant-i-see-my-widget/">More info</a>)</noscript>
 <a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php">Share</a>
 <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><br/>
 					
@@ -71,11 +72,11 @@ img{
 				src="http://images.socialtwist.com/2009042015794/button.png"
 				onmouseout="hideHoverMap(this)" 
 				onmouseover="showHoverMap(this, '2009042015794', window.location, document.title)" 
-				onclick="cw(this, {id:'2009042015794', link: window.location, title: document.title });"/></a><br/>-->
+				onclick="cw(this, {id:'2009042015794', link: window.location, title: document.title });"/></a><br/>Spread this great deal among your  friends and earn their gratitude!-->
 <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" />Spread this great deal among your  friends and earn their gratitude!</a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" />Share This</a>
 <script type="text/javascript">
 	var shared_object = SHARETHIS.addEntry({
 	content:'this is the conten of the share this',
@@ -103,10 +104,7 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 -->
 </div>
 <div class="chat">
-		<!-- Beginning of meebo me widget code.
-		Want to talk with visitors on your page?  
-		Go to http://www.meebome.com/ and get your widget! -->
-		<div style="margin-top:-25px" id="chat_text_div" width="300px">
+	<div style="margin-top:-25px" id="chat_text_div" width="300px">
 		<table width="300px" align="center">
 				<tbody><tr>
 					<td align="center">
@@ -197,6 +195,7 @@ Mins: 48 Secs: 36-->
 </ul>
 </div></div>
 </div></div>
+
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
 <input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 
