@@ -31,7 +31,7 @@ en-US:
         city: City
         firstname: "First Name"
         lastname: "Last Name"
-        phone: Phone
+        phone: "Landline"
         zipcode: "Zip Code"
       checkout:
         bill_address:
@@ -40,7 +40,7 @@ en-US:
           firstname: "Billing address first name"
           lastname: "Billing address last name"
           name: "Billing address name"
-          phone: "Billing address phone"
+          phone: "Landline"
           state: "Billing address state"
           zipcode: "Billing address zipcode"
         ship_address:
@@ -495,7 +495,7 @@ en-US:
   no_match_found: "No Match Found"
   no_products_found: "No products found"
   no_shipping_methods_available: "No shipping methods available, please change your address and try again."
-  no_user_found: "No user was found with that email address"
+  no_user_found: "No such user exists. Please check the email id."
   none: None
   none_available: "None Available"
   not: not
@@ -557,6 +557,7 @@ en-US:
   powered_by: "Powered by"
   presentation: Presentation
   preview: Preview
+  phone: "Landline"
   previous: Previous
   price: Price
   price_with_discount: Discount Price
@@ -891,7 +892,7 @@ en-US:
   year: "Year"
   you_have_been_logged_out: "You have been logged out."
   your_cart_is_empty: "Your cart is empty"
-  zip: Zip
+  zip: "Pin code"
   zone: Zone
   zone_based: "Zone Based"
   zone_setting_description: "Collections of countries, states or other zones to be used in various calculations."

@@ -73,10 +73,9 @@
 			<div class="errormesg" id="error_text" style="color:red;"></div></td>
 		</tr>
 		<tr>
-            <td class="cancel">
+            <td align="right" class="cancel" colspan="2" style="padding-right:40px">
 		   <%= submit_tag "Save",:onclick=> "return email_validate();",:style=>"background-color:#008AD5" %>
 			<input type="reset" style="background-color:#008AD5;" value="Cancel" onclick="javascript:submitUrl('/home')">
-            <td>&nbsp;</td>
         </tr>
 		
    </table>

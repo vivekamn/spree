@@ -10,9 +10,9 @@ class UserMailer < ActionMailer::Base
   end
   
   def users_deal_notify(recipients,product)
-   from           "customersupport@masthideal.com"
+   from           "customersupport@masthideals.com"
    recipients     recipients
-   subject        "New product in Masti Deal - #{product.name}" 
+   subject        "New product in Masti Deals - #{product.name}" 
    sent_on        Time.now.utc
    body          "product" => product,"url"=>default_url_options[:host]
  end
@@ -21,13 +21,13 @@ class UserMailer < ActionMailer::Base
     from           "customersupport@masthideal.com"
     recipients     user.email
     if msg == "deal_exp_notify"
-      subject  "MasthiDeal: deal expiry notification"
+      subject  "MasthiDeals: deal expiry notification"
     elsif msg == "deal_cancel_notify"
-      subject  "MasthiDeal: deal cancel notification"
+      subject  "MasthiDeals: deal cancel notification"
     elsif msg == "deal_on_notify"
-      subject  "MasthiDeal: deal on notification"
+      subject  "MasthiDeals: deal on notification"
     elsif msg == "deal_over_notify"
-      subject  "MasthiDeal:  deal over notification"
+      subject  "MasthiDeals:  deal over notification"
     end
     sent_on        Time.now.utc
      body          "user" => user,"product"=>product,"vedor"=>product.vendor
@@ -35,25 +35,25 @@ class UserMailer < ActionMailer::Base
  
  def notify_users_deal_cancel(user_emails, product)
     bcc user_emails
-    from       "customersupport@masthideal.com"
+    from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
-    subject    "MasthiDeal: deal cancel notification" 
+    subject    "MasthiDeals: deal cancel notification" 
     body       "product" => product.name 
    
  end
  
  def users_notify_deal_on(user_emails, product)
     bcc        user_emails
-    from       "customersupport@masthideal.com"
+    from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
-    subject    "MasthiDeal: deal on notification"
+    subject    "MasthiDeals: deal on notification"
     body       "product" => product.name 
    
  end
  
  def users_notify_deal_over(user_emails, product)
     bcc        user_emails
-    from       "customersupport@masthideal.com"
+    from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
     subject    "MasthiDeal: deal_over_notification"
     body       "product" => product.name 

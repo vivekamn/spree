@@ -32,7 +32,7 @@ function MM_swapImage() { //v3.0
   <div class="logopart"><img src="/images/logo.gif" width="305" height="71" /></div>
   <div class="logoright">
     <% if current_user %>
-      <div class="loggedinpart">
+      <div class="loggedinpart" style="padding-left: 30px;">
         <div class="fl username">Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span></div>
         <div class="fl username"><%= link_to 'Account', user_path(current_user) %></div>
         <div class="fl username"><%= link_to 'Logout', logout_path %></div>
