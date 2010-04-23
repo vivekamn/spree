@@ -1,6 +1,6 @@
 Dear <%=@order.email%>,
 
-Thanks for your order at MasthiDeals. Your order is placed for "Deal info". Subject to the deal going “live”, we will send you your printable voucher on the day the deal ends to your registered email address with 
+Thanks for your order at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". Subject to the deal going “live”, we will send you your printable voucher on the day the deal ends to your registered email address with 
 
 <%=@url%>
 
