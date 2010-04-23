@@ -3,7 +3,7 @@ class ProductsController < Spree::BaseController
 
   prepend_before_filter :reject_unknown_object, :only => [:show]
   before_filter :load_data, :only => :show
-
+  before_filter :require_user, :only =>[:show]
   resource_controller
   helper :taxons
   actions :show, :index
