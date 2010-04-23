@@ -5,7 +5,7 @@ class OrderMailer < ActionMailer::QueueMailer
   def confirm(order, resend = false)
     @subject    = (resend ? "[RESEND] " : "") 
     @subject    += 'Thanks for your order at Masthi Deals'
-    @body       = {"order" => order}
+    @body       = {"order" => order , "url" => default_url_options[:host] }
     @recipients = order.email
     @from       = Spree::Config[:order_from]
     @bcc        = order_bcc
@@ -15,7 +15,7 @@ class OrderMailer < ActionMailer::QueueMailer
   def placed(order, resend = false)
     @subject    = (resend ? "[RESEND] " : "") 
     @subject    += 'Thanks for your order at Masthi Deals'
-    @body       = {"order" => order}
+    @body       = {"order" => order, "url" => default_url_options[:host]}
     @recipients = order.email
     @from       = Spree::Config[:order_from]
     @bcc        = order_bcc
