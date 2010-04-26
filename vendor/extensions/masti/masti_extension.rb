@@ -69,8 +69,8 @@ class MastiExtension < Spree::Extension
 Address.class_eval do
   attr_accessible :name, :city, :state_id, :country, :address1, :zipcode, :phone
   has_one :user, :foreign_key => "bill_address_id"
-      validates_presence_of :name
-      validates_format_of :name, :with=>/^(([A-Za-z]+\s+[A-Za-z]+$)|([A-Za-z]+$))/
+      validates_presence_of :name      
+      validates_format_of :name, :with=>/^([A-Za-z .]+$)/
       #validates_presence_of :state
       validates_numericality_of :zipcode
       validates_numericality_of :phone
