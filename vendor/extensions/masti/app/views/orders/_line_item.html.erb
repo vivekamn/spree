@@ -13,7 +13,7 @@
   </td>
  <td width="44%" class="bd1 bd2" align="left">
     <% hook :cart_item_description, locals do %>
-     <%= link_to variant.product.name,  home_path %>
+     <%=  variant.product.permalink %>
       <%= variant_options variant %>
       <br /><%# truncate(variant.product.description, :length => 100, :omission => "...") %>
     <% end %>

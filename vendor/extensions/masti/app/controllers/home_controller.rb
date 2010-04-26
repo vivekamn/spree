@@ -87,7 +87,7 @@ class HomeController < Spree::BaseController
         end
     else
       #if the user have already subscribed means it will show error
-      flash[:error]="You Have already Subscribed to Masthi Deal Newsletter. Would you like to register another email id?"      
+      flash[:error]="You have already subscribed to MasthiDeals Newsletter. Would you like to register another email id?"      
     end
     redirect_to :back
   end
