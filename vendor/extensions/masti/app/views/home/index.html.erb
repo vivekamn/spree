@@ -17,7 +17,7 @@ img{
 
 <div class="bannerouter">
 	<div class="banerleft" align="center"><%if @featured_product.images and @featured_product.images.first %>
-			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px;") %><%end%>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %><%end%>
 	</div>
 	
 	<div class="banerrightout">

@@ -81,18 +81,28 @@ class InventoryUnit < ActiveRecord::Base
 def self.deal_status_update(order)
   begin
     if order.state!='credit_owed'
-  order.line_items.each do |line_item|    
+  order.line_items.each do |line_item|
+    variant =line_item.variant
     product=line_item.variant.product
     old_count=product.currently_bought_count - line_item.quantity   
     if product.currently_bought_count>product.minimum_number and  old_count>product.minimum_number  
       logger.info "deal already on and trying to send confirmation mail"
-      OrderMailer.deliver_confirm(order)      
+       # we are sending vouchers after the deal is on
+       OrderMailer.deliver_voucher(order,product,order.user.email)
+       #OrderMailer.deliver_confirm(order)      
     elsif product.currently_bought_count<product.minimum_number
       logger.info "deal not on and trying to send placement mail"
       OrderMailer.deliver_placed(order)
     elsif product.currently_bought_count==product.minimum_number or old_count<product.minimum_number 
       logger.info "deal on with this placement and trying to send confirmation mail"
-      OrderMailer.deliver_confirm(order)
+      #sending vouchers for all users before bought
+      line_items_variant = variant.line_items
+      line_items_variant.each do |item|
+        if item.order.state == "paid"
+            OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
+        end
+      end
+      #OrderMailer.deliver_confirm(order)
      end    
 
 end
