@@ -224,11 +224,14 @@
                           <tr>
                             <td align="left" valign="top" height="22" colspan="2">Retailer Details :</td>
                           </tr>
+						  <%unless @product.vendor.nil?%>
                           <tr>
-                            <td align="left" valign="top" colspan="2"><%=@product.vendor.name%><br>
-							<%unless @product.vendor.address.nil?%>
-                              	<%= @product.vendor.address %>
-							<%end%>
+                            <td align="left" valign="top" colspan="2">
+                            	
+									<%=@product.vendor.name%><br>
+								<%unless @product.vendor.address.nil?%>
+	                              	<%= @product.vendor.address %>
+								<%end%>
 							<!--111-A, Currimjee Bldg, Opposite Mumbai University,  Fort, Mumbai - 400023-->
 							  </td>
                           </tr>
@@ -236,6 +239,7 @@
                           <tr>
                             <td align="left" valign="top" colspan="2">Contact : <%= @product.vendor.phone_no %></td>
                           </tr>
+						  <%end%>
                           <tr>
                             <td align="left" valign="top" colspan="2"><a></a></td>
                           </tr>
