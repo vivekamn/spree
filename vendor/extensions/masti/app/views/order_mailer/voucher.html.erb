@@ -1,0 +1,153 @@
+
+<table class="curve" style="margin-bottom:10px;margin-left: 30px;align:center;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
+
+       <tr>
+           <td colspan='2' width="100%" align="center">
+<table border="0" width="90%" cellspacing="0" cellpadding="0" style="margin-top: 10px; margin-bottom: 10px;">
+      <tbody><tr>
+        <td bgcolor="#ffffff" align="left" width="179" valign="bottom" rowspan="3"><img width="173" height="90" style="vertical-align: text-bottom;" alt="Masthi Deals"></td>
+        <td bgcolor="#ffffff" align="left" width="83" valign="top" height="48"></td>
+        <td bgcolor="#ffffff" align="left" valign="top" colspan="2"></td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" align="left" valign="top" height="14"><span style="color: rgb(128, 128, 128); font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; letter-spacing: 2px;">VOUCHER</span></td>
+
+
+        <td bgcolor="#a0d736" align="left" valign="bottom" height="12" colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tbody><tr bgcolor="#ef037f">
+    <td align="left" valign="bottom" ></td>
+  </tr>
+</tbody></table>
+</td>
+      </tr>
+      
+      <tr>
+        <td bgcolor="#ffffff" align="left" valign="bottom"></td>
+        <td bgcolor="#ffffff" align="left" width="327" valign="bottom" height="30"></td>
+        <td bgcolor="#a0d736" align="left" width="8" valign="bottom"></td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff" align="left" valign="top" colspan="4"><table border="0" width="100%" height="303" cellspacing="0" cellpadding="0">
+          <tbody><tr>
+            <td bgcolor="#a0d736" align="left" width="10" valign="top" height="293"></td>
+            <td bgcolor="#ffffff" align="left" width="566" valign="top"><table border="0" align="center" width="740" cellspacing="0" cellpadding="0">
+              <tbody><tr>
+                <td align="left" width="100%" valign="top"></td>
+                <td align="left" width="7" valign="top"></td>
+                <td align="left" width="217" valign="top"></td>
+                </tr>
+              <tr>
+                  <td align="left" width="100%" valign="top" rowspan="2" style="padding-right: 10px;"><h1 style="margin: 0px; padding: 0px; font-size: 16px; font-family: Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 137, 217); font-weight: bold;">
+
+					<%=@product.permalink%></h1>
+                    <div class="points" style="width:380px;background:transparent url(../images/logo.gif) no-repeat scroll center center;">
+							<ul>
+								<%=@product.description%>
+							</ul>
+					</div>
+				</td>
+                 <td align="center" valign="middle">
+                 	<table bgcolor="#1974a3" border="0" width="100%" height="121" cellspacing="0" cellpadding="0" style="font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal; color: white;">
+
+
+                    <tbody><tr>
+                      <td width="5" height="121">
+                      </td><td align="left" valign="top"><table border="0" width="350" cellspacing="0" cellpadding="0">
+                          <tbody><tr>
+                            <td align="left" valign="top" height="19" colspan="3">
+                          </td></tr>
+                          <tr>
+                            <td align="left" valign="top" height="32" colspan="3"><h2 style="margin: 0px; padding: 0px; font-size: 18px; color: white; font-family: Verdana,Arial,Helvetica,sans-serif;">
+							
+							Masthi Deals &nbsp;&nbsp;&nbsp#  <%=@order.number%></h2>
+
+							</td>
+                          </tr>
+                          <tr>
+                            <td align="left" width="48%" valign="top" height="20">Recipient</td>
+							<td align="left" valign="top" height="20">:&nbsp;</td>
+                            <td align="left" width="52%" valign="top"><%= @order.bill_address.name %></td>
+                          </tr>
+                          <tr>
+                            <td align="left" valign="top" height="20">Purchased:</td>
+							<td align="left" valign="top" height="20">:&nbsp;</td>
+                            <td align="left" valign="top" height="19"><%=@order.created_at.to_date%></td>
+                          </tr>
+                          <tr>
+                            <td align="left" valign="top" height="20">Expires On:</td>
+							<td align="left" valign="top" height="20">:&nbsp;</td>
+                            <td align="left" valign="top" height="19"><%=@product.deal_expiry_date.to_date%></td>
+                          </tr>
+                      </tbody></table></td>
+                      <td width="7">
+                    </td></tr>
+                </tbody></table></td>
+                </tr>
+              <tr>
+                <td align="left" width="2" valign="top" height="9"></td>
+                <td align="left" width="7" valign="top"></td>
+                <td align="left" valign="top"></td>
+                </tr>
+              <tr>
+                 
+                <td align="left" valign="top"><h1 style="margin: 0px; padding: 0px; font-size: 14px; font-family: Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 137, 217); font-weight: bold;">Special Instructions</h1>
+
+
+                   <div class="points" style="width:380px;">
+	                   	<ul>
+							<%=@product.catch_message%>
+						</ul>
+					</div>
+				</td>
+                 
+                <td align="left" valign="top"><table border="0" width="100%" height="126" cellspacing="0" cellpadding="0" style="font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold; color: white;">
+
+
+                    <tbody><tr>
+                      <td bgcolor="#1974a3" width="4%" height="126"></td>
+                      <td bgcolor="#1974a3" align="left" width="94%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+                          <tbody><tr>
+                            <td align="left" valign="top" height="19" colspan="2"></td>
+                          </tr>
+                          <tr>
+                            <td align="left" valign="top" height="22" colspan="2">Retailer Details :</td>
+                          </tr>
+						  <%unless @product.vendor.nil?%>
+                          <tr>
+                            <td align="left" valign="top" colspan="2">
+                            	
+									<%=@product.vendor.name%><br>
+								<%unless @product.vendor.address.nil?%>
+	                              	<%= @product.vendor.address %>
+								<%end%>
+							<!--111-A, Currimjee Bldg, Opposite Mumbai University,  Fort, Mumbai - 400023-->
+							  </td>
+                          </tr>
+                          
+                          <tr>
+                            <td align="left" valign="top" colspan="2">Contact : <%= @product.vendor.phone_no %></td>
+                          </tr>
+						  <%end%>
+                          <tr>
+                            <td align="left" valign="top" colspan="2"><a></a></td>
+                          </tr>
+                      </tbody></table></td>
+                      <td bgcolor="#1974a3" width="2%"></td>
+                    </tr>
+                </tbody></table></td>
+                </tr>
+              <tr>
+                <td bgcolor="#ffffff" align="left" valign="top" height="12" colspan="4"></td>
+              </tr>
+            </tbody></table></td>
+            <td bgcolor="#a0d736" align="left" width="10" valign="top"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#a0d736" align="left" valign="top" height="10" colspan="3"></td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table>
+	</td>
+	</tr>
+</table>
