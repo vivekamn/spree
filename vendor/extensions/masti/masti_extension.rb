@@ -39,7 +39,7 @@ class MastiExtension < Spree::Extension
       validates_presence_of :vendor_id
       delegate_belongs_to :master, :count_on_hand
       validates_presence_of :count_on_hand       
-      validate :minimum_less_than_maximum, :deal_expiry
+      validate :minimum_less_than_maximum, :deal_expiry, :bought_count
       before_save :calc_count_on_hand
       def minimum_less_than_maximum       
         if minimum_number and maximum_number and maximum_number>0          
@@ -54,6 +54,11 @@ class MastiExtension < Spree::Extension
         end        
         if validity_from and validity_to and validity_from >= validity_to
           errors.add(:validity_from, "should be before validity_to date")
+        end
+      end
+      def bought_count
+        if currently_bought_count > maximum_number
+          errors.add(:currently_bought_count, "should be less than maximum number")
         end
       end
       def calc_count_on_hand
