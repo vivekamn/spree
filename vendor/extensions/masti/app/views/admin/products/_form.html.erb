@@ -70,7 +70,11 @@
 		<p>
           <%= f.label :increased_count, t("inc_count")%><br />
           <%= f.text_field :increased_count, :size => 4 %>
-        </p>		
+        </p>	
+		<p>
+          <%= f.label :maximum_number, t("maximum_number")%><br />
+          <%= @product.maximum_number%>
+        </p>	
 		<%end%>
         <!--ul id="shipping-specs">
           <li>

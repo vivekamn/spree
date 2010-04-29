@@ -1,4 +1,13 @@
-<h1><%= t(:change_my_password) %></h1>
+<style>
+	.green{
+		font-size: 28px;
+	}
+	.blue{
+		font-size: 28px;
+	}
+</style>
+<div class='shoppingout1' style="padding:10px 20px 10px 20px;">
+<span class='green'>Change My</span><span class='blue'> Password</span><br /><br />
  
 <% form_for @user, :url => password_reset_path, :method => :put do |f| %>
   <%= f.error_messages %>
@@ -10,3 +19,4 @@
   <br />
   <%= f.submit t("update_password") %>
 <% end %>
+</div>
