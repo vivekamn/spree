@@ -1,8 +1,8 @@
-<!--
+
 <table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;border:0px;">
 	<tr>
-		<td>
-			<h1>Voucher for <%=@product.permalink%></h1>
+		<td width="750px">
+			<!--<h1>Voucher for <%=@product.permalink%></h1>-->
 		</td>
 		<td>
 			<a href="javascript:back();">Back to My Account</a>
@@ -10,14 +10,14 @@
 	</tr>
 	<tr >
 		<td>
-			<img src="/images/bg1.gif" />
+			<!--<img src="/images/bg1.gif" />-->
 			<%# image_tag "bg1.gif",:border=>"0px", :alt => 'Peek-A-Boo Patterns',:width=>"250px"%>
 		</td>
 		<td>
 			
 		</td>
 	</tr>
-</table>-->
+</table>
 <table class="curve" style="margin-bottom:10px;margin-left: 30px;align:center;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
 
        <tr>
@@ -88,12 +88,12 @@
                           <tr>
                             <td align="left" valign="top" height="20">Purchased:</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" valign="top" height="19"><%=@order.created_at.to_date%></td>
+                            <td align="left" valign="top" height="19"><%=@order.created_at.strftime '%m/%d/%Y'%></td>
                           </tr>
                           <tr>
                             <td align="left" valign="top" height="20">Expires On:</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" valign="top" height="19"><%=@product.deal_expiry_date.to_date%></td>
+                            <td align="left" valign="top" height="19"><%=@product.deal_expiry_date.strftime '%m/%d/%Y'%></td>
                           </tr>
                       </tbody></table></td>
                       <td width="7">
