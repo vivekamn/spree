@@ -23,7 +23,7 @@
     </tbody>
     <tr>
       <td><strong><%= t('order_total') %>:</strong></td>
-      <td><strong><span id='summary-order-total'>Rs. <%= @order.total %></span></strong></td>
+      <td><strong><span id='summary-order-total'>Rs. <%= @order.total.to_i %></span></strong></td>
     </tr>
   </tbody>
 </table>
