@@ -48,17 +48,20 @@
 	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
 	<div align="right" style="padding-right: 0px; margin-right: -26px;"><%= image_submit_tag "proceed.gif"%>  </div>
 </form>
-<%else%>
-	<%= render :partial => 'failure', :locals => {:order => @order} -%>
-	<%end%>
-  <br/>
- </div>
- <div style="float:right;">
+</div>
+<div style="float:right;">
 	<div style="padding-top: 100px;padding-right:100px;">
 		<img src="/images/ebs.gif" />
 	</div>
 	
 </div>
+<%else%>
+<div class='tiles'>
+	<%= render :partial => 'failure', :locals => {:order => @order} -%>
+	</div>
+	<%end%>
+  <br/>
+ 
  
  <script type="text/javascript">
  	function checkState(){
