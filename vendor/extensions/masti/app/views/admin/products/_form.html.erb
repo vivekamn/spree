@@ -65,8 +65,12 @@
 	  <% f.field_container :price do %>
         <p>
           <%= f.label :on_hand, t("on_hand")%><br />
-          <%= f.text_field :count_on_hand, :size => 4 %>
+          <%= @product.count_on_hand%>
         </p>
+		<p>
+          <%= f.label :increased_count, t("inc_count")%><br />
+          <%= f.text_field :increased_count, :size => 4 %>
+        </p>		
 		<%end%>
         <!--ul id="shipping-specs">
           <li>
