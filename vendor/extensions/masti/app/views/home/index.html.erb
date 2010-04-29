@@ -41,12 +41,14 @@ img{
 	</div>
 </div>
 
-	<%if @deal and deal_live @deal, @featured_product%>
+	<%if @deal and deal_live @deal, @featured_product%>	
 	<div class="bought1">
 	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>	
+	</div>	
+	<%else%>
+	<div class='sold_out'>	
+	<span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>
 	</div>
-	<%else%><div style="margin-top: -80px;margin-left:80px">
-	<%= image_tag "soldout3.png",:height=>"150px",:width=>"180px"%></div>
 	<%end%>	
 
 </div>
@@ -74,7 +76,7 @@ img{
 <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Spread this great deal among your  friends and earn their gratitude!</u></a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Tell you friends about this Masthi Deal!</u></a>
 <script type="text/javascript">
 	var shared_object = SHARETHIS.addEntry({
 	content:'this is the content of the share this',
