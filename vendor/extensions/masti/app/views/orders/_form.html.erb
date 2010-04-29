@@ -42,7 +42,7 @@ margin-right:6px;
       <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
     <% end %>
 <tr align="center">	                
-         <td colspan=5 align="right"> <div id='buy' align="right"><%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :class => 'button checkout primary' %></div></td>
+         <td colspan=5 align="right"> <div id='buy' align="right"><%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %></div></td>
        </tr>
     <% if @order.line_items.empty? -%>
       <tr id="none">
