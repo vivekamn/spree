@@ -6,24 +6,32 @@
       <td height="51" colspan="3"><img src="/images/newcustomer.gif" width="233" height="35" /></td>
       </tr>
     <tr>
-      <td width="30%" height="35">Email</td>
+      <td width="30%" height="35">Email <font color="red">
+                            *
+                          </font></td>
 	  <td width="4%" height="35"> :</td>
       <td width="66%"><%= f.text_field :email, :class=>"textbox" %>
         </td>
     </tr>
     <tr>
-      <td width="30%" height="35">Password</td>
+      <td width="30%" height="35">Password <font color="red">
+                            *
+                          </font></td>
 	  <td width="4%" height="35"> :</td>
       <td width="66%"><div id="password-credentials" style="<%=password_style(@user)%>"><%= f.password_field :password, :class=>"textbox"  %><div>
         </td>
     </tr>
     <tr>
-      <td width="30%" height="35">Confirm</td>
+      <td width="30%" height="35">Confirm <font color="red">
+                            *
+                          </font></td>
 	  <td width="4%" height="35"> :</td>
       <td width="66%"><div id="password-credentials" style="<%=password_style(@user)%>"> <%= f.password_field :password_confirmation,:class=>"textbox"%>
     </tr>
 	<tr>
-      <td width="30%" height="35">Moblie</td>
+      <td width="30%" height="35">Moblie <font color="red">
+                            *
+                          </font></td>
 	  <td width="4%" height="35"> :+91</td>
       <td width="66%"><%= f.text_field :phone_no, :class=>"textbox" %>
         </td>

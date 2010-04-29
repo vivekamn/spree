@@ -77,7 +77,7 @@ img{
 <a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Spread this great deal among your  friends and earn their gratitude!</u></a>
 <script type="text/javascript">
 	var shared_object = SHARETHIS.addEntry({
-	content:'this is the conten of the share this',
+	content:'this is the content of the share this',
 	title:  document.title,
 	summary: '<%= @featured_product.name %>',
 	icon:'http://www.masthideals.com/images/logo.gif',
@@ -245,14 +245,14 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   	e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
   	minsLeft = Math.floor(e_minsLeft);
   	scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
-  	document.getElementById("countdown_time").innerHTML = "Days:   " + daysLeft + " Hours:  " + hrsLeft + "<br/> Mins:   " + minsLeft + " Secs:   " + scesLeft;
+  	document.getElementById("countdown_time").innerHTML = "Day(s)  &nbsp;:   " + daysLeft + "<br/>Hour(s):  " + hrsLeft + "<br/>Min(s)  &nbsp;:   " + minsLeft + "<br/>Sec(s)  &nbsp;:   " + scesLeft;
   	setTimeout('updateTime()', 1000);
   }
  else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
 		window.location.reload();
 	} 
   else{
-  	document.getElementById("countdown_time").innerHTML = "Days: 0  "  + " Hours: 0 " + "<br/> Mins:  0 " + " Secs:  0 ";
+  	document.getElementById("countdown_time").innerHTML = "Day(s): 0  "  + " Hour(s): 0 " + "<br/> Min(s):  0 " + " Sec(s):  0 ";
   }
 }
 </script>
