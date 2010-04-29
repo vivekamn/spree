@@ -501,6 +501,7 @@ en-US:
   not: not
   note: Note
   on_hand: "On Hand (Maximum Number)"
+  inc_count: "Increase count on hand by"
   operation: Operation
   option_Values: "Option Values"
   option_types: "Option Types"

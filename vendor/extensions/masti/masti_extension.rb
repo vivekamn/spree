@@ -28,7 +28,8 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount
+       attr_accessible :vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+       attr_accessor :increased_count, :decreased_count
       validates_presence_of :discount
       validates_presence_of :available_on
       validates_presence_of :minimum_number
@@ -39,10 +40,11 @@ class MastiExtension < Spree::Extension
       delegate_belongs_to :master, :count_on_hand
       validates_presence_of :count_on_hand       
       validate :minimum_less_than_maximum, :deal_expiry
+      before_save :calc_count_on_hand
       def minimum_less_than_maximum       
-        if minimum_number and count_on_hand and count_on_hand>0          
-          if count_on_hand<minimum_number           
-            errors.add(:count_on_hand, "Minimum number should be less than Maximum number")
+        if minimum_number and maximum_number and maximum_number>0          
+          if maximum_number < minimum_number           
+            errors.add(:maximum_number, "Minimum number should be less than Maximum number")
           end
         end
       end
@@ -52,6 +54,17 @@ class MastiExtension < Spree::Extension
         end        
         if validity_from and validity_to and validity_from >= validity_to
           errors.add(:validity_from, "should be before validity_to date")
+        end
+      end
+      def calc_count_on_hand
+        if increased_count        
+        #increased_count = 0 if increased_count.nil?
+        #decreased_count||=0        
+        #adjustment = increased_count.to_i
+        self.count_on_hand = self.count_on_hand.to_i + increased_count.to_i
+        self.maximum_number = self.maximum_number.to_i + increased_count.to_i       
+      else        
+        self.count_on_hand = maximum_number.to_i
         end
       end
     end    
