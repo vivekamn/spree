@@ -48,7 +48,8 @@
 				<%else%>
 				<p>
 					<h3>
-						We are sorry, your order was cancelled as your payment process was not completed properly. Please try again placing an order.
+						We are sorry, your order was cancelled as your payment process was not completed properly. Please try again placing an order. 
+						<%if featured_product.id == @order.line_items[0].variant.product.id%><%=link_to "Click Here", featured_product%> to try placing an order again <%end%>
 					</h3>
 				</p>
 				<%end%>					

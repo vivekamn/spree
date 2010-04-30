@@ -41,5 +41,10 @@ module HomeHelper
     city=City.find_by_state_id(1061493609)
     cities<<[city.name, city.name]
   end
+  
+  def featured_product
+    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+    Product.find(:first, :conditions => ['id = ?',deal.product_id])
+  end
 
 end
