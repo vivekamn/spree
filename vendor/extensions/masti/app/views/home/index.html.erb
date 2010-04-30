@@ -76,13 +76,12 @@ img{
 <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Tell you friends about this Masthi Deal!</u></a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Tell your friends about this Masthi Deal!</u></a>
 <script type="text/javascript">
 	var shared_object = SHARETHIS.addEntry({
-	content:'this is the content of the share this',
 	title:  document.title,
 	summary: '<%= @featured_product.name %>',
-	icon:'http://www.masthideals.com/images/logo.gif',
+	icon:'http://www.masthideals.com<%= @featured_product.images.first.attachment.url(:large) %>',
 	url: document.location.href
 },{embeds:true});
 
@@ -138,7 +137,9 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 &nbsp;Warranty: 1 Year (manufacturer)
 -->
 <div width="350px" style="width: 380px;" id="prod_name">
-<%= @featured_product.name %>
+<% unless @featured_product.deal_info.nil?%>
+<%= @featured_product.deal_info %>
+<%end%>
 </div>
 <!--
 Nobody knows how to take care of the feet like the Japanese. Have you SEEN those delicate, Beautifully-groomed feet on which Japanese women move west. And now that fabulous treatment,known toonly a few-there are these rare aromatic oils,you see-is coming your way from Areopagus, the best Japanese spa inthe city.With a price-tag of Rs 300 for what costs Rs 600, you won't even have to,well,foot a step bill.

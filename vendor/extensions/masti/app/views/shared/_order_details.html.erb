@@ -13,7 +13,7 @@
       <tr>
         <%- locals = {:item => item} -%>
         <% hook :order_details_line_item_row, locals do %>
-          <td width="300"><%=item.variant.product.permalink-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
+          <td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
           <td class="price"><center>Rs.<%=  item.price.to_i -%></center></td>
           <td class="qty"><center><%=item.quantity-%></center></td>
           <td class="total"><span> Rs. <%=(item.price * item.quantity).to_i-%></span></td>
