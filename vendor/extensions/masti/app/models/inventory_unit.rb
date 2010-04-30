@@ -89,7 +89,7 @@ def self.deal_status_update(order)
       logger.info "deal already on and trying to send confirmation mail"
        # we are sending vouchers after the deal is on
        OrderMailer.deliver_voucher(order,product,order.user.email)
-       OrderMailer.deliver_confirm(order)      
+       #OrderMailer.deliver_confirm(order)      
     elsif product.currently_bought_count<product.minimum_number
       logger.info "deal not on and trying to send placement mail"
       OrderMailer.deliver_placed(order)
@@ -102,7 +102,7 @@ def self.deal_status_update(order)
             OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
         end
       end
-      OrderMailer.deliver_confirm(order)
+     # OrderMailer.deliver_confirm(order)
      end    
 
 end

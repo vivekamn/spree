@@ -1,18 +1,18 @@
-Dear <%=@order.email%>,<br/>
+Dear <%=@order.email%>,<br/><br/>
 		 
 	Thanks for your order at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". Subject to the deal going “live”, we will send you your printable voucher on the day the deal ends to your registered email address with
-	<br/>
+	<br/><br/>
 <%=@url%><br/>
 <br/>
-Your voucher quantity : <%=@order.line_items[0].quantity%><br/>
+Your voucher quantity : <%=@order.line_items[0].quantity%><br/><br/>
 <br/>
-Order Number : <%=@order.number%>    <br/>
+Order Number : <%=@order.number%>    <br/><br/>
 
-============================================================<br/>
+============================================================<br/><br/>
 
-If you have any questions, please feel free to reach out to us at support@masthideals.com or call us at (044-4330 0051) Monday to Friday, 10am to 9pm and Saturday, 10am to 6pm.
-<br/>
+If you have any questions, please feel free to reach out to us at <a href="mailTo:customerservice@masthideals.com">customerservice@masthideals.com</a>, chat with us or talk to us at 044-433 000 51 10AM to 6PM on all days.
+<br/><br/>
 
-With Regards,<br/>
+With Regards,<br/><br/>
 
 Customer Support Team

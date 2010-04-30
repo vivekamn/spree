@@ -11,18 +11,28 @@ class Address < ActiveRecord::Base
   validates_presence_of :city
   #validates_presence_of :state, :if => Proc.new { |address| address.state_name.blank? && Spree::Config[:address_requires_state] }
   #validates_presence_of :state_name, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
-  validates_presence_of :zipcode
+  #validates_presence_of :zipcode
   validates_presence_of :country
   validates_presence_of :phone
   #validate :state_name_validate, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
-
+  validate :phone_validate
+  validate :zipcode_validate
   # disconnected since there's no code to display error messages yet OR matching client-side validation
   def phone_validate
     return if phone.blank?
     n_digits = phone.scan(/[0-9]/).size
     valid_chars = (phone =~ /^[-+()\/\s\d]+$/)
-    if !(n_digits > 5 && valid_chars)
+    if !(n_digits > 8 && n_digits < 12 && valid_chars)
       errors.add(:phone, :invalid)
+    end
+  end
+  
+  def zipcode_validate
+    return if zipcode.blank?
+    n_digits = zipcode.scan(/[0-9]/).size
+    valid_chars = (zipcode =~ /^[-+()\/\s\d]+$/)
+    if !(n_digits > 5 && valid_chars)
+      errors.add(:zipcode, :invalid)
     end
   end
 

@@ -110,6 +110,7 @@ en-US:
         name: Name
       user:
         email: Email
+        phone_no: Mobile
       variant:
         cost_price: "Cost Price"
         depth: Depth
