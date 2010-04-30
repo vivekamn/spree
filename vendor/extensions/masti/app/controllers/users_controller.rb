@@ -38,7 +38,7 @@ class UsersController < Spree::BaseController
   def update
     #load_object
    @user = current_user if current_user     
-#    begin  
+    begin  
       unless @user.bill_address.empty? or  @user.bill_address.nil?
         bill_address=@user.bill_address
        if  @user.update_attributes(params[:user]) and bill_address.update_attributes!(params[:user][:bill_address_attributes])  
@@ -60,7 +60,6 @@ class UsersController < Spree::BaseController
         bill_address.state_id = params[:user][:bill_address_attributes][:state_id]
         bill_address.save!
         @user.bill_address = bill_address
-        puts "#{@user.bill_address.name}============="
         if  @user.update_attributes(params[:user]) and @user.bill_address.update_attributes!(params[:user][:bill_address_attributes])    
           flash[:success] = t("account_updated")
           flash[:error] = nil
@@ -72,12 +71,12 @@ class UsersController < Spree::BaseController
       end
       
       
-#    rescue Exception=>e      
-#      logger.info "unable to update user................"+e.message      
-#      flash[:error] = e.message 
-#      flash[:success] = nil
-#      render :action => :edit
-#    end
+    rescue Exception=>e      
+      logger.info "unable to update user................"+e.message      
+      flash[:error] = e.message 
+      flash[:success] = nil
+      render :action => :edit
+    end
   end
   
 #  def edit

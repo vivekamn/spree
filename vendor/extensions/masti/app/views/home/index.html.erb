@@ -17,7 +17,11 @@ img{
 
 <div class="bannerouter">
 	<div class="banerleft" align="center"><%if @featured_product.images and @featured_product.images.first %>
-			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %><%end%>
+				<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %>
+			<%else%>
+				<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
+			<%end%>
+			
 	</div>
 	
 	<div class="banerrightout">
@@ -81,7 +85,9 @@ img{
 	var shared_object = SHARETHIS.addEntry({
 	title:  document.title,
 	summary: '<%= @featured_product.name %>',
+	'<%if @featured_product.images and @featured_product.images.first %>'
 	icon:'http://www.masthideals.com<%= @featured_product.images.first.attachment.url(:large) %>',
+	'<%end%>'
 	url: document.location.href
 },{embeds:true});
 
