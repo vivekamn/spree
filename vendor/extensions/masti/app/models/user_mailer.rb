@@ -4,9 +4,18 @@ class UserMailer < ActionMailer::Base
   def password_reset_instructions(user)
     subject       Spree::Config[:site_name] + ' ' + I18n.t("password_reset_instructions")
     from          Spree::Config[:mails_from]
-    bcc    user.email
+    bcc           user.email
     sent_on       Time.now
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
+  end
+  
+  def registration(user,product)
+    content_type "text/html"
+    from           "customersupport@masthideals.com"
+     bcc             user.email
+     subject        "Welcome to MasthiDeals community" 
+     sent_on        Time.now.utc
+     body           'product' => product
   end
   
   def users_deal_notify(recipients,product)

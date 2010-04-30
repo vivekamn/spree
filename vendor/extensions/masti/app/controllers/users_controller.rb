@@ -15,8 +15,11 @@ class UsersController < Spree::BaseController
 	  @user.save do |result|
 	    if result       
 	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
-	      @user.roles << Role.find_by_name("admin") unless admin_created?
-	      respond_to do |format|
+	       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+         product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
+        UserMailer.deliver_registration(@user,product)
+        @user.roles << Role.find_by_name("admin") unless admin_created?
+        respond_to do |format|
 	        format.html { redirect_back_or_default home_url }
 	        format.js { render :js => true.to_json }
 	      end
@@ -34,25 +37,47 @@ class UsersController < Spree::BaseController
 
   def update
     #load_object
-    @user = current_user if current_user     
-    begin  
-      bill_address=@user.bill_address
-      if  @user.update_attributes(params[:user]) and bill_address.update_attributes!(params[:user][:bill_address_attributes])     
-      flash[:success] = t("account_updated")
-      flash[:error] = nil
-      render :action => :edit  
-    else
-      #flash[:error] = bill_address.errors.to_s
-      render :action => :edit  
+   @user = current_user if current_user     
+#    begin  
+      unless @user.bill_address.empty? or  @user.bill_address.nil?
+        bill_address=@user.bill_address
+       if  @user.update_attributes(params[:user]) and bill_address.update_attributes!(params[:user][:bill_address_attributes])  
+          flash[:success] = t("account_updated")
+          flash[:error] = nil
+          render :action => :edit  
+        else
+          #flash[:error] = bill_address.errors.to_s
+          render :action => :edit  
+        end
+      else
+        bill_address=Address.new
+        bill_address.name = params[:user][:bill_address_attributes][:name]
+        bill_address.address1 = params[:user][:bill_address_attributes][:address1]
+        bill_address.city = params[:user][:bill_address_attributes][:city]
+        bill_address.zipcode = params[:user][:bill_address_attributes][:zipcode]
+        bill_address.country_id = params[:user][:bill_address_attributes][:country_id]
+        bill_address.phone = params[:user][:bill_address_attributes][:phone]
+        bill_address.state_id = params[:user][:bill_address_attributes][:state_id]
+        bill_address.save!
+        @user.bill_address = bill_address
+        puts "#{@user.bill_address.name}============="
+        if  @user.update_attributes(params[:user]) and @user.bill_address.update_attributes!(params[:user][:bill_address_attributes])    
+          flash[:success] = t("account_updated")
+          flash[:error] = nil
+          render :action => :edit  
+        else
+          #flash[:error] = bill_address.errors.to_s
+          render :action => :edit  
+        end
       end
       
       
-    rescue Exception=>e      
-      logger.info "unable to update user................"+e.message      
-      flash[:error] = e.message 
-      flash[:success] = nil
-      render :action => :edit
-    end
+#    rescue Exception=>e      
+#      logger.info "unable to update user................"+e.message      
+#      flash[:error] = e.message 
+#      flash[:success] = nil
+#      render :action => :edit
+#    end
   end
   
 #  def edit
