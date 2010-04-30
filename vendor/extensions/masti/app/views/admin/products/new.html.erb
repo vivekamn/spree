@@ -10,7 +10,18 @@
     <%= f.text_field :name, :class => 'fullwidth title'  %>
     <%= f.error_message_on :name %>
   <% end %>
-
+  
+   <% f.field_container :deal_info do %>
+        <%= f.label :deal_info, "Deal Info" %> <span class="required">*</span><br />
+        <%= f.text_field :deal_info, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :deal_info %>
+      <% end %>
+	  <% f.field_container :voucher_text do %>
+        <%= f.label :voucher_text, "Voucher Text" %> <span class="required">*</span><br />
+        <%= f.text_field :voucher_text, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :voucher_text %>
+      <% end %>	
+	
   <div class="yui-gb">
     <div class="yui-u first">
       <% unless @product.has_variants? %>
