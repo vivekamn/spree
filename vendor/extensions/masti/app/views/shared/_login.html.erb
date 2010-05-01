@@ -19,18 +19,24 @@
       <td width="66%"><%= password_field :user_session, 'password', :class=>"textbox"  %>
         </td>
     </tr>
-	<tr>
+	<!--<tr>
 		<td height="61" colspan="3">
 			<label>
 		      <%= check_box :user_session, :remember_me %>
 		      <%= label :user_session, :remember_me, t('remember_me') %>
 		   </label>
 		</td>
-	</tr>	
+	</tr>-->	
     <tr>
       <td height="61" colspan="3" align="right" style="padding-right:42px"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
         </td>
-      </tr>
+		</tr>
+		<tr>
+			<td height="61" colspan="3" align="right" style="padding-right:42px">
+				<%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %>
+			</td>
+		</tr>
+		
 	  
 <% end %>
     <tr>
