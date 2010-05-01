@@ -22,7 +22,7 @@ class Address < ActiveRecord::Base
     return if phone.blank?
     n_digits = phone.scan(/[0-9]/).size
     valid_chars = (phone =~ /^[-+()\/\s\d]+$/)
-    if !(n_digits > 8 && n_digits < 12 && valid_chars)
+    if !(n_digits > 7 && n_digits < 12 && valid_chars)
       errors.add(:phone, :invalid)
     end
   end
