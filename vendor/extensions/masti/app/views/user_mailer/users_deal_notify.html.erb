@@ -1,12 +1,14 @@
-Dear Subscriber,
+Hi,<br/><br/>
 
-We are very happy to introduce you about our new deal '<%= @product.name %>' 
+<%=@product.name%>.  Hurry up before it is gone.<br/><br/>
 
-For further inform link into the following:
+Login to <%=@url%> for further details.<br/><br/>
 
-<%= @url%>
+Forward this deal to your friends and earn their gratitude.<br/><br/>
 
-Make use of this as soon as possible.
+Regards,<br/><br/>
+Shanthi<br/><br/>
+MasthiDeals Team
 
-
-The MasthiDeal Team
+<br/><br/>
+<img width="540" src="http://www.masthideals.com<%= @product.images.first.attachment.url(:large) %>">
