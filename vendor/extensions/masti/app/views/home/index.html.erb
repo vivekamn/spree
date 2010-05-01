@@ -81,13 +81,14 @@ img{
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
 <a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Tell your friends about this Masthi Deal!</u></a>
+<input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
 <script type="text/javascript">
+		
+	var image_url = document.getElementById('image_url').value
 	var shared_object = SHARETHIS.addEntry({
 	title:  document.title,
-	summary: '<%= @featured_product.name %>',
-	'<%if @featured_product.images and @featured_product.images.first %>'
-	icon:'http://www.masthideals.com<%= @featured_product.images.first.attachment.url(:large) %>',
-	'<%end%>'
+	summary: 'www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/>br/>You might  like it.',
+	icon:'http://www.masthideals.com'+image_url,
 	url: document.location.href
 },{embeds:true});
 
@@ -254,14 +255,14 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   	e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
   	minsLeft = Math.floor(e_minsLeft);
   	scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
-  	document.getElementById("countdown_time").innerHTML = "Day(s)  &nbsp;:   " + daysLeft + "<br/>Hour(s):  " + hrsLeft + "<br/>Min(s)  &nbsp;:   " + minsLeft + "<br/>Sec(s)  &nbsp;:   " + scesLeft;
+  	document.getElementById("countdown_time").innerHTML = "Days&nbsp;:   " + daysLeft + " Hours:  " + hrsLeft + "<br/>Mins&nbsp;:   " + minsLeft + " Secs&nbsp;:   " + scesLeft;
   	setTimeout('updateTime()', 1000);
   }
  else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
 		window.location.reload();
 	} 
   else{
-  	document.getElementById("countdown_time").innerHTML = "Day(s): 0  "  + " Hour(s): 0 " + "<br/> Min(s):  0 " + " Sec(s):  0 ";
+  	document.getElementById("countdown_time").innerHTML = "Days: 0  "  + " Hours: 0 " + "<br/> Mins:  0 " + " Secs:  0 ";
   }
 }
 </script>

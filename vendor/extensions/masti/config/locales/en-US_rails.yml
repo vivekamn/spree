@@ -170,7 +170,7 @@ en-US:
         # Append your own errors here or at the model/attributes scope.
 
       full_messages:
-        format: "{{attribute}} is invalid "
+        format: "<br/>{{attribute}} is invalid"
 
       # You can define own errors for models or model attributes.
       # The values :model, :attribute and :value are always available for interpolation.

@@ -79,7 +79,7 @@ a{ outline:none;
 }
 .rightsidecontent{ width:409px; float:left;
 }
-.rightsidetime{ width:152px; float:left; padding-left:257px; font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#414141; font-weight:bold; padding-bottom:0px;
+.rightsidetime{ width:185px; float:left; padding-left:257px; font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#414141; font-weight:bold; padding-bottom:0px;
 }
 .time{ font-family:Verdana, Geneva, sans-serif; font-size:21px; color:#008edb; font-weight:normal;
 }
