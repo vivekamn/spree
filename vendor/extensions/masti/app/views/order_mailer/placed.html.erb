@@ -1,8 +1,8 @@
-Dear <%=@order.email%>,<br/><br/>
+Dear <%=@user.bill_address.name%>,<br/><br/>
 		 
-	Thanks for your order at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". Subject to the deal going “live”, we will send you your printable voucher on the day the deal ends to your registered email address with
+	Thanks for buying at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". We will send you your printable voucher, once the deal goes live.
 	<br/><br/>
-<%=@url%><br/>
+Please save the following order details for further reference. <%=@url%><br/>
 <br/>
 Your voucher quantity : <%=@order.line_items[0].quantity%><br/><br/>
 <br/>
@@ -10,9 +10,10 @@ Order Number : <%=@order.number%>    <br/><br/>
 
 ============================================================<br/><br/>
 
-If you have any questions, please feel free to reach out to us at <a href="mailTo:customerservice@masthideals.com">customerservice@masthideals.com</a>, chat with us or talk to us at 044-433 000 51 10AM to 6PM on all days.
+If you have any questions, please feel free to reach out to us at <a href="mailTo:customerservice@masthideals.com">customerservice@masthideals.com</a> or chat with us or talk to us at 044-433 000 51 10AM to 6PM Mon to Sat.
 <br/><br/>
 
 With Regards,<br/><br/>
 
-Customer Support Team
+Lakshmi.<br/><br/>
+<img width="305" height="71" src="http://www.masthideals.com/images/logo.gif">

@@ -58,7 +58,7 @@
               <tr>
                   <td align="left" width="100%" valign="top" rowspan="2" style="padding-right: 10px;"><h1 style="margin: 0px; padding: 0px; font-size: 16px; font-family: Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 137, 217); font-weight: bold;">
 
-					<% unless @featured_product.voucher_text.nil?%>
+					<% unless @product.voucher_text.nil?%>
 						<%=@product.voucher_text%></h1>
 					<%end%>
                     <div class="points" style="width:380px;background:transparent url(../images/logo.gif) no-repeat scroll center center;">
@@ -86,6 +86,11 @@
                             <td align="left" width="48%" valign="top" height="20">Recipient</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
                             <td align="left" width="52%" valign="top"><%= @order.bill_address.name %></td>
+                          </tr>
+						   <tr>
+                            <td align="left" width="48%" valign="top" height="20">Quantity</td>
+							<td align="left" valign="top" height="20">:&nbsp;</td>
+                            <td align="left" width="52%" valign="top"><%= @order.line_items[0].quantity %></td>
                           </tr>
                           <tr>
                             <td align="left" valign="top" height="20">Purchased:</td>

@@ -92,7 +92,8 @@ def self.deal_status_update(order)
        #OrderMailer.deliver_confirm(order)      
     elsif product.currently_bought_count<product.minimum_number
       logger.info "deal not on and trying to send placement mail"
-      OrderMailer.deliver_placed(order)
+      user = User.find_by_email(order.email)
+      OrderMailer.deliver_placed(order,user)
     elsif product.currently_bought_count==product.minimum_number or old_count<product.minimum_number 
       logger.info "deal on with this placement and trying to send confirmation mail"
       #sending vouchers for all users before bought
