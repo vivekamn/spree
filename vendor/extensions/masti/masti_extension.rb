@@ -78,8 +78,8 @@ class MastiExtension < Spree::Extension
     
     
      User.class_eval do
-       attr_accessible :bill_address, :bill_address_attributes
-       attr_accessor :bill_address, :bill_address_attributes
+#       attr_accessible :bill_address, :bill_address_attributes
+#       attr_accessor :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address      
       attr_accessible :phone_no
       #validates_presence_of :phone_no

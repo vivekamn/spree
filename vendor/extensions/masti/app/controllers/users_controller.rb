@@ -42,6 +42,7 @@ class UsersController < Spree::BaseController
       unless @user.bill_address.empty? or  @user.bill_address.nil?
         bill_address=@user.bill_address
        if  @user.update_attributes(params[:user]) and bill_address.update_attributes!(params[:user][:bill_address_attributes])  
+         puts "coming here==========="
           flash[:success] = t("account_updated")
           flash[:error] = nil
           render :action => :edit  
@@ -55,12 +56,14 @@ class UsersController < Spree::BaseController
         bill_address.address1 = params[:user][:bill_address_attributes][:address1]
         bill_address.city = params[:user][:bill_address_attributes][:city]
         bill_address.zipcode = params[:user][:bill_address_attributes][:zipcode]
-        bill_address.country_id = params[:user][:bill_address_attributes][:country_id]
+        bill_address.country_id = 41
         bill_address.phone = params[:user][:bill_address_attributes][:phone]
         bill_address.state_id = params[:user][:bill_address_attributes][:state_id]
         bill_address.save!
         @user.bill_address = bill_address
+        puts "#{@user.bill_address.id}------------------"
         if  @user.update_attributes(params[:user]) and @user.bill_address.update_attributes!(params[:user][:bill_address_attributes])    
+          puts "#{@user.bill_address.id}------------------"
           flash[:success] = t("account_updated")
           flash[:error] = nil
           render :action => :edit  
