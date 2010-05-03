@@ -4,11 +4,11 @@
 	<% form_tag user_session_path do  %>
   <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
     <tr>
-      <td height="51" colspan="3"><span style="font-size:35px;color:#6CAB16;font:Times;">Existing </span><span style="font-size:35px;color:#214D76;font:Times;">Customer</span><!--<img src="images/newcustomer.gif" width="233" height="35" />-->
+      <td height="51" colspan="3" style="padding-bottom: 28px;"><span style="font-size:35px;color:#6CAB16;font:Times;">Existing </span><span style="font-size:35px;color:#214D76;font:Times;">Customer</span><!--<img src="images/newcustomer.gif" width="233" height="35" />-->
 	  </td>
       </tr>
     <tr>
-      <td width="30%" height="35" valign="middle">Email</td>
+      <td width="30%" height="35" valign="middle"  style="margin-top:20px;">Email</td>
 	  <td width="4%" height="35"> :</td>
       <td width="66%" valign="middle"><%= text_field :user_session, 'login', :class=>"textbox" %>
         </td>

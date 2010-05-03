@@ -38,8 +38,10 @@ function MM_swapImage() { //v3.0
         <div class="fl username"><%= link_to 'Logout', logout_path %></div>
       </div>
     <% else %>
-      <div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %></div>
-      <% form_tag user_session_path do  %>
+	<div class="submitpart">
+	<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign</span> <span class='blue' style='font-size:16px'>In</span>", new_user_session_path %> or <%= link_to "<span class='green' style='font-size:16px'>Sign</span> <span class='blue' style='font-size:16px'>Up</span>", signup_path %></div>
+      <!--<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %></div>
+      <%# form_tag user_session_path do  %>
         <div class="submitpart"> 
           <div class="fl username">User Name :</div>
           <div class="fl pt6"><%= text_field :user_session, 'login', :class => 'textfield' %></div>
@@ -47,8 +49,10 @@ function MM_swapImage() { //v3.0
           <div class="fl pt6"><%= password_field :user_session, 'password', :class => 'textfield' %></div>
           <div class="fl submit"><%= image_submit_tag 'submit.gif', :width=>"60", :height=>"25" %></div>
         </div>
-      <% end %>
+      <%#end %>-->
+	  </div>
     <% end %>
+	
     <div class="emailpart">
   <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
       <div class="fl"><img src="/images/email.gif" width="239" height="25" /></div>

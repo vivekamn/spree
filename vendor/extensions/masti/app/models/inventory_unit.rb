@@ -98,6 +98,7 @@ def self.deal_status_update(order)
       logger.info "deal on with this placement and trying to send confirmation mail"
       #sending vouchers for all users before bought
       line_items_variant = variant.line_items
+#      OrderMailer.deliver_notify_admin(product)
       line_items_variant.each do |item|
         if item.order.state == "paid"
             OrderMailer.deliver_voucher(item.order,product,item.order.user.email)

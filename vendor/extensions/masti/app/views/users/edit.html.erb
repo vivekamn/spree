@@ -1,3 +1,4 @@
+<div class="flash errors" id="flash_error" style="display:none;" ></div>
 <%= error_messages_for :user %>
 <div class="bannerouter">
 	<br />
@@ -44,12 +45,66 @@
 	
 </div>
 <div align="right" style="padding-right:90px; padding-bottom: 10px;">
-<%=image_submit_tag 'update.gif' %>
+<%= image_submit_tag "update.gif", :alt => 'update_btn', :class  => "cursor_pointer", :id => "submit_btn",:onclick => "return user_validate();",:tabindex => 6 %>
 </div>
 <%end%>
 </div>
 </div>
-
+<script>
+	function user_validate(){
+		alert("hi hello");
+		var flag_em=true;
+		var NAME_REGEX = /^[A-Za-z]+$/;
+		var PHONE_REGEX	= /^[0-9]+$/;
+		var name = document.getElementById('user_bill_address_attributes_name').value;
+		var address = document.getElementById('user_bill_address_attributes_address1').value;
+		var pincode = document.getElementById('user_bill_address_attributes_zipcode').value;
+		var phone = document.getElementById('user_bill_address_attributes_phone').value;
+		var password = document.getElementById('user_password').value;
+		var confirm = document.getElementById('user_password_confirmation').value;
+		var mobile = document.getElementById('user_phone_no').value;
+		var msg = '<ul style="margin-left:20px;">';
+		name_value = NAME_REGEX.test(new String(name)); 	
+		if(name == '' || name == null || name_value == false ){
+			msg += '<br/>Name is invalid';
+			flag_em=false;
+		}
+		 var phone_str = new String(phone);
+		 phone_value = PHONE_REGEX.test(new String(phone));
+		 if(phone_str =='' || phone_str == null || phone_value == false || phone_str.length < 7 || phone_str.length>12){
+			msg += '<br/>Phone number is invalid';
+			flag_em=false;
+		}
+		
+		 var mobile_str = new String(mobile);
+		 mobile_value = PHONE_REGEX.test(new String(mobile));
+		 if(phone_str =='' || mobile_str == null || mobile_value == false || phone_str.length != 10){
+			msg += '<br/>Mobile number is invalid';
+			flag_em=false;
+		}	
+		
+		var pincode_str = new String(pincode);
+		 pincode_value = PHONE_REGEX.test(new String(pincode));
+		 if(pincode_str =='' || pincode_str == null || pincode_value == false || pincode_str.length != 6){
+			msg += '<br/>Pincode is invalid';
+			flag_em=false;
+		}	
+		
+		if(!flag_em){
+			msg += '</ul>'
+			document.getElementById('flash_error').style.display='';
+			document.getElementById('flash_error').innerHTML = msg;
+		}else{
+			document.getElementById('flash_error').style.display=none;
+			error_msg_div.innerHTML = "";
+		}
+		alert(flag_em+"regardingthe glag");
+		return flag_em;
+	}
+</script>
 
 <%= hook :signup_below_password_fields %>
+
+
+
 

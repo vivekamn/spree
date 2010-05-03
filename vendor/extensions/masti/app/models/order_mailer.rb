@@ -56,6 +56,16 @@ class OrderMailer < ActionMailer::QueueMailer
   end 
   
   
+  def notify_admin(product)
+    content_type "text/html"
+    @subject    = 'Masthideals: Minimum Number Reached for #{ product.name }'
+    @body       = {"product" => product}
+    @recipients = 'akvsaran@gmail.com'
+    @from       = Spree::Config[:order_from]
+    @bcc        = order_bcc
+    @sent_on    = Time.now
+  end
+  
   private
   def order_bcc
       bcc = [Spree::Config[:order_bcc] || "", Spree::Config[:mail_bcc] || ""]

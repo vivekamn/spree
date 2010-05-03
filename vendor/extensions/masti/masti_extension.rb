@@ -78,7 +78,8 @@ class MastiExtension < Spree::Extension
     
     
      User.class_eval do
-       #attr_accessible :bill_address, :bill_address_attributes
+       attr_accessible :bill_address, :bill_address_attributes
+       attr_accessor :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address      
       attr_accessible :phone_no
       #validates_presence_of :phone_no
@@ -88,6 +89,7 @@ class MastiExtension < Spree::Extension
 
 Address.class_eval do
   attr_accessible :name, :city, :state_id, :country, :address1, :zipcode, :phone
+#  attr_accessor :name, :address1, :zipcode, :phone
   has_one :user, :foreign_key => "bill_address_id"
       validates_presence_of :name, :message => "is invalid"      
       validates_format_of :name, :with=>/^([A-Za-z .]+$)/, :message => "is invalid"

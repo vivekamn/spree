@@ -14,48 +14,51 @@ img{
 	border:0;
 }
 </style>
-
+<div class="title">
+	<% unless @featured_product.name.nil?%>
+		<%=@featured_product.name%>
+	<%end%>
+</div>
 <div class="bannerouter">
-	<div class="banerleft" align="center"><%if @featured_product.images and @featured_product.images.first %>
-				<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %>
-			<%else%>
-				<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
-			<%end%>
-			
+	<div class="banerleft">
+		<%if @featured_product.images and @featured_product.images.first %>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %>
+		<%else%>
+			<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
+		<%end%>
 	</div>
-	
 	<div class="banerrightout">
-  		<div class="dealbg">Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %></div>
-		<div class="bought" id="bought" style="display:none;">
+		<%if @deal and deal_live @deal, @featured_product%>	
+			<div class="bought2">
+				<%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
+			</div>
+		<%else%>
+			<div class='sold_out'>	
+				<span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>
+			</div>
+		<%end%>
+		<div class="dealbg">
+			Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %>
+		</div>
+		<div class="bought"  id="bought" style="display:none;">
 			<div class="bought1">
-				<!--<img src="images/box.gif" width="309" height="12" /><br/><br/>-->
 				<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
-				<div class="progress_bar">
-  					<div class="progress_barred" id="progress" style="float:left;"></div>
-				</div>	
+			</div>
+			<div class="progress_bar">
+  				<div class="progress_barred" id="progress" style="float:left;"></div>
 			</div>
 			<div class="bought1">
-	<%if @deal and deal_live @deal, @featured_product%>
-	<%if deal_on @featured_product %>
-	Hurray, the deal is already on. Just go ahead to get your masthi savings 
-	<%else%>
-	If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
-	<%end%>	
-	<%end%>
-	</div>
-</div>
+				<%if @deal and deal_live @deal, @featured_product%>
+					<%if deal_on @featured_product %>
+						Hurray, the deal is already on. Just go ahead to get your masthi savings 
+					<%else%>
+						If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
+					<%end%>	
+				<%end%>
+			 </div>
+		</div>
 
-	<%if @deal and deal_live @deal, @featured_product%>	
-	<div class="bought1">
-	<%= link_to "<img src='/images/buydeal.gif' border=0 />", @featured_product %>	
-	</div>	
-	<%else%>
-	<div class='sold_out'>	
-	<span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>
 	</div>
-	<%end%>	
-
-</div>
 </div>
 <div class="sharetis">
 	
@@ -64,19 +67,7 @@ img{
 					<!--<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 					<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://richardxthripp.thripp.com/wp-content/plugins/tweet-this/icons/tt-twitter-micro2.png" class="nothumb" style="margin-bottom: -5px;"></a>
 					<a href="mailto:?subject=Great Deals Exclusive for MasthiDeals members&body=<%=@featured_product.name%>">E-mail</a>
-					<script type="text/javascript" src="http://cdn.widgetserver.com/syndication/subscriber/InsertWidget.js"></script><script>if (WIDGETBOX) WIDGETBOX.renderWidget('50d68c5e-084e-4c92-9362-ff66826aa92a');</script><noscript>Get the <a href="http://www.widgetbox.com/widget/facebook-share">Share on Facebook</a> widget and many other <a href="http://www.widgetbox.com/">great free widgets</a> at <a href="http://www.widgetbox.com">Widgetbox</a>! Not seeing a widget? (<a href="http://docs.widgetbox.com/using-widgets/installing-widgets/why-cant-i-see-my-widget/">More info</a>)</noscript>
-<a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php">Share</a>
-<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script><br/>
-					
-						<script type="text/javascript" src="http://cdn.socialtwist.com/2009042015794/script.js">
-				</script>
-				<a class="st-taf" href="http://tellafriend.socialtwist.com:80" 
-				onclick="return false;" style="border:0;padding:0;margin:0;">
-				<img alt="SocialTwist? Tell-a-Friend" style="border:0;padding:0;margin:0;" 
-				src="http://images.socialtwist.com/2009042015794/button.png"
-				onmouseout="hideHoverMap(this)" 
-				onmouseover="showHoverMap(this, '2009042015794', window.location, document.title)" 
-				onclick="cw(this, {id:'2009042015794', link: window.location, title: document.title });"/></a><br/>Spread this great deal among your  friends and earn their gratitude!-->
+					-->
 <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
@@ -110,11 +101,11 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 -->
 </div>
 <div class="chat">
-	<div style="margin-top:-25px" id="chat_text_div" width="300px">
+	<div id="chat_text_div" width="300px">
 		<table width="300px" align="center">
 				<tbody><tr>
 					<td align="center">
-						<a href="javascript:show_chat();"><img width="100px" height="100px" alt="Chat" src="/images/chat.jpg"/></a>
+						<a href="javascript:show_chat();"><img src="images/icon4.gif" width="39" height="39" /><br /><span class="style9">Live chat</span></a>
 					</td>
 					
 				</tr>
