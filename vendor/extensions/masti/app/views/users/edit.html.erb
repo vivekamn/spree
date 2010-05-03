@@ -51,7 +51,6 @@
 </div>
 <script>
 	function user_validate(){
-		alert("hi hello");
 		var flag_em=true;
 		var NAME_REGEX = /^[A-Za-z]+$/;
 		var PHONE_REGEX	= /^[0-9]+$/;
@@ -74,10 +73,9 @@
 			msg += '<br/>Phone number is invalid';
 			flag_em=false;
 		}
-		
 		 var mobile_str = new String(mobile);
 		 mobile_value = PHONE_REGEX.test(new String(mobile));
-		 if(phone_str =='' || mobile_str == null || mobile_value == false || phone_str.length != 10){
+		 if(mobile_str =='' || mobile_str == null || mobile_value == false || mobile_str.length != 10){
 			msg += '<br/>Mobile number is invalid';
 			flag_em=false;
 		}	
@@ -97,7 +95,6 @@
 			document.getElementById('flash_error').style.display=none;
 			error_msg_div.innerHTML = "";
 		}
-		alert(flag_em+"regardingthe glag");
 		return flag_em;
 	}
 </script>
