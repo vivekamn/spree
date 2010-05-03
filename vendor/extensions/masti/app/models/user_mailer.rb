@@ -19,6 +19,7 @@ class UserMailer < ActionMailer::Base
   end
   
   def users_deal_notify(recipients,product)
+    content_type "text/html"
    from           "customersupport@masthideals.com"
    bcc             recipients
    subject        "New product in Masti Deals - #{product.name}" 
@@ -27,6 +28,7 @@ class UserMailer < ActionMailer::Base
  end
  
   def notify_admin(user, product, msg)
+    content_type "text/html"
     from           "customersupport@masthideal.com"
     recipients     user.email
     if msg == "deal_exp_notify"
@@ -43,6 +45,7 @@ class UserMailer < ActionMailer::Base
  end
  
  def notify_users_deal_cancel(user_emails, product)
+   content_type "text/html"
     bcc user_emails
     from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
@@ -52,6 +55,7 @@ class UserMailer < ActionMailer::Base
  end
  
  def users_notify_deal_on(user_emails, product)
+   content_type "text/html"
     bcc        user_emails
     from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
@@ -61,6 +65,7 @@ class UserMailer < ActionMailer::Base
  end
  
  def users_notify_deal_over(user_emails, product)
+   content_type "text/html"
     bcc        user_emails
     from       "customersupport@masthideals.com"
     sent_on    Time.now.utc
@@ -70,6 +75,7 @@ class UserMailer < ActionMailer::Base
  end
  
  def notify_credit_owed_to_admin(user, order)
+   content_type "text/html"
     from           "customersupport@masthideal.com"
     recipients     user.email
     subject  "MasthiDeal: Credit Owed for a payment"
