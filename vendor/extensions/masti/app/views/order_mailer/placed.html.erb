@@ -1,6 +1,6 @@
 Dear <%=@user.bill_address.name%>,<br/><br/>
 		 
-	Thanks for buying at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". We will send you your printable voucher, once the deal goes live.
+	Thanks for buying at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". We will send you the printable voucher, once the deal goes live.
 	<br/><br/>
 Please save the following order details for further reference. <%=@url%><br/>
 <br/>
