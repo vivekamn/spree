@@ -2,7 +2,7 @@ body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:Verdana, Geneva
 }
 .main{ width:960px; margin:0 auto;
 }
-.outer{ width:938px; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;background-color:white;
+.outer{ width:938px; float:left; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;
 }
 a{ outline:none;
 }
@@ -14,9 +14,22 @@ a{ outline:none;
 }
 .logoright{ width:538px; float:left;
 }
-.join{ padding-left:25px; width:415px; float:left; padding-top:8px;
+.join{
+	width:150px;
+	float:right;
+	padding-top:8px;
+	font-size: 16px;
+	padding-right: 50px;
 }
-.submitpart{ padding-left:33px; width:479px; float:left; padding-top:9px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#646464; padding-bottom:8px;
+.submitpart{
+	padding-left:33px;
+	width:479px;
+	float:right;
+	padding-top:9px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	color:#646464;
+	padding-bottom:8px;
 }
 .textfield{ border:1px solid #e5e5e5; height:16px; width:105px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
 }
@@ -43,17 +56,19 @@ a{ outline:none;
 }
 .bannerouter{ width:938px; float:left;background-color:white;
 }
-.banerleft{ width:570px; float:left;
+.banerleft{ width:581px; float:left; height:344px;
 }
-.banerrightout{ width:368px; float:left;
+.banerrightout{ width:357px; float:left; padding-top:16px;
 }
-.dealbg{ background:url(../images/dealbg.gif) no-repeat; width:261px; height:69px; padding:37px 0 0 107px; text-align:center; color:#507200; font-size:14px; font-weight:bold; 
+.dealbg{ background:url(/images/dealbg.gif) no-repeat; width:257px; height:69px; padding:37px 0 0 100px; text-align:center; color:#ffffff; font-size:13px; font-weight:bold; 
 }
-.bought{ background:url(../images/bought.gif) no-repeat; width:309px; height:97px; padding:20px 28px 0 31px; text-align:center; color:#507200; font-size:16px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#414141;  
+.bought{ background:url(/images/bought.gif) no-repeat; width:299px; height:97px; padding:20px 28px 0 31px; text-align:center; color:#507200; font-size:16px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#414141;  
 }
 .bought1{ width:309px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
 }
-.sold_out{background:url(../images/buydeal.gif) no-repeat;	
+.bought2{ width:357px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
+}
+.sold_out{background:url(/images/buydeal.gif) no-repeat;	
 }
 .sharetis{ width:616px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background-color:white;
 }
@@ -282,4 +297,8 @@ th { font-weight: bold; }
 	 font-size:18px; color:#5c6164;
 	 background:url(../images/sharebg.gif) no-repeat left;
 	 background-color:white;
+}
+.title{ width:918px; float:left; padding-left:20px; font-size:20px; font-weight:bold; color:#00a8ff;
+}
+.icon{ width:918px; float:left; padding-top:19px; padding-left:20px;
 }
