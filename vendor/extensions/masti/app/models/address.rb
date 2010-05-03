@@ -7,16 +7,16 @@ class Address < ActiveRecord::Base
 
   #validates_presence_of :firstname
   #validates_presence_of :lastname
- # validates_presence_of :address1
+  validates_presence_of :address1
  # validates_presence_of :city
   #validates_presence_of :state, :if => Proc.new { |address| address.state_name.blank? && Spree::Config[:address_requires_state] }
   #validates_presence_of :state_name, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
   #validates_presence_of :zipcode
  # validates_presence_of :country
- # validates_presence_of :phone
+#  validates_presence_of :phone
   #validate :state_name_validate, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
- # validate :phone_validate
-  #validate :zipcode_validate
+  validate :phone_validate
+  validate :zipcode_validate
   # disconnected since there's no code to display error messages yet OR matching client-side validation
   def phone_validate
     return if phone.blank?
