@@ -1,4 +1,4 @@
-body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#848484;
+body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#000000;
 }
 .main{ width:960px; margin:0 auto;
 }
@@ -53,6 +53,8 @@ a{ outline:none;
 }
 .bought1{ width:309px; text-align:center; color:#507200; font-size:16px; font-size:11px; color:#414141;  
 }
+.sold_out{background:url(../images/buydeal.gif) no-repeat;	
+}
 .sharetis{ width:616px; float:left; height:80px; font-family:"Times New Roman", Times, serif; font-size:18px; color:#5c6164; background-color:white;
 }
 .sharetext{ float:left; padding-top:18px; text-align:center; text-decoration:underline;
@@ -81,7 +83,7 @@ a{ outline:none;
 }
 .time{ font-family:Verdana, Geneva, sans-serif; font-size:21px; color:#008edb; font-weight:normal;
 }
-.pb10{ padding-bottom:0px;
+.pb10{ padding-bottom:20px;
 }
 .fr{ float:right;
 }
@@ -118,7 +120,9 @@ a{ outline:none;
 }
 .shoppingright{ width:433px; float:left;  background:url(../images/line1.gif) no-repeat; background-position:left center bottom; padding-left:100px; padding-top:20px;
 }
-.textbox{ width:193px; height:24px; background:url(../images/textbg.gif) no-repeat; border:none; padding-left:10px; padding-top:5px; font-size:11px; color:#457700;
+.textbox{ width:193px; height:24px; background:url(../images/textbg.gif) no-repeat; border:none; padding-left:0px; padding-top:5px; font-size:11px; color:#457700;
+}
+.textarea{ width:193px; height:84px; background:url(../images/addressbg.gif) no-repeat; border:none; padding-left:0px; padding-top:5px; font-size:11px; color:#457700;
 }
 .button{ background:url(../images/submit1.gif) no-repeat; width:91px; height:42px; border:none; cursor:pointer;
 }
@@ -143,7 +147,7 @@ a{ outline:none;
 		
 	}
 	h3{
-		color:#848484;
+		color:#000000;
 		font-family:Verdana,Geneva,sans-serif;
 		font-size:11px;
 		line-height:21px;
