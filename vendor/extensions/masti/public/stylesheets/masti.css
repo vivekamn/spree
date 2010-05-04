@@ -14,9 +14,22 @@ a{ outline:none;
 }
 .logoright{ width:538px; float:left;
 }
-.join{ padding-left:25px; width:415px; float:left; padding-top:8px;
+.join{
+	width:150px;
+	float:right;
+	padding-top:8px;
+	font-size: 16px;
+	padding-right: 50px;
 }
-.submitpart{ padding-left:33px; width:479px; float:left; padding-top:9px; font-family:Verdana, Geneva, sans-serif; font-size:11px; color:#646464; padding-bottom:8px;
+.submitpart{
+	padding-left:33px;
+	width:479px;
+	float:right;
+	padding-top:9px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	color:#646464;
+	padding-bottom:8px;
 }
 .textfield{ border:1px solid #e5e5e5; height:16px; width:105px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
 }
