@@ -80,6 +80,16 @@
 			msg += '<br/>Mobile number is invalid';
 			flag_em=false;
 		}	
+		var pass_str = new String(password);
+		var confirm_str =  new String(confirm);
+		if (password == '' || password == null){
+			
+		}else{
+			if(password != confirm || confirm_str.length < 4 || pass_str.length < 4){
+				msg += "<br/>Password invalid";
+				flag_em = false;
+			}	
+		}
 		
 		var pincode_str = new String(pincode);
 		 pincode_value = PHONE_REGEX.test(new String(pincode));
@@ -90,11 +100,15 @@
 		
 		if(!flag_em){
 			msg += '</ul>'
+			document.getElementById('flash_notice').style.display='none';
 			document.getElementById('flash_error').style.display='';
 			document.getElementById('flash_error').innerHTML = msg;
+			
 		}else{
 			document.getElementById('flash_error').style.display=none;
 			error_msg_div.innerHTML = "";
+			
+			
 		}
 		return flag_em;
 	}
