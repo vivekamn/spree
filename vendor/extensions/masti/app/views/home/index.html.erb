@@ -14,7 +14,7 @@ img{
 	border:0;
 }
 </style>
-<div class="title">
+<div class="title" style="margin-left:20px;font-size:20px;font-weight:bold; color:#00a8ff;">
 	<% unless @featured_product.name.nil?%>
 		<%=@featured_product.name%>
 	<%end%>
@@ -22,7 +22,7 @@ img{
 <div class="bannerouter">
 	<div class="banerleft">
 		<%if @featured_product.images and @featured_product.images.first %>
-			<%= image_tag(@featured_product.images.first.attachment.url(:large),:style=>"margin-left: 20px; margin-top: 10px; width: 540px;") %>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
 		<%else%>
 			<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
 		<%end%>
@@ -101,7 +101,7 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 -->
 </div>
 <div class="chat">
-	<div id="chat_text_div" width="300px">
+	<div id="chat_text_div">
 		<table width="300px" align="center">
 				<tbody><tr>
 					<td align="center">
