@@ -83,7 +83,7 @@ a{ outline:none;
 }
 .time{ font-family:Verdana, Geneva, sans-serif; font-size:21px; color:#008edb; font-weight:normal;
 }
-.pb10{ padding-bottom:20px;
+.pb10{ padding-bottom:0px;
 }
 .fr{ float:right;
 }
