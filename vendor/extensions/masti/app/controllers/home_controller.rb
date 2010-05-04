@@ -10,7 +10,18 @@ class HomeController < Spree::BaseController
     @saving = (@price*@discount/100).to_i
     @bought_count = @featured_product.currently_bought_count
   end
-
+  
+  def unique_email
+    count = User.count(:conditions => ['email = ?',params[:email]] )
+    if count > 0
+      puts "its comig here"
+      render(:text => 'false' )
+    else
+       puts "its true"
+      render(:text => 'true')
+    end
+  end
+  
   def payment_response
     @key = '5fa2c2ffb54022d1b4e849668119e7b5'
     @DR = params[:DR]

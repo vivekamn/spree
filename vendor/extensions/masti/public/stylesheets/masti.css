@@ -302,3 +302,12 @@ th { font-weight: bold; }
 }
 .icon{ width:918px; float:left; padding-top:19px; padding-left:20px;
 }
+
+.green_h2{
+		color:#6CAB16;
+		font:Times;
+	}
+	.blue_h2{
+		color:#214D76;
+		font:Times;
+	}
