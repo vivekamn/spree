@@ -71,14 +71,15 @@ img{
 <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
 <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
 <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /><u>Tell your friends about this Masthi Deal!</u></a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /></a>
+<span  style='font-size:16px;font-weight:bold;color:#414141;'>Tell your friends about this Masthi Deal!</span></u>
 <input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
 <script type="text/javascript">
 		
 	var image_url = document.getElementById('image_url').value
 	var shared_object = SHARETHIS.addEntry({
 	title:  document.title,
-	summary: 'www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/>br/>You might  like it.',
+	summary: '<span style="text-decoration:none;font-weight:normal;">www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/><br/>You might  like it.<br/><br/>We publish a new deal every week.<br/><br/>Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.</span>',
 	icon:'http://www.masthideals.com'+image_url,
 	url: document.location.href
 },{embeds:true});

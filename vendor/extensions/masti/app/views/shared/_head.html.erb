@@ -39,7 +39,7 @@ function MM_swapImage() { //v3.0
       </div>
     <% else %>
 	<div class="submitpart">
-	<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign</span> <span class='blue' style='font-size:16px'>In</span>", new_user_session_path %> or <%= link_to "<span class='green' style='font-size:16px'>Sign</span> <span class='blue' style='font-size:16px'>Up</span>", signup_path %></div>
+	<div class="join"><%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path, :style=>"text-decoration:underline;" %> or <%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>Up</span>", signup_path, :style=>"text-decoration:underline;"  %></div>
       <!--<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %></div>
       <%# form_tag user_session_path do  %>
         <div class="submitpart"> 

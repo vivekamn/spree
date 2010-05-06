@@ -16,7 +16,7 @@ class OrderMailer < ActionMailer::QueueMailer
   def placed(order,user, resend = false)
     content_type "text/html"
     @subject    = (resend ? "[RESEND] " : "") 
-    @subject    += 'Thanks for your order at Masthi Deals'
+    @subject    += 'Thanks for buying at Masthi Deals, Order Confirmation:' + order.number 
     @body       = {"order" => order,"user" => user, "url" => default_url_options[:host]}
     @recipients = order.email
     @from       = Spree::Config[:order_from]

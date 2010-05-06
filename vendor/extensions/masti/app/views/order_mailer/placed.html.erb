@@ -1,4 +1,4 @@
-Dear <%=@user.bill_address.name%>,<br/><br/>
+Dear <%=@order.checkout.bill_address.name%>,<br/><br/>
 		 
 	Thanks for buying at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". We will send you the printable voucher, once the deal goes live.
 	<br/><br/>
@@ -16,4 +16,6 @@ If you have any questions, please feel free to reach out to us at <a href="mailT
 With Regards,<br/><br/>
 
 Lakshmi<br/><br/>
-<img width="305" height="71" src="http://www.masthideals.com/images/logo.gif">
+
+<span class='green' style='font-size:35px;font-weight:bold;color:#6CAB16;'>Masthi</span><span class='blue' style='color:#214D76;font-size:35px;font-weight:bold;'>Deals</span>
+

@@ -15,7 +15,7 @@ a{ outline:none;
 .logoright{ width:538px; float:left;
 }
 .join{
-	width:150px;
+	width:162px;
 	float:right;
 	padding-top:8px;
 	font-size: 16px;
@@ -92,7 +92,7 @@ a{ outline:none;
 }
 .rightsidecontent{ width:409px; float:left;
 }
-.rightsidetime{ width:152px; float:left; padding-left:257px; font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#414141; font-weight:bold; padding-bottom:0px;
+.rightsidetime{ width:158px; float:left; padding-left:257px; font-family:Verdana, Geneva, sans-serif; font-size:14px; color:#414141; font-weight:bold; padding-bottom:0px;
 }
 .time{ font-family:Verdana, Geneva, sans-serif; font-size:21px; color:#008edb; font-weight:normal;
 }
@@ -306,3 +306,16 @@ th { font-weight: bold; }
 	}
 .footertop5{ width:235px; float:left; background:#333; padding:10px 0 0 0px; height:42px; color: #a1a1a1; text-align:center; line-height:18px;
 }
+.for_font{
+			color:#000000;
+			font-family:Comic Sans MS,Geneva,sans-serif;
+			font-size:11px;
+			font-weight:normal;
+			line-height:21px;
+	}
+	p{
+		color:#000000;
+		font-size:13px;
+		font-weight:normal;
+		margin:0;
+	}

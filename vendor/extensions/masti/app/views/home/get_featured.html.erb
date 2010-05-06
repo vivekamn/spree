@@ -150,13 +150,6 @@
 	}else{
 		document.getElementById('error_phone').innerHTML = "";
 	}
-	if(text_query == '' || text_query == null){
-		msg += '<br/>Description is invalid';
-		//document.getElementById('error_text').innerHTML = "Please enter proper description";
-		flag_em=false;
-	}else{
-		document.getElementById('error_text').innerHTML = "";
-	}
 	
 	if (email_name != ''){
 		if (email_name.length != 0){
@@ -177,6 +170,14 @@
 		msg += '<br/>E-mail is invalid';
 		//error_msg_div.innerHTML = "Please enter valid E-mail";
 		flag_em=false;
+	}
+	
+	if(text_query == '' || text_query == null){
+		msg += '<br/>Description is invalid';
+		//document.getElementById('error_text').innerHTML = "Please enter proper description";
+		flag_em=false;
+	}else{
+		document.getElementById('error_text').innerHTML = "";
 	}
 	
 	if(!flag_em){
