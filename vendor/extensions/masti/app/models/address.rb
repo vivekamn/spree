@@ -13,7 +13,7 @@ class Address < ActiveRecord::Base
   #validates_presence_of :state_name, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
   #validates_presence_of :zipcode
  # validates_presence_of :country
-#  validates_presence_of :phone
+  validates_presence_of :phone
   #validate :state_name_validate, :if => Proc.new { |address| address.state.blank? && Spree::Config[:address_requires_state] }
   validate :phone_validate
   validate :zipcode_validate
