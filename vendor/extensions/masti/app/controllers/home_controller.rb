@@ -83,7 +83,9 @@ class HomeController < Spree::BaseController
   end 
  
 
-  
+  def sitemap
+    
+  end
   
 #to get the email id from the user and store it in the deal notifications table
 
@@ -152,6 +154,10 @@ class HomeController < Spree::BaseController
   end
   
   def about_us
+    
+  end
+  
+  def recent_deals
     
   end
   
