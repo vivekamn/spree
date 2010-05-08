@@ -27,7 +27,7 @@
 <form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction" onsubmit="return checkState();">
 	<input name="account_id" type="hidden" value="6246" />
         <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
-	<input name="mode" type="hidden" value="LIVE" />
+	<input name="mode" type="hidden" value="TEST" />
 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
 	<input name="amount" type="hidden" value="<%=@order.total%>"/>
 	<input name="description" type="hidden" value="<%=@order.state%>" />
@@ -50,13 +50,22 @@
 </form>
 </div>
 <div style="float:right;">
-	<div style="padding-top: 100px;padding-right:100px;">
-		<img src="/images/ebs.gif" />
+	<div style="padding-top: 100px;padding-right:10px;">
+		<table>
+			<tr>
+				<td>
+					<img src="/images/ebs.gif" />
+				</td>
+				<td valign="center">
+					<img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+				</td>
+			</tr>
+		</table>
 	</div>
 	
 </div>
 <%else%>
-<div class='tiles'>
+	<div class='tiles'>
 	<%= render :partial => 'failure', :locals => {:order => @order} -%>
 	</div>
 	<%end%>

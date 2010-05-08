@@ -8,11 +8,52 @@ module HomeHelper
       end
   end
   
+   def page_title
+     if @featured_product
+        "Masthideals.com Deal of the Day : #{@featured_product.name}"
+    else
+      @page_title
+    end
+  end   
+  
+  def meta(name, content)
+    %(<meta name= "#{name}" content= "#{content} " />) 
+  end
+  
+  def meta_description
+    if @featured_product
+      if @featured_product.meta_description      
+        "#{@featured_product.meta_description}"
+      end 
+    else
+      @description
+    end
+  end
+  
+  def meta_keywords
+    if @featured_product
+      if @featured_product.meta_keywords      
+        "#{@featured_product.meta_keywords}"
+      end 
+    else
+      @keywords
+    end
+  end
+  
+  
   def deal_live deal, product    
     if deal.sold_out==true or  product.deal_expiry_date<=Time.now      
       return false
     else     
       return true
+    end
+  end
+  
+   def admin?
+    if current_user==User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+      return true
+    else
+      return false
     end
   end
   

@@ -28,7 +28,7 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+       attr_accessible :meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
        attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :voucher_text
