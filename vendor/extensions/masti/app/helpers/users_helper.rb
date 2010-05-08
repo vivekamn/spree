@@ -6,14 +6,7 @@ module UsersHelper
     show_openid ? "": "display:none"
   end
   
-   def admin?
-    if current_user==User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
-      return true
-    else
-      return false
-    end
-    
-  end
+  
  
   private 
   def show_openid
