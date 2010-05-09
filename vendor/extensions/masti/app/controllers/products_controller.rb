@@ -7,12 +7,15 @@ class ProductsController < Spree::BaseController
   resource_controller
   helper :taxons
   actions :show, :index
-def show
-  session[:order_id] = nil
-  redirect_to :controller=>'orders', :product=>@product.id
-end
+  
+  def show
+    session[:order_id] = nil
+    redirect_to :controller=>'orders', :product=>@product.id
+  end
+
   include Spree::Search
   layout 'spree_application'
+
   def change_image
     @product = Product.available.find_by_param(params[:id])
     img = Image.find(params[:image_id])

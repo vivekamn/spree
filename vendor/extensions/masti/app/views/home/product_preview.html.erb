@@ -1,0 +1,236 @@
+<%= javascript_include_tag "prototype" %>
+<style>
+.progress_bar {
+    background-color:#000000; 
+	width: 300px;
+    height:10px
+}
+
+.progress_barred {
+        background-color:#E60000; 
+        height:10px
+}
+img{
+	border:0;
+}
+</style>
+<div class="title" style="margin-left:20px;font-size:20px;font-weight:bold; color:#00a8ff;">
+	<% unless @featured_product.name.nil?%>
+		<%=@featured_product.name%>
+	<%end%>
+</div>
+<div class="bannerouter">
+  <div class="banerleft">
+    <%if @featured_product.images and @featured_product.images.first %>
+      <%= image_tag(@featured_product.images.first.attachment.url(:large),:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
+    <%else%>
+      <img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
+    <%end%>
+  </div>
+  <div class="banerrightout">
+      <div class="bought2">
+        <%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
+      </div>
+    <div class="dealbg">
+      Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %>
+    </div>
+    <div class="bought"  id="bought" style="display:none;">
+      <div class="bought1">
+        <span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
+      </div>
+      <div class="progress_bar">
+        <div class="progress_barred" id="progress" style="float:left;"></div>
+      </div>
+      <div class="bought1">
+            If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sharetis">
+  <div class="sharetext" style="text-decoration:none;">
+    <div style="margin-left:20px">
+      <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
+      <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
+      <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
+      <a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /></a>
+      <span  style='font-size:16px;font-weight:bold;color:#414141;'>Tell your friends about this Masthi Deal!</span></u>
+  <input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
+    <script type="text/javascript">
+      var image_url = document.getElementById('image_url').value
+      var shared_object = SHARETHIS.addEntry({title: 
+          document.title, summary: '<span style="text-decoration:none;font-weight:normal;">www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/><br/>You might  like it.<br/><br/>We publish a new deal every week.<br/><br/>Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.</span>', icon:'http://www.masthideals.com'+image_url,
+          url: document.location.href
+          },{embeds:true});
+
+shared_object.attachButton(document.getElementById("ck_sharethis"));
+shared_object.attachChicklet("email", document.getElementById("ck_email"));
+shared_object.attachChicklet("facebook", document.getElementById("ck_facebook"));
+shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
+</script>
+
+<br/>
+                                </div>	
+                              </div>
+
+
+
+</div>
+<div class="chat">
+
+  <div id="chat_text_div">
+    <table width="300px" align="center">
+      <tr>
+        <td align="left">
+          <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+        </td>
+        <td align="left">
+          <a href="javascript:show_chat();"><%= image_tag "icon4.gif", :width =>"39", :height =>"39", :border => 0 %><br />
+            <span class="style9">Live chat
+            </span>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+<div style="display:none;align:right;width:300px;" id="chat_div" >
+  <table width="300px" align="right" cellpadding="0px" cellspacing="0px">
+    <tr>
+      <td align="right">
+        <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed>
+        </object>
+      </td>
+      <td valign="top" width="18px">
+        <%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+      </td>
+    </tr>
+  </table>
+</div>	
+
+</div>
+<div class="contentouter">
+<div class="leftsidecontent">
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Deal</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Info</span>
+</div>
+<div class="dealinfocontent" style="height:auto;"> 
+
+<div class="points" style="width:380px">
+<ul>
+<% unless @featured_product.deal_info.nil?%>
+<%= @featured_product.deal_info %>
+<%end%>
+</ul>
+</div>
+
+
+</div>
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Details</span>
+</div>
+<div class="dealinfocontent1">
+<div class="points" style="width:380px">
+  <ul>
+
+    <%= @featured_product.description %>
+
+  </ul>
+</div></div>
+</div>
+
+<div class="rightsidecontent">
+<div class="rightsidetime"><span class="time">Time left</span><br/>
+<div id="countdown_time"></div>
+
+
+</div>
+<div class="rightsidecontent">
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Catch</span>
+</div>
+<div class="dealinfocontent1 pb10">
+<div class="points">
+<ul>
+	<%= @featured_product.catch_message%>
+
+
+</ul>
+</div></div>
+
+
+<div class="dealinfo">
+	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Some</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Reviews</span>
+</div>
+<div class="dealinfocontent1">
+<div class="points">
+<ul>
+<%= @featured_product.reviews%>
+
+
+</ul>
+</div></div>
+</div></div>
+
+<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
+
+</div>
+<script>
+	function show_chat()
+	{
+		document.getElementById('chat_text_div').style.display='none';
+		document.getElementById('chat_div').style.display='';
+		
+	}
+	function close_chat(){
+		document.getElementById('chat_div').style.display='none';
+		document.getElementById('chat_text_div').style.display='';
+	}
+	just_call_porgress_bar();
+	function just_call_porgress_bar(){
+		new Ajax.Request('/progress_bar?id=<%=@featured_product.id%>',{
+asynchronous:true, evalScripts:true, onComplete:function(request){
+	if (request.responseText != null){
+		document.getElementById('bought').style.display = '';
+		document.getElementById('progress').style.width=request.responseText+'px';
+	}
+	else{
+		document.getElementById('progress').style.width=0;
+	}
+	}});
+
+	}
+  var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+  updateTime();
+  function updateTime() {
+
+  today = new Date();
+  expiry_datetime = document.getElementById("end_time").value;
+  var todayy = today.getYear();
+  if (todayy < 1000)
+	todayy+=1900;
+  var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+   var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
+  timeLeft = Date.parse(exp)-Date.parse(curr);
+  msPerDay = 24 * 60 * 60 * 1000 ;  
+  if (timeLeft > 0) {
+  	e_daysLeft = timeLeft / msPerDay;
+  	daysLeft = Math.floor(e_daysLeft);
+  	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+  	hrsLeft = Math.floor(e_hrsLeft);
+  	e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+  	minsLeft = Math.floor(e_minsLeft);
+  	scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
+  	document.getElementById("countdown_time").innerHTML = "Days&nbsp;:   " + daysLeft + " Hours:  " + hrsLeft + "<br/>Mins&nbsp;:   " + minsLeft + " Secs&nbsp;:   " + scesLeft;
+  	setTimeout('updateTime()', 1000);
+  }
+ else if(timeLeft>=-3000){		
+		window.location.reload();
+	} 
+  else{
+  	document.getElementById("countdown_time").innerHTML = "Days: 0  "  + " Hours: 0 " + "<br/> Mins:  0 " + " Secs:  0 ";
+  }
+}
+</script>
