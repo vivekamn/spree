@@ -29,7 +29,7 @@ end
 def create_admin_user
   if ENV['AUTO_ACCEPT']
     password =  "spree"
-    email =  "spree@example.com"          
+    email =  "spree@example.com"
   else
     require 'highline/import' 
     puts "Create the admin user (press enter for defaults)."
@@ -41,7 +41,8 @@ def create_admin_user
     :password => password,
     :password_confirmation => password,
     :email => email,
-    :login => email
+    :login => email,
+    :phone_no => "9444444444"
   }
   require File.join(SPREE_ROOT, 'app/models/user.rb')
   if User.find_by_login(email)

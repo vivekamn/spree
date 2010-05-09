@@ -3,61 +3,59 @@ ror_tote:
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-tote
-  count_on_hand: 45
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_bag:
   name: Ruby on Rails Bag
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-bag
-  count_on_hand: 45
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_baseball_jersey:
   name: Ruby on Rails Baseball Jersey
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-baseball-jersey
-  count_on_hand: 75
+  
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_jr_spaghetti:
   name: Ruby on Rails Jr. Spaghetti
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-jr-spaghetti
-  count_on_hand: 75
+ 
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_mug:
   name: Ruby on Rails Mug
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-mug
-  count_on_hand: 75
+
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_ringer:
   name: Ruby on Rails Ringer T-Shirt
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-on-rails-ringer-t-shirt
-  count_on_hand: 75
+
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ror_stein:
   name: Ruby on Rails Stein
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>  
   permalink: ruby-on-rails-stein
-  count_on_hand: 75
+
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 ruby_baseball_jersey:
   name: Ruby Baseball Jersey
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: ruby-baseball-jersey
-  count_on_hand: 75
+
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>
 apache_baseball_jersey:
   name: Apache Baseball Jersey
   description: <li>8 GB capacity</li><li>Compact and light weight design</li><li>Black color</li><li>USB 2.0 support</li><li>Compatible with USB 1.1</li><li>Activity LED</li><li>Plug-and-Play, no software installation required</li><li>Low power consumption in both active and suspend modes</li><li>FCC and CE certified.</li>
   available_on: <%= Time.now.to_s(:db) %>
   permalink: apache-baseball-jersey
-  count_on_hand: 10
+
   catch_message: <li>Height - 3.25 </li><li>Width - 1.25</li><li>Thickness - 0.5</li>

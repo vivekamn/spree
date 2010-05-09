@@ -9,7 +9,7 @@ ship_address_<%= i %>:
   address2: <%= Faker::Address.secondary_address %>
   city: <%= Faker::Address.city %>
   state_id: 889445952
-  zipcode: 16804
+  zipcode: 600001
   country_id: 214
   phone: 9876543210
   name: Test Masthi
@@ -22,7 +22,7 @@ bill_address_<%= i %>:
   address2: <%= Faker::Address.secondary_address %>
   city: <%= Faker::Address.city %>
   state_id: 889445952
-  zipcode: 16804
+  zipcode: 600001
   country_id: 214
   phone: 9876543210
   name: Test Masthi
