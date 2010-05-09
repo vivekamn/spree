@@ -15,6 +15,7 @@ map.chennai '/chennai', :controller=>'home', :action=>'index'
 map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
 map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
 map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
+map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  

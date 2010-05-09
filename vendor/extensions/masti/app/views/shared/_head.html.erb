@@ -84,6 +84,12 @@ function MM_swapImage() { //v3.0
   </div>
   <!--<div class="fl"><img src="/images/rightcurve.gif" width="5" height="47" /></div>-->
 </div>
+  <div style='position:absolute;left:0px;top:390px;'>
+  <% if admin?%>
+    <%= render :partial => "/shared/whos_among_us" %>
+  <% end %>
+  </div>
+
 <script type="text/javascript">
 	function clear_email(){
 		document.getElementById('deals_notification_email').value="";
