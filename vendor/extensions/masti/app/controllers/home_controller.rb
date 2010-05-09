@@ -12,7 +12,7 @@ class HomeController < Spree::BaseController
   end
   
   def unique_email
-    count = User.count(:conditions => ['email = ?',params[:email]] )
+    count = User.count(:all, :conditions => ['email = ?',params[:email]] )
     if count > 0
       puts "its comig here"
       render(:text => 'false' )
@@ -20,6 +20,14 @@ class HomeController < Spree::BaseController
        puts "its true"
       render(:text => 'true')
     end
+  end
+
+  def product_preview
+    @featured_product = Product.find_by_permalink(params[:id])
+    @price = @featured_product.price.to_i
+    @discount = @featured_product.discount
+    @saving = (@price*@discount/100).to_i
+    @bought_count = @featured_product.currently_bought_count   
   end
   
   def payment_response
