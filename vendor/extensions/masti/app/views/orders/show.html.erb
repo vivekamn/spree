@@ -23,11 +23,10 @@
   <% if params.has_key? :checkout_complete %>
   <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>	 
 </div>
-
-<form  method="post" action="https://secure.ebs.in/pg/ma/sale/pay/" name="frmTransaction" id="frmTransaction" onsubmit="return checkState();">
+<%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
 	<input name="account_id" type="hidden" value="6246" />
-        <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
-	<input name="mode" type="hidden" value="LIVE" />
+    <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
+	<input name="mode" type="hidden" value="TEST" />
 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
 	<input name="amount" type="hidden" value="<%=@order.total%>"/>
 	<input name="description" type="hidden" value="<%=@order.state%>" />
@@ -47,7 +46,8 @@
 	<input name="ship_country" type="hidden" value="IND" />
 	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
 	<div align="right" style="padding-right: 0px; margin-right: -26px;"><%= image_submit_tag "proceed.gif"%>  </div>
-</form>
+<%end%>
+
 </div>
 <div style="float:right;">
 	<div style="padding-top: 100px;padding-right:0px;">
