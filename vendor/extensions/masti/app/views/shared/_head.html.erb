@@ -87,6 +87,10 @@ function MM_swapImage() { //v3.0
   <div style='position:absolute;left:0px;top:390px;'>
   <% if admin?%>
     <%= render :partial => "/shared/whos_among_us" %>
+   <% else %>
+    <div style='display:none'>
+   <%= render :partial => "/shared/whos_among_us" %>
+    </div>
   <% end %>
   </div>
 
