@@ -48,11 +48,13 @@ a{ outline:none;
 
 .navinner{ width:938px; float:left; height:37px;
 }
-.thedeal{ width:311px; float:left; height:37px; 
+.thedeal{ width:180px; float:left; height:37px; 
 }
-.howwork{ width:315px; float:left; height:37px; 
+.howwork{ width:302px; float:left; height:37px; 
 }
-.getfeatures{ width:312px; float:left; height:37px; 
+.getfeatures{ width:225px; float:left; height:37px; 
+}
+.upcoming{ width:231px; float:left; height:37px; 
 }
 .bannerouter{ width:938px; float:left;background-color:white;
 }
