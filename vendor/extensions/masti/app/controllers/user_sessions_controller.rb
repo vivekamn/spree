@@ -1,7 +1,8 @@
 class UserSessionsController < Spree::BaseController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
-
+   ssl_required :new, :create, :destroy, :update
+  ssl_allowed :login_bar
     
   def new
     @user_session = UserSession.new

@@ -165,8 +165,8 @@ class HomeController < Spree::BaseController
     
   end
   
-  def recent_deals
-    
+  def upcoming_deals
+    @bar_selected="upcoming_deals"
   end
   
   def how_masti_works
