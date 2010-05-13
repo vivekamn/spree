@@ -1,13 +1,13 @@
 <%= javascript_include_tag "prototype" %>
 <style>
 .progress_bar {
-    background-color:#000000; 
+    background-color:#2E81CC; 
 	width: 300px;
     height:10px
 }
 
 .progress_barred {
-        background-color:#E60000; 
+        background-color:#9DC63A; 
         height:10px
 }
 img{
@@ -22,7 +22,7 @@ img{
 <div class="bannerouter">
 	<div class="banerleft">
 		<%if @featured_product.images and @featured_product.images.first %>
-			<%= image_tag(@featured_product.images.first.attachment.url(:large),:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
 		<%else%>
 			<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
 		<%end%>
@@ -57,6 +57,33 @@ img{
 				<%end%>
 			 </div>
 		</div>
+		<table width="300px" align="center">
+				<tbody><tr>
+					<td align="left">
+						<img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+					</td>
+					<td align="left">
+						<div id="chat_text_div">
+							<a href="javascript:show_chat();"><img src="/images/icon4.gif" width="39" height="39" /><br /><span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Live </span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">chat</span></a>
+						</div>
+					</td>
+					
+				</tr>
+			
+		</tbody></table>
+		<div  style="position: absolute; right: 112px; top: 385px;display:none;" id="chat_div" >
+			<table align="right" cellpadding="0px" cellspacing="0px">
+				<tr>
+					<td align="right">
+						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
+					</td>
+					<td valign="top" width="18px">
+						<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+					</td>
+				</tr>
+			</table>
+			
+		</div>	
 
 	</div>
 </div>
@@ -101,37 +128,9 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 </div>
 -->
 </div>
-<div class="chat">
-	
-		<table width="300px" align="center">
-				<tbody><tr>
-					<td align="left">
-						<img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
-					</td>
-					<td align="left">
-						<div id="chat_text_div">
-							<a href="javascript:show_chat();"><img src="images/icon4.gif" width="39" height="39" /><br /><span class="style9">Live chat</span></a>
-						</div>
-					</td>
-					
-				</tr>
-			
-		</tbody></table>
-		<div style="display:none;align:right;width:300px;" id="chat_div" >
-			<table width="300px" align="right" cellpadding="0px" cellspacing="0px">
-				<tr>
-					<td align="right">
-						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
-					</td>
-					<td valign="top" width="18px">
-						<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-					</td>
-				</tr>
-			</table>
-			
-		</div>	
-</div>
+
 <div class="contentouter">
+<div class="contentouter1">
 <div class="leftsidecontent">
 <div class="dealinfo">
 	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Deal</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Info</span>
@@ -173,7 +172,7 @@ Nobody knows how to take care of the feet like the Japanese. Have you SEEN those
 Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
-<div class="dealinfo">
+<div class="dealinfo" style="padding-top:50px;">
 	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Catch</span>
 </div>
 <div class="dealinfocontent1 pb10">
@@ -202,7 +201,7 @@ Mins: 48 Secs: 36-->
 </ul>
 </div></div>
 </div></div>
-
+</div>
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
 <input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 

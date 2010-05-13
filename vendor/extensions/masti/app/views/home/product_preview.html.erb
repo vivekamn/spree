@@ -1,13 +1,13 @@
 <%= javascript_include_tag "prototype" %>
 <style>
 .progress_bar {
-    background-color:#000000; 
+    background-color:#2E81CC; 
 	width: 300px;
     height:10px
 }
 
 .progress_barred {
-        background-color:#E60000; 
+        background-color:#9DC63A; 
         height:10px
 }
 img{
@@ -20,49 +20,96 @@ img{
 	<%end%>
 </div>
 <div class="bannerouter">
-  <div class="banerleft">
-    <%if @featured_product.images and @featured_product.images.first %>
-      <%= image_tag(@featured_product.images.first.attachment.url(:large),:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
-    <%else%>
-      <img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
-    <%end%>
-  </div>
-  <div class="banerrightout">
-      <div class="bought2">
-        <%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
-      </div>
-    <div class="dealbg">
-      Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %>
-    </div>
-    <div class="bought"  id="bought" style="display:none;">
-      <div class="bought1">
-        <span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
-      </div>
-      <div class="progress_bar">
-        <div class="progress_barred" id="progress" style="float:left;"></div>
-      </div>
-      <div class="bought1">
-            If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
-      </div>
-    </div>
-  </div>
-</div>
+	<div class="banerleft">
+		<%if @featured_product.images and @featured_product.images.first %>
+			<%= image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"540px",:style=>"margin-left:20px;margin-top:10px;width: 540px;") %>
+		<%else%>
+			<img alt="No images added Yet" style="margin-left: 20px; margin-top: 10px;">
+		<%end%>
+	</div>
+	<div class="banerrightout">
+		<%if @deal and deal_live @deal, @featured_product%>	
+			<div class="bought2">
+				<%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
+			</div>
+		<%else%>
+			<div class='sold_out'>	
+				<span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>
+			</div>
+		<%end%>
+		<div class="dealbg">
+			Value: Rs.<%= @price %> Discount: <%= @discount %>% <br/>You save: Rs.<%= @saving %>
+		</div>
+		<div class="bought"  id="bought" style="display:none;">
+			<div class="bought1">
+				<span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span><br/><br/>
+			</div>
+			<div class="progress_bar">
+  				<div class="progress_barred" id="progress" style="float:left;"></div>
+			</div>
+			<div class="bought1">
+				<%if @deal and deal_live @deal, @featured_product%>
+					<%if deal_on @featured_product %>
+						Hurray, the deal is already on. Just go ahead to get your masthi savings 
+					<%else%>
+						If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. 
+					<%end%>	
+				<%end%>
+			 </div>
+		</div>
+		<table width="300px" align="center">
+				<tbody><tr>
+					<td align="left">
+						<img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+					</td>
+					<td align="left">
+						<div id="chat_text_div">
+							<a href="javascript:show_chat();"><img src="/images/icon4.gif" width="39" height="39" /><br /><span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Live </span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">chat</span></a>
+						</div>
+					</td>
+					
+				</tr>
+			
+		</tbody></table>
+		<div  style="position: absolute; right: 112px; top: 385px;display:none;" id="chat_div" >
+			<table align="right" cellpadding="0px" cellspacing="0px">
+				<tr>
+					<td align="right">
+						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
+					</td>
+					<td valign="top" width="18px">
+						<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+					</td>
+				</tr>
+			</table>
+			
+		</div>	
 
+	</div>
+</div>
 <div class="sharetis">
-  <div class="sharetext" style="text-decoration:none;">
-    <div style="margin-left:20px">
-      <a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
-      <a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
-      <a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-      <a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /></a>
-      <span  style='font-size:16px;font-weight:bold;color:#414141;'>Tell your friends about this Masthi Deal!</span></u>
-  <input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
-    <script type="text/javascript">
-      var image_url = document.getElementById('image_url').value
-      var shared_object = SHARETHIS.addEntry({title: 
-          document.title, summary: '<span style="text-decoration:none;font-weight:normal;">www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/><br/>You might  like it.<br/><br/>We publish a new deal every week.<br/><br/>Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.</span>', icon:'http://www.masthideals.com'+image_url,
-          url: document.location.href
-          },{embeds:true});
+	
+		<div class="sharetext" style="text-decoration:none;">
+				<div style="margin-left:20px">
+					<!--<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+					<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://richardxthripp.thripp.com/wp-content/plugins/tweet-this/icons/tt-twitter-micro2.png" class="nothumb" style="margin-bottom: -5px;"></a>
+					<a href="mailto:?subject=Great Deals Exclusive for MasthiDeals members&body=<%=@featured_product.name%>">E-mail</a>
+					-->
+<a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
+<a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
+<a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
+<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /></a>
+<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Tell your friends about</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;"> this Masthi Deal!</span></u>
+<input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
+<script type="text/javascript">
+		
+	var image_url = document.getElementById('image_url').value
+	var shared_object = SHARETHIS.addEntry({
+	title:  document.title,
+	summary: '<span style="text-decoration:none;font-weight:normal;">www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/><br/>You might  like it.<br/><br/>We publish a new deal every week.<br/><br/>Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.</span>',
+	icon:'http://www.masthideals.com'+image_url,
+	url: document.location.href
+},{embeds:true});
 
 shared_object.attachButton(document.getElementById("ck_sharethis"));
 shared_object.attachChicklet("email", document.getElementById("ck_email"));
@@ -70,54 +117,28 @@ shared_object.attachChicklet("facebook", document.getElementById("ck_facebook"))
 shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 </script>
 
-<br/>
-                                </div>	
-                              </div>
 
+					<%#render :partial=>'/shared/share_with_friends'%>
+					<br/>
+				</div>	
+			</div>
 
-
+<!--<div class="icon">
+<img src="images/icon1.gif" width="39" height="39" /> &nbsp;<img src="images/icon2.gif" width="39" height="39" /> &nbsp;<img src="images/icon3.gif" width="39" height="39" />
 </div>
-<div class="chat">
-
-  <div id="chat_text_div">
-    <table width="300px" align="center">
-      <tr>
-        <td align="left">
-          <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
-        </td>
-        <td align="left">
-          <a href="javascript:show_chat();"><%= image_tag "icon4.gif", :width =>"39", :height =>"39", :border => 0 %><br />
-            <span class="style9">Live chat
-            </span>
-          </a>
-        </td>
-      </tr>
-    </table>
-  </div>
-
-
-<div style="display:none;align:right;width:300px;" id="chat_div" >
-  <table width="300px" align="right" cellpadding="0px" cellspacing="0px">
-    <tr>
-      <td align="right">
-        <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed>
-        </object>
-      </td>
-      <td valign="top" width="18px">
-        <%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-      </td>
-    </tr>
-  </table>
-</div>	
-
+-->
 </div>
+
 <div class="contentouter">
+<div class="contentouter1">
 <div class="leftsidecontent">
 <div class="dealinfo">
 	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Deal</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Info</span>
 </div>
 <div class="dealinfocontent" style="height:auto;"> 
-
+<!--
+&nbsp;Warranty: 1 Year (manufacturer)
+-->
 <div class="points" style="width:380px">
 <ul>
 <% unless @featured_product.deal_info.nil?%>
@@ -125,7 +146,9 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 <%end%>
 </ul>
 </div>
-
+<!--
+Nobody knows how to take care of the feet like the Japanese. Have you SEEN those delicate, Beautifully-groomed feet on which Japanese women move west. And now that fabulous treatment,known toonly a few-there are these rare aromatic oils,you see-is coming your way from Areopagus, the best Japanese spa inthe city.With a price-tag of Rs 300 for what costs Rs 600, you won't even have to,well,foot a step bill.
+-->
 
 </div>
 <div class="dealinfo">
@@ -145,16 +168,21 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 <div class="rightsidetime"><span class="time">Time left</span><br/>
 <div id="countdown_time"></div>
 
-
+<!--Days: 179 Hours: 9<br/>
+Mins: 48 Secs: 36-->
 </div>
 <div class="rightsidecontent">
-<div class="dealinfo">
+<div class="dealinfo" style="padding-top:50px;">
 	<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">The</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;">Catch</span>
 </div>
 <div class="dealinfocontent1 pb10">
 <div class="points">
 <ul>
 	<%= @featured_product.catch_message%>
+<!--	
+<li>Valid from 12/02/10 to 11/04/10</li>
+<li>Can't combine with other promotions</li>
+<li>Thickness :0.5"</li>-->
 
 
 </ul>
@@ -173,8 +201,10 @@ shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
 </ul>
 </div></div>
 </div></div>
-
+</div>
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
+<input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
+
 
 </div>
 <script>
@@ -215,7 +245,7 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
    var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
   timeLeft = Date.parse(exp)-Date.parse(curr);
   msPerDay = 24 * 60 * 60 * 1000 ;  
-  if (timeLeft > 0) {
+  if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
   	e_daysLeft = timeLeft / msPerDay;
   	daysLeft = Math.floor(e_daysLeft);
   	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
@@ -226,7 +256,7 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   	document.getElementById("countdown_time").innerHTML = "Days&nbsp;:   " + daysLeft + " Hours:  " + hrsLeft + "<br/>Mins&nbsp;:   " + minsLeft + " Secs&nbsp;:   " + scesLeft;
   	setTimeout('updateTime()', 1000);
   }
- else if(timeLeft>=-3000){		
+ else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
 		window.location.reload();
 	} 
   else{
