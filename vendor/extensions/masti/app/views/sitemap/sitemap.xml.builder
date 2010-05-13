@@ -21,7 +21,78 @@ xml.urlset(
     xml.loc         "http://www.mastideals.com/faq"
     xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
     xml.changefreq  "monthly"
+  end 
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/user_session/new"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
   end  
+ xml.url do
+    xml.loc         "http://www.masthideals.com/signup"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end  
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/get-featured"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end  
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/upcoming-deals"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end  
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/about-us"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end  
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/contact-us"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/terms-conditions"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/chennai"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/delhi"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/mumbai"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/bangalore"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end   
+
+ xml.url do
+    xml.loc         "http://www.masthideals.com/login"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end    
 
   @products.each do |product|
   xml.url do

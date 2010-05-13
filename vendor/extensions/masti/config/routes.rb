@@ -1,4 +1,5 @@
 # Put your extension routes here.
+map.resources :products, :member => {:change_image => :post}
 map.home '/', :controller => 'home'
 map.root :controller => "home", :action => "index"
 map.connect "update_assets", :controller => "home", :action => "update_assets"
