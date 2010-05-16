@@ -1,3 +1,9 @@
+
+<% content_for :head do %>
+  <%= javascript_include_tag :ckeditor %>
+<% end %>
+
+
 <div class="yui-gc">
   <div class="yui-u first">
     <%- locals = {:f => f} -%>
@@ -28,7 +34,7 @@
 
       <% f.field_container :description do %>
         <%= f.label :description, t("description")%><br />
-        <%= f.text_area :description, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
+        <%= f.cktext_area :description, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
         <%= f.error_message_on :description %>
       <% end %>
     <% end %>
@@ -124,7 +130,7 @@
   <div class="yui-u first">
     <% f.field_container :catch_message do %>
       <%= f.label :catch_message, t("catch_message")%><br />
-      <%= f.text_area :catch_message, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
+      <%= f.cktext_area :catch_message, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
       <%= f.error_message_on :catch_message%>
     <% end %>
   </div>     
@@ -144,7 +150,7 @@
   <div class="yui-u first">
     <% f.field_container :reviews do %>
       <%= f.label :reviews, t("reviews")%><br />
-      <%= f.text_area :reviews, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
+      <%= f.cktext_area :reviews, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
       <%= f.error_message_on :reviews%>
     <% end %>
   </div> 
