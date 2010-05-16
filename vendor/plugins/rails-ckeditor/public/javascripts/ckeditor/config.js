@@ -9,7 +9,7 @@ CKEDITOR.editorConfig = function( config )
 {
   config.PreserveSessionOnFileBrowser = true;
   // Define changes to default configuration here. For example:
-  config.language = 'ru';
+  config.language = 'en';
   // config.uiColor = '#AADC6E';
 
   //config.ContextMenu = ['Generic','Anchor','Flash','Select','Textarea','Checkbox','Radio','TextField','HiddenField','ImageButton','Button','BulletedList','NumberedList','Table','Form'] ;
