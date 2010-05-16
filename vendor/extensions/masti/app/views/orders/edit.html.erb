@@ -2,33 +2,74 @@
 <%= error_messages_for :order  %>
 
 <div class="bannerouter">
-<div class="shoppingout1">
-<div class="shoppinginner"><img src="/images/iworuld.gif" width="303" height="41" /></div>
-<div class="shoppinginner"><div class="shoptable" style="padding:0px">
-<% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
-<% hook :inside_cart_form do %>
-
-  <% hook :cart_items do %>
-    <%= render :partial => 'form', :locals => {:order_form => order_form} %>
-  <% end %>
-
-  <% unless @order.line_items.empty? -%>
-  <div id="subtotal" align="right">
-    <h2><%= "#{t("total")}: Rs.  #{order_price(@order).to_i}" %></h2>   
+  <div class="shoppingout1">
+    <% if @order.gift? %>
+      <div>
+        <h1>I Would Like to Gift!</h1>
+        <div id="Gtext">
+          Give the Name, Email and Phone No. of the person to whom you want to gift and update. Don't worry the voucher only has the retail value on it, so gift away..
+        </div>
+      </div>
+    <% else %> 
+      <div class="shoppinginner"><img src="/images/iworuld.gif" width="303" height="41" />
+      </div>
+    <% end %>
+    <div class="shoppinginner">
+      <div class="shoptable" style="padding:0px">
+        <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
+          <% hook :inside_cart_form do %>
+            <% hook :cart_items do %>
+              <%= render :partial => 'form', :locals => {:order_form => order_form} %>
+            <% end %>
+            <% unless @order.line_items.empty? -%>
+              <div id="subtotal" align="right">
+                <h2><%= "#{t("total")}: Rs.  #{order_price(@order).to_i}" %></h2>   
+              </div>
+            <% end -%>  
+          <% end %>
+        <% end -%>
+      </div>
+    </div>
   </div>
-  <% end -%>  
+</div>
 
-<% end %>
-<% end -%>
-</div>
-</div>
-</div>
-</div>
 <script type="text/javascript">
-	function update_price(){	
-		document.getElementById('buy').style.display='none';
-		document.getElementById('updatecart').submit();
-	}
+  var name = document.getElementById('order_giftee_name');
+  var email = document.getElementById('order_giftee_email');
+  var phone = document.getElementById('order_giftee_phone_no');  
+  function validate_name() {
+    if(name.value == "") {
+      document.getElementById('name_div').innerHTML = "Name cann't be empty";
+    }
+    else {
+      document.getElementById('name_div').innerHTML = " ";
+    }
+  }
+  function validate_email() {
+    if(email.value == "") {
+      document.getElementById('email_div').innerHTML = "Email cann't be empty";
+    }
+    else {
+      document.getElementById('email_div').innerHTML = " ";
+    }
+  }
+  function validate_phone() {
+    if(phone.value == "") {
+      document.getElementById('phone_div').innerHTML = "Phone cann't be empty";
+    }
+    else {
+      document.getElementById('phone_div').innerHTML = " ";
+    }    
+  }  
+  function update_order() {
+    validate_name();
+    validate_email();
+    validate_phone();
+    document.getElementById('buy').style.display='none';
+    if(name.value != "" && email.value != "" && phone.value != ""){
+      document.getElementById('updatecart').submit();
+    }
+  }
+</script>
 
-	</script>
 	

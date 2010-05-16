@@ -1,89 +1,91 @@
 <style>
-	table{ width:100%; }
-	.index{
-		padding-bottom: 20px;
-		padding-left: 20px;
-		padding-right: 20px;
-		padding-top: 20px;
-	}
-	.center{text-align:center;}
+  table{ width:100%; }
+  .index{
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+  .center{text-align:center;}
 </style>
-<div class="tiles">
-<div id="order">
-	
- <!-- <%= link_to t('back_to_store'), home_path %> -->
 
+<div class="tiles">
   <% if params.has_key? :checkout_complete %>
-  	<br/><br/>
-  	<h2><span class="index"><%= t('proceed_to_pay_after_checkout') %></span></h2>   
+    <% if @order.gift? %>
+      <h2><span class="index"><%= t('proceed_to_gift_after_checkout') %></span></h2> 
+    <% else %>
+      <h2><span class="index"><%= t('proceed_to_pay_after_checkout') %></span></h2> 
+    <% end %> 
   <% else %>
-  	| <%= link_to t('my_account'), user_path(current_user) if current_user%>
+    | <%= link_to t('my_account'), user_path(current_user) if current_user%>
   <% end %>
   <br/><br/>	
   <% if params.has_key? :checkout_complete %>
-  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>	 
-</div>
-<%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
-	<input name="account_id" type="hidden" value="6246" />
-    <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
-	<input name="mode" type="hidden" value="LIVE" />
-	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
-	<input name="amount" type="hidden" value="<%=@order.total%>"/>
-	<input name="description" type="hidden" value="<%=@order.state%>" />
-	<input name="name" type="hidden" maxlength="255" value="<%=@order.checkout.bill_address.name%>" />
-	<input name="address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
-	<input name="city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
-	<input name="state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
-	<input name="postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
-	<input name="country" type="hidden" value="IND" />
-	<input name="email" type="hidden" value="<%=@order.checkout.email%>" />
-	<input name="phone" type="hidden" maxlength="20" value="<%=@order.checkout.bill_address.phone%>" />
-	<input name="ship_name" type="hidden" value="<%=@order.checkout.bill_address.name%>" />
-	<input name="ship_address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
-	<input name="ship_city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
-	<input name="ship_state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
-	<input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
-	<input name="ship_country" type="hidden" value="IND" />
-	<input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-	<div align="right" style="padding-right: 0px; margin-right: -26px;"><%= image_submit_tag "proceed.gif"%>  </div>
+    <div id="order">
+      <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+    </div>      
+    <%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
+      <input name="account_id" type="hidden" value="6246" />
+      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
+      <% if RAILS_ENV == 'development' %>
+        <input name="mode" type="hidden" value="TEST" />
+      <% else %>
+        <input name="mode" type="hidden" value="LIVE" />
+      <% end %>
+      <input name="reference_no" type="hidden" value="<%=@order.number%>" />
+      <input name="amount" type="hidden" value="<%=@order.total%>"/>
+      <input name="description" type="hidden" value="<%=@order.state%>" />
+      <input name="name" type="hidden" maxlength="255" value="<%=@order.checkout.bill_address.name%>" />
+      <input name="address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
+      <input name="city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
+      <input name="state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
+      <input name="postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
+      <input name="country" type="hidden" value="IND" />
+      <input name="email" type="hidden" value="<%=@order.checkout.email%>" />
+      <input name="phone" type="hidden" maxlength="20" value="<%=@order.checkout.bill_address.phone%>" />
+      <input name="ship_name" type="hidden" value="<%=@order.checkout.bill_address.name%>" />
+      <input name="ship_address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
+      <input name="ship_city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
+      <input name="ship_state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
+      <input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
+      <input name="ship_country" type="hidden" value="IND" />
+      <input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
+      <div align="right" style="padding-right: 0px; margin-right: -26px;"><%= image_submit_tag "proceed.gif"%> 
+      </div>
+    <%end%>
+  </div>
+  <div style="float:right;">
+    <div style="padding-top: 100px;padding-right:0px;">
+      <table>
+        <tr>
+          <td>
+            <img src="/images/ebs.gif" />
+          </td>
+          <td valign="center">
+            <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <%= render :partial => 'failure', :locals => {:order => @order} -%>
 <%end%>
 
-</div>
-<div style="float:right;">
-	<div style="padding-top: 100px;padding-right:0px;">
-		<table>
-			<tr>
-				<td>
-					<img src="/images/ebs.gif" />
-				</td>
-				<td valign="center">
-					<img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
-				</td>
-			</tr>
-		</table>
-	</div>
-	
-</div>
-<%else%>
-	<div class='tiles'>
-	<%= render :partial => 'failure', :locals => {:order => @order} -%>
-	</div>
-	<%end%>
-  <br/>
+
+
  
- 
- <script type="text/javascript">
- 	function checkState(){
- 	var state='<%=@order.state%>'
- 	if(state=='new'){
-		return true;
-	}
-	else{
-		alert('This order is a cancelled or already paid order')
-		return false;
-	}
-	}
-	
- 
- 	</script>
-  <!--<%= link_to t('back_to_store'), home_path %>--> 
+<script type="text/javascript">
+  function checkState(){
+    var state='<%=@order.state%>'
+      if(state=='new'){
+        return true;
+      }
+      else{
+        alert('This order is a cancelled or already paid order')
+          return false;
+      }
+  }
+</script>
+
+

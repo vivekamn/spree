@@ -5,19 +5,20 @@ class OrdersController < Spree::BaseController
   ssl_required :show
 
   resource_controller
-  actions :all, :except => :index
+  actions :all, :except => [:index]
   
   helper :products
 
   create.before :create_before
+  create.after :create_after 
 
-def index  
-  create
-end
+  def index
+    create
+  end
 
   # override the default r_c behavior (remove flash - redirect to edit details instead of show)
   create do
-    flash nil     
+    flash nil 
     success.wants.html {redirect_to edit_order_url(@order)}
     failure.wants.html { render :template => "orders/edit" }
   end 
@@ -62,8 +63,14 @@ end
     @object ||= Order.find_by_number(params[:id], :include => :adjustments) if params[:id]
     return @object || find_order
   end
+
+  def create_after
+    if params[:type]
+      object.update_attributes(:gift => 1)
+    end
+  end
   
-  def create_before      
+  def create_before
     quantity=1      
      product=Product.find(params[:product])    
     params[:products].each do |product_id,variant_id|     
@@ -75,7 +82,7 @@ end
       quantity = quantity.to_i
       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
     end if params[:variants]    
-@order.add_variant(Variant.find(product.master.id), quantity) if quantity > 0
+    @order.add_variant(Variant.find(product.master.id), quantity) if quantity > 0
     # store order token in the session
     session[:order_token] = @order.token
   end

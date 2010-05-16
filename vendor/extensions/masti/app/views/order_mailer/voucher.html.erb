@@ -66,10 +66,18 @@
                           </tr>
                           <tr>
                             <td align="left" width="48%" valign="top" height="20">Recipient</td>
-							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" width="52%" valign="top"><%= @order.bill_address.name %></td>
+                            <td align="left" valign="top" height="20">:&nbsp;</td>
+                            
+                            <td align="left" width="52%" valign="top">
+                              <% if @order.gift? %>
+                                <%= @order.giftee_name %>
+                              <% else %>
+                                <%= @order.bill_address.name %>
+                              <% end %>
+                            </td>
                           </tr>
-						   <tr>
+                          <tr>
+        
                             <td align="left" width="48%" valign="top" height="20">Quantity</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
                             <td align="left" width="52%" valign="top"><%= @order.line_items[0].quantity %></td>

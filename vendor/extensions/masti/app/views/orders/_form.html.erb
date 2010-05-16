@@ -27,41 +27,62 @@ margin-right:6px;
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
   <tr>
     <td width="100%" style="padding-top: 23px;">
-    	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
-    <tr align="center">
-      <% hook :cart_items_headers do %>
-        <th width="16%" height="34" class="bd"><%= t("item") %></th>
-		<th width="44%" class="bd1">Description</th>
-        <th width="15%" class="bd1"><%= t("price_with_discount") %></th>
-        <th width="9%" class="bd1"><%= t("qty") %></th>
-        <th width="16%" class="bd1"><%= t("total") %></th>        
-      <% end %>
-    </tr>  
- 
-    <% order_form.fields_for :line_items do |item_form| %>
-      <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
-    <% end %>
-<tr align="center">	                
-         <td colspan=5 align="right"> <div id='buy' align="right"><%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %></div></td>
-       </tr>
-    <% if @order.line_items.empty? -%>
-      <tr id="none">
-        <td colspan="5"><%= t("your_cart_is_empty.") -%></td>
-      </tr>
-    <% end -%>
-  
-		</table>
-	</td>
-	<!--<td>
-			<div id="giftC">
-				<div id="Gheading">
-					Gift a Great Deal!
-				</div>
-				<div id="Gtext">
-					Simply enter the names on the confirmation page. Don't worry the voucher only has the retail value on it, so gift away..
-				</div>
-			</div>
-	</td>-->
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
+        <% unless @order.gift.nil? %>
+          <tr align='center'>
+            <td>
+              <b>Name</b> <span class="required">*</span><br />
+              <%= order_form.text_field :giftee_name, :onblur => 'validate_name();' %>
+              <span id="name_div" style="color:red"></span>
+            </td>
+            <td>
+              <b>Email</b><span class="required">*</span><br />
+              <%= order_form.text_field :giftee_email, :onblur => 'validate_email();' %><br />
+              <span id="email_div" style="color:red"></span>
+            </td>
+            <td>
+              <b>Phone No.</b><span class="required">*</span><br />
+              <%= order_form.text_field :giftee_phone_no, :onblur => 'validate_phone();' %>
+              <span id="phone_div" style="color:red"></span>
+            </td>
+            <% unless @order.giftee_name %> 
+            <td align='right'>
+              <a href="javascript:update_order();"><%= image_tag 'update.gif', :border => 0 %></a>
+            </td> 
+            <% end %>         
+          </tr>
+        <% end %>
+        <tr height='20px'><td></td></tr>
+        <tr align="center">
+          <% hook :cart_items_headers do %>
+            <th width="16%" height="34" class="bd"><%= t("item") %></th>
+            <th width="44%" class="bd1">Description</th>
+            <th width="15%" class="bd1"><%= t("price_with_discount") %></th>
+            <th width="9%" class="bd1"><%= t("qty") %></th>
+            <th width="16%" class="bd1"><%= t("total") %></th>        
+          <% end %>
+        </tr>  
+
+        <% order_form.fields_for :line_items do |item_form| %>
+          <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+        <% end %>
+        <tr align="center">	                
+          <td colspan=5 align="right">
+            <div id='buy' align="right">
+              <% if @order.giftee_name %>
+                <%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
+                <% end %>
+            </div>
+          </td>
+        </tr>
+      
+        <% if @order.line_items.empty? -%>
+          <tr id="none">
+            <td colspan="5"><%= t("your_cart_is_empty.") -%></td>
+          </tr>
+        <% end -%>
+      </table>
+    </td>
   </tr>
-	
 </table>
+

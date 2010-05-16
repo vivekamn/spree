@@ -53,7 +53,17 @@ class OrderMailer < ActionMailer::QueueMailer
     @from       = Spree::Config[:order_from]
     @bcc        = order_bcc
     @sent_on    = Time.now
-  end 
+  end
+
+  def gift_notification(order, product)
+    content_type "text/html"
+    @subject    = 'Gift Voucher From Masthi Deals'
+    @body       = {"product" => product,"order" => order}
+    @recipients = order.giftee_email
+    @from       = Spree::Config[:order_from]
+    @bcc        = order_bcc
+    @sent_on    = Time.now
+  end
   
   
   def notify_admin(product)

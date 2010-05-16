@@ -6,7 +6,7 @@ class ProductsController < Spree::BaseController
   before_filter :require_user, :only =>[:show]
   resource_controller
   helper :taxons
-#  actions :show, :index
+  actions :show, :index
 
   def index
     @products = Product.paginate(:all, :conditions => ['deleted_at is NULL'], :page => params[:page], :per_page => 10)
@@ -14,7 +14,7 @@ class ProductsController < Spree::BaseController
   
   def show
     session[:order_id] = nil
-    redirect_to :controller=>'orders', :product=>@product.id
+    redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
   end
 
   include Spree::Search

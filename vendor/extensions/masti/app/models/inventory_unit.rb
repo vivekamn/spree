@@ -78,48 +78,52 @@ class InventoryUnit < ActiveRecord::Base
 #  end
 
 
-def self.deal_status_update(order)
-  begin
-    if order.state!='credit_owed'
-  order.line_items.each do |line_item|
-    variant =line_item.variant
-    product=line_item.variant.product
-    old_count=product.currently_bought_count - line_item.quantity   
-    if product.currently_bought_count>product.minimum_number and  old_count>product.minimum_number  
-      logger.info "deal already on and trying to send confirmation mail"
-       # we are sending vouchers after the deal is on
-       OrderMailer.deliver_voucher(order,product,order.user.email)
-       #OrderMailer.deliver_confirm(order)      
-    elsif product.currently_bought_count<product.minimum_number
-      logger.info "deal not on and trying to send placement mail"
-      user = User.find_by_email(order.email)
-      OrderMailer.deliver_placed(order,user)
-    elsif product.currently_bought_count==product.minimum_number or old_count<product.minimum_number 
-      logger.info "deal on with this placement and trying to send confirmation mail"
-      #sending vouchers for all users before bought
-      line_items_variant = variant.line_items
-#      OrderMailer.deliver_notify_admin(product)
-      line_items_variant.each do |item|
-        if item.order.state == "paid"
-            OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
+  def self.deal_status_update(order)
+    begin    
+      if order.state!='credit_owed'
+        order.line_items.each do |line_item|
+          variant =line_item.variant
+          product=line_item.variant.product
+          old_count=product.currently_bought_count - line_item.quantity   
+          if product.currently_bought_count>product.minimum_number and  old_count>product.minimum_number  
+            logger.info "deal already on and trying to send confirmation mail"
+            # we are sending vouchers after the deal is on
+            OrderMailer.deliver_voucher(order,product,order.user.email)
+            if order.gift?
+              OrderMailer.deliver_gift_notification(order, product)
+            end
+            #OrderMailer.deliver_confirm(order)      
+          elsif product.currently_bought_count<product.minimum_number
+            logger.info "deal not on and trying to send placement mail"
+            user = User.find_by_email(order.email)
+            OrderMailer.deliver_placed(order,user)
+          elsif product.currently_bought_count==product.minimum_number or old_count<product.minimum_number 
+            logger.info "deal on with this placement and trying to send confirmation mail"
+            #sending vouchers for all users before bought
+            line_items_variant = variant.line_items
+            # OrderMailer.deliver_notify_admin(product)
+            line_items_variant.each do |item|
+              if item.order.state == "paid"
+                OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
+                if order.gift?
+                  OrderMailer.deliver_gift_notification(order, product)
+                end                
+              end
+            end
+            # OrderMailer.deliver_confirm(order)
+          end   
         end
+      else
+        OrderMailer.deliver_credit_owed(order)  
+        logger.info "credit owed mailed to........." +order.email
+        admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+        UserMailer.deliver_notify_credit_owed_to_admin(admin, order)
+        logger.info "and mailed to admin also........."
       end
-     # OrderMailer.deliver_confirm(order)
-     end    
-
-end
-else
-  OrderMailer.deliver_credit_owed(order)  
-  logger.info "credit owed mailed to........." +order.email
-  admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
-  UserMailer.deliver_notify_credit_owed_to_admin(admin, order)
-  logger.info "and mailed to admin also........."
+    rescue Exception => e
+      logger.error "problem sending order mails"+e.message
+    end
   end
-rescue Exception => e
-  logger.error "problem sending order mails"+e.message
-end
-
-end
 
 def self.sufficient_inventory(line_item)
   status="available"

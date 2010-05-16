@@ -687,6 +687,7 @@ en-US:
         sentence: with property <em>%s</em> and value <em>%s</em>
   proceed_to_pay: Proceed To Pay
   proceed_to_pay_after_checkout: "Great that you have decided to buy this masthi deal. Let us proceed to pay now"
+  proceed_to_gift_after_checkout: "Great that you have decided to gift this masthi deal. Let us proceed to pay now"
   products: Products
   phone_no: Phone Number
   products_with_zero_inventory_display: "Products with a zero inventory will {{not}} be displayed"
