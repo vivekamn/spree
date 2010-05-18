@@ -90,7 +90,7 @@ class InventoryUnit < ActiveRecord::Base
             # we are sending vouchers after the deal is on
             OrderMailer.deliver_voucher(order,product,order.user.email)
             if order.gift?
-              OrderMailer.deliver_gift_notification(order, product)
+              OrderMailer.deliver_gift_notification(order, product, variant)
             end
             #OrderMailer.deliver_confirm(order)      
           elsif product.currently_bought_count<product.minimum_number
@@ -106,7 +106,7 @@ class InventoryUnit < ActiveRecord::Base
               if item.order.state == "paid"
                 OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
                 if order.gift?
-                  OrderMailer.deliver_gift_notification(order, product)
+                  OrderMailer.deliver_gift_notification(item.order, product, variant)
                 end                
               end
             end

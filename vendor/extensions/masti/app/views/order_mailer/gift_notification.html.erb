@@ -1,10 +1,10 @@
 Dear <%=@order.giftee_name%>,<br/><br/>
 
 <%=@order.checkout.bill_address.name%> has requested us to gift the following to you.<br/><br/>
-Item: "<% @order.line_items[0].variant.product.name %>"<br/>
+Item: "<%= @product.name %>"<br/>
 Quantity: <%=@order.line_items[0].quantity%><br/>
 
-Gift value: <% @order.line_items[0].variant.price %><br/><br/>
+Gift value: Rs.<%= @variant.price %><br/><br/>
 
 ============================================================<br/><br/>
 

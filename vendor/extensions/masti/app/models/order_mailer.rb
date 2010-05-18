@@ -55,10 +55,10 @@ class OrderMailer < ActionMailer::QueueMailer
     @sent_on    = Time.now
   end
 
-  def gift_notification(order, product)
+  def gift_notification(order, product, variant)
     content_type "text/html"
     @subject    = 'Gift Voucher From Masthi Deals'
-    @body       = {"product" => product,"order" => order}
+    @body       = {"product" => product,"order" => order, "variant" => variant}
     @recipients = order.giftee_email
     @from       = Spree::Config[:order_from]
     @bcc        = order_bcc
