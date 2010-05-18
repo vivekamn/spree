@@ -1,9 +1,3 @@
-
-<% content_for :head do %>
-  <%= javascript_include_tag :ckeditor %>
-<% end %>
-
-
 <div class="yui-gc">
   <div class="yui-u first">
     <%- locals = {:f => f} -%>
@@ -19,22 +13,22 @@
         <%= f.text_field :permalink, :class => 'fullwidth title'  %>
         <%= f.error_message_on :permalink %>
       <% end %>
-	  
-	  <% f.field_container :deal_info do %>
+     
+      <% f.field_container :deal_info do %>
         <%= f.label :deal_info, "Deal Info" %> <span class="required">*</span><br />
         <%= f.text_field :deal_info, :class => 'fullwidth title'  %>
         <%= f.error_message_on :deal_info %>
       <% end %>
-	  <% f.field_container :voucher_text do %>
+      <% f.field_container :voucher_text do %>
         <%= f.label :voucher_text, "Voucher Text" %> <span class="required">*</span><br />
         <%= f.text_field :voucher_text, :class => 'fullwidth title'  %>
         <%= f.error_message_on :voucher_text %>
       <% end %>
-	  
+     
 
       <% f.field_container :description do %>
         <%= f.label :description, t("description")%><br />
-        <%= f.cktext_area :description, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
+        <%= f.text_area :description, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
         <%= f.error_message_on :description %>
       <% end %>
     <% end %>
@@ -62,7 +56,7 @@
         <%= f.label :deal_expiry_date, t("deal_expiry_date") %><br />
         <%= f.error_message_on :deal_expiry_date %>
         <%= f.unobtrusive_date_text_picker :deal_expiry_date %>
-      </p>        
+      </p>       
 
       <p>
         <%= f.label :validity_from, t("validity_from") %><br />
@@ -74,26 +68,26 @@
         <%= f.label :validity_to, t("validity_to") %><br />
         <%= f.error_message_on :validity_to %>
         <%= f.unobtrusive_date_text_picker :validity_to %>
-      </p>        
+      </p>       
       <!--p>
         <%= f.label :sku, t("sku") %><br />
         <%= f.text_field :sku, :size => 16 %>
       </p-->
       <% unless @product.has_variants? %>
-	  <% f.field_container :price do %>
+      <% f.field_container :price do %>
         <p>
           <%= f.label :on_hand, t("on_hand")%><br />
           <%= @product.count_on_hand%>
         </p>
-		<p>
+        <p>
           <%= f.label :increased_count, t("inc_count")%><br />
           <%= f.text_field :increased_count, :size => 4 %>
-        </p>	
-		<p>
+        </p>   
+        <p>
           <%= f.label :maximum_number, t("maximum_number")%><br />
           <%= @product.maximum_number%>
-        </p>	
-		<%end%>
+        </p>   
+        <%end%>
         <!--ul id="shipping-specs">
           <li>
             <%= f.label :weight, t("weight")%>
@@ -130,11 +124,11 @@
   <div class="yui-u first">
     <% f.field_container :catch_message do %>
       <%= f.label :catch_message, t("catch_message")%><br />
-      <%= f.cktext_area :catch_message, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
+      <%= f.text_area :catch_message, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
       <%= f.error_message_on :catch_message%>
     <% end %>
-  </div>     
-  <div class="yui-u">    
+  </div>    
+  <div class="yui-u">   
     <% f.field_container :minimum_number do %>
       <%= f.label :minimum_number, t("minimum_number") %> <span class="required">*</span><br />
       <%= f.text_field :minimum_number, :value => @product.minimum_number %>
@@ -150,12 +144,12 @@
   <div class="yui-u first">
     <% f.field_container :reviews do %>
       <%= f.label :reviews, t("reviews")%><br />
-      <%= f.cktext_area :reviews, :toolbar=>'Easy', :width =>"500px", :height =>"200px" %>
+      <%= f.text_area :reviews, {:cols => 60, :rows => 4, :class => 'fullwidth'} %>
       <%= f.error_message_on :reviews%>
     <% end %>
-  </div> 
+  </div>
 
-</div>      
+</div>     
  
 
 <h2><%= t("metadata") %></h2>
