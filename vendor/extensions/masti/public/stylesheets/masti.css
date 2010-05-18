@@ -92,7 +92,9 @@ a{ outline:none;
 }
 .points ul{ width:380px; padding:5px 0 5px 5px; margin:0;
 }
-.points ul li{ width:380px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+.points ul li{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+}
+.points p{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
 }
 .rightsidecontent{ width:409px; float:left;
 }

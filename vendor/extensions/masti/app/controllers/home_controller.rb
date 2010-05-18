@@ -1,6 +1,7 @@
 class HomeController < Spree::BaseController
     require 'RubyRc4.rb'
     require 'base64'
+    ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
   def index
     @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
@@ -21,7 +22,36 @@ class HomeController < Spree::BaseController
       render(:text => 'true')
     end
   end
-
+  
+  def share_this
+    puts "#{params[:recipients]}-------->"
+    recipients = params[:recipients]
+    from=params[:from]
+     puts "#{params[:from]}-------->"
+    split_recipients = recipients.split(",")
+    split_recipients.each do |recipient|
+      #UserMailer.deliver_share_this(recipient,from)
+    end
+    redirect_to home_url
+  end
+  
+   def check_email
+    recipients = params[:email]
+    @trimmed_line = recipients.delete(' ').lstrip
+    @split_recipients = @trimmed_line.split(",");
+    count = 0
+    @split_recipients.each do |s|        
+      if(s.match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i))
+        count+= 1;
+      end
+    end
+    if(@split_recipients.size == count)        
+      render(:text => "valid")
+    else
+      render(:text => "Invalid")
+    end
+  end
+  
   def product_preview
     @featured_product = Product.find_by_permalink(params[:id])
     @price = @featured_product.price.to_i

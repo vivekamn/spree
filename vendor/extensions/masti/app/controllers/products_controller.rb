@@ -7,7 +7,7 @@ class ProductsController < Spree::BaseController
   resource_controller
   helper :taxons
   actions :show, :index
-
+  ssl_required  :show
   def index
     @products = Product.paginate(:all, :conditions => ['deleted_at is NULL'], :page => params[:page], :per_page => 10)
   end

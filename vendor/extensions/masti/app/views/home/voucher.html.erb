@@ -55,12 +55,18 @@
                 <td align="left" width="7" valign="top"></td>
                 <td align="left" width="217" valign="top"></td>
                 </tr>
-              <tr>
-                  <td align="left" width="100%" valign="top" rowspan="2" style="padding-right: 10px;"><h1 style="margin: 0px; padding: 0px; font-size: 16px; font-family: Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 137, 217); font-weight: bold;">
+				<tr >
+					<td colspan="3">
+					<h1 style="margin: 0px; padding: 0px; font-size: 16px; font-family: Verdana,Arial,Helvetica,sans-serif; color: rgb(0, 137, 217); font-weight: bold;">
 
 					<% unless @product.voucher_text.nil?%>
 						<%=@product.voucher_text%></h1>
 					<%end%>
+					</td>
+				</tr>
+              <tr>
+                  <td align="left" width="100%" valign="top" rowspan="2" style="padding-right: 10px;">
+				  
                     <div class="points" style="width:380px;background:transparent url(../images/logo.gif) no-repeat scroll center center;">
 							<ul>
 								<%=@product.description%>

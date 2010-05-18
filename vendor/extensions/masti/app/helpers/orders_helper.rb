@@ -15,10 +15,11 @@ module OrdersHelper
   
   def get_quantities(variant)
     quantities = []    
-    
-    variant.count_on_hand.times do |count|
-      quantities << [count+1, count+1]
-    end
+    quantities << [1, 1]
+    quantities << [2, 2]
+#    variant.count_on_hand.times do |count|
+#      quantities << [count+1, count+1]
+#    end
     return quantities  
   end
 

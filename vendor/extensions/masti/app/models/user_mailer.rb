@@ -1,27 +1,40 @@
 class UserMailer < ActionMailer::Base
+  helper "spree/base"
   default_url_options[:host] = Spree::Config[:site_url]
 
   def password_reset_instructions(user)
     subject       Spree::Config[:site_name] + ' ' + I18n.t("password_reset_instructions")
     from          Spree::Config[:mails_from]
-    bcc           user.email
+    recipients    user.email
+    bcc           Spree::Config[:mail_bcc]
     sent_on       Time.now
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
+  end
+  
+  def share_this(recipient,from,product)
+    content_type "text/html"
+    from           from
+    recipients    recipient
+    bcc           Spree::Config[:mail_bcc]
+    subject        "Welcome to MasthiDeals community" 
+    sent_on        Time.now.utc
+    body           'product' => product
   end
   
   def registration(user,product)
     content_type "text/html"
     from           "customersupport@masthideals.com"
-     bcc             user.email
-     subject        "Welcome to MasthiDeals community" 
-     sent_on        Time.now.utc
-     body           'product' => product
+    recipients    user.email
+    bcc           Spree::Config[:mail_bcc]
+    subject        "Welcome to MasthiDeals community" 
+    sent_on        Time.now.utc
+    body           'product' => product
   end
   
   def users_deal_notify(recipients,product)
     content_type "text/html"
    from           "customersupport@masthideals.com"
-   bcc             recipients
+   bcc            recipients
    subject        "New product in Masti Deals - #{product.name}" 
    sent_on        Time.now.utc
    body          "product" => product,"url"=>default_url_options[:host]

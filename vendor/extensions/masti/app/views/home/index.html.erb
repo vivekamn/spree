@@ -1,4 +1,9 @@
 <%= javascript_include_tag "prototype" %>
+<%= javascript_include_tag "getRealPopup" %>
+<%= javascript_include_tag "effects" %>
+<%= javascript_include_tag "dragdrop" %>
+
+
 <style>
 .progress_bar {
     background-color:#2E81CC; 
@@ -14,6 +19,11 @@ img{
 	border:0;
 }
 </style>
+<div style="position: absolute; right: 132px; top: 148px;">
+	<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/cmoms.jpeg" /></a>	
+</div>
+
+
 <div class="title" style="margin-left:20px;font-size:20px;font-weight:bold; color:#00a8ff;">
 	<% unless @featured_product.name.nil?%>
 		<%=@featured_product.name%>
@@ -32,9 +42,9 @@ img{
                   <div class="bought2">
                     <%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
                   </div>
-                <div style="text-align:center">
-                  <%= link_to "<h1> Gigt This Deal </h1>", "/products/#{@featured_product.permalink}?type=gift" %>
-                </div>                          
+                <!--<div style="text-align:center">
+                  <%= link_to "<h1> Gift This Deal </h1>", "/products/#{@featured_product.permalink}?type=gift" %>
+                </div>-->                          
                 <%else%>
                   <div class='sold_out'>	
                     <span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>
@@ -74,7 +84,7 @@ img{
 				</tr>
 			
 		</tbody></table>
-		<div  style="position: absolute; right: 112px; top: 385px;display:none;" id="chat_div" >
+		<div  style="position: absolute; right: 112px; top: 410px;display:none;" id="chat_div" >
 			<table align="right" cellpadding="0px" cellspacing="0px">
 				<tr>
 					<td align="right">
@@ -205,6 +215,29 @@ Mins: 48 Secs: 36-->
 </div></div>
 </div></div>
 </div>
+<!--<div style="float:left;font-size:12px;padding-left:7px;">
+                    <a href="javascript:show_send_share_this();">Share your score
+                        <br>
+                        with your friends.
+                    </a>
+                </div>
+                <div id="share_this_div" style="display:none;width:500px;height:180px;">
+                    <%= render :partial => "popup" %>
+             </div>
+
+-->
+
+
+<script type="text/javascript">
+    function show_send_share_this(){
+        showPop('share_this_div', 10, 200);
+    }
+	function close_send_share_this(){
+        hidePop('share_this_div');
+    }
+</script>
+
+
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>" >
 <input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>" >
 
@@ -267,3 +300,4 @@ asynchronous:true, evalScripts:true, onComplete:function(request){
   }
 }
 </script>
+
