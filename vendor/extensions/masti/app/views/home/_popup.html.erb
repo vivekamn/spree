@@ -1,0 +1,151 @@
+<div style="height:230px;width:500px;background-color:#FFFFFF;border: 5px solid #29689E;">
+    <% form_for :share_mail ,:url => {:controller =>'home' , :action => 'share_this'},:html => {:id => "share_this",:method=>"post"} do |f|%>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="4" align="center">
+                <span class="style12">Share Your Friends About This Great Deal</span>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                <%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_send_share_this();" %>
+            </td>
+          </tr>
+        <tr height="15">
+          <td >    </td> <td> &nbsp; </td> <td> &nbsp;</td><td></td>
+         </tr>
+        <tr>
+              <td colspan="4" align="center">
+                <div id="div_recipients" style="display:none;"></div>
+            </td>
+          </tr>   
+        <tr>
+            <td width="3%">
+                &nbsp;
+            </td>
+            <td width="11%" align="left"  height="70">
+                <strong>To:</strong>
+            </td>
+            <td width="83%" align='center' height="70">
+                <label>
+                    <textarea name="recipients" id="recipients" cols="50" rows="3" style="font-family:arial;font-size:small;;color:#707070;" onclick="clear_message();" onfocus="clear_value();" onblur="fill_value();">Enter comma separated emails</textarea>
+                </label>
+            </td>
+            <td width="3%">
+                &nbsp;
+            </td>
+          </tr>
+		  <tr>
+            <td width="3%">
+                &nbsp;
+            </td>
+            <td width="11%" align="left"  height="70">
+                <strong>From:</strong>
+            </td>
+            <td width="83%" align='center' height="70">
+                <label>
+                    <input type="text" name="from" id="from" style="width:387px;font-family:arial;font-size:small;;color:#707070;"/></br>
+					<div class="errormesg" id="email_msg" style="color:red;"></div></td>
+                </label>
+            </td>
+            <td width="3%">
+                &nbsp;
+            </td>
+          </tr>
+        <tr height="20">
+          <td >    </td> <td> &nbsp; </td> <td> &nbsp;</td><td></td>
+         </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td  align='center'>
+                <div id="change_image">
+                    <input type="button" style="background-color:#A8D027;" class="forward_but" value="Send to friends" onclick="validate_share_this();" />
+                </div>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+</table>
+<input type="hidden" name="page" value="<%= @page %>" />
+<input type="hidden" name="match" id="match">
+    <% end %>
+</div>
+<script type="text/javascript">
+    function validate_share_this()
+	{
+      	var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+        var msg_recipients = document.getElementById('div_recipients');
+        var get_recipients = document.getElementById('recipients').value;
+        var email_name = document.getElementById('from').value;
+		
+		var error_msg_div = document.getElementById('email_msg');
+		error_msg_div.innerHTML = "";
+		email_my = new String(email_name);
+		email_value = EMAIL_REGEX.test(email_my); 
+		if (email_name != '' && email_name.length != 0 && email_value != 0) {
+			if (get_recipients != "" && get_recipients != "Enter comma separated emails") {
+				new Ajax.Request('/home/check_email?email=' + get_recipients, {
+					asynchronous: true,
+					evalScripts: true,
+					onComplete: function(request){
+						if (request.responseText == "valid") {
+							document.getElementById('change_image_cancel_share_this').onclick = function(){
+							};
+							document.getElementById('change_image_cancel_share_this').style.cursor = "wait";
+							document.getElementById('change_image').innerHTML = '<input type="button" class="forward_but" value="Forwarding..." style="cursor:wait;"/>';
+							document.getElementById('share_this').submit();
+						}
+						else {
+							msg_recipients.style.display = "block";
+							msg_recipients.innerHTML = "<font color='red'>One or more email ids given are invalid.<\/font>";
+						}
+					}
+				});
+			}
+			else {
+				msg_recipients.style.display = "block";
+				msg_recipients.innerHTML = "<font color='red'>Please enter email.<\/font>";
+			}
+		}
+		else{
+			error_msg_div.innerHTML = "Please enter valid E-mail";
+		}
+    }
+    function clear_message(){
+        document.getElementById('div_recipients').style.display = "none";
+    }
+    function clear_value(){
+        document.getElementById('recipients').value= "";
+    }
+   function fill_value(){
+	var recipients = document.getElementById('recipients').value;
+	recipients1 = new String(recipients);
+	if (recipients == null || recipients == '' || recipients1.length != 0){
+		document.getElementById('recipients').value = "Enter comma separated emails";
+	}   	
+   }
+</script>
