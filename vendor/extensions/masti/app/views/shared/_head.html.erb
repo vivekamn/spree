@@ -1,3 +1,5 @@
+
+
 <script type="text/javascript">
 <!--
 function MM_preloadImages() { //v3.0
@@ -86,7 +88,7 @@ function MM_swapImage() { //v3.0
 		  <div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Get Featured" title="Get Featured"/></a></div>
 		  <div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcomingon.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
 	<%else%>
-		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/dealon.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/dealon.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
 		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="237" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
 		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
 		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
@@ -105,6 +107,7 @@ function MM_swapImage() { //v3.0
   		 <%= render :partial => "/shared/whos_among_us" %>
     </div>
   <% end %>
+   
   
 
 <script type="text/javascript">
@@ -120,8 +123,3 @@ function MM_swapImage() { //v3.0
 	}
 </script>
 
-<%if !admin?%>
-<script>
-	document.getElementById('wau_tab_container').style.display='none';	
-</script>
-<% end %>
