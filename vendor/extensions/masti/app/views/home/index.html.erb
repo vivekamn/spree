@@ -2,8 +2,35 @@
 <%= javascript_include_tag "getRealPopup" %>
 <%= javascript_include_tag "effects" %>
 <%= javascript_include_tag "dragdrop" %>
-
-
+<%= javascript_include_tag "utils" %>
+<script>
+    function adjustNotes(){
+        var default_notes_top = 138;
+        var default_screen_width = 935;
+		var home_coordinates = getElementOffsetScrollable(document.getElementById("home_menu"));
+        var pageY;
+        if (typeof(window.pageYOffset) == 'number') {
+            pageY = window.pageYOffset;
+        }
+        else {
+            pageY = document.documentElement.scrollTop;
+        }
+        
+        if (pageY > 70) 
+            default_notes_top = 0;
+        
+        if (document.getElementById("notes_div")) {
+            document.getElementById("notes_div").style.top = default_notes_top + "px";
+			document.getElementById("notes_div").style.left = default_screen_width + home_coordinates.left + "px";
+           
+        }
+    }
+    
+    window.onscroll = adjustNotes;
+    window.onload = adjustNotes;
+    window.onresize = adjustNotes;
+    
+</script>
 <style>
 .progress_bar {
     background-color:#2E81CC; 
@@ -19,10 +46,35 @@ img{
 	border:0;
 }
 </style>
-<div style="position: absolute; right: 132px; top: 148px;">
-	<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/cmoms.jpeg" /></a>	
-</div>
-
+ <table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
+        <tr>
+			 <td>
+				 <table border=0 cellpadding=0 cellspacing=0>
+		        	 <tr>
+		        		 <td>
+		         	 		<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/cmoms.jpeg" /></a>	
+					 	</td>
+					</tr>
+				</table>
+		</td>
+	</tr>
+		 <tr>
+        	 <td>
+        	 	<div id="chat_div" style="display:none;">
+	         	 	<table align="right" cellpadding="0px" cellspacing="0px">
+					<tr>
+						<td align="right">
+							<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
+						</td>
+						<td valign="top" width="18px">
+							<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+						</td>
+					</tr>
+				</table>
+				</div>	
+			 </td>
+		</tr>
+		</table>
 
 <div class="title" style="margin-left:20px;font-size:20px;font-weight:bold; color:#00a8ff;">
 	<% unless @featured_product.name.nil?%>
@@ -84,20 +136,6 @@ img{
 				</tr>
 			
 		</tbody></table>
-		<div  style="position: absolute; right: 112px; top: 410px;display:none;" id="chat_div" >
-			<table align="right" cellpadding="0px" cellspacing="0px">
-				<tr>
-					<td align="right">
-						<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
-					</td>
-					<td valign="top" width="18px">
-						<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-					</td>
-				</tr>
-			</table>
-			
-		</div>	
-
 	</div>
 </div>
 <div class="sharetis">
