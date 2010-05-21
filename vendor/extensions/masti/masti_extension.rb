@@ -91,7 +91,7 @@ Address.class_eval do
   attr_accessible :name, :city, :state_id, :country, :address1, :zipcode, :phone
 #  attr_accessor :name, :address1, :zipcode, :phone
   has_one :user, :foreign_key => "bill_address_id"
-      validates_presence_of :name, :message => "is invalid"      
+      validates_presence_of :name, :message => "can not be empty"      
       validates_format_of :name, :with=>/^([A-Za-z .]+$)/, :message => "is invalid"
   end
   

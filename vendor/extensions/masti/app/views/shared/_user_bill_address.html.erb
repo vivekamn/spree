@@ -1,4 +1,6 @@
-
+<%= javascript_include_tag "prototype" %>
+<div class="flash errors" id="flash_error" style="display:none;">
+</div>
 <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
 		<tr>
       <td width="30%" height="35"><%= bill_form.label :name, t(:name) %><span class="req" style="float:none;">*</span></td>
@@ -46,4 +48,75 @@
 	   
         </td>		
     </tr> 
-     </table>
+  </table>
+<div class="form-buttons">
+  <%= image_submit_tag "submit1.gif", :alt => 'submit_btn', :class  => "cursor_pointer", :id => "submit_btn",:onclick => "return user_validate();" %>
+</div>
+<script>
+  function user_validate() {
+    var name = document.getElementById('checkout_bill_address_attributes_name').value;
+    var address = document.getElementById('checkout_bill_address_attributes_address1').value;
+    var mobile = document.getElementById('checkout_bill_address_attributes_phone').value;
+    var pincode = document.getElementById('checkout_bill_address_attributes_zipcode').value;
+    var msg = '';
+    var PHONE_REGEX	= /^[0-9]+$/;
+    var flag_user = true;
+
+    if(name == '' || name == null){
+      msg += '<br/>Name cannot be empty';
+      flag_user = false; 
+    }
+
+    if(address == '' || address == null){
+      msg += '<br/>Street Address cannot be empty';
+      flag_user = false; 
+    }    
+
+    phone_value = PHONE_REGEX.test(new String(mobile)); 
+    if(mobile =='' || mobile == null) {
+      msg += '<br/>Phone No. can not be empty';
+      flag_user = false;
+    } 
+    else {
+      if(phone_value != true) {
+        msg += '<br/> Please give only numbers in the Phone No. field';
+        flag_user = false;
+      }
+      else {
+        if(new String(mobile).length != 10){
+          msg += '<br/>Please check Phone No. has 10 digits';
+          flag_user = false;
+        }
+      }
+    }
+
+    pincode_value = PHONE_REGEX.test(new String(pincode)); 
+    if(pincode =='' || pincode == null) {
+      msg += '<br/>Pincode can not be empty';
+      flag_user = false;
+    } 
+    else {
+      if(pincode_value != true) {
+        msg += '<br/> Please give only numbers in the pincode field';
+        flag_user = false;
+      }
+      else {
+        if(new String(pincode).length != 6){
+          msg += '<br/>Please check pincode has 6 digits';
+          flag_user = false;
+        }
+      }
+    }    
+    if(!flag_user) {
+      msg += '</ul>'
+    document.getElementById('flash_error').style.display='';
+    document.getElementById('flash_error').innerHTML = msg;
+    }
+    else {
+      document.getElementById('flash_error').style.display=none;
+      error_msg_div.innerHTML = "";
+    }
+    return flag_user;
+  }
+
+</script>  
