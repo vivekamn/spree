@@ -139,6 +139,12 @@
       <%= f.label :currently_bought_count, t("currently_bought_count") %> <span class="required">*</span><br />
       <%= f.text_field :currently_bought_count, :value => @product.currently_bought_count %>
       <%= f.error_message_on :currently_bought_count%>
+	 <% end %>
+	
+	   <% f.field_container :max_vouchers do %>
+      <%= f.label :max_vouchers, t("max_vouchers") %> <br />
+      <%= f.text_field :max_vouchers, :value => @product.max_vouchers %>
+      <%= f.error_message_on :max_vouchers%>
     <% end %>
   </div>
   <div class="yui-u first">

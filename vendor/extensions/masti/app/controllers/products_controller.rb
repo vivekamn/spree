@@ -13,8 +13,28 @@ class ProductsController < Spree::BaseController
   end
   
   def show
-    session[:order_id] = nil
-    redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
+    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+    cur_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
+    oreders = current_user.orders
+    count = 0
+    oreders.each do |order|
+     order.line_items.each do |line_item|
+       if line_item.variant.id ==  cur_product.variant.id
+         if order.state == "paid"
+           count += line_item.quantity
+         end
+      end
+     end
+   end
+      if cur_product.max_vouchers.nil? or count < cur_product.max_vouchers
+        session[:user_bought_count] = count
+        session[:order_id] = nil
+        redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
+      else
+        flash[:error] = "You have already bought the maximum allowed number of purchases in this deal.  We implement the maximum number of purchases per user to ensure that a large number of users can use this offer."
+        redirect_to :back
+      end
+      
   end
 
   include Spree::Search

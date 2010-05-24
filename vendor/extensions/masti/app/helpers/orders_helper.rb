@@ -13,13 +13,18 @@ module OrdersHelper
     #options.delete(:format_as_currency) ? number_to_currency(amount) : amount
   end
   
-  def get_quantities(variant)
-    quantities = []    
-    quantities << [1, 1]
-    quantities << [2, 2]
-#    variant.count_on_hand.times do |count|
-#      quantities << [count+1, count+1]
-#    end
+  def get_quantities(variant,user_count)
+    quantities = []
+   unless variant.product.max_vouchers.nil?
+       us_count = variant.product.max_vouchers - user_count
+       us_count.times do |count|
+        quantities << [count+1, count+1]
+       end
+   else
+      variant.count_on_hand.times do |count|
+        quantities << [count+1, count+1]
+      end
+   end
     return quantities  
   end
 

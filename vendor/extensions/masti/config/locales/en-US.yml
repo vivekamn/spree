@@ -5,6 +5,7 @@ en-US:
   validity_from: "Validity From"
   validity_to: "Validity To"
   currently_bought_count: "Currently Bought Count"
+  max_vouchers: "Maximum Vouchers"
   catch_message: "Catch Messages"
   'no': "No"
   'yes': "Yes"

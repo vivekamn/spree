@@ -42,9 +42,23 @@ function MM_swapImage() { //v3.0
     <% else %>
 	<div class="submitpart">
 	<div class="join">
-		
-					<%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path %>
-					New user? <%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>Up</span>", signup_path  %></div>		
+		<table cellpadding="1" cellspacing="1">
+			<tr>
+				<td>
+					<table style="border-right:1px solid;">
+						<tr>
+							<td>
+								<%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path %>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					New here? <%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>Up</span>", signup_path  %>	
+				</td>
+			</tr>
+		</table>
+		</div>				
       <!--<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %></div>
       <%# form_tag user_session_path do  %>
         <div class="submitpart"> 

@@ -17,7 +17,9 @@ class UsersController < Spree::BaseController
 	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
 	       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
          product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
-        UserMailer.deliver_registration(@user,product)
+         UserMailer.deliver_registration(@user,product)
+         message = "Hi,Thanks for registering with  MasthiDeals.com. We will give you great deals from restaurants, spas, resorts etc  periodically- MasthiDeals team."
+         send_sms(@user.phone_no,message)
         @user.roles << Role.find_by_name("admin") unless admin_created?
         respond_to do |format|
 	        format.html { redirect_back_or_default home_url }
@@ -88,7 +90,13 @@ class UsersController < Spree::BaseController
 #  end
 
   private
-
+    
+    def send_sms(phone_no,message)
+      query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
+      result = ActiveRecord::Base.connection.execute(query)
+    end
+    
+    
     def object      
       @object ||= current_user      
       @object.bill_address ||= Address.default

@@ -76,27 +76,32 @@ class InventoryUnit < ActiveRecord::Base
 #    
 #    out_of_stock_items
 #  end
-
-
-  def self.deal_status_update(order)
+  class << self
+  def deal_status_update(order)
     begin    
       if order.state!='credit_owed'
         order.line_items.each do |line_item|
           variant =line_item.variant
           product=line_item.variant.product
+          user = User.find_by_email(order.email)
           old_count=product.currently_bought_count - line_item.quantity   
           if product.currently_bought_count>product.minimum_number and  old_count>product.minimum_number  
             logger.info "deal already on and trying to send confirmation mail"
             # we are sending vouchers after the deal is on
+            message = "Hi ,We have emailed you the coupon for MasthiDeals - #{product.name}  - order no : #{order.number}."
+            send_sms(user.phone_no,message)
             OrderMailer.deliver_voucher(order,product,order.user.email)
             if order.gift?
               OrderMailer.deliver_gift_notification(order, product, variant)
             end
+            
             #OrderMailer.deliver_confirm(order)      
           elsif product.currently_bought_count<product.minimum_number
             logger.info "deal not on and trying to send placement mail"
             user = User.find_by_email(order.email)
             OrderMailer.deliver_placed(order,user)
+            message = "Hi,Your order no : #{order.number}  for MasthiDeals - #{product.name} is successfuly placed. We will email you the voucher when the deals goes live.Order number : ( #{order.number})."
+            send_sms(user.phone_no,message)
           elsif product.currently_bought_count==product.minimum_number or old_count<product.minimum_number 
             logger.info "deal on with this placement and trying to send confirmation mail"
             #sending vouchers for all users before bought
@@ -107,7 +112,9 @@ class InventoryUnit < ActiveRecord::Base
                 OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
                 if order.gift?
                   OrderMailer.deliver_gift_notification(item.order, product, variant)
-                end                
+                end  
+                message = "Hi ,We have emailed you the coupon for MasthiDeals - #{product.name}  - order no : #{order.number}."
+                send_sms(user.phone_no,message)
               end
             end
             # OrderMailer.deliver_confirm(order)
@@ -125,6 +132,13 @@ class InventoryUnit < ActiveRecord::Base
     end
   end
 
+  
+    def send_sms(phone_no,message)
+      query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
+      result = ActiveRecord::Base.connection.execute(query)
+    end
+  end
+  
 def self.sufficient_inventory(line_item)
   status="available"
       variant = line_item.variant
@@ -195,8 +209,12 @@ end
                                  :conditions => ['status = ? ', status],
                                  :limit => quantity)
   end
-
+  
+  
+  
   private
+  
+  
   def allow_ship?
     Spree::Config[:allow_backorder_shipping] || (state == 'ready_to_ship')
   end
