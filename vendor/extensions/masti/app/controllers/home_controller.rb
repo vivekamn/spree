@@ -35,6 +35,7 @@ class HomeController < Spree::BaseController
     split_recipients.each do |recipient|
       UserMailer.deliver_share_this(recipient,from,product,params[:name])
     end
+    flash[:success]="Deal Shared to your friends"
     redirect_to home_url
   end
   
