@@ -94,9 +94,9 @@ img{
                   <div class="bought2">
                     <%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
                   </div>
-                <!--<div style="text-align:center">
-                  <%= link_to "<h1> Gift This Deal </h1>", "/products/#{@featured_product.permalink}?type=gift" %>
-                </div>-->                          
+                <div style="text-align:center">
+                  <%= link_to "<h1> Gift This Deal <img src='/images/gift_box.png' border=0 /> </h1>", "/products/#{@featured_product.permalink}?type=gift" %>
+                </div>                          
                 <%else%>
                   <div class='sold_out'>	
                     <span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px'%></span>

@@ -5,7 +5,7 @@
   <div class="shoppingout1">
     <% if @order.gift? %>
       <div>
-        <h1>I Would Like to Gift!</h1>
+        <%= image_tag '/images/iwouldgift.gif', :border => '0'%> 
         <div id="Gtext">
           Give the Name, Email and Phone No. of the person to whom you want to gift and update. Don't worry the voucher only has the retail value on it, so gift away..
         </div>
@@ -34,41 +34,80 @@
 </div>
 
 <script type="text/javascript">
+  function update_price() {
+    document.getElementById('buy').style.display='none';    
+    document.getElementById('updatecart').submit();
+  }
+
+</script>
+
+
+<script type="text/javascript">
+  var order_submit = true;
   var name = document.getElementById('order_giftee_name');
   var email = document.getElementById('order_giftee_email');
-  var phone = document.getElementById('order_giftee_phone_no');  
+  var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+  var phone = document.getElementById('order_giftee_phone_no'); 
+  var PHONE_REGEX	= /^[0-9]+$/; 
   function validate_name() {
     if(name.value == "") {
       document.getElementById('name_div').innerHTML = "Name cann't be empty";
+      order_submit = false;
     }
     else {
       document.getElementById('name_div').innerHTML = " ";
+      order_submit = true;
     }
   }
-  function validate_email() {
-    if(email.value == "") {
-      document.getElementById('email_div').innerHTML = "Email cann't be empty";
+
+function validate_email() {
+  if (email.value.length != 0) {
+    email_my = new String(email.value);
+    email_value = EMAIL_REGEX.test(email_my);
+    if (email_value != true) {
+      document.getElementById('email_div').innerHTML = "Email is invalid";
+      order_submit = false;
     }
     else {
       document.getElementById('email_div').innerHTML = " ";
+      order_submit = true;
     }
   }
-  function validate_phone() {
-    if(phone.value == "") {
-      document.getElementById('phone_div').innerHTML = "Phone cann't be empty";
+  else {
+    document.getElementById('email_div').innerHTML = "Email cann't be empty";
+    order_submit = false;
+  }
+}
+function validate_phone() {
+  phone_value = PHONE_REGEX.test(new String(phone.value)); 
+  if(phone.value =='' || phone.value == null) {
+    document.getElementById('phone_div').innerHTML = 'Phone No. field can not be empty';
+    order_submit = false;
+  } 
+  else {
+    document.getElementById('phone_div').innerHTML = " "
+    order_submit = true;  
+    if(phone_value != true) {
+      document.getElementById('phone_div').innerHTML = 'Please give only numbers';
+      order_submit = false;
     }
     else {
-      document.getElementById('phone_div').innerHTML = " ";
-    }    
-  }  
+      if(new String(phone.value).length != 10){
+        document.getElementById('phone_div').innerHTML = 'Please check Phone No. has 10 digits';
+        order_submit = false;
+      }
+    }
+  }
+}  
+
   function update_order() {
-    //validate_name();
-    //validate_email();
-    //validate_phone();
-    //document.getElementById('buy').style.display='none';
-    //if(name.value != "" && email.value != "" && phone.value != ""){
+    validate_name();
+    validate_email();
+    validate_phone();
+    document.getElementById('buy').style.display='none';
+    if(order_submit) {
       document.getElementById('updatecart').submit();
-    //}
+    }
   }
 </script>
 
