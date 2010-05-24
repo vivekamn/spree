@@ -71,7 +71,7 @@ margin-right:6px;
             <div id='buy' align="right">
              <% if @order.gift? %> 
 			  <% if @order.giftee_name %>
-                <%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
+                <%= link_to image_tag('/images/buy_gift.png', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
                <% end %>
 			  <%else%>
 			  	<%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
