@@ -17,5 +17,8 @@
     <%= render @checkout.state, :checkout_form => checkout_form %>    
     <input type="hidden" name="step" value="<%= @checkout.state %>">
     <input id="post-final" type="submit" style="display:none"/> 
+	<div class="form-buttons">
+  <%= image_submit_tag "submit1.gif", :alt => 'submit_btn', :class  => "cursor_pointer", :id => "submit_btn",:onclick => "return user_validate();" %>
+</div>
   <%end%>
 </div>
