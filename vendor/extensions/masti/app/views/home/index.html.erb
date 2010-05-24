@@ -142,33 +142,27 @@ img{
 	
 		<div class="sharetext" style="text-decoration:none;">
 				<div style="margin-left:20px">
-					<!--<a name="fb_share" type="button" share_url="http://www.masthideals.com" href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com&t=MasthiDelas">Facebook It!</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
-					<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://richardxthripp.thripp.com/wp-content/plugins/tweet-this/icons/tt-twitter-micro2.png" class="nothumb" style="margin-bottom: -5px;"></a>
-					<a href="mailto:?subject=Great Deals Exclusive for MasthiDeals members&body=<%=@featured_product.name%>">E-mail</a>
-					-->
-<a id="ck_email" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/email.gif" /></a>
-<a id="ck_facebook" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/facebook.gif" /></a>
-<a id="ck_twitter" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/twitter.gif" /></a>
-<a id="ck_sharethis" class="stbar chicklet" href="javascript:void(0);"><img src="http://w.sharethis.com/chicklets/sharethis.gif" /></a>
-<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Tell your friends about</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;"> this Masthi Deal!</span></u>
-<input type="hidden" id="image_url" value="<%if @featured_product.images and @featured_product.images.first %><%= @featured_product.images.first.attachment.url(:large) %><%else%>/images/logo.gif<%end%>">
-<script type="text/javascript">
-		
-	var image_url = document.getElementById('image_url').value
-	var shared_object = SHARETHIS.addEntry({
-	title:  document.title,
-	summary: '<span style="text-decoration:none;font-weight:normal;">www.masthideals.com features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.<br/><br/>Current deal : <%= @featured_product.name %><br/><br/>You might  like it.<br/><br/>We publish a new deal every week.<br/><br/>Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.</span>',
-	icon:'http://www.masthideals.com'+image_url,
-	url: document.location.href
-},{embeds:true});
-
-shared_object.attachButton(document.getElementById("ck_sharethis"));
-shared_object.attachChicklet("email", document.getElementById("ck_email"));
-shared_object.attachChicklet("facebook", document.getElementById("ck_facebook"));
-shared_object.attachChicklet("twitter", document.getElementById("ck_twitter"));
-</script>
-
-
+					<table border="0">
+						<tr>
+							<td valign="top">
+								<a name="fb_share" type="icon_link" href="http://www.facebook.com/sharer.php" /><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+							</td>
+							<td valign="top">
+								<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://w.sharethis.com/chicklets/twitter.gif" class="nothumb" style="margin-bottom: 7px;margin-right:3px;"></a>
+							</td>
+							<td valign="top">
+								<a href="javascript:show_send_share_this();"><img src="http://w.sharethis.com/chicklets/email.gif" style="margin-bottom: 7px;" /></a>
+							</td>
+							<td valign="top">
+								<div style="margin-top:-10px">
+								<span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#6cab16; font-weight:bold;">Tell your friends about</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:17px; color:#214d76; font-weight:bold;"> this Masthi Deal!</span></u>
+								</div>
+							</td>
+						</tr>
+					</table>
+					
+                    
+					
 					<%#render :partial=>'/shared/share_with_friends'%>
 					<br/>
 				</div>	
@@ -253,17 +247,11 @@ Mins: 48 Secs: 36-->
 </div></div>
 </div></div>
 </div>
-<!--<div style="float:left;font-size:12px;padding-left:7px;">
-                    <a href="javascript:show_send_share_this();">Share your score
-                        <br>
-                        with your friends.
-                    </a>
-                </div>
+
                 <div id="share_this_div" style="display:none;width:500px;height:180px;">
                     <%= render :partial => "popup" %>
              </div>
 
--->
 
 
 <script type="text/javascript">

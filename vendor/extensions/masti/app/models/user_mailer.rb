@@ -11,14 +11,14 @@ class UserMailer < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
   
-  def share_this(recipient,from,product)
+  def share_this(recipient,from,product,name)
     content_type "text/html"
     from           from
     recipients    recipient
     bcc           Spree::Config[:mail_bcc]
-    subject        "Welcome to MasthiDeals community" 
+    subject        "#{product.name}" 
     sent_on        Time.now.utc
-    body           'product' => product
+    body           'product' => product,'name'=>name
   end
   
   def registration(user,product)

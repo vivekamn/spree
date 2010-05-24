@@ -24,13 +24,16 @@ class HomeController < Spree::BaseController
   end
   
   def share_this
-    puts "#{params[:recipients]}-------->"
+    puts "#{params[:name]}-------->"
     recipients = params[:recipients]
+    name = params[:recipients]
     from=params[:from]
-     puts "#{params[:from]}-------->"
+    puts "#{params[:from]}-------->"
+    current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+    product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
     split_recipients = recipients.split(",")
     split_recipients.each do |recipient|
-      #UserMailer.deliver_share_this(recipient,from)
+      UserMailer.deliver_share_this(recipient,from,product,params[:name])
     end
     redirect_to home_url
   end

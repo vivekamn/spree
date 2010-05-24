@@ -1,13 +1,16 @@
 <span style="text-decoration:none;font-weight:normal;">
-	<a href="http://www.masthideals.com">www.masthideals.com</a> features great deals(more than 50%) from prominent Restaurants, Spas, Beauty houses, Adventure sports etc in various localities of chennai.
+	Hi,<br/><br/>
+	I found this great deal <%= @product.name %> in <a href="http://www.masthideals.com/?from=share_this">www.masthideals.com</a>
 	<br/><br/>
-	Current deal : <%= @product.name %>
+	They offer deeply discounted deals from Restaurants, Spas, Resorts, Adventure sports etc. Please take a look. You might like it.
 	<br/><br/>
-	You might  like it.
+	Tell your friends bcoz with more number of users they will be able to negotiate better deals from  Businessess.
 	<br/><br/>
-	We publish a new deal every week.
-	<br/><br/>
-	Please register your email id to lakshmi@masthideals.com to get updates on new deals posted.
-</span>
-<br/><br/>
 <img width="540" src="http://www.masthideals.com<%= @product.images.first.attachment.url(:large) %>">
+
+<br/><br/>
+Regards,
+<br/><br/>
+<%= @name %>
+
+</span>
