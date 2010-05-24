@@ -150,7 +150,7 @@ img{
 								<a name="fb_share" type="icon_link" href="http://www.facebook.com/sharer.php" /><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
 							</td>
 							<td valign="top">
-								<a href="http://twitter.com/home?status=<%=@featured_product.name%>" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://w.sharethis.com/chicklets/twitter.gif" class="nothumb" style="margin-bottom: 7px;margin-right:3px;"></a>
+								<a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img alt="Post to Twitter" src="http://w.sharethis.com/chicklets/twitter.gif" class="nothumb" style="margin-bottom: 7px;margin-right:3px;"></a>
 							</td>
 							<td valign="top">
 								<a href="javascript:show_send_share_this();"><img src="http://w.sharethis.com/chicklets/email.gif" style="margin-bottom: 7px;" /></a>
