@@ -27,7 +27,7 @@
   <% count = session[:user_bought_count] %>
   <td width="9%" class="bd1 bd2 plr">
     <% hook :cart_item_quantity, locals do %>      
-	  <%=item_form.select :quantity, get_quantities(variant,count), {}, { :onchange=>'update_order();' } %>	 
+	  <%=item_form.select :quantity, get_quantities(variant,count), {}, { :onchange=>'update_price();' } %>	 
     <% end %>
   </td>
 

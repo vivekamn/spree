@@ -7,13 +7,13 @@
 <div id="checkout" style="padding:10px;">  
   <%= checkout_progress %>
 <br /><br />
-  <%= error_messages_for :checkout %>
+<!--  <%= error_messages_for :checkout %> -->
   <% hook :checkout_summary_box do %>
     <div id="checkout-summary" style="background-color:#C3C9DF;float:right;margin-top:16px;padding:20px;width:180px;">
       <%= render :partial => "summary" %>
     </div>
   <% end %>     
-   <% form_for @checkout, :url => object_url, :html => { :method => :put, :id => "checkout_form_#{@checkout.state}"} do |checkout_form| %>
+  <% form_for @checkout, :url => object_url, :onsubmit => "return user_validate();", :html => { :method => :put, :id => "checkout_form_#{@checkout.state}"} do |checkout_form| %>
     <%= render @checkout.state, :checkout_form => checkout_form %>    
     <input type="hidden" name="step" value="<%= @checkout.state %>">
     <input id="post-final" type="submit" style="display:none"/> 
@@ -22,3 +22,73 @@
 </div>
   <%end%>
 </div>
+
+<script>
+  function user_validate() {
+    var name = document.getElementById('checkout_bill_address_attributes_name').value;
+    var address = document.getElementById('checkout_bill_address_attributes_address1').value;
+    var mobile = document.getElementById('checkout_bill_address_attributes_phone').value;
+    var pincode = document.getElementById('checkout_bill_address_attributes_zipcode').value;
+    var msg = '';
+    var PHONE_REGEX	= /^[-+()\/\s\d]+([0-9])+$/;
+    var flag_user = true;
+
+    if(name == '' || name == null){
+      msg += '<br/>Name cannot be empty';
+      flag_user = false; 
+    }
+
+    if(address == '' || address == null){
+      msg += '<br/>Street Address cannot be empty';
+      flag_user = false; 
+    }    
+
+    phone_value = PHONE_REGEX.test(new String(mobile)); 
+    if(mobile =='' || mobile == null) {
+      msg += '<br/>Phone No. can not be empty';
+      flag_user = false;
+    } 
+    else {
+      if(phone_value != true) {
+        msg += "<br/> Phone number can have only numerals, '-', '+' and '()'";
+        flag_user = false;
+      }
+      else {
+        mobile_length = new String(mobile).length
+        if(mobile_length < 8 || mobile_length > 11 ){
+          msg += '<br/>Please check  your Phone No.';
+          flag_user = false;
+        }
+      }
+    }
+
+    pincode_value = PHONE_REGEX.test(new String(pincode)); 
+    if(pincode =='' || pincode == null) {
+      msg += '<br/>Pincode can not be empty';
+      flag_user = false;
+    } 
+    else {
+      if(pincode_value != true) {
+        msg += '<br/> Please give only numbers in the pincode field';
+        flag_user = false;
+      }
+      else {
+        if(new String(pincode).length != 6){
+          msg += '<br/>Please check pincode has 6 digits';
+          flag_user = false;
+        }
+      }
+    }    
+    if(!flag_user) {
+      msg += '</ul>'
+    document.getElementById('flash_error').style.display='';
+    document.getElementById('flash_error').innerHTML = msg;
+    }
+    else {
+      document.getElementById('flash_error').style.display=none;
+      error_msg_div.innerHTML = "";
+    }
+    return flag_user;
+  }
+
+</script>  
