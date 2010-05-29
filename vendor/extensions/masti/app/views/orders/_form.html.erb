@@ -32,7 +32,7 @@ margin-right:6px;
           <tr align='center'>
             <td>
               <b>Name</b> <span class="required">*</span><br />
-              <%= order_form.text_field :giftee_name, :onblur => 'validate_name();' %>
+              <%= order_form.text_field :giftee_name, :onblur => 'validate_name();',:size=>20 %>
               <span id="name_div" style="color:red"></span>
             </td>
             <td>
@@ -42,7 +42,7 @@ margin-right:6px;
             </td>
             <td>
               <b>Phone No.</b><span class="required">*</span><br />
-              <%= order_form.text_field :giftee_phone_no, :onblur => 'validate_phone();' %>
+              <%= order_form.text_field :giftee_phone_no, :onblur => 'validate_phone();',:size=>20 %>
               <span id="phone_div" style="color:red"></span>
             </td>
             <% unless @order.giftee_name %> 
