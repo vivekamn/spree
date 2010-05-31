@@ -27,7 +27,6 @@ class ProductsController < Spree::BaseController
      end
    end
       if cur_product.max_vouchers.nil? or count < cur_product.max_vouchers
-        session[:user_bought_count] = count
         session[:order_id] = nil
         redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
       else

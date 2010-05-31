@@ -13,9 +13,20 @@ module OrdersHelper
     #options.delete(:format_as_currency) ? number_to_currency(amount) : amount
   end
   
-  def get_quantities(variant,user_count)
+  def get_quantities(variant,current_user)
     quantities = []
    unless variant.product.max_vouchers.nil?
+       oreders = current_user.orders
+        user_count = 0
+        oreders.each do |order|
+         order.line_items.each do |line_item|
+           if line_item.variant.id ==  variant.id
+             if order.state == "paid"
+               user_count += line_item.quantity
+             end
+          end
+         end
+       end
        us_count = variant.product.max_vouchers - user_count
        us_count.times do |count|
         quantities << [count+1, count+1]
