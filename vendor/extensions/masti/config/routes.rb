@@ -19,6 +19,12 @@ map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
 map.email_camp '/email_camp',:controller => "home", :action => "index"
+map.forum '/forum',:controller => "home", :action => "index"
+map.classifieds '/classifieds',:controller => "home", :action => "index"
+map.directory '/directory',:controller => "home", :action => "index"
+map.bookmarking '/bookmarking',:controller => "home", :action => "index"
+map.blog '/blog',:controller => "home", :action => "index"
+
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  

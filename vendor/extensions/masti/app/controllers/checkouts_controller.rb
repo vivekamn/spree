@@ -106,7 +106,6 @@ class CheckoutsController < Spree::BaseController
 
   # Calls edit hooks registered for the current step
   def edit_hooks
-    session.delete :user_bought_count
     edit_hook @checkout.state.to_sym
   end
   # Calls update hooks registered for the current step

@@ -48,35 +48,6 @@ img{
 </style>
 <% @description = "Find all upcoming online deals, discount coupons and great shopping offers for your favorite online store at Masthideals.com"%>
 <% @keywords = "hot deals coupons, online discount deals, best spa resort deals chennai, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages "%>
- <table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
-        <tr>
-			 <td>
-				 <table border=0 cellpadding=0 cellspacing=0>
-		        	 <tr>
-		        		 <td>
-		         	 		<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/masthi_cmoms.jpeg" /></a>	
-					 	</td>
-					</tr>
-				</table>
-		</td>
-	</tr>
-		 <tr>
-        	 <td>
-        	 	<div id="chat_div" style="display:none;">
-	         	 	<table align="right" cellpadding="0px" cellspacing="0px">
-					<tr>
-						<td align="right">
-							<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
-						</td>
-						<td valign="top" width="18px">
-							<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-						</td>
-					</tr>
-				</table>
-				</div>	
-			 </td>
-		</tr>
-		</table>
 
 <div class="title" style="margin-left:20px;font-size:20px;font-weight:bold; color:#00a8ff;">
 	<% unless @featured_product.name.nil?%>
@@ -253,6 +224,37 @@ Mins: 48 Secs: 36-->
                 <div id="share_this_div" style="display:none;width:500px;height:180px;">
                     <%= render :partial => "popup" %>
              </div>
+
+
+ <table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
+        <tr>
+			 <td>
+				 <table border=0 cellpadding=0 cellspacing=0>
+		        	 <tr>
+		        		 <td>
+		         	 		<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/masthi_cmoms.jpeg" /></a>	
+					 	</td>
+					</tr>
+				</table>
+		</td>
+	</tr>
+		 <tr>
+        	 <td>
+        	 	<div id="chat_div" style="display:none;">
+	         	 	<table align="right" cellpadding="0px" cellspacing="0px">
+					<tr>
+						<td align="right">
+							<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
+						</td>
+						<td valign="top" width="18px">
+							<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+						</td>
+					</tr>
+				</table>
+				</div>	
+			 </td>
+		</tr>
+		</table>
 
 
 
