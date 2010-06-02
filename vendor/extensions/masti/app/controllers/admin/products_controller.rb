@@ -99,12 +99,13 @@ class Admin::ProductsController < Admin::BaseController
     end
 
     # set the default tax_category if applicable
-    def create_before       
+    def create_before 
+      @product.variant.count_on_hand = @product.maximum_number
       return unless Spree::Config[:default_tax_category]
       @product.tax_category ||= TaxCategory.find_by_name Spree::Config[:default_tax_category]
     end
 
-    def update_before      
+    def update_before 
 #      if params[:product][:deal_expiry_date].to_date<=Time.now.to_date
 #          flash[:error]="cannot be in past"
 #        end
