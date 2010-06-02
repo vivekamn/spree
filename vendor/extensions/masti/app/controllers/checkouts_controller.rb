@@ -40,9 +40,9 @@ class CheckoutsController < Spree::BaseController
         @order.update_totals!        
         after :update        
         next_step             
-#        if @checkout.completed_at
-#          return complete_checkout
-#        end
+        if @checkout.completed_at
+          return complete_checkout
+        end
       else
         after :update_fails
         set_flash :update_fails
@@ -158,7 +158,10 @@ class CheckoutsController < Spree::BaseController
     # prevent editing of a complete checkout
     if parent_object.checkout_complete
       logger.info "editing of a complete checkout prevented"
-#      redirect_to order_url(parent_object)     
+    if parent_object.state == 'paid'
+     redirect_to order_url(parent_object)        
+    end
+  # redirect_to order_url(parent_object)     
     end    
   end
 

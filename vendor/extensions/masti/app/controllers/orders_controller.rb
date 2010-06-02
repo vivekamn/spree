@@ -89,9 +89,9 @@ class OrdersController < Spree::BaseController
   
   def prevent_editing_complete_order      
     load_object
-#    if @order.state == 'paid'
-#      redirect_to object_url
-#    end
+    if object.state == 'paid'
+      redirect_to object_url
+    end
   end
   
   def accurate_title
