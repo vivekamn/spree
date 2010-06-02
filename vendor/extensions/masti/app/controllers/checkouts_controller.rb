@@ -68,7 +68,7 @@ class CheckoutsController < Spree::BaseController
       flash[:error] += '<ul>'          
     end  
     end
-    redirect_to order_url(@order, {:order_token => @order.token})
+    redirect_to order_url(@order, {:checkout_complete => true,:order_token => @order.token})
     end
   end  
   
