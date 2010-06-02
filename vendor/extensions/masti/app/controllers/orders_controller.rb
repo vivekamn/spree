@@ -89,7 +89,7 @@ class OrdersController < Spree::BaseController
   
   def prevent_editing_complete_order      
     load_object
-    redirect_to object_url if @order.checkout_complete
+#    redirect_to object_url if @order.checkout_complete
   end
   
   def accurate_title

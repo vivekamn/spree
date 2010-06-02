@@ -7,7 +7,7 @@
       <div>
         <%= image_tag '/images/iwouldgift.gif', :border => '0'%> 
         <div id="Gtext">
-          Give the Name, Email and Phone No. of the person to whom you want to gift and update. Don't worry the voucher only has the retail value on it, so gift away..
+          Please give the details about the person whom you want to gift.
         </div>
       </div>
     <% else %> 
@@ -51,7 +51,7 @@
   var PHONE_REGEX	= /^[0-9]+$/; 
   function validate_name() {
     if(name.value == "") {
-      document.getElementById('name_div').innerHTML = "Name cann't be empty";
+      document.getElementById('name_div').innerHTML = "Name cannot be empty";
       order_submit = false;
     }
     else {
@@ -74,14 +74,14 @@ function validate_email() {
     }
   }
   else {
-    document.getElementById('email_div').innerHTML = "Email cann't be empty";
+    document.getElementById('email_div').innerHTML = "Email cannot be empty";
     order_submit = false;
   }
 }
 function validate_phone() {
   phone_value = PHONE_REGEX.test(new String(phone.value)); 
   if(phone.value =='' || phone.value == null) {
-    document.getElementById('phone_div').innerHTML = 'Phone No. field can not be empty';
+    document.getElementById('phone_div').innerHTML = 'Phone Number cannot be empty';
     order_submit = false;
   } 
   else {
@@ -93,7 +93,7 @@ function validate_phone() {
     }
     else {
       if(new String(phone.value).length != 10){
-        document.getElementById('phone_div').innerHTML = 'Please check Phone No. has 10 digits';
+        document.getElementById('phone_div').innerHTML = 'Phone number is Invalid. It should be 10 numeric digits';
         order_submit = false;
       }
     }
