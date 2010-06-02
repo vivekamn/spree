@@ -1,14 +1,207 @@
-Hi,<br/><br/>
+<div style="margin: auto; padding: 10px; width: 720px;">
+    <div style="margin: 5px 0pt; padding: 20px; width: 670px; background-repeat: no-repeat; background-color: rgb(158, 213, 52);">
+      <table width="100%" cellspacing="0" cellpadding="0" style="background-color: rgb(255, 255, 255);">
+        
+        <tbody><tr>
+          <td colspan="2"><div style="margin: 0pt; min-height: 104px;">
+              <table bgcolor="#e5e5e5" width="670px" height="104px" cellspacing="0" cellpadding="0">
+                <tbody><tr>
+                  <td valign="top" style="padding: 18px 0pt 0pt 15px; width: 110px; min-height: 37px;"><a linkindex="14" href="http://www.masthideals.com/email_camp" style="text-decoration: none;"><span style="font-size: 35px; font-weight: bold; color: rgb(108, 171, 22);" class="green">Masthi</span><span style="color: rgb(33, 77, 118); font-size: 35px; font-weight: bold;" class="blue">Deals</span><span style="font-size: 35px; font-weight: bold; color: rgb(108, 171, 22);" class="green">.com</span></a></td>
 
-<%=@product.name%>.  Hurry up before it is gone.<br/><br/>
 
-Login to <%=@url%> for further details.<br/><br/>
+                   
+                  <td align="right" valign="top" style="padding-right: 20px; padding-top: 21px;">
+                    <table width="225px;" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                        <td align="right" style="margin: 0pt; font-size: 12px; font-family: Helvetica,Arial,sans-serif; color: rgb(0, 0, 0);">
+                          <%= Time.now.strftime '%A, %B %d, %Y'%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="right" style="padding-top: 15px;">
+                          <p style="margin: 0pt; font-family: Helvetica,Arial,sans-serif; font-weight: 700;">
+                            <table>
+					        	<tr>
+					        		<td>
+					        			  follow us:
+					        		</td>
+									<td>
+										<table>
+								        	<tr>
+								        		<td style="background-color:#4166BB;color:white;">
+								        			 <a class="company" href="http://www.facebook.com/pages/masthideals/118174988203190" linkindex="12" style="color: white;font-size:13px;font-weight:bold;padding:5px">f<a>
+								        		</td>
+												<td style="background-color:#2DB5D9;color:white;">
+												    <a title="Follow Masthideals on Twitter" style="color: white;font-size:13px;font-weight:bold;padding:5px" href="http://twitter.com/masthideals" linkindex="13">t</a>
+												</td>
+								        	</tr>
+								        </table>
+									</td>
+					        	</tr>
+					        </table>
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                  </td>
+                </tr>
+              </tbody></table>
+            </div></td>
+        </tr>
+		
+        <tr>
+          <td valign="top" style="border-top: 10px solid rgb(26, 130, 176); padding: 20px 0pt 25px;">
+            <table width="100%" cellspacing="0" cellpadding="0">
+              
+              <tbody><tr>
+                <td colspan="2">
+                  <h1 style="margin: 0pt; padding: 0pt 20px 20px;"><a href="http://www.masthideals.com/email_camp" style="margin: 0pt; text-decoration: none; color: rgb(9, 129, 190); font-weight: 700; font-family: Helvetica,Arial,sans-serif; font-size: 18px;" title="" target="_blank" linkindex="17"><%=@product.name%></a></h1>
+                </td>
+              </tr>
+              
+              <tr>
+                <td align="left" valign="top" style="padding: 0pt 15px 0pt 4px; width: 380px;">
+              <div style="border: 1px solid rgb(232, 232, 232); width: 403px;">
+<div style="margin-left: 20px;">
+<div style="height: 29px; width: 403px;">
+	<span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(108, 171, 22); font-weight: bold;">Deal</span> <span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(33, 77, 118); font-weight: bold;"> Info<hr style="margin-right: 30px; color: rgb(229, 229, 229);"></span>
+</div>
+<div>
+<div style="width: 380px;">
+  <ul style="padding: 15px 0pt 5px 5px; line-height: 24px;">
+		<%=@product.deal_info%> 
+  </ul>
+</div></div>
+<div style="height: 29px; width: 403px;">
+	<span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(108, 171, 22); font-weight: bold;">The</span> <span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(33, 77, 118); font-weight: bold;">Details<hr style="margin-right: 30px; color: rgb(229, 229, 229);"></span>
+</div>
+<div>
+<div style="width: 380px;">
+  <ul style="padding: 15px 0pt 5px 5px; line-height: 24px;">
+   <%=@product.description%>
 
-Forward this deal to your friends and earn their gratitude.<br/><br/>
+  </ul>
+</div></div>
 
-Regards,<br/><br/>
-Shanthi<br/><br/>
-MasthiDeals Team
 
-<br/><br/>
-<img width="540" src="http://www.masthideals.com<%= @product.images.first.attachment.url(:large) %>">
+<div style="height: 29px; width: 403px;">
+	<span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(108, 171, 22); font-weight: bold;">The</span> <span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(33, 77, 118); font-weight: bold;">Catch<hr style="margin-right: 30px; color: rgb(229, 229, 229);"></span>
+</div>
+<div>
+<div style="width: 380px;">
+  <ul style="padding: 15px 0pt 5px 5px; line-height: 24px;">
+    	 <%=@product.catch_message%>
+  </ul>
+</div></div>
+
+
+ 
+ 
+</div>
+</div> 
+                </td>
+                <td valign="top" style="width: 400px;">
+    <table bgcolor="#9ed534" width="233px" height="60px" cellspacing="0" cellpadding="0">
+                    <tbody><tr>
+                      <td style="padding-left: 15px; color: rgb(255, 255, 255); font-family: Helvetica,Arial,sans-serif; font-size: 28px;">
+                        <div>                           Rs <%= (@product.variant.price-((@product.discount/100)*@product.variant.price)).to_i %>                      </div>
+                      </td>
+                      <td style="padding-top: 5px;">
+<table style="border: 1px solid rgb(24, 118, 167); font-weight: bold; color: white; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px; cursor: pointer; background-color: rgb(24, 118, 167);">
+              	<tbody><tr>
+              		<td align="center">
+              			<a href="http://www.masthideals.com/email_camp" style="color:white;text-decoration:none;">See</a>
+              		</td>
+              	</tr>
+                <tr>
+              		<td align="center" width="100px">
+              			<a href="http://www.masthideals.com/email_camp" style="color:white;text-decoration:none;">Today's Deal</a> 
+              		</td>
+              	</tr>
+              </tbody></table>
+   
+</td>
+                    </tr>
+                  </tbody></table>
+                  <div style="padding-left: 0px;">
+                    <table width="233px" cellspacing="0" cellpadding="0">
+                      <tbody><tr style="background-color: rgb(24, 118, 167);">
+                        <td align="center" width="33%" style="border-left: 1px solid rgb(24, 118, 167); margin: 0pt; padding: 10px 0pt 5px; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">
+
+
+                          worth:
+                        </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 10px 0pt 5px; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">
+                          discount:
+                        </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 10px 0pt 5px; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">
+
+
+                          savings:
+                        </td>
+                      </tr>
+                      <tr style="background-color: rgb(24, 118, 167);">
+                        <td align="center" width="33%" style="border-left: 1px solid rgb(24, 118, 167); border-bottom: 1px solid rgb(24, 118, 167); margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                             Rs <%= @product.variant.price.to_i%>                         </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                            <%= @product.discount%>%                         </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">Rs <%= ((@product.discount/100)*@product.variant.price).to_i %></td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                  <div style="padding: 8px 0pt 0pt 0px;">
+                    <table width="233px" cellspacing="0" cellpadding="0">
+                      <tbody><tr>
+                        <td style="border: 1px solid rgb(232, 232, 232); padding: 0pt 5px 10px 18px; width: 217px; min-height: 116px;">
+                          <table cellspacing="0" cellpadding="0">
+                            <tbody><tr>
+                              <td style="margin: 0pt; padding: 10px 0pt 7px; font-weight: 700; font-size: 11px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                                 Retailer Information:                               </td>
+                            </tr>
+                            <tr>
+                              <td style="margin: 0pt; padding: 0pt; font-weight: 700; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                                 <%=@product.vendor.name%>                               </td>
+                            </tr>
+                            <tr>
+                              <td style="margin: 0pt; padding: 0pt; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">
+                                 
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="margin: 0pt; padding: 0pt; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">  
+							  <%unless @product.vendor.address.nil?%>
+	                              	<%= @product.vendor.address %>
+								<%end%>
+								<br/>
+								Contact : <%= @product.vendor.phone_no %>
+								</td>
+                            </tr>
+                          </tbody></table>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                  </div>
+                </td>
+              </tr>
+              
+               
+            </tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+      <table width="100%" style="background-color: rgb(222, 237, 204); margin-top: 2px;">
+        <tbody><tr>
+          <td style="padding: 10px; font-family: Helvetica,Arial,sans-serif; color: rgb(84, 84, 84); font-weight: 700; font-size: 12px; text-align: center; line-height: 16px;">
+            Need help? Have feedback? Feel free to
+            <a href="mailTo:saravanan@masthideals.com" style="color: rgb(9, 129, 190);" title="Contact Masthideals">Contact Us</a>
+          </td>
+        </tr>
+      </tbody></table>
+    </div>
+    <table width="720px" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+        <td align="center">
+          <p style="margin: 3px; font-size: 11px; font-family: Helvetica,Arial,sans-serif; color: rgb(146, 146, 146); padding-bottom: 5px;">             If you prefer not to receive the daily Masthideal email, you can always             <a linkindex="18" title="Unsubscribe with one click" style="color: rgb(9, 129, 190);" href="mailTo:unsubscribe@masthideals.com">unsubscribe</a>
+          </p>
+           
+           
+        </td>
+      </tr>
+    </tbody></table>
+  </div>

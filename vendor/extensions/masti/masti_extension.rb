@@ -71,7 +71,7 @@ class MastiExtension < Spree::Extension
         self.count_on_hand = self.count_on_hand.to_i + increased_count.to_i
         self.maximum_number = self.maximum_number.to_i + increased_count.to_i       
       else        
-        self.count_on_hand = maximum_number.to_i
+       # self.count_on_hand = maximum_number.to_i
         end
       end
     end    
