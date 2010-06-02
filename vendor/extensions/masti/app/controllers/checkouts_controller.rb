@@ -53,7 +53,7 @@ class CheckoutsController < Spree::BaseController
       flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
     rescue Exception => e
       logger.info "order not complete in checkout---------------"+e.message
-      if @order.line_items
+      if @order.line_items && @order.line_items[0].failure_status[0]
       if @order.line_items[0].failure_status[0][:count]       
       flash[:error] = t('order_out_of_stock')
       flash[:error] += '<ul>'     
@@ -106,7 +106,7 @@ class CheckoutsController < Spree::BaseController
 
   # Calls edit hooks registered for the current step
   def edit_hooks
-    edit_hook @checkout.state.to_sym
+#    edit_hook @checkout.state.to_sym
   end
   # Calls update hooks registered for the current step
   def update_hooks
@@ -158,7 +158,9 @@ class CheckoutsController < Spree::BaseController
     # prevent editing of a complete checkout
     if parent_object.checkout_complete
       logger.info "editing of a complete checkout prevented"
-      redirect_to order_url(parent_object)     
+      if @order.state=='paid'
+        redirect_to order_url(parent_object)
+      end     
     end    
   end
 
