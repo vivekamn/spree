@@ -172,8 +172,21 @@
 
       pass_str = new String(password)
       if(password == '' || password == null || confirm == '' || confirm == null || pass_str.length < 4){
-        msg += '<br/>Password is invalid';
-        flag_user = false;
+        if(password == '' || password == null || confirm == '' || confirm == null){
+			if(password == '' || password == null ){
+				msg += '<br/>Password cannot be empty';
+        		flag_user = false;
+			}
+			else{
+				msg += '<br/>Confirm Password cannot be empty';
+        		flag_user = false;
+			}
+		}
+		else{
+			msg += '<br/>Password is invalid. It should be 4 characters';
+        	flag_user = false;
+		}
+		
       }
       else{
         if (password != confirm ){
@@ -183,7 +196,7 @@
       }
       phone_value = PHONE_REGEX.test(new String(mobile)); 
       if(mobile =='' || mobile == null) {
-        msg += '<br/>Phone No. field can not be empty';
+        msg += '<br/>Phone number cannot be empty';
         flag_user = false;
       } 
       else {
