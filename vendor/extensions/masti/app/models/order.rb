@@ -299,10 +299,10 @@ class Order < ActiveRecord::Base
 
     if self.payments.total < self.total
       #Total is higher so balance_due
-      self.under_paid
+      #self.under_paid
     elsif self.payments.total > self.total
       #Total is lower so credit_owed
-      self.over_paid
+      #self.over_paid
     end
 
     save!
