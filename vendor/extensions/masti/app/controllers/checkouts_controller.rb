@@ -146,13 +146,13 @@ class CheckoutsController < Spree::BaseController
 
   def load_data
     @countries = Checkout.countries.sort
-    if object.bill_address && object.bill_address.country
-      default_country = object.bill_address.country
-    elsif current_user && current_user.bill_address
-      default_country = current_user.bill_address.country
-    else
-      default_country = Country.find Spree::Config[:default_country_id]
-    end
+#    if object.bill_address && object.bill_address.country
+#      default_country = object.bill_address.country
+#    elsif current_user && current_user.bill_address
+#      default_country = current_user.bill_address.country
+#    else
+      default_country = Country.find_by_iso_name('INDIA')
+#    end
     @states = default_country.states.sort
 
     # prevent editing of a complete checkout

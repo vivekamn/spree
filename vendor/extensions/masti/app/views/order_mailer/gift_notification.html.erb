@@ -4,7 +4,7 @@ Dear <%=@order.giftee_name%>,<br/><br/>
 Item: "<%= @product.name %>"<br/>
 Quantity: <%=@order.line_items[0].quantity%><br/>
 
-Gift value: Rs.<%= @variant.price %><br/><br/>
+Gift value: Rs.<%= @variant.price * @order.line_items[0].quantity %><br/><br/>
 
 ============================================================<br/><br/>
 

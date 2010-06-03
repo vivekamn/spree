@@ -30,7 +30,14 @@ class OrdersController < Spree::BaseController
   # override the default r_c flash behavior
   update do  
     flash nil
-    success.wants.html { redirect_to edit_order_url(object) }
+    success.wants.html { 
+    if object.gift.nil?
+      redirect_to edit_order_url(object)
+    else
+      redirect_to edit_order_checkout_url(object)   
+    end
+   
+    }
     failure.wants.html { render :template => "orders/edit" }
   end  
  
