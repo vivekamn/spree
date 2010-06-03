@@ -11,7 +11,7 @@
       <% end %>
     <% end %>
   </td>
- <td width="44%" class="bd1 bd2" align="left">
+ <td width="44%" class="bd1 bd2" align="left" style="line-height:24px;">
     <% hook :cart_item_description, locals do %>
      <%=  variant.product.name %>
       <%= variant_options variant %>
@@ -24,15 +24,22 @@
 	  <strong>Rs. <%=line_item.price.to_i%></strong>
     <% end %>
   </td>
+
   <td width="9%" class="bd1 bd2 plr">
     <% hook :cart_item_quantity, locals do %>      
-	  <%=item_form.select :quantity, get_quantities(variant,current_user), {}, { :onchange=>'update_order();' } %>	 
-    <% end %>
+		<% if @order.gift.nil? %>	  
+	 		 <%=item_form.select :quantity, get_quantities(variant,current_user), {}, { :onchange=>'update_price();' } %>	 
+    	<%else%>
+			<%=item_form.select :quantity, get_quantities(variant,current_user), {}, { :onchange=>'update_gift_price();'} %>	
+		<%end%>
+	<% end %>
   </td>
 
   <td width="16%" class="bd1 bd2">
     <% hook :cart_item_total, locals do %>
+	<div id="total">
 	<strong>Rs. <%=order_price(@order).to_i%></strong>
+	</div>
       <!--<%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>-->
     <% end %>
   </td>

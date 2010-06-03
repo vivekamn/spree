@@ -19,35 +19,37 @@ text-align:center;
 color:#000000;
 font-family:Arial,Helvetica,sans-serif;
 font-size:12px;
-margin-left:50px;
+margin-left:0;
 margin-right:6px;
+margin-top:20px;
 }
 </style>
 <br />
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
-  <tr>
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
+  <tr >
     <td width="100%" style="padding-top: 23px;">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
+       <% order_form.fields_for :line_items do |item_form| %>
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 0em;">
         <% unless @order.gift.nil? %>
-          <tr align='center'>
+          <tr align='center' height="75px" valign="top">
             <td>
-              <b>Name</b> <span class="required">*</span><br />
+              <b>Name</b> <span class="required" style="color:red;">*</span><br />
               <%= order_form.text_field :giftee_name, :onblur => 'validate_name();',:size=>20 %>
               <span id="name_div" style="color:red"></span>
             </td>
             <td>
-              <b>Email</b><span class="required">*</span><br />
+              <b>Email</b><span class="required" style="color:red;">*</span><br />
               <%= order_form.text_field :giftee_email, :onblur => 'validate_email();' %><br />
               <span id="email_div" style="color:red"></span>
             </td>
             <td>
-              <b>Phone No.</b><span class="required">*</span><br />
+              <b>Phone Number</b><span class="required" style="color:red;">*</span><br />
               <%= order_form.text_field :giftee_phone_no, :onblur => 'validate_phone();',:size=>20 %>
               <span id="phone_div" style="color:red"></span>
             </td>
             <% unless @order.giftee_name %> 
-            <td align='right'>
-              <a href="javascript:update_order();"><%= image_tag 'update.gif', :border => 0 %></a>
+            <td align='right' colspan="2">
+             <!-- <a href="javascript:update_order();"><%= image_tag 'update.gif', :border => 0 %></a>-->
             </td> 
             <% end %>         
           </tr>
@@ -63,16 +65,16 @@ margin-right:6px;
           <% end %>
         </tr>  
 
-        <% order_form.fields_for :line_items do |item_form| %>
+       
           <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
         <% end %>
         <tr align="center">	                
           <td colspan=5 align="right">
             <div id='buy' align="right">
              <% if @order.gift? %> 
-			  <% if @order.giftee_name %>
-                <%= link_to image_tag('/images/buy_gift.png', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
-               <% end %>
+			  <%# if @order.giftee_name %>
+                <%= link_to image_tag('/images/buy_gift.png', :border=>0,:style => "margin-right:0px;"), "javascript:update_order();",:style => 'text-decoration:none;' %>
+               <%# end %>
 			  <%else%>
 			  	<%= link_to image_tag('/images/buy.gif', :border=>0,:style => "margin-right:-10px;"), edit_order_checkout_url(@order), :style => 'text-decoration:none;' %>
 			  <%end%> 

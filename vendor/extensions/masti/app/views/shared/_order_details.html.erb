@@ -3,9 +3,21 @@
     <tr>
       <% hook :order_details_line_items_headers do %>
         <th align="left"><%= t('item_description') %></th>
-        <th class="price"><%= t('price') %></th>
-        <th class="qty"><%= t('qty') %></th>
-        <th class="total" align="left"><span><%= t('total') %></span></th>
+        <th class="price" style="width: 7%;"><%= t('price') %></th>
+        <th class="qty" style="width: 7%;"><%= t('qty') %></th>
+        <th class="total" align="left" style="width: 7%;"><span><%= t('total') %></span></th>
+		<td width="" rowspan="2" >
+			<table border="0">
+			        <tbody><tr>
+			          <td align="right" width="273px">
+			            <img src="/images/ebs.gif">
+			          </td>
+			          <td valign="center">
+			            <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+			          </td>
+			        </tr>
+			      </tbody></table>
+		</td>
       <% end %>
     </tr>
 

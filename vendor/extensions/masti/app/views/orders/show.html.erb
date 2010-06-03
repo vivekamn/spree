@@ -50,23 +50,9 @@
       <input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
       <input name="ship_country" type="hidden" value="IND" />
       <input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-      <div align="right" style="padding-right: 0px; margin-right: -26px;"><%= image_submit_tag "proceed.gif"%> 
+      <div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> 
       </div>
     <%end%>
-  </div>
-  <div style="float:right;">
-    <div style="padding-top: 100px;padding-right:0px;">
-      <table>
-        <tr>
-          <td>
-            <img src="/images/ebs.gif" />
-          </td>
-          <td valign="center">
-            <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
-          </td>
-        </tr>
-      </table>
-    </div>
   </div>
 <% else %>
   <%= render :partial => 'failure', :locals => {:order => @order} -%>

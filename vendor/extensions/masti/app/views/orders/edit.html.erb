@@ -32,11 +32,18 @@
     </div>
   </div>
 </div>
-
+<input type="hidden" id="price" value="<%= order_price(@order).to_i %>">
 <script type="text/javascript">
   function update_price() {
     document.getElementById('buy').style.display='none';    
     document.getElementById('updatecart').submit();
+  }
+  
+  function update_gift_price() {
+    price = document.getElementById('price').value;    
+    updt_price = price * (document.getElementById('order_line_items_attributes_0_quantity').value);
+	document.getElementById('subtotal').innerHTML='<h2>Total: Rs. '+updt_price+'</h2>';
+	document.getElementById('total').innerHTML='<strong>Rs. '+updt_price+'</strong>';
   }
 
 </script>
@@ -104,7 +111,7 @@ function validate_phone() {
     validate_name();
     validate_email();
     validate_phone();
-    document.getElementById('buy').style.display='none';
+   // document.getElementById('buy').style.display='none';
     if(order_submit) {
       document.getElementById('updatecart').submit();
     }
