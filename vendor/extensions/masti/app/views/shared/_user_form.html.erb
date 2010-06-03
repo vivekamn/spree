@@ -172,8 +172,14 @@
 
       pass_str = new String(password)
       if(password == '' || password == null || confirm == '' || confirm == null || pass_str.length < 4){
-        msg += '<br/>Password is invalid';
-        flag_user = false;
+        if(pass_str.length < 4){
+			msg += '<br/>Password is invalid';
+        	flag_user = false;
+		}
+		else{
+			msg += '<br/>Password is invalid';
+        	flag_user = false;
+		}
       }
       else{
         if (password != confirm ){
