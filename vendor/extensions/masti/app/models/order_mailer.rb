@@ -47,9 +47,19 @@ class OrderMailer < ActionMailer::QueueMailer
   
   def voucher(order,product,recipients)
     content_type "text/html"
-    @subject    = 'Voucher For your Deal at Masthi Deals'
+    @subject    = get_subject(order)
     @body       = {"product" => product,"order" => order}
     @recipients = recipients
+    @from       = Spree::Config[:order_from]
+    @bcc        = order_bcc
+    @sent_on    = Time.now
+  end
+  
+    def gift_voucher(order,product)
+    content_type "text/html"
+    @subject    = 'Voucher For your Deal at Masthi Deals'
+    @body       = {"product" => product,"order" => order}
+    @recipients = order.giftee_email
     @from       = Spree::Config[:order_from]
     @bcc        = order_bcc
     @sent_on    = Time.now
@@ -57,7 +67,7 @@ class OrderMailer < ActionMailer::QueueMailer
 
   def gift_notification(order, product, variant)
     content_type "text/html"
-    @subject    = 'Gift Voucher From Masthi Deals'
+    @subject    = "#{ order.bill_address.name } has sent you a nice gift"
     @body       = {"product" => product,"order" => order, "variant" => variant}
     @recipients = order.giftee_email
     @from       = Spree::Config[:order_from]
@@ -77,6 +87,13 @@ class OrderMailer < ActionMailer::QueueMailer
   end
   
   private
+  def get_subject(order)
+    if order.gift?
+      "Gift sent to #{order.giftee_name}"
+    else
+      'Voucher For your Deal at Masthi Deals'
+    end
+  end
   def order_bcc
       bcc = [Spree::Config[:order_bcc] || "", Spree::Config[:mail_bcc] || ""]
       bcc = bcc.inject([]){|array, config_string| array + config_string.split(",")}

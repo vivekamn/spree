@@ -11,6 +11,12 @@
            	<% if @order.state=='paid'%>
 				<p>
 					<h3>
+						Hi <%= @order.bill_address.name %>,
+					</h3>
+				</p>
+				<p>
+				
+					<h3>
 						Your payment has been successful and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>.
 	 Please note your payment details for further correspondence.
 					</h3> 

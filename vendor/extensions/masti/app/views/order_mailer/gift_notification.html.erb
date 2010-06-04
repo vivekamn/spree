@@ -1,11 +1,12 @@
 Dear <%=@order.giftee_name%>,<br/><br/>
 
-<%=@order.checkout.bill_address.name%> has requested us to gift the following to you.<br/><br/>
-Item: "<%= @product.name %>"<br/>
+<%=@order.checkout.bill_address.name%> has gifted you  the following.<br/><br/>
+"<%= @product.name %>"<br/>
 Quantity: <%=@order.line_items[0].quantity%><br/>
 
 Gift value: Rs.<%= @variant.price * @order.line_items[0].quantity %><br/><br/>
-
+Please save the following order details for further reference. 
+Please refer <a href="http://www.masthideals.com/">www.masthideals.com</a> for further details.<br/><br/>
 ============================================================<br/><br/>
 
 If you have any questions, please feel free to reach out to us at support@masthideals.com or call us at (phone number) Monday to Friday, 10am to 9pm and Saturday, 10am to 6pm.<br/><br/>

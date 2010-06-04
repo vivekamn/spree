@@ -93,6 +93,7 @@ class InventoryUnit < ActiveRecord::Base
             OrderMailer.deliver_voucher(order,product,order.user.email)
             if order.gift?
               OrderMailer.deliver_gift_notification(order, product, variant)
+              OrderMailer.deliver_gift_voucher(order,product)
             end
             
             #OrderMailer.deliver_confirm(order)      
@@ -112,6 +113,7 @@ class InventoryUnit < ActiveRecord::Base
                 OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
                 if order.gift?
                   OrderMailer.deliver_gift_notification(item.order, product, variant)
+                  OrderMailer.deliver_gift_voucher(item.order,product)
                 end  
                 message = "Hi ,We have emailed you the coupon for MasthiDeals - #{product.name}  - order no : #{order.number}."
                 send_sms(user.phone_no,message)
