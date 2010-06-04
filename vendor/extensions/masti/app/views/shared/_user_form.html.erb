@@ -162,7 +162,7 @@
       var flag_user = true;
 
       if(email == '' || email == null){
-        msg += '<br/>E-mail field cannot be empty';
+        msg += '<br/>Email cannot be empty';
         flag_user = false; 
       }
       else {
@@ -197,17 +197,17 @@
       }
       phone_value = PHONE_REGEX.test(new String(mobile)); 
       if(mobile =='' || mobile == null) {
-        msg += '<br/>Phone number cannot be empty';
+        msg += '<br/>Mobile number cannot be empty';
         flag_user = false;
       } 
       else {
         if(phone_value != true) {
-          msg += '<br/> Please give only numbers in the Phone No. field';
+          msg += '<br/> Please give only numbers in the Mobile number field';
           flag_user = false;
         }
         else {
           if(new String(mobile).length != 10){
-            msg += '<br/>Please check Phone No. has 10 digits';
+            msg += '<br/>Please check Mobile number has 10 digits';
             flag_user = false;
           }
         }
