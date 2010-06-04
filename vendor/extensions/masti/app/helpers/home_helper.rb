@@ -10,7 +10,7 @@ module HomeHelper
   
    def page_title
      if @featured_product
-        "Masthideals.com Deal of the Day : #{@featured_product.name}"
+        "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Power of Group Buying - Masthideals.com"
     else
       @page_title
     end
