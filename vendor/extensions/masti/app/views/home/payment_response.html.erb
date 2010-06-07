@@ -14,12 +14,31 @@
 						Hi <%= @order.bill_address.name %>,
 					</h3>
 				</p>
-				<p>
 				
+				<p>
+				<% unless @order.gift? %>
 					<h3>
 						Your payment has been successful and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>.
-	 Please note your payment details for further correspondence.
+	 					Please note your payment details for further correspondence.
 					</h3> 
+				<%else%>
+				<% old_count=featured_product.currently_bought_count - @order.line_items[0].quantity %>
+					<%if featured_product.currently_bought_count>=featured_product.minimum_number and  old_count>=featured_product.minimum_number  %>
+					<h3>
+						Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>. <br/><br/>
+						We have sent the gift voucher to <%= @order.giftee_name%>.<br/><br/>
+						
+						Please note your payment details for further correspondence.
+					</h3>
+					<%else featured_product.currently_bought_count< featured_product.minimum_number%>
+						<h3>
+							Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>. <br/><br/>
+							We will send the gift voucher to <%= @order.giftee_name%> once the deal goes live. <br/><br/>
+							
+							Please note your payment details for further correspondence.
+						</h3>
+					<%end%>
+				<%end%>
 				</p>
 				<%elsif @order.state=='credit_owed'%>
 				<p>
