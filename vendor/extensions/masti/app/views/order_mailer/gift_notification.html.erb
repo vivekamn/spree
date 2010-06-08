@@ -1,7 +1,7 @@
 Dear <%=@order.giftee_name%>,<br/><br/>
 
 <%=@order.checkout.bill_address.name%> has gifted you  the following.<br/><br/>
-"<%= @product.name %>"<br/>
+"<%= @product.voucher_text %>"<br/>
 Quantity: <%=@order.line_items[0].quantity%><br/>
 
 Gift value: Rs.<%= @variant.price * @order.line_items[0].quantity %><br/><br/>
