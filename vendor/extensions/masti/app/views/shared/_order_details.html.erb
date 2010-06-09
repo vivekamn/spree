@@ -6,6 +6,7 @@
         <th class="price" style="width: 7%;"><%= t('price') %></th>
         <th class="qty" style="width: 7%;"><%= t('qty') %></th>
         <th class="total" align="left" style="width: 7%;"><span><%= t('total') %></span></th>
+		 <% if params.has_key? :checkout_complete %>
 		<td width="" rowspan="2" >
 			<table border="0">
 			        <tbody><tr>
@@ -18,7 +19,8 @@
 			        </tr>
 			      </tbody></table>
 		</td>
-      <% end %>
+      <%end%>
+	  <% end %>
     </tr>
 
     <% @order.line_items.each do |item| %>
