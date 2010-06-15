@@ -25,10 +25,8 @@ class HomeController < Spree::BaseController
   def unique_email
     count = User.count(:all, :conditions => ['email = ?',params[:email]] )
     if count > 0
-      puts "its comig here"
       render(:text => 'false' )
     else
-       puts "its true"
       render(:text => 'true')
     end
   end
