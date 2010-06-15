@@ -112,6 +112,7 @@ class InventoryUnit < ActiveRecord::Base
               if item.order.state == "paid"
                 OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
                 if order.gift?
+                  send_sms(order.giftee_phone_no,product.gift_sms)
                   OrderMailer.deliver_gift_notification(item.order, product, variant)
                   OrderMailer.deliver_gift_voucher(item.order,product)
                 end  

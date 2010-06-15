@@ -15,11 +15,27 @@ class DealHistory < ActiveRecord::Base
       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
       product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
       all_deals_notify_email = DealsNotification.find(:all, :select => "email")
-      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user'"])
-      #all_emails = all_deals_notify_email.concat(all_user_email)
-      all_emails = all_deals_notify_email
+      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user' and is_sample = ?",false])
+      message = product.sms_notification.to_s
+      flag = 1
+      qry_str = ""
+     all_user_email.each do |user|
+       unless user.phone_no.nil?
+         if flag==1
+            qry_str = "('#{ user.phone_no }','#{ message }')"
+          else
+            qry_str = qry_str + ", ('#{ user.phone_no }','#{ message }')"
+          end
+          flag = 2
+        end
+      end
+      query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
+      result = ActiveRecord::Base.connection.execute(query)
+     
+      all_emails = all_deals_notify_email.concat(all_user_email[0])
+      all_emails = all_deals_notify_email.uniq
       recipients = all_emails.collect{|x| x.email}.join(',')
-      UserMailer.deliver_users_deal_notify(recipients, product)     
+      UserMailer.deliver_users_deal_notify(recipients, product)    
     end
   end
   

@@ -13,18 +13,30 @@
         <%= f.text_field :permalink, :class => 'fullwidth title'  %>
         <%= f.error_message_on :permalink %>
       <% end %>
-     
-      <% f.field_container :deal_info do %>
+      
+	  <% f.field_container :deal_info do %>
         <%= f.label :deal_info, "Deal Info" %> <span class="required">*</span><br />
         <%= f.text_field :deal_info, :class => 'fullwidth title'  %>
         <%= f.error_message_on :deal_info %>
       <% end %>
+	  
       <% f.field_container :voucher_text do %>
         <%= f.label :voucher_text, "Voucher Text" %> <span class="required">*</span><br />
         <%= f.text_field :voucher_text, :class => 'fullwidth title'  %>
         <%= f.error_message_on :voucher_text %>
       <% end %>
      
+	 <% f.field_container :gift_sms do %>
+        <%= f.label :gift_sms, "Gift SMS Text" %> <span class="required">*</span><br />
+        <%= f.text_field :gift_sms, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :gift_sms %>
+      <% end %>
+	
+	  <% f.field_container :sms_notification do %>
+        <%= f.label :sms_notification, "SMS Notification Text" %> <span class="required">*</span><br />
+        <%= f.text_field :sms_notification, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :sms_notification %>
+      <% end %>	
 
       <% f.field_container :description do %>
         <%= f.label :description, t("description")%><br />

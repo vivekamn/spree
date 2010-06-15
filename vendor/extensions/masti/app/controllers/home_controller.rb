@@ -11,6 +11,15 @@ class HomeController < Spree::BaseController
     @discount = @featured_product.discount
     @saving = (@price*@discount/100).to_i
     @bought_count = @featured_product.currently_bought_count
+    unless params[:email].nil? and params[:product_id].nil?
+      email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
+      if email_trace.nil?
+        email_trace = EmailTrace.new 
+        email_trace.email = params[:email]
+        email_trace.product_id = params[:product_id]
+        email_trace.save!
+      end
+    end
   end
   
   def unique_email
