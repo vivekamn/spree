@@ -23,6 +23,17 @@
         <%= f.error_message_on :voucher_text %>
       <% end %>	
 	
+	   <% f.field_container :gift_sms do %>
+        <%= f.label :gift_sms, "Gift SMS Text" %> <span class="required">*</span><br />
+        <%= f.text_field :gift_sms, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :gift_sms %>
+      <% end %>
+	  <% f.field_container :sms_notification do %>
+        <%= f.label :sms_notification, "SMS Notification Text" %> <span class="required">*</span><br />
+        <%= f.text_field :sms_notification, :class => 'fullwidth title'  %>
+        <%= f.error_message_on :sms_notification %>
+      <% end %>	
+	
   <div class="yui-gb">
     <div class="yui-u first">
       <% unless @product.has_variants? %>

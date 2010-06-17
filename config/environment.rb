@@ -87,10 +87,10 @@ ActionMailer::Base.delivery_method = :smtp
  ActionMailer::Base.smtp_settings = {
    :address => "smtp.sendgrid.net",
    :port => "25",
-   :domain => "sitterscout.com",
+   :domain => "masthideals.com",
    :authentication => :plain,
-   :user_name => "notifications@sitterscout.com",
-   :password => "chiefscout"
+   :user_name => "admin@chennaimoms.com",
+   :password => "test1234"
  }
 
  

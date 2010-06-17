@@ -28,7 +28,7 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+       attr_accessible :gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
        attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :voucher_text
@@ -107,7 +107,7 @@ Address.class_eval do
     Image.attachment_definitions[:attachment][:styles] = {:mini => '48x48>', 
                                                           :small => '100x100>', 
                                                           :product => '240x240>',
-                                                          :large => '600x600>'}
+                                                          :large => '540x540>'}
 
  
 
