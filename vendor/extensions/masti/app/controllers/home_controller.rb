@@ -22,6 +22,17 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def order_vendor
+    unless params[:id].nil?
+      begin 
+         @variant = Variant.find(:first,:include => {:product => {}},:conditions=>['id = ?',params[:id]])
+         @orders = Order.find(:all,:include => {:user => {},:checkout => {}, :bill_address=>{}},:joins =>["INNER JOIN line_items ON orders.id = line_items.order_id INNER JOIN variants ON variants.id = line_items.variant_id"],:conditions=>["variants.id = ? and orders.state = 'paid'",params[:id]])
+      rescue
+        flash[:error] = 'Cannot find the product.Please check the product id Correctly'  
+      end
+    end
+  end
+
   def unique_email
     count = User.count(:all, :conditions => ['email = ?',params[:email]] )
     if count > 0

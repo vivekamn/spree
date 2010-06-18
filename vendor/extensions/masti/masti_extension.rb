@@ -116,6 +116,14 @@ Address.class_eval do
     # make your helper avaliable in all views
      Spree::BaseController.class_eval do
        helper HomeHelper
+        before_filter :call_logging
+       def call_logging
+         if current_user
+           logger.info "#{current_user.email} is in Controller---> (#{controller_name}) action---> (#{ action_name}) Browser-----> (#{request.env["HTTP_USER_AGENT"]})"
+         else
+           logger.info "#{request.remote_ip} is in Controller---> (#{controller_name}) action---> (#{ action_name}) Browser-----> (#{request.env["HTTP_USER_AGENT"]})"
+         end
+       end
      end
   end
 end
