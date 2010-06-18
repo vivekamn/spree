@@ -32,9 +32,9 @@ class DealHistory < ActiveRecord::Base
       query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
       result = ActiveRecord::Base.connection.execute(query)
       all_emails = all_deals_notify_email.concat(all_user_email)
-      all_emails = all_deals_notify_email.uniq
+      all_emails = all_emails.uniq
       recipients = all_emails.collect{|x| x.email}.join(',')
-#      UserMailer.deliver_users_deal_notify(recipients, product)    
+      UserMailer.deliver_users_deal_notify(recipients, product)    
     end
   end
   
