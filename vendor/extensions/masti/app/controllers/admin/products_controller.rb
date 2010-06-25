@@ -74,12 +74,17 @@ class Admin::ProductsController < Admin::BaseController
 
         # Note: the SL scopes are on/off switches, so we need to select "not_deleted" explicitly if the switch is off
         # QUERY - better as named scope or as SL scope?
+#        puts "#{params[:search][:city_id]}====>"
+#        puts "#{session[:city_id]}===========>"
+#        params[:search][:city_id] = session[:city_id]
         if params[:search].nil? || params[:search][:deleted_at_not_null].blank?
           base_scope = base_scope.not_deleted
         end
-
-        @search = base_scope.group_by_products_id.searchlogic(params[:search])
-        @search.order ||= "ascend_by_name"
+#        params[:search_city_id] = session[:city_id]
+#        params[:search][:order] = "descend_by_created_at" 
+        @search = base_scope.group_by_products_id.searchlogic(:city_id=>session[:city_id])
+#        @search = base_scope.group_by_products_id.searchlogic(params[:search])
+        @search.order ||= "descend_by_created_at"
 
         @collection = @search.paginate(:include  => {:variants => [:images, :option_values]},
                                        :per_page => Spree::Config[:admin_products_per_page],

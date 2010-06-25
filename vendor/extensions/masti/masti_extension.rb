@@ -28,7 +28,7 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+       attr_accessible :city_id,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
        attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :voucher_text
@@ -81,7 +81,7 @@ class MastiExtension < Spree::Extension
 #       attr_accessible :bill_address, :bill_address_attributes
 #       attr_accessor :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address      
-      attr_accessible :phone_no
+      attr_accessible :phone_no,:corporate_id
       #validates_presence_of :phone_no
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
@@ -111,12 +111,23 @@ Address.class_eval do
 
  
 
-
+      
 
     # make your helper avaliable in all views
      Spree::BaseController.class_eval do
        helper HomeHelper
         before_filter :call_logging
+        
+        before_filter :set_thread
+          def set_thread
+            if session[:city_id].nil?
+               session[:city_id] = 1
+             end
+             Thread.current[:city] = City.find(session[:city_id].to_i)
+             puts "#{Thread.current[:city].name}---------->"
+         end
+        
+        
        def call_logging
          if current_user
            logger.info "#{current_user.email} is in Controller---> (#{controller_name}) action---> (#{ action_name}) Browser-----> (#{request.env["HTTP_USER_AGENT"]})"

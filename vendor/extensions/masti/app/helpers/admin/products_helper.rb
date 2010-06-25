@@ -1,7 +1,7 @@
 module Admin::ProductsHelper
   
   def current_product
-    return DealHistory.find(:first, :conditions => ['is_active = ?', true])
+    return DealHistory.find(:first, :conditions => ['is_active = ? and city_id = ?', true,session[:city_id]])
   end
   
   def option_type_select(so)

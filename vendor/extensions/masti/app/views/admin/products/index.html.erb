@@ -1,5 +1,5 @@
 <% render :partial => 'admin/shared/product_sub_menu' %>
-
+<input type="hidden" id="city_id" value="<%= session[:city_id] %>">
 <div class='toolbar'>
   <ul class='actions'>
     <li id="new_ot_link">
@@ -96,8 +96,8 @@
   <% end %>
 
 <% end %>
+<%if params[:search].nil?%>
 <script>
-	<%if params[:search].nil?%>
-		window.location.href='/admin/products?search[order]=descend_by_created_at';
-	<%end%>
+		//window.location.href='/admin/products?search[city_id]='+document.getElementById('city_id').value;
 </script>
+<%end%>
