@@ -4,8 +4,10 @@ class HomeController < Spree::BaseController
     ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
     skip_filter :protect_from_forgery
+    before_filter :set_city
+
   def index
-    @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
+    @deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
     @price = @featured_product.price.to_i
     @discount = @featured_product.discount
@@ -172,6 +174,14 @@ class HomeController < Spree::BaseController
     line_items_coll.each do |item|
       @item=item
       @product=item.variant.product
+    end
+  end
+
+  def set_city
+    if params[:city_id].nil?
+      session[:city_id] = 1
+    else
+      session[:city_id] = params[:city_id]
     end
   end
   

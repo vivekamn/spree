@@ -1,6 +1,7 @@
 class Admin::ProductsController < Admin::BaseController
   resource_controller
   before_filter :load_data, :except => :index
+  before_filter :set_city
 
   index.response do |wants|
     wants.html { render :action => :index }
@@ -63,6 +64,14 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   private
+
+  def set_city
+    if params[:city_id].nil?
+      session[:city_id] = 1
+    else
+      session[:city_id] = params[:city_id]
+    end
+  end
     def load_data
       @tax_categories = TaxCategory.find(:all, :order=>"name")
       @shipping_categories = ShippingCategory.find(:all, :order=>"name")

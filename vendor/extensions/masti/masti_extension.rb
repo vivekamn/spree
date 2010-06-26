@@ -116,17 +116,13 @@ Address.class_eval do
     # make your helper avaliable in all views
      Spree::BaseController.class_eval do
        helper HomeHelper
-        before_filter :call_logging
-        
-        before_filter :set_thread
-          def set_thread
-            if session[:city_id].nil?
-               session[:city_id] = 1
-             end
-             Thread.current[:city] = City.find(session[:city_id].to_i)
-             puts "#{Thread.current[:city].name}---------->"
+       before_filter :call_logging
+       before_filter :set_city
+       def set_city
+         if session[:city_id].nil?
+           session[:city_id] = 1
          end
-        
+       end
         
        def call_logging
          if current_user

@@ -76,14 +76,24 @@ function MM_swapImage() { //v3.0
     <% end %>
 	
     <div class="emailpart">
-  <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
-      <div class="fl"><img src="/images/email.gif" width="239" height="25" /></div>
-      <div class="w190"><%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %><br/>
-	  <div class="errormesg" id="error_email" style="color:red;"></div>
-	  </div>
-      <div class="fl"><%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %></div>
-	<%end%>    
-	</div>
+      <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
+        <div class="fl">
+          <img src="/images/email.gif" width="239" height="25" />
+        </div>
+        <div class="w190"><%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %>
+          <br/>
+          <div class="errormesg" id="error_email" style="color:red;">
+          </div>
+        </div>
+        <div class="fl"><%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %>
+        </div>
+      <%end%>    
+    </div>
+    <div>
+      Select the city <%= link_to 'Chennai', :controller => 'home', :action => 'index', :city_id => 1 %>,   
+      <%= link_to 'Bangalore', :controller => 'home', :action => 'index', :city_id => 2 %>
+    </div>
+
   </div>
 </div>
 <div class="navouter">

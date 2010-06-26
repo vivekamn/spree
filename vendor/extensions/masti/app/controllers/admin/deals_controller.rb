@@ -2,8 +2,7 @@ class Admin::DealsController < ApplicationController
 
   def make_online
     product=Product.find(params[:id])
-    city_id = Thread.current[:city].id
-    active_deal = DealHistory.find(:first, :conditions => ['is_active = ? and city_id = ?', true,city_id])
+    active_deal = DealHistory.find(:first, :conditions => ['is_active = ? and city_id = ?', true,session[:city_id]])
     active_deal.deal_completed_at = Time.now
     active_deal.is_active = 0
     active_deal.save 
@@ -13,13 +12,13 @@ class Admin::DealsController < ApplicationController
     new_deal.is_active = 1
     new_deal.city_id = city_id
     new_deal.save
-    new_deal.deal_notify
+    new_deal.deal_notify 
     redirect_to admin_products_url
   end
   
   def create_city_session
-    unless params[:id].nil?
-       session[:city_id] = params[:id]
+    unless params[:city_id].nil?
+       session[:city_id] = params[:city_id]
    end
    redirect_to admin_products_url
   end
