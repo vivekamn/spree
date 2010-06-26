@@ -4,7 +4,15 @@ class HomeController < Spree::BaseController
     ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
     skip_filter :protect_from_forgery
-    before_filter :set_city
+
+  def set_city_id
+    if params[:city_id].nil?
+      session[:city_id] = 1
+    else
+      session[:city_id] = params[:city_id]
+    end
+    redirect_to chennai_path
+  end
 
   def index
     @deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])  
@@ -177,14 +185,6 @@ class HomeController < Spree::BaseController
     end
   end
 
-  def set_city
-    if params[:city_id].nil?
-      session[:city_id] = 1
-    else
-      session[:city_id] = params[:city_id]
-    end
-  end
-  
   #getting the featured deal informations from the user
 #  def create
 #    @enquiry=Enquiry.new(params[:enquiry])
