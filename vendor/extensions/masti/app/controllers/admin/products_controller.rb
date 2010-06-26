@@ -67,11 +67,12 @@ class Admin::ProductsController < Admin::BaseController
 
   def set_city
     if params[:city_id].nil?
-      session[:city_id] = 1
+     session[:city_id] = 1
     else
       session[:city_id] = params[:city_id]
     end
   end
+
     def load_data
       @tax_categories = TaxCategory.find(:all, :order=>"name")
       @shipping_categories = ShippingCategory.find(:all, :order=>"name")
@@ -91,7 +92,7 @@ class Admin::ProductsController < Admin::BaseController
         end
 #        params[:search_city_id] = session[:city_id]
 #        params[:search][:order] = "descend_by_created_at" 
-        @search = base_scope.group_by_products_id.searchlogic(:city_id=>session[:city_id])
+        @search = base_scope.group_by_products_id.searchlogic(:city_id => session[:city_id])
 #        @search = base_scope.group_by_products_id.searchlogic(params[:search])
         @search.order ||= "descend_by_created_at"
 
