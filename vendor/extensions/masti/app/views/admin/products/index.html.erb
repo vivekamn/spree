@@ -38,19 +38,18 @@
     <% end %>
     <td class="actions">
       <% hook :admin_products_index_row_actions, locals do %>
-        <% unless deal.nil?%>
-        <%if deal.product_id==product.id %>
-          <%if params[:flag].nil? and product.deal_expiry_date>Time.now%>
-            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
-          <%elsif product.deal_expiry_date<=Time.now%>
-            <span style="color:red">Expired</span>
-          <%else%>
-            <span style="color:red">Sold out</span>
+          <%if !deal.nil? and deal.product_id==product.id %>
+            <% if params[:flag].nil? and product.deal_expiry_date>Time.now %>
+              <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
+            <% elsif product.deal_expiry_date<=Time.now %>
+              <span style="color:red">Expired
+              </span>
+            <%else%>
+              <span style="color:red">Sold out</span>
+            <%end%>
+          <% else %>
+            <%= link_to "Make online",:controller => 'admin/deals', :action => "make_online",:city_id => session[:city_id], :id => product.id  unless product.deleted?  %> 
           <%end%>
-        <%else%>
-          <%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted?  %> 
-        <%end%>
-      <% end %>
         &nbsp;        
         <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
         &nbsp;
