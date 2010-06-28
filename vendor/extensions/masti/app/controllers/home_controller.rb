@@ -1,20 +1,29 @@
 class HomeController < Spree::BaseController
     require 'RubyRc4.rb'
     require 'base64'
-    ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
+    ssl_required  :index, :unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
     skip_filter :protect_from_forgery
+    before_filter :set_city
 
-  def set_city_id
-    if params[:city_id].nil?
-      session[:city_id] = 1
-    else
+  def set_chennai
+    unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
-    end
+    end    
     redirect_to chennai_path
   end
 
+  def set_bangalore
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end    
+    redirect_to bangalore_path
+  end  
+
   def index
+    if session[:city_id].nil?
+      session[:city_id] = 1
+    end   
     @deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
     @price = @featured_product.price.to_i
@@ -269,4 +278,12 @@ class HomeController < Spree::BaseController
       end
     end 
   end
+
+  private
+
+  def set_city
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end
+  end  
 end

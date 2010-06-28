@@ -66,9 +66,7 @@ class Admin::ProductsController < Admin::BaseController
   private
 
   def set_city
-    if params[:city_id].nil?
-     session[:city_id] = 1
-    else
+    unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
   end
