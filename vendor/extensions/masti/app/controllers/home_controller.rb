@@ -218,6 +218,10 @@ class HomeController < Spree::BaseController
     
   end
   
+  def recent_deals
+    @bar_selected="recent_deals"
+  end
+  
   def upcoming_deals
     @bar_selected="upcoming_deals"
   end

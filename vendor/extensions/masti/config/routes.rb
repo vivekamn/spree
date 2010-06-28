@@ -18,6 +18,7 @@ map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
 map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
+map.recent '/recent-deals', :controller=>'home',  :action=>'recent_deals'
 map.email_camp '/email_camp',:controller => "home", :action => "index"
 map.forum '/forum',:controller => "home", :action => "index"
 map.classifieds '/classifieds',:controller => "home", :action => "index"

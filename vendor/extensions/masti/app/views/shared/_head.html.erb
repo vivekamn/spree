@@ -62,16 +62,6 @@ function MM_swapImage() { //v3.0
 			</tr>
 		</table>
 		</div>				
-      <!--<div class="join"><%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %></div>
-      <%# form_tag user_session_path do  %>
-        <div class="submitpart"> 
-          <div class="fl username">User Name :</div>
-          <div class="fl pt6"><%= text_field :user_session, 'login', :class => 'textfield' %></div>
-          <div class="fl username">Password :</div>
-          <div class="fl pt6"><%= password_field :user_session, 'password', :class => 'textfield' %></div>
-          <div class="fl submit"><%= image_submit_tag 'submit.gif', :width=>"60", :height=>"25" %></div>
-        </div>
-      <%#end %>-->
 	  </div>
     <% end %>
 	
@@ -90,25 +80,35 @@ function MM_swapImage() { //v3.0
   <!--<div class="fl"><img src="/images/leftcurve.gif" width="5" height="47" /></div>-->
   <div class="navinner">
   	<% if @bar_selected == "how_masthi_works"%>
-	    <div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/howon.gif" name="Image2" width="237" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+	    <div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how_on.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
+		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
 	<% elsif @bar_selected == "get_featured" %>
-		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore()"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="237" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore()" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/geton.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore()"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
+		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get_on.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
 	<% elsif @bar_selected == "upcoming_deals" %>
-		  <div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="The Deal" title="The Deal"/></a></div>
-		  <div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="237" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="How Masthideal Works" title="How Masthideal Works"/></a></div>
-		  <div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Get Featured" title="Get Featured"/></a></div>
-		  <div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcomingon.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
+		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming_on.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
+	<%elsif @bar_selected == "recent_deals"%>
+		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
+		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent_on.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
 	<%else%>
-		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/dealon.gif" name="Image1" width="229" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="237" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="237" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="235" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="thedeal"><a href="<%= home_path%>" ><img src="/images/deal_on.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
+		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
+		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
+		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
 	<%end%>
 	
   </div>

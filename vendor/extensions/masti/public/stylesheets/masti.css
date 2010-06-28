@@ -2,7 +2,7 @@ body{ margin:0 auto; background:#e5e5e5; width:100%; font-family:arial; font-siz
 }
 .main{ width:960px; margin:0 auto;
 }
-.outer{ width:938px; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;background-color:white;
+.outer{ width:940px; background:url(../images/centerbg.gif) repeat-y; padding:0 11px 0 11px;background-color:white;
 }
 a{ outline:none;
 }
@@ -46,15 +46,17 @@ a{ outline:none;
 .w190{ padding-top:2px; width:190px; float:left;
 }
 
-.navinner{ width:938px; float:left; height:37px;
+.navinner{ width:940px; float:left; height:37px;
 }
-.thedeal{ width:229px; float:left; height:37px; 
+.thedeal{ width:188px; float:left; height:37px; 
 }
-.howwork{ width:237px; float:left; height:37px; 
+.howwork{ width:188px; float:left; height:37px; 
 }
-.getfeatures{ width:237px; float:left; height:37px; 
+.getfeatures{ width:188px; float:left; height:37px; 
 }
-.upcoming{ width:235px; float:left; height:37px; 
+.upcoming{ width:188px; float:left; height:37px; 
+}
+.recent{ width:188px; float:left; height:37px; 
 }
 .bannerouter{ width:938px; float:left;background-color:white;
 }
