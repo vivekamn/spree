@@ -10,7 +10,7 @@ module HomeHelper
   
    def page_title
      if @featured_product
-        "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Power of Group Buying - Masthideals.com"
+        "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Best Deals Website - Masthideals.com"
     else
       @page_title
     end
