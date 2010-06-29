@@ -4,6 +4,7 @@ class HomeController < Spree::BaseController
     ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
     skip_filter :protect_from_forgery
+    before_filter :update_user_credit
   def index
     @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
@@ -263,4 +264,34 @@ class HomeController < Spree::BaseController
       end
     end 
   end
+
+  private
+
+  def update_user_credit
+    user = User.find_by_email(params[:user_email])
+    referer = User.find_by_email(params[:referer_email])
+    if user and referer
+      create_user_promotion user
+      update_user_promotion referer
+    elsif user
+      create_user_promotion user
+    elsif referer
+      update_user_promotion referer
+    end      
+  end
+
+  def create_user_promotion user
+    UserPromotion.create(:credit_amount => 100, :user_id => user.id)
+  end
+
+  def update_user_promotion referer
+    referer_promotion = UserPromotion.find_by_user_id(referer.id)    
+    if referer_promotion.nil?
+      UserPromotion.create(:credit_amount => 50, :user_id => referer.id)
+    else
+      referer_promotion.credit_amount += 50
+      referer_promotion.save
+    end
+  end
+
 end
