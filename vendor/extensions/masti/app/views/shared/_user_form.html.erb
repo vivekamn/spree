@@ -28,6 +28,7 @@
             </div>
           </td>
         </tr>
+		
         <tr>
           <td width="30%" height="35">
             Password 
@@ -72,6 +73,25 @@
           </td>
           <td width="66%">
             <%= f.text_field :phone_no, :class=>"textbox" %>
+          </td>
+        </tr>
+		<tr>
+          <td width="30%" height="35">
+            Reffered By<br>
+			(CMOM'S E-mail)
+            <font color="red">
+              
+            </font>
+          </td>
+          <td width="4%" height="35">
+           :
+          </td>
+          <td width="66%">
+          	<div style="float:left;">
+              <%= f.text_field :refered_by, :class=>"textbox" %>
+            </div>
+            <div id="email_image1" style="float:right;">
+            </div>
           </td>
         </tr>
         <tr>
@@ -150,17 +170,17 @@
       }
     }
 
-    
 
     function user_validate(){
       var email = document.getElementById('user_email').value;
       var password = document.getElementById('user_password').value;
       var confirm = document.getElementById('user_password_confirmation').value;
       var mobile = document.getElementById('user_phone_no').value;
-      var msg = '';
+      var refered_by = document.getElementById('user_refered_by').value;
+	  var msg = '';
       var PHONE_REGEX	= /^[0-9]+$/;
       var flag_user = true;
-
+	  var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
       if(email == '' || email == null){
         msg += '<br/>Email cannot be empty';
         flag_user = false; 
@@ -169,7 +189,7 @@
         if(email_flag == false)
         msg += '<br/>E-mail is invalid';
       }
-
+	
       pass_str = new String(password)
       if(password == '' || password == null || confirm == '' || confirm == null || pass_str.length < 4){
         if(password == '' || password == null || confirm == '' || confirm == null){
@@ -212,6 +232,18 @@
           }
         }
       }
+	  if (email_name.length != 0) {
+	  	email_my = new String(email_name);
+	  	email_value = EMAIL_REGEX.test(email_my);
+	  	if (email_value != true) {
+	  		msg += '<br/>Refered E-mail is invalid';
+	  		document.getElementById('flash_error').style.display = '';
+	  		document.getElementById('flash_error').innerHTML = msg;
+	  		flag_em = false;
+	  		email_flag = false;
+	  	}
+	  }
+	  
       if(!flag_user) {
         msg += '</ul>'
       document.getElementById('flash_error').style.display='';
