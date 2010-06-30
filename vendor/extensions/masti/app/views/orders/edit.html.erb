@@ -15,6 +15,9 @@
       </div>
     <% end %>
     <div class="shoppinginner">
+          <div>
+            <strong>Your credit with Masthi Deals is Rs.<%= current_user_credit_amount %>. This amount will be adjusted with this transaction.  </strong>
+    </div>
       <div class="shoptable" style="padding:0px">
         <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
           <% hook :inside_cart_form do %>

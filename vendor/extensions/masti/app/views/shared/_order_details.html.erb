@@ -34,6 +34,14 @@
         <% end %>
       </tr>
     <% end %>
+  <% hook :order_details_subtotal do %>
+    <tbody id='subtotal'>
+      <tr class="total" id="subtotal-row">
+        <td colspan="3"><b><%= t('your_credit_amount') %>:</b></td>
+        <td class="total"><span>Rs.<%=  @order.user.user_promotion.credit_amount.to_i -%></span></td>
+      </tr>
+    </tbody>
+  <% end %>    
   </tbody>
   <% hook :order_details_subtotal do %>
     <tbody id='subtotal'>

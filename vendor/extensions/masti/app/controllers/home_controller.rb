@@ -154,6 +154,7 @@ class HomeController < Spree::BaseController
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
     begin
     @order.update_payment_info(@response_txt)
+    @order.update_user_promotion
     if @order.state=='new' # check if user is paying again for a paid order or cancelled order
       if @response_txt['ResponseMessage']=='Transaction Successful'
         @status=@order.update_payment
@@ -193,8 +194,7 @@ class HomeController < Spree::BaseController
     #flash[:error]=e.message
     redirect_to :action=>'payment_failure'
     end
-  end 
- 
+  end
 
   def sitemap
     
