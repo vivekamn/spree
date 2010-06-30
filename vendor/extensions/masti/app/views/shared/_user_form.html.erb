@@ -232,15 +232,12 @@
           }
         }
       }
-	  if (email_name.length != 0) {
-	  	email_my = new String(email_name);
-	  	email_value = EMAIL_REGEX.test(email_my);
-	  	if (email_value != true) {
+	  if (refered_by.length != 0) {
+	  	email_my1 = new String(refered_by);
+	  	email_value1 = EMAIL_REGEX.test(email_my1);
+	  	if (email_value1 != true) {
 	  		msg += '<br/>Refered E-mail is invalid';
-	  		document.getElementById('flash_error').style.display = '';
-	  		document.getElementById('flash_error').innerHTML = msg;
-	  		flag_em = false;
-	  		email_flag = false;
+	  		flag_user = false;
 	  	}
 	  }
 	  

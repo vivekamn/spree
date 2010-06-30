@@ -43,28 +43,47 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def verify_mobile
+    verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
+    if verification_code.code == params[:code]
+      create_user_promotion current_user
+#     referer = User.find_by_email(current_user.refered_by) 
+#      update_user_promotion referer unless referer.nil?
+      flash[:success]="We have credited you 100 Masthideals Money"
+      redirect_to invite_friends_path
+    else
+      flash[:error]="Please Enter Correct code.If you want to send code again Please <a href='/generate-code'>Click here</a>"
+      redirect_to verifiy_your_phone_path
+    end
+  end
+  
   def from_cmom_check
    user = User.find_by_email(params[:user_email])
     referer = User.find_by_email(params[:referer_email])
     if user and referer
       if params[:phone_verify]=="true"
         create_user_promotion user
-        update_user_promotion referer
+#        update_user_promotion referer
+        flash[:success]="We have credited you 100 Masthideals Money"
         redirect_to invite_friends_path
       else
-        redirect_to generate_code_path
+        generate_code
       end
     elsif user
       if params[:phone_verify]=="true"
         create_user_promotion user
+        flash[:success]="We have credited you 100 Masthideals Money"
         redirect_to invite_friends_path
       else
-        redirect_to generate_code_path
+        generate_code
       end
     elsif referer
-      update_user_promotion referer
+#      update_user_promotion referer
+      update_referer_promotion
       count= User.count(:all,:conditions=>['refered_by = ?',params[:referer_email]])
+      count=0 if count.nil?
       UserMailer.deliver_success_invite(params[:referer_email],count,current_user.email)
+       flash[:success]="We have credited you 50 Masthideals Money"
       redirect_to home_url
     else
       redirect_to home_url
@@ -315,14 +334,24 @@ class HomeController < Spree::BaseController
     UserPromotion.create(:credit_amount => 100, :user_id => user.id)
   end
 
-  def update_user_promotion referer
-    referer_promotion = UserPromotion.find_by_user_id(referer.id)    
+#  def update_user_promotion referer
+#    referer_promotion = UserPromotion.find_by_user_id(referer.id)    
+#    if referer_promotion.nil?
+#      UserPromotion.create(:credit_amount => 5, :user_id => referer.id)
+#    else
+#      referer_promotion.credit_amount += 5
+#      referer_promotion.save
+#    end
+#  end
+  
+  def update_referer_promotion
+    referer_promotion = UserPromotion.find_by_user_id(current_user.id)    
     if referer_promotion.nil?
-      UserPromotion.create(:credit_amount => 50, :user_id => referer.id)
+      UserPromotion.create(:credit_amount => 50, :user_id => current_user.id)
     else
-      referer_promotion.credit_amount += 5
+      referer_promotion.credit_amount += 50
       referer_promotion.save
     end
   end
-
+  
 end

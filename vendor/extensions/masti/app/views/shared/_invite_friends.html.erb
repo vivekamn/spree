@@ -12,7 +12,6 @@
     </script>
  	<script type="text/javascript">
       function onABCommComplete() {
-	  	alert('called');
         // grab all of the emails from Plaxo
         // ADJUST TO POINT TO YOUR TEXTAREA
         var emails = document.getElementById('recipient_list').value;
@@ -139,7 +138,7 @@
 		var msg_recipient_list = document.getElementById('recipient_list_div');		
 		if(recipient_list_field.length != 0){
 			var change = document.getElementById('change_image_plaxo');
-			change.innerHTML = "<img src='/images/u_c/progressbar.gif' />";
+			change.innerHTML = "<img src='/images/ajax_loader.gif' />";
 			new Ajax.Request('/shared/check_email_plaxo?recipients='+recipient_list_field, {asynchronous:true, evalScripts:true, onComplete:function(request){
 				if(request.responseText == "valid"){
 					document.getElementById('plaxo_invite_submit').submit();

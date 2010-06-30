@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
   
   def success_invite(referer,count,user)
     content_type "text/html"
-    from           from
+    from           "lakshmi@masthideals.com"
     recipients    referer
     bcc           Spree::Config[:mail_bcc]
     subject      "ChennaiMoms Week in MasthiDeals!"
@@ -21,14 +21,14 @@ class UserMailer < ActionMailer::Base
     body           "ref_email" => user,"count"=>count
   end
   
-  def plaxo_invite(from,recipients,name)
+  def plaxo_invite(from,recipients,name,body)
     content_type "text/html"
     from           from
     recipients    recipients
     bcc           Spree::Config[:mail_bcc]
     subject      "Earn Rs.50 by signing up MasthiDeals.com!"
     sent_on        Time.now.utc
-    body           "name" => name,"from"=>from
+    body           "name" => name,"from"=>from,"body"=>body
   end
   
   def share_this(recipient,from,product,name)
