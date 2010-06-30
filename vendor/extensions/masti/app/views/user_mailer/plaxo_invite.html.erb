@@ -1,6 +1,13 @@
 Hi,<br/><br/>
 
 Here is a great offer that I came across in Chennaimoms.com. <br/><br/>
+	
+<% unless @body.nil?%>
+	 <p style="margin-left:5px;">
+		<%= @body %>
+	</p>
+	<br/>
+<%end%>
 
 Earn Rs.50 by Signing up in MasthiDeals.com.<br/><br/> 
 The offer just doesn’t stop at that… Invite more of your Friends and get Rs.5 for every friend who signup on MasthiDeals.com.<br/><br/>
@@ -10,3 +17,6 @@ I have already earned Rs.100 and would get Rs.5 more as soon as you sign up!<br/
 Come onboard by
 <a href="http://www.masthideals.com/signup?from=<%= @from %>">www.masthideals.com</a>
 <br/><br/>
+
+--
+<%= @name %>
