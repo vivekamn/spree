@@ -278,10 +278,14 @@ class Order < ActiveRecord::Base
 
   def update_totals(force_adjustment_recalculation=false)
     self.item_total       = self.line_items.total
-    if self.item_total < self.user.user_promotion.credit_amount
-      self.item_total = 0
-    else
-      self.item_total -= self.user.user_promotion.credit_amount
+    unless self.user.user_promotion.nil?
+      credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
+      total_amount = self.item_total
+      if total_amount < credit_amount
+        self.item_total = 0
+      else
+        self.item_total -= credit_amount
+      end
     end
 
     # save the items which might be changed by an order update, so that
@@ -375,14 +379,16 @@ class Order < ActiveRecord::Base
   end
   
   def update_user_promotion
-    credit_amount = self.user.user_promotion.credit_amount
-    total_amount = self.line_items.total
-    if credit_amount > total_amount
-      self.user.user_promotion.credit_amount -= total_amount
-    else 
-      self.user.user_promotion.credit_amount = 0
+    unless self.user.user_promotion.nil?
+      credit_amount = self.user.user_promotion.credit_amount
+      total_amount = self.line_items.total
+      if credit_amount > total_amount
+        self.user.user_promotion.credit_amount -= total_amount
+      else 
+        self.user.user_promotion.credit_amount = 0
+      end
+      self.user.user_promotion.save
     end
-    self.user.user_promotion.save
   end
 
   def out_of_stock_items
