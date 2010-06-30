@@ -4,7 +4,7 @@ class HomeController < Spree::BaseController
     ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
 #   before_filter :require_user,:only=>[:get_featured]
     skip_filter :protect_from_forgery
-    before_filter :update_user_credit
+#    before_filter :update_user_credit,:only=>[:from_cmom_check]
   def index
     @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
     @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
@@ -43,12 +43,42 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def from_cmom_check
+   user = User.find_by_email(params[:user_email])
+    referer = User.find_by_email(params[:referer_email])
+    if user and referer
+      if params[:phone_verify]=="true"
+        create_user_promotion user
+        update_user_promotion referer
+        redirect_to invite_friends_path
+      else
+        redirect_to verifiy_your_phone_path
+      end
+    elsif user
+      if params[:phone_verify]=="true"
+        create_user_promotion user
+        redirect_to invite_friends_path
+      else
+        redirect_to verifiy_your_phone_path
+      end
+    elsif referer
+      update_user_promotion referer
+      count= User.count(:all,:conditions=>['refered_by = ?',params[:referer_email]])
+      UserMailer.deliver_success_invite(params[:referer_email],count,current_user.email)
+      redirect_to home_url
+    else
+      redirect_to home_url
+    end      
+  end
+  
+  def invite_friends
+    
+  end
+  
   def share_this
-    puts "#{params[:name]}-------->"
     recipients = params[:recipients]
     name = params[:recipients]
     from=params[:from]
-    puts "#{params[:from]}-------->"
     current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
     product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
     split_recipients = recipients.split(",")
@@ -176,18 +206,6 @@ class HomeController < Spree::BaseController
     end
   end
   
-  #getting the featured deal informations from the user
-#  def create
-#    @enquiry=Enquiry.new(params[:enquiry])
-#    if @enquiry.save
-#      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
-#      redirect_to home_url
-#    else
-#      flash[:error]="Oops You are missing Something."      
-#      redirect_to get_featured_path
-#    end
-#  end
-  
   def create
     @enquiry=Enquiry.new(params[:enquiry])
     begin
@@ -266,20 +284,7 @@ class HomeController < Spree::BaseController
   end
 
   private
-
-  def update_user_credit
-    user = User.find_by_email(params[:user_email])
-    referer = User.find_by_email(params[:referer_email])
-    if user and referer
-      create_user_promotion user
-      update_user_promotion referer
-    elsif user
-      create_user_promotion user
-    elsif referer
-      update_user_promotion referer
-    end      
-  end
-
+  
   def create_user_promotion user
     UserPromotion.create(:credit_amount => 100, :user_id => user.id)
   end
@@ -289,7 +294,7 @@ class HomeController < Spree::BaseController
     if referer_promotion.nil?
       UserPromotion.create(:credit_amount => 50, :user_id => referer.id)
     else
-      referer_promotion.credit_amount += 50
+      referer_promotion.credit_amount += 5
       referer_promotion.save
     end
   end

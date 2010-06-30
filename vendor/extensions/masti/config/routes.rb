@@ -25,7 +25,8 @@ map.classifieds '/classifieds',:controller => "home", :action => "index"
 map.directory '/directory',:controller => "home", :action => "index"
 map.bookmarking '/bookmarking',:controller => "home", :action => "index"
 map.blog '/blog',:controller => "home", :action => "index"
-
+map.invite_friends '/invite-your-friends',:controller => "home", :action => "invite_friends"
+map.verifiy_your_phone '/verifiy-your-phone',:controller => "shared", :action => "verifiy_your_phone"
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  

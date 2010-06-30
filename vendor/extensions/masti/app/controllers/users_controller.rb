@@ -21,7 +21,7 @@ class UsersController < Spree::BaseController
          message = "Hi,Thanks for registering with  MasthiDeals.com. We will give you great deals from restaurants, spas, resorts etc  periodically- MasthiDeals team."
          send_sms(@user.phone_no,message)
         @user.roles << Role.find_by_name("admin") unless admin_created?
-        if @user.refered_by.nil?
+        if @user.refered_by.nil? or @user.refered_by.empty?
           redirect_to "http://localhost:3005/deals/verify_referer/1?email=#{@user.email}"
         else
           redirect_to "http://localhost:3005/deals/verify_referer/1?email=#{@user.email}&referer=#{@user.refered_by}"

@@ -5,6 +5,11 @@ class DealHistory < ActiveRecord::Base
     self.save!
   end
   
+  def self.send_sms(phone_no,message)
+    query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
+    result = ActiveRecord::Base.connection.execute(query)
+  end
+  
   def sell_out   
     self.sold_out=true
     self.save!

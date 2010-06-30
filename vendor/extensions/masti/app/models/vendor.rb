@@ -9,4 +9,7 @@ class Vendor < ActiveRecord::Base
   validates_uniqueness_of :name, :on => :save, :message => "already available, choose another"
   validates_format_of(:email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "not valid")
   validates_presence_of :state_id, :on => :save, :message => "required"
+ def deleted?
+    deleted_at
+ end
 end

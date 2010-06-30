@@ -11,6 +11,26 @@ class UserMailer < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
   
+  def success_invite(referer,count,user)
+    content_type "text/html"
+    from           from
+    recipients    referer
+    bcc           Spree::Config[:mail_bcc]
+    subject      "ChennaiMoms Week in MasthiDeals!"
+    sent_on        Time.now.utc
+    body           "ref_email" => user,"count"=>count
+  end
+  
+  def plaxo_invite(from,recipients,name)
+    content_type "text/html"
+    from           from
+    recipients    recipients
+    bcc           Spree::Config[:mail_bcc]
+    subject      "Earn Rs.50 by signing up MasthiDeals.com!"
+    sent_on        Time.now.utc
+    body           "name" => name,"from"=>from
+  end
+  
   def share_this(recipient,from,product,name)
     content_type "text/html"
     from           from
