@@ -52,14 +52,14 @@ class HomeController < Spree::BaseController
         update_user_promotion referer
         redirect_to invite_friends_path
       else
-        redirect_to verifiy_your_phone_path
+        redirect_to generate_code_path
       end
     elsif user
       if params[:phone_verify]=="true"
         create_user_promotion user
         redirect_to invite_friends_path
       else
-        redirect_to verifiy_your_phone_path
+        redirect_to generate_code_path
       end
     elsif referer
       update_user_promotion referer
@@ -69,6 +69,27 @@ class HomeController < Spree::BaseController
     else
       redirect_to home_url
     end      
+  end
+  
+  def verifiy_your_phone
+    
+  end
+  
+  def generate_code
+    verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
+    verification_code = VerificationCode.new if verification_code.nil?
+    verification_code.user = current_user
+    record = true
+    while record
+      random = "#{Array.new(5){rand(5)}}"
+      record = VerificationCode.find(:first, :conditions => ["code = ?", random])
+    end
+    verification_code.code = random
+    verification_code.verify_type="Mobile"
+    verification_code.save!
+    message = "Hi,Your Verification code is #{random} - MasthiDeals team."
+    send_sms(current_user.phone_no,message)
+    redirect_to verifiy_your_phone_path
   end
   
   def invite_friends
@@ -284,6 +305,11 @@ class HomeController < Spree::BaseController
   end
 
   private
+  
+ def send_sms(phone_no,message)
+    query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
+    result = ActiveRecord::Base.connection.execute(query)
+  end
   
   def create_user_promotion user
     UserPromotion.create(:credit_amount => 100, :user_id => user.id)

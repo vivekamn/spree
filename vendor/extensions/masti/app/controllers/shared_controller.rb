@@ -17,23 +17,14 @@ class SharedController < ApplicationController
     
   end
   
-  def verifiy_your_phone
+  def verify_mobile
     verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
-    verification_code = VerificationCode.new if verification_code.nil?
-    verification_code.user = current_user
-    record = true
-    while record
-      random = "#{Array.new(5){rand(5)}}"
-      record = VerificationCode.find(:first, :conditions => ["code = ?", random])
+    if verification_code.code == params[:code]
+    
+    else
+      flash[:error]="Please Enter Correct code.If you want to send code again Please <a href='/generate-code'>Click here</a>"  
     end
-    verification_code.code = random
-    verification_code.verify_type="Mobile"
-    verification_code.save!
-    message = "Hi,Your Verication code is #{random} - MasthiDeals team."
-    DealHistory.send_sms(current_user.phone_no,message)
   end
-  
-  
   
   def check_email_plaxo
     recipients = params[:recipients]
