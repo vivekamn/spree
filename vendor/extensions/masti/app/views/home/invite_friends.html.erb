@@ -1,0 +1,29 @@
+<%= javascript_include_tag "utils" %>
+<style>
+	.row_even {
+background-color:#D5EAFF;
+height:28px;
+vertical-align:middle;
+}
+.style41 {
+color:#10779D;
+font-size:12px;
+}
+
+</style>
+<div style="height:400px">
+  <div id="invite_friends" style="display:none;width:805px;height:400px">
+    <%= render :partial => "shared/invite_friends" %>
+  </div>
+</div>
+
+<script type="text/javascript">
+	
+	if(is_ie){
+		setTimeout("showPop('invite_friends', 210, 500);",500);
+	}else{		
+		showPop('invite_friends', 210, 500);
+	}
+
+	
+</script>

@@ -1,0 +1,160 @@
+<script type="text/javascript">
+        function showPlaxoChooser(){
+            showPlaxoABChooser('recipient_list', '/shared/plaxo_cb');
+            return false;
+        }
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/util.js">
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/basic.js">
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/abc_launcher.js">
+    </script>
+ 	<script type="text/javascript">
+      function onABCommComplete() {
+	  	alert('called');
+        // grab all of the emails from Plaxo
+        // ADJUST TO POINT TO YOUR TEXTAREA
+        var emails = document.getElementById('recipient_list').value;
+        // strip out all of the names associated with emails
+        emails = emails.match(/<([^>]+)>/g).join(', ');
+        // strip out the opening and closing brackets
+        emails = emails.replace(/[<>]/g,'');
+
+        // ADJUST TO POINT TO YOUR TEXTAREA
+        document.getElementById('recipient_list').value = emails;
+      }
+    </script>
+
+
+<div align='center' style='width:805px;background-color:#FFFFFF;border: 5px solid #29689E'>
+  <% form_for :connections ,:url => {:controller =>'shared' , :action => 'plaxo_invite', :invited_after =>@status}, :html => {:id => "plaxo_invite_submit"} do |f| %>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" >
+      <tr height="40">
+        <td colspan="8" valign="middle">
+		 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite Your </span> <span class='blue' style='font-size:16px;font-weight:bold;'>Friends</span>
+        </td>
+      </tr>
+      <tr height="20">
+        <td colspan="8">
+        	<input type="hidden" value='Home' id="send_from" name="send_from">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" align="left" style='padding-left:150px;font-size:12px'>
+        Welcome to the Masthideals community!<br/>
+          The more people we have, our community becomes more fun and useful. <br/>
+          Please take a minute to invite your friends whom you think will enjoy our community.
+          
+        </td>
+      <tr height="20">
+        <td></td>
+        <td align="right" style='padding-right:20px'> <%= link_to "Skip", '/home?skipped_after=skipped' %></td>
+      </tr>
+      </tr>  
+      <tr>
+        <td width="50%">
+          <table width="98%" style="border: 1px solid lightblue; margin-left: 5px; margin-bottom: 5px;" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+              <td align="center">
+                <table border="0" width="100%" align="left" cellpadding="3" cellspacing="0">
+                  <tr>
+                    <td>
+                      <table id="EditTable" width="100%" height='265' border="0" cellpadding="2" cellspacing="0">
+                        <tr class="row_even">
+                          <td colspan="6" align="left">
+                            <span class="style41">Enter your friends info</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="6" align="center">
+                            <%= image_tag '/images/addressBook_btn.jpg', :onclick => "showPlaxoChooser();", :border => '0', :width => '216px', :height => '44px', :alt => "Add from my address book", :class  => "cursor_pointer" %>
+                          </td>
+                        </tr>                        
+                        <tr>
+                          <td width="50" align="right">
+                            To
+                          </td>
+                          <td width="3">
+                            :
+                          </td>
+                          <td colspan="4" align="left">
+                            <textarea rows="2" cols="43" id="recipient_list" name="recipients" onfocus="clear_recipient_list_div();"></textarea><br />
+                            <div id="recipient_list_div" style="display:none;"></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right">
+                            Name
+                          </td>
+                          <td>
+                            :
+                          </td>
+                          <td colspan="4" align="left">
+                               <input type="text" id="name" name="name" size="38">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="right">
+                            Message
+                          </td>
+                          <td>
+                            :
+                          </td>
+                          <td colspan="4" align="left">
+                            <textarea rows="4" cols="43" id="body" name="body" onkeyup="set_messages(this);" >
+                            </textarea>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="6" align="center">
+                            <div id="change_image_plaxo">
+                            	<input type="button" onclick="validate_plaxo_invite();" value="Send" class="forward_but" style="background-color: rgb(168, 208, 39);">
+                            </div>                                                
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td width="50%" valign="top">
+          <%= render :partial => 'shared/email_text'%>
+        </td>
+      </tr>
+    </table>
+    <input name="login_or_signup" type="hidden" value=true /> 
+  <% end %>
+</div>
+
+<script type="text/javascript">    
+    function set_messages(inputs){
+        document.getElementById('invite_from').innerHTML = inputs.value;
+    }
+	function validate_plaxo_invite(){		
+		var recipient_list_field = document.getElementById('recipient_list').value;
+		var msg_recipient_list = document.getElementById('recipient_list_div');		
+		if(recipient_list_field.length != 0){
+			var change = document.getElementById('change_image_plaxo');
+			change.innerHTML = "<img src='/images/u_c/progressbar.gif' />";
+			new Ajax.Request('/shared/check_email_plaxo?recipients='+recipient_list_field, {asynchronous:true, evalScripts:true, onComplete:function(request){
+				if(request.responseText == "valid"){
+					document.getElementById('plaxo_invite_submit').submit();
+				}else{
+					change.innerHTML = "<input type='button' onclick='validate_plaxo_invite();' value='Send' class='forward_but' style='background-color: rgb(168, 208, 39);'/>";
+					msg_recipient_list.innerHTML = "<font color='red'>One or more email ids given are invalid.<\/font>";
+					msg_recipient_list.style.display = "block";
+				}
+			}});
+		}else{
+			msg_recipient_list.innerHTML = "<font color='red'>Email-Id should not be empty.<\/font>";
+			msg_recipient_list.style.display = "block";
+		}
+	}
+	function clear_recipient_list_div(){
+		document.getElementById('recipient_list_div').style.display = "none";
+	}
+</script>
