@@ -2,9 +2,30 @@
 </div>
 <% form_for :connections ,:url => {:controller =>'home' , :action => 'verify_mobile'}, :html => {:id => "verification_submit"} do |f| %>
 <table width="100%">
-	<tr height="150px">
+	<tr height="90px">
 		<td valign="top">
 			<span class="green">Mobile </span><span class="blue">Verification</span>
+		</td>
+	</tr>
+	<tr height="120px">
+		<td align="center">
+			<table style="width:98%;">
+				<tr>
+					<td>
+						<p align="center">
+						
+						<%if params.nil?%>
+						Welcome CMOM! You are just one step away from earning 100 MD Money!
+						<%else%>
+						You are just one step away from earning  50 MD Money!
+						<%end%>
+						<br/><br/>
+
+						Please enter the verification code sent to your mobile <%= current_user.phone_no %>.
+						</p>
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>
     <tr height="150px">
@@ -19,6 +40,9 @@
                     </td>
                     <td colspan="4" align="left">
                         <input type="text" id="code" name="code" size="38">
+						<%if params[:md_user]=='true'%>
+							<input type="hidden" id="md_user_ref" name="md_user_ref">
+						<%end%>
                     </td>
                 </tr>
                 <tr>

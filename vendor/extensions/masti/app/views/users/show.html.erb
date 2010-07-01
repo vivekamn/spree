@@ -22,6 +22,17 @@
 		<% if admin?%>
 			<%=link_to "View all Orders","/admin/orders" %>&nbsp;&nbsp;&nbsp;&nbsp;<%=link_to "View all Products","/admin/products" %>
 		<%end%>
+		 <%unless current_user.user_promotion.nil?%>
+			  <table>
+			  <tr>
+			    <td><strong>Balance MD Money&nbsp; </strong></td>
+				<td><strong>: &nbsp;</strong></td>
+			    <td>
+			      <%= @user.user_promotion.credit_amount %>
+			    </td>
+			  </tr>
+			  </table>
+			<%end%>
 	</div>
 	
 

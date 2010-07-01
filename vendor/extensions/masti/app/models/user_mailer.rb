@@ -16,7 +16,7 @@ class UserMailer < ActionMailer::Base
     from           "lakshmi@masthideals.com"
     recipients    referer
     bcc           Spree::Config[:mail_bcc]
-    subject      "ChennaiMoms Week in MasthiDeals!"
+    subject      "Thanks . You are close to winning the two Inox tickets. "
     sent_on        Time.now.utc
     body           "ref_email" => user,"count"=>count
   end
@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
     from           from
     recipients    recipients
     bcc           Spree::Config[:mail_bcc]
-    subject      "Earn Rs.50 by signing up MasthiDeals.com!"
+    subject      "Become a part of MasthiDeals and earn 50 MasthiDeals Money which you can use to buy any deal. "
     sent_on        Time.now.utc
     body           "name" => name,"from"=>from,"body"=>body
   end

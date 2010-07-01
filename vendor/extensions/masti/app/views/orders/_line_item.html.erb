@@ -11,17 +11,21 @@
       <% end %>
     <% end %>
   </td>
- <td width="44%" class="bd1 bd2" align="left" style="line-height:24px;">
+ <td width="44%" class="bd1 bd2" align="left" style="line-height:24px;padding-left:5px;">
     <% hook :cart_item_description, locals do %>
      <%=  variant.product.name %>
       <%= variant_options variant %>
       <br /><%# truncate(variant.product.description, :length => 100, :omission => "...") %>
     <% end %>
   </td>
-  <td width="15%" class="bd1 bd2">
+  <td width="18%" class="bd1 bd2">
     <% hook :cart_item_price, locals do %>
       <!--<%=  product_price(line_item) %>-->
-	  <strong>Rs. <%=line_item.price.to_i%></strong>
+	  <strong>Rs. <%=line_item.price.to_i%>
+	  <%unless current_user.user_promotion.nil?%>
+	  	- <%= current_user_credit_amount %>&nbsp;(MD Money)
+	  <%end%>
+	  </strong>
     <% end %>
   </td>
 

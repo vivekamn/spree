@@ -34,18 +34,50 @@
 		 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite Your </span> <span class='blue' style='font-size:16px;font-weight:bold;'>Friends</span>
         </td>
       </tr>
-      <tr height="20">
+	  <tr height="20">
         <td colspan="8">
         	<input type="hidden" value='Home' id="send_from" name="send_from">
         </td>
       </tr>
-      <tr>
+	  <%if params[:from]=='reg_complete' %>
+	  <tr>
+	  	<td colspan="2" align="center">
+	  		<div id="flash notice" class="" style="width:98%">
+	  			 Since you are a CMom, We have credited 100 MD Money to you. If you would like your friends to earn 50 MD Money, do 
+				 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite </span> <span class='blue' style='font-size:16px;font-weight:bold;'>them</span>
+				 .
+				<br/><br/>
+				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
+				<br/><br/>
+				You can also become the MasthiQueen and win a romantic dinner at GRT Grand Days Inn if you have the highest number of friends who register. 
+				<br/><br/>
+				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
+	  		</div>
+	  	</td>
+	  </tr>
+	  <%elsif params[:from]=='reg_complete_md_ref'%>
+	  	<tr>
+	  	<td colspan="2" align="center">
+	  		<div id="flash notice" class="" style="width:98%">
+	  			 Hi,
+<br/><br/>
+				We are glad to credit you 50 MD Money since you have been invited by <%= current_user.refered_by %>. If you would like your friends to earn 50 MD Money, do 
+
+
+ 
+				 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite </span> <span class='blue' style='font-size:16px;font-weight:bold;'>them</span>
+				 .
+				<br/><br/>
+				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
+	  		</div>
+	  	</td>
+	  </tr>
+      <%end%>
+	  <tr>
         <td colspan="8" align="left" style='padding-left:150px;font-size:12px'>
-        Welcome to the Masthideals community!<br/>
-          The more people we have, our community becomes more fun and useful. <br/>
-          Please take a minute to invite your friends whom you think will enjoy our community.
           
         </td>
+		</tr>
       <tr height="20">
         <td></td>
         <td align="right" style='padding-right:20px'> <%= link_to "Skip", '/home?skipped_after=skipped' %></td>

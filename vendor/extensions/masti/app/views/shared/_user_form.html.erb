@@ -95,12 +95,13 @@
           </td>
         </tr>
         <tr>
-          <td height="61" colspan="3" align="right" style="padding-right:39px">
+         <td></td>
+          <td align="center" height="61" style="padding-right: 0px;" colspan="2">
             <p>
             <%= image_submit_tag "submit1.gif", :alt => 'submit_btn', :class  => "cursor_pointer", :id => "submit_btn",:onclick => "return user_validate();" %>
             </p>
             <span class='login_exists'><%= link_to "<span class='green' style='font-size:16px; font-weight:bold;'>Log In as</span> <span class='blue' style='font-size:16px; font-weight:bold;'>Existing Customer</span>", login_path %></span>
-          </td>
+		  </td>
         </tr>
         <tr>
           <td>
@@ -120,6 +121,33 @@
     </div>
   </div>
 </div>
+
+<%if params[:from]=="CMOMS"%>
+<script type="text/javascript">
+window.location.href='javascript:show_send_share_this();';
+	function show_send_share_this(){
+        showPop('welcome_cmom', 10, 200);
+    }
+	function close_send_share_this(){
+        hidePop('welcome_cmom');
+    }
+</script>
+<div id="welcome_cmom" name="welcome_cmom" style="display:none;width:418px;height:63px;background-color:white;">
+<table style="border:4px solid #29689E;background-color:white;" height>
+	<tr>
+		<td>
+			<p align="center">Hi CMOM! Welcome to MasthiDeals!
+			<br/><br/>
+		Please Complete the registration to earn 100 MD Money.
+		</p> 
+		</td>
+		<td width="10px;" valign="top">
+			<%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_send_share_this();" %>
+		</td>
+	</tr>
+</table>
+</div>
+<%end%>
 <script>
   var email_flag = true;
   function unique_email() {
@@ -131,7 +159,7 @@
         email_my = new String(email_name);
         email_value = EMAIL_REGEX.test(email_my);
         if (email_value != true) {
-          msg += '<br/>E-mail is invalid';
+          msg += '<br/>E-mail is not in valid format';
           document.getElementById('flash_error').style.display = '';
           document.getElementById('flash_error').innerHTML = msg;
           flag_em = false;
@@ -153,7 +181,7 @@
               else {
                 email_flag = false;
                 document.getElementById('email_image').innerHTML = '';
-                msg += 'Email has already been registered.<a href="password_resets/new">Forgot Password?</a>'
+                msg += 'Email has already been registered. <a href="password_resets/new">Forgot Password?</a>'
                 document.getElementById('flash_error').style.display = '';
                 document.getElementById('flash_error').innerHTML = msg;
               }
@@ -187,14 +215,14 @@
       }
       else {
         if(email_flag == false)
-        msg += '<br/>E-mail is invalid';
+        msg += '<br/>E-mail is not in valid format';
       }
 	
       pass_str = new String(password)
       if(password == '' || password == null || confirm == '' || confirm == null || pass_str.length < 4){
         if(password == '' || password == null || confirm == '' || confirm == null){
 			if(password == '' || password == null ){
-				msg += '<br/>Password cannot be empty';
+				msg += '<br/>Password should be atleast 4 characters';
         		flag_user = false;
 			}
 			else{
@@ -203,7 +231,7 @@
 			}
 		}
 		else{
-			msg += '<br/>Password is invalid. It should be 4 characters';
+			msg += '<br/>Password should be atleast 4 characters';
         	flag_user = false;
 		}
 		
@@ -217,7 +245,7 @@
       }
       phone_value = PHONE_REGEX.test(new String(mobile)); 
       if(mobile =='' || mobile == null) {
-        msg += '<br/>Mobile number cannot be empty';
+        msg += '<br/>Mobile number should be a 10 digit number';
         flag_user = false;
       } 
       else {
@@ -236,7 +264,7 @@
 	  	email_my1 = new String(refered_by);
 	  	email_value1 = EMAIL_REGEX.test(email_my1);
 	  	if (email_value1 != true) {
-	  		msg += '<br/>Refered E-mail is invalid';
+	  		msg += '<br/>Referred E-mail is not in valid format';
 	  		flag_user = false;
 	  	}
 	  }

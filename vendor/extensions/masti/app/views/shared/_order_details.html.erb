@@ -34,6 +34,7 @@
         <% end %>
       </tr>
     <% end %>
+  <%unless @order.user.user_promotion.nil?%>
   <% hook :order_details_subtotal do %>
     <tbody id='subtotal'>
       <tr class="total" id="subtotal-row">
@@ -43,6 +44,7 @@
     </tbody>
   <% end %>    
   </tbody>
+  <%end%>
   <% hook :order_details_subtotal do %>
     <tbody id='subtotal'>
       <tr class="total" id="subtotal-row">

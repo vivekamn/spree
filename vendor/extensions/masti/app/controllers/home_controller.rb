@@ -2,7 +2,7 @@ class HomeController < Spree::BaseController
     require 'RubyRc4.rb'
     require 'base64'
     ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
-#   before_filter :require_user,:only=>[:get_featured]
+   before_filter :require_user,:only=>[:verify_mobile,:invite_friends]
     skip_filter :protect_from_forgery
 #    before_filter :update_user_credit,:only=>[:from_cmom_check]
   def index
@@ -46,13 +46,15 @@ class HomeController < Spree::BaseController
   def verify_mobile
     verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
     if verification_code.code == params[:code]
-      create_user_promotion current_user
-#     referer = User.find_by_email(current_user.refered_by) 
-#      update_user_promotion referer unless referer.nil?
-      flash[:success]="We have credited you 100 Masthideals Money"
-      redirect_to invite_friends_path
+     if params[:md_user_ref].nil?
+       create_user_promotion current_user
+      redirect_to invite_friends_path(:from=>"reg_complete")  
     else
-      flash[:error]="Please Enter Correct code.If you want to send code again Please <a href='/generate-code'>Click here</a>"
+      update_referer_promotion
+      redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
+     end
+    else
+      flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
       redirect_to verifiy_your_phone_path
     end
   end
@@ -64,16 +66,14 @@ class HomeController < Spree::BaseController
       if params[:phone_verify]=="true"
         create_user_promotion user
 #        update_user_promotion referer
-        flash[:success]="We have credited you 100 Masthideals Money"
-        redirect_to invite_friends_path
+        redirect_to invite_friends_path(:from=>"reg_complete")
       else
         generate_code
       end
     elsif user
       if params[:phone_verify]=="true"
         create_user_promotion user
-        flash[:success]="We have credited you 100 Masthideals Money"
-        redirect_to invite_friends_path
+        redirect_to invite_friends_path(:from=>"reg_complete")
       else
         generate_code
       end
@@ -83,10 +83,16 @@ class HomeController < Spree::BaseController
       count= User.count(:all,:conditions=>['refered_by = ?',params[:referer_email]])
       count=0 if count.nil?
       UserMailer.deliver_success_invite(params[:referer_email],count,current_user.email)
-       flash[:success]="We have credited you 50 Masthideals Money"
+       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
       redirect_to home_url
     else
-      redirect_to home_url
+      unless current_user.refered_by.nil? or current_user.refered_by.empty?
+        user = User.find_by_email(current_user.refered_by)
+        generate_code('true') unless user.nil?
+      else
+        redirect_to home_url
+      end
+      
     end      
   end
   
@@ -94,7 +100,7 @@ class HomeController < Spree::BaseController
     
   end
   
-  def generate_code
+  def generate_code(md_user=nil)
     verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
     verification_code = VerificationCode.new if verification_code.nil?
     verification_code.user = current_user
@@ -108,7 +114,13 @@ class HomeController < Spree::BaseController
     verification_code.save!
     message = "Hi,Your Verification code is #{random} - MasthiDeals team."
     send_sms(current_user.phone_no,message)
-    redirect_to verifiy_your_phone_path
+    if md_user=='true'
+      redirect_to verifiy_your_phone_path(:md_user=>'true')
+    else
+      redirect_to verifiy_your_phone_path  
+    end
+    
+    
   end
   
   def invite_friends
@@ -173,7 +185,9 @@ class HomeController < Spree::BaseController
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
     begin
     @order.update_payment_info(@response_txt)
-    @order.update_user_promotion
+    unless @order.user.user_promotion.nil?
+      @order.update_user_promotion
+    end
     if @order.state=='new' # check if user is paying again for a paid order or cancelled order
       if @response_txt['ResponseMessage']=='Transaction Successful'
         @status=@order.update_payment
@@ -332,18 +346,15 @@ class HomeController < Spree::BaseController
   
   def create_user_promotion user
     UserPromotion.create(:credit_amount => 100, :user_id => user.id)
+    current_user.phone_verify=true
+    current_user.save!
+    user=User.find_by_email(current_user.refered_by)
+     unless user.nil?
+       user.invited_count +=1
+       user.save!
+     end
   end
 
-#  def update_user_promotion referer
-#    referer_promotion = UserPromotion.find_by_user_id(referer.id)    
-#    if referer_promotion.nil?
-#      UserPromotion.create(:credit_amount => 5, :user_id => referer.id)
-#    else
-#      referer_promotion.credit_amount += 5
-#      referer_promotion.save
-#    end
-#  end
-  
   def update_referer_promotion
     referer_promotion = UserPromotion.find_by_user_id(current_user.id)    
     if referer_promotion.nil?
@@ -352,6 +363,13 @@ class HomeController < Spree::BaseController
       referer_promotion.credit_amount += 50
       referer_promotion.save
     end
+    current_user.phone_verify=true
+    current_user.save!
+    user=User.find_by_email(current_user.refered_by)
+     unless user.nil?
+       user.invited_count +=1
+       user.save!
+     end
   end
   
 end
