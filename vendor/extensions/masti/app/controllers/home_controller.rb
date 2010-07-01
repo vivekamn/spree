@@ -39,6 +39,19 @@ class HomeController < Spree::BaseController
     if count > 0
       render(:text => 'false' )
     else
+      puts "true =================="
+      render(:text => 'true')
+    end
+  end
+  
+  def unique_phone
+    puts "#{params[:phone]}"
+    count = User.count(:all, :conditions => ['phone_no = ?',params[:phone]] )
+    if count > 0
+      puts "false =================="
+      render(:text => 'false')
+    else
+      puts "true =================="
       render(:text => 'true')
     end
   end
