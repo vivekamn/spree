@@ -11,14 +11,14 @@ class UserMailer < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
   
-  def success_invite(referer,count,user)
+  def success_invite(referer,count,user,current_user)
     content_type "text/html"
     from           "lakshmi@masthideals.com"
     recipients    referer
     bcc           Spree::Config[:mail_bcc]
     subject      "Thanks . You are close to winning the two Inox tickets. "
     sent_on        Time.now.utc
-    body           "ref_email" => user,"count"=>count
+    body           "ref_email" => user,"count"=>count,"current_user"=>current_user
   end
   
   def plaxo_invite(from,recipients,name,body)

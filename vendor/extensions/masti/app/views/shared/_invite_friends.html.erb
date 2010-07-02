@@ -34,7 +34,7 @@
         	<input type="hidden" value='Home' id="send_from" name="send_from">
         </td>
       </tr>
-	  <%if params[:from]=='reg_complete' %>
+	 <%if current_user.is_cmom==true%>
 	  <tr>
 	  	<td colspan="2">
 	  		<div id="" class="" style="width:98%">

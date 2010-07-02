@@ -2,6 +2,18 @@ Hi , <br/><br/>
 
 	Your friend <%= @ref_email %> has registered with <a href="http://www.masthiDeals.com">MasthiDeals.com</a>. <br/><br/>
 	
-	Since YOU referred him / her, we have gifted him 50 MasthiDeals Money which he can use to buy any deal in <a href="http://www.masthiDeals.com">MasthiDeals.com</a>.  <br/><br/>
+	Since YOU referred him, we have gifted him 50 MD Money.  <br/><br/>
 	
-	If <%= 5-@count %> more of your friends regsiter with MD,   you get two satyam cinema tickets free. Do you want to <a href="http://www.masthiDeals.com/home/invite_friends/1">invite more of your friends?</a>(link to invite people)
+	If 
+	<%if @current_user.is_cmom==true%>
+		<%= 5-@count %>
+	<%else%>
+		<%= 7-@count %>
+	<%end%>
+	 more of your friends regsiter with MD,   you get 
+	<%if @current_user.is_cmom==true%>
+		two tickets
+	<%else%>
+		one ticket
+	<%end%>
+	to satyam cinemas. Do you want to <a href="http://www.masthiDeals.com/home/invite_friends/1">invite more of your friends?</a>

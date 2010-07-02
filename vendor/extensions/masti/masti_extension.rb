@@ -82,7 +82,7 @@ class MastiExtension < Spree::Extension
 #       attr_accessor :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address
       attr_accessible :phone_no,:refered_by
-      has_many :verification_codes
+      has_one :verification_code
       has_one :user_promotion
       #validates_presence_of :phone_no
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"

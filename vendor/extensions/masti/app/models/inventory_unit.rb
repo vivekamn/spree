@@ -92,7 +92,7 @@ class InventoryUnit < ActiveRecord::Base
             send_sms(user.phone_no,message)
             OrderMailer.deliver_voucher(order,product,order.user.email)
             if order.gift?
-              message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }"
+              message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }  Please check your email for further details."
               send_sms(order.giftee_phone_no,message)
               OrderMailer.deliver_gift_notification(order, product, variant)
               OrderMailer.deliver_gift_voucher(order,product)
@@ -114,7 +114,7 @@ class InventoryUnit < ActiveRecord::Base
               if item.order.state == "paid"
                 OrderMailer.deliver_voucher(item.order,product,item.order.user.email)
                 if order.gift?
-                  message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }"
+                  message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }  Please check your email for further details."
                   send_sms(order.giftee_phone_no,message)
                   OrderMailer.deliver_gift_notification(item.order, product, variant)
                   OrderMailer.deliver_gift_voucher(item.order,product)

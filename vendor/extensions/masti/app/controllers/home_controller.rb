@@ -53,17 +53,21 @@ class HomeController < Spree::BaseController
   end
   
   def verify_mobile
+   if current_user.mobile_verify==true
+     flash[:error]='Your mobile number has already been verified'
+     redirect_to home_url
+   else
     verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
     if verification_code.code == params[:code]
-     if params[:md_user_ref].nil?
-       create_user_promotion current_user
+     if current_user.is_cmom==true
+      create_user_promotion current_user
       redirect_to invite_friends_path(:from=>"reg_complete")  
     else
       update_referer_promotion
       user = User.find_by_email(current_user.refered_by)
       unless user.nil?
         count= user.invited_count
-        UserMailer.deliver_success_invite(user.email,count,current_user.email)
+        UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
         
       end
       redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
@@ -76,9 +80,8 @@ class HomeController < Spree::BaseController
         flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
         redirect_to verifiy_your_phone_path()
      end
-      
-    
     end
+   end
   end
   
   def cmom
@@ -89,8 +92,9 @@ class HomeController < Spree::BaseController
    user = User.find_by_email(params[:user_email])
     referer = User.find_by_email(params[:referer_email])
     if user and referer
+      current_user.is_cmom=true
+      current_user.save!
       if params[:phone_verify]=="true"
-        
         create_user_promotion user
 #        update_user_promotion referer
         redirect_to invite_friends_path(:from=>"reg_complete")
@@ -98,6 +102,8 @@ class HomeController < Spree::BaseController
         generate_code
       end
     elsif user
+      current_user.is_cmom=true
+      current_user.save!
       if params[:phone_verify]=="true"
         create_user_promotion user
         redirect_to invite_friends_path(:from=>"reg_complete")
@@ -126,7 +132,10 @@ class HomeController < Spree::BaseController
   end
   
   def verifiy_your_phone
-    
+     if current_user.mobile_verify==true
+       flash[:error]='Your mobile number has already been verified'
+       redirect_to home_url
+     end
   end
   
   def generate_code(md_user=nil)

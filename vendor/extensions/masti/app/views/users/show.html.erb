@@ -33,6 +33,19 @@
 			  </tr>
 			  </table>
 			<%end%>
+			<%unless current_user.verification_code.nil?%>
+			<%if current_user.mobile_verify==false%>
+			  <table>
+			  <tr>
+			    <td><strong>Balance MD Money&nbsp; </strong></td>
+				<td><strong>: &nbsp;</strong></td>
+			    <td>
+			    	<a href="/verifiy-your-phone">Click Her to verify your mobile</a>
+			    </td>
+			  </tr>
+			  </table>
+			  <%end%>
+			<%end%>
 	</div>
 	
 
