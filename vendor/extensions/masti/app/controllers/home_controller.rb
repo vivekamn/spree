@@ -39,19 +39,15 @@ class HomeController < Spree::BaseController
     if count > 0
       render(:text => 'false' )
     else
-      puts "true =================="
       render(:text => 'true')
     end
   end
   
   def unique_phone
-    puts "#{params[:phone]}"
     count = User.count(:all, :conditions => ['phone_no = ?',params[:phone]] )
     if count > 0
-      puts "false =================="
       render(:text => 'false')
     else
-      puts "true =================="
       render(:text => 'true')
     end
   end
@@ -64,12 +60,29 @@ class HomeController < Spree::BaseController
       redirect_to invite_friends_path(:from=>"reg_complete")  
     else
       update_referer_promotion
+      user = User.find_by_email(current_user.refered_by)
+      unless user.nil?
+        count= user.invited_count
+        UserMailer.deliver_success_invite(user.email,count,current_user.email)
+        
+      end
       redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
      end
-    else
-      flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
-      redirect_to verifiy_your_phone_path
+   else
+     unless params[:md_user_ref].nil?
+        flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code?from=resend'>Click here</a>"
+        redirect_to verifiy_your_phone_path(:md_user=>'true')
+     else
+        flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
+        redirect_to verifiy_your_phone_path()
+     end
+      
+    
     end
+  end
+  
+  def cmom
+    
   end
   
   def from_cmom_check
@@ -77,6 +90,7 @@ class HomeController < Spree::BaseController
     referer = User.find_by_email(params[:referer_email])
     if user and referer
       if params[:phone_verify]=="true"
+        
         create_user_promotion user
 #        update_user_promotion referer
         redirect_to invite_friends_path(:from=>"reg_complete")
@@ -92,16 +106,18 @@ class HomeController < Spree::BaseController
       end
     elsif referer
 #      update_user_promotion referer
-      update_referer_promotion
-      count= User.count(:all,:conditions=>['refered_by = ?',params[:referer_email]])
-      count=0 if count.nil?
-      UserMailer.deliver_success_invite(params[:referer_email],count,current_user.email)
-       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
-      redirect_to home_url
+       generate_code('true')
+#       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
+#      redirect_to home_url
     else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
         user = User.find_by_email(current_user.refered_by)
-        generate_code('true') unless user.nil?
+        unless user.nil?
+          generate_code('true')
+        else
+          redirect_to home_url
+        end
+         
       else
         redirect_to home_url
       end
@@ -114,6 +130,9 @@ class HomeController < Spree::BaseController
   end
   
   def generate_code(md_user=nil)
+    if !params[:from].nil?
+      md_user = 'true'
+    end
     verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
     verification_code = VerificationCode.new if verification_code.nil?
     verification_code.user = current_user
@@ -359,10 +378,10 @@ class HomeController < Spree::BaseController
   
   def create_user_promotion user
     UserPromotion.create(:credit_amount => 100, :user_id => user.id)
-    current_user.phone_verify=true
+    current_user.mobile_verify=true
     current_user.save!
     user=User.find_by_email(current_user.refered_by)
-     unless user.nil?
+    unless user.nil?
        user.invited_count +=1
        user.save!
      end
@@ -376,7 +395,7 @@ class HomeController < Spree::BaseController
       referer_promotion.credit_amount += 50
       referer_promotion.save
     end
-    current_user.phone_verify=true
+    current_user.mobile_verify=true
     current_user.save!
     user=User.find_by_email(current_user.refered_by)
      unless user.nil?

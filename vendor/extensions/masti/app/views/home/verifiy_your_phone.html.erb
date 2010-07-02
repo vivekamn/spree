@@ -1,6 +1,7 @@
 <div class="flash errors" id="flash_error" style="display:none;">
 </div>
-<% form_for :connections ,:url => {:controller =>'home' , :action => 'verify_mobile'}, :html => {:id => "verification_submit"} do |f| %>
+<% from = 'resend' if params[:md_user]=='true'%>
+<% form_for :connections ,:url => {:controller =>'home' , :action => 'verify_mobile',:from=>from}, :html => {:id => "verification_submit"} do |f| %>
 <table width="100%">
 	<tr height="90px">
 		<td valign="top">
@@ -14,10 +15,12 @@
 					<td>
 						<p align="center">
 						
-						<%if params.nil?%>
-						Welcome CMOM! You are just one step away from earning 100 MD Money!
+						<%if params[:md_user].nil?%>
+						You are just one step away from earning 
+						<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>100 MD</span> <span class='blue' style='font-size:16px;font-weight:bold;'> Money!</span>
 						<%else%>
-						You are just one step away from earning  50 MD Money!
+						You are just one step away from earning 
+						<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:16px;font-weight:bold;'> Money!</span>
 						<%end%>
 						<br/><br/>
 
@@ -43,6 +46,7 @@
 						<%if params[:md_user]=='true'%>
 							<input type="hidden" id="md_user_ref" name="md_user_ref">
 						<%end%>
+						<input type="hidden" id="md_user" name="md_user" value="<%= '?from=resend' if params[:md_user]=='true' %>">
                     </td>
                 </tr>
                 <tr>
@@ -56,6 +60,7 @@
         </td>
     </tr>
 </table>
+
 <% end %>
 <script type="text/javascript">
 	function validate_verification(){
@@ -64,7 +69,7 @@
 	 	document.getElementById('verification_submit').submit();
 	 } else{
 	 	document.getElementById('flash_error').style.display = '';
-          document.getElementById('flash_error').innerHTML = "Please fill the verification code.If you want to send code again Please <a href='/generate-code'>Click here</a>";
+          document.getElementById('flash_error').innerHTML = "Please fill the verification code.If you want to send code again Please <a href='/generate-code"+document.getElementById("md_user").value+"'>Click here</a>";
 	 }
 	}
 </script>

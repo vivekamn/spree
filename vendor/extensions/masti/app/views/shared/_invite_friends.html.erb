@@ -26,14 +26,9 @@
     </script>
 
 
-<div align='center' style='width:805px;background-color:#FFFFFF;border: 5px solid #29689E'>
+<div align='center' style='width:950px;background-color:#FFFFFF;border: 5px solid #29689E'>
   <% form_for :connections ,:url => {:controller =>'shared' , :action => 'plaxo_invite', :invited_after =>@status}, :html => {:id => "plaxo_invite_submit"} do |f| %>
     <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" >
-      <tr height="40">
-        <td colspan="8" valign="middle">
-		 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite Your </span> <span class='blue' style='font-size:16px;font-weight:bold;'>Friends</span>
-        </td>
-      </tr>
 	  <tr height="20">
         <td colspan="8">
         	<input type="hidden" value='Home' id="send_from" name="send_from">
@@ -41,34 +36,56 @@
       </tr>
 	  <%if params[:from]=='reg_complete' %>
 	  <tr>
-	  	<td colspan="2" align="center">
-	  		<div id="flash notice" class="" style="width:98%">
-	  			 Since you are a CMom, We have credited 100 MD Money to you. If you would like your friends to earn 50 MD Money, do 
-				 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite </span> <span class='blue' style='font-size:16px;font-weight:bold;'>them</span>
-				 .
+	  	<td colspan="2">
+	  		<div id="" class="" style="width:98%">
+	  			<p style="margin-left:15px;"> 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span> You have earned 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>100 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money!</span>
+				  You will get two tickets to 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Satyam</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Cinemas</span>
+				 if five of your friends succesfuly register with us.
 				<br/><br/>
-				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
-				<br/><br/>
-				You can also become the MasthiQueen and win a romantic dinner at GRT Grand Days Inn if you have the highest number of friends who register. 
-				<br/><br/>
-				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
+				Wait. We have some thing more to offer. You can also become the 
+				<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Queen</span>
+				 and win a romantic dinner for two at 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>GRT Grand</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Days</span>
+				  <br/>if you have the highest number of friends who register.<br/><br/> Go ahead and Invite them. Your friends will get <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span> when they register with MasthiDeals.com 
+				 </p>
 	  		</div>
 	  	</td>
 	  </tr>
 	  <%elsif params[:from]=='reg_complete_md_ref'%>
 	  	<tr>
 	  	<td colspan="2" align="center">
-	  		<div id="flash notice" class="" style="width:98%">
-	  			 Hi,
-<br/><br/>
-				We are glad to credit you 50 MD Money since you have been invited by <%= current_user.refered_by %>. If you would like your friends to earn 50 MD Money, do 
-
-
- 
-				 <span class='green' style='margin-left:10px;font-size:16px;font-weight:bold;'>Invite </span> <span class='blue' style='font-size:16px;font-weight:bold;'>them</span>
-				 .
-				<br/><br/>
-				If five of your friends successfully register you will win two tickets to Satyam Cinemas. 
+	  		<div id="" class="" style="width:98%">
+	  			<p style="margin-left:-3px;"> 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span>
+				 You have earned 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money!</span>
+				  First 500 users will get a ticket to 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Satyam</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Cinemas</span>
+				 if seven of their friends succesfuly register with us.
+				  <br/><br/>Go ahead and Invite them. Your friends will get 
+				  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>
+				   when they register with MasthiDeals.com 
+				 </p>
+	  		</div>
+	  	</td>
+	  </tr>
+	  <%else%>
+	  <tr>
+	  	<td colspan="2" align="center">
+	  		<div id="" class="" style="width:98%">
+	  			<p style="margin-left:10px;"> 
+				  First 500 users will get a ticket to 
+				 <img src="/images/cmom_intro/sathyam_logo1.jpg" style="border:0px;">
+				 if seven of their friends succesfuly register with us.
+				  <br/><br/>Go ahead and 
+				  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Invite</span> <span class='blue' style='font-size:18px;font-weight:bold;'> them</span>
+				  . Your friends will get 
+				  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>
+				   when they register with MasthiDeals.com 
+				 </p>
 	  		</div>
 	  	</td>
 	  </tr>
@@ -122,7 +139,8 @@
                             :
                           </td>
                           <td colspan="4" align="left">
-                               <input type="text" id="name" name="name" size="38">
+                               <input type="text" id="name" name="name" size="38" onkeyup="set_name(this);"><br/>
+							   <div id="name_msg_div" style="display:none;"></div>
                           </td>
                         </tr>
                         <tr>
@@ -165,10 +183,16 @@
     function set_messages(inputs){
         document.getElementById('invite_from').innerHTML = inputs.value;
     }
+	function set_name(inputs){
+        document.getElementById('invite_from_name').innerHTML = inputs.value;
+    }
 	function validate_plaxo_invite(){		
 		var recipient_list_field = document.getElementById('recipient_list').value;
 		var msg_recipient_list = document.getElementById('recipient_list_div');		
-		if(recipient_list_field.length != 0){
+		var name_box = document.getElementById('name').value;
+		document.getElementById("name_msg_div").style.display = "none";
+		msg_recipient_list.style.display = "none";
+		if(recipient_list_field.length != 0 && name_box.length !=0){
 			var change = document.getElementById('change_image_plaxo');
 			change.innerHTML = "<img src='/images/ajax_loader.gif' />";
 			new Ajax.Request('/shared/check_email_plaxo?recipients='+recipient_list_field, {asynchronous:true, evalScripts:true, onComplete:function(request){
@@ -181,8 +205,16 @@
 				}
 			}});
 		}else{
-			msg_recipient_list.innerHTML = "<font color='red'>Email-Id should not be empty.<\/font>";
-			msg_recipient_list.style.display = "block";
+			if(name_box.length==0){
+				document.getElementById("name_msg_div").innerHTML="<font color='red'>Name should not be empty.</font>";
+				document.getElementById("name_msg_div").style.display = "block";
+			}
+			if(recipient_list_field.length==0){
+				msg_recipient_list.innerHTML = "<font color='red'>Email-Id should not be empty.<\/font>";
+				msg_recipient_list.style.display = "block";
+			}
+			
+		
 		}
 	}
 	function clear_recipient_list_div(){
