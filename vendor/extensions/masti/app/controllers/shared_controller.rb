@@ -7,7 +7,8 @@ class SharedController < ApplicationController
     recipients = params[:recipients]
     content = params[:body] 
     name = params[:name] 
-    count=recipients.split(",").count
+#    count=recipients.split(",").count
+#    count = current_user.invited_count
     UserMailer.deliver_plaxo_invite(current_user.email,recipients,name,content)
     flash[:success] = "Thanks for inviting your friends to MasthiDeals.com. Since YOU invited them, we are gifting 50 MasthiDeals Money to your friends. If five of your friend register then you get two satyam cinema tickets free. Do you want to  <a href='/invite-your-friends'>invite more of your friends?</a>".to_html
     redirect_to home_url
