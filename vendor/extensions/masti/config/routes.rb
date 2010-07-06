@@ -29,6 +29,12 @@ map.blog '/blog',:controller => "home", :action => "index"
 map.invite_friends '/invite-your-friends',:controller => "home", :action => "invite_friends"
 map.verifiy_your_phone '/verifiy-your-phone',:controller => "home", :action => "verifiy_your_phone"
 map.generate_code '/generate-code',:controller => "home", :action => "generate_code"
+
+# seo purpose url
+map.orkut '/orkut', :controller=>"home", :action => "index"
+map.adwords '/adwords', :controller=>"home", :action => "index"
+
+
 map.namespace :admin do |admin|
    admin.resources :vendors
 end  
