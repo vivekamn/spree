@@ -4,13 +4,16 @@ Hi , <br/><br/>
 	
 	Since YOU referred him, we have gifted him 50 MD Money.  <br/><br/>
 	
-	If 
 	<%if @current_user.is_cmom==true%>
-		<%= 5-@count %>
+		<% cnt =  5-@count %>
 	<%else%>
-		<%= 7-@count %>
+		<%cnt =  7-@count %>
 	<%end%>
-	 more of your friends regsiter with MD,   you get 
+	<%if cnt < 0 %>
+		you win 
+	<%else%>
+		If <%= cnt %> more of your friends regsiter with MD, you get 
+	<%end%>
 	<%if @current_user.is_cmom==true%>
 		two tickets
 	<%else%>
