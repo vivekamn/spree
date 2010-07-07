@@ -1,22 +1,28 @@
 Hi , <br/><br/>
 
-	Your friend <%= @ref_email %> has registered with <a href="http://www.masthiDeals.com">MasthiDeals.com</a>. <br/><br/>
+Your friend <%= @ref_email %> has registered with <a href="http://www.masthiDeals.com">MasthiDeals.com</a>. <br/><br/>
 	
-	Since YOU referred him, we have gifted him 50 MD Money.  <br/><br/>
+Since YOU referred him, we have gifted him 50 MD Money.  <br/><br/>
 	
-	<%if @current_user.is_cmom==true%>
-		<% cnt =  5-@count %>
-	<%else%>
-		<%cnt =  7-@count %>
-	<%end%>
-	<%if cnt <= 0 %>
-		you win 
-	<%else%>
-		If <%= cnt %> more of your friends regsiter with MD, you get 
-	<%end%>
+<%if @current_user.is_cmom==true%>
+	<% cnt =  5-@count %>
+<%else%>
+	<%cnt =  7-@count %>
+<%end%>
+<%if cnt <= 0 %>
+	Congrats! you have invited required number of friends to successfully register with <a href="http://www.masthideals.com">MasthiDeals.com</a>.
+	<br><br> 
+	We will send you the tickets to Satyam Cinemas within 7 days of the end of this promotion.
+	<br><br> 
+	Hope you will enjoy the buying experience in MasthiDeals. 
+	<br><br>
+	Feel free to email us any feedback about your experience.
+<%else%>
+	If <%= cnt %> more of your friends regsiter with MD, you get
 	<%if @current_user.is_cmom==true%>
 		two tickets
 	<%else%>
 		one ticket
 	<%end%>
-	to satyam cinemas. Do you want to <a href="http://www.masthiDeals.com/home/invite_friends/1">invite more of your friends?</a>
+	to satyam cinemas. Do you want to <a href="http://www.masthideals.com/home/invite_friends/1">invite more of your friends?</a> 
+<%end%>	
