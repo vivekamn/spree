@@ -206,7 +206,7 @@
     
     function email_validation(){
         //document.getElementById('flash_error').style.display = 'none';
-        var user_email = document.getElementById('user_email').value;
+        var user_email = document.getElementById('user_email').value.trim();
         //var msg = '<ul style="margin-left:20px;">';
         //var email_flag;
         //var msg = '';
@@ -273,7 +273,7 @@
 	}
 	
     function phone_validation(){
-        var mobile = document.getElementById('user_phone_no').value;
+        var mobile = document.getElementById('user_phone_no').value.trim();
         //var phone_flag = true;
         //var msg = '';
         //alert(mobile + " no in phone validaiton method");
@@ -406,8 +406,8 @@
 	
     function referedby_validation(){
 		//alert('tis comming');
-        var refered_by = document.getElementById('user_refered_by').value;
-        var user_email = document.getElementById('user_email').value;
+        var refered_by = document.getElementById('user_refered_by').value.trim();
+        var user_email = document.getElementById('user_email').value.trim();
 		
         //alert(refered_by+ "======reference=============" + user_email);
         //alert(document.getElementById('email_hidden_script').value +"  == email hidden valise");
