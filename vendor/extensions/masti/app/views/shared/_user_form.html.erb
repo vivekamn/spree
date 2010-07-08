@@ -260,6 +260,11 @@
 		document.getElementById('email_image').innerHTML = '';
         document.getElementById('email_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('email_hidden_script').value = true;
+		//alert(document.getElementById('referedby_hidden_script').value);
+		if(document.getElementById('referedby_hidden_script').value == 'false'){
+			//alert('given value is false');
+			referedby_validation();
+		}
 	}
     
 	function email_false(){
@@ -351,6 +356,11 @@
 		document.getElementById('password_image').innerHTML = '';
         document.getElementById('password_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('password_hidden_script').value = true;
+		//alert(document.getElementById('conform_hidden_script').value);
+		if(document.getElementById('conform_hidden_script').value == 'false'){
+			//alert('inside of password false');
+			conformpassword_validation();
+		}
 	}
 	
 	function password_false(){
