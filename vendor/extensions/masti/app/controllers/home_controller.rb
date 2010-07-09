@@ -121,11 +121,11 @@ class HomeController < Spree::BaseController
         unless user.nil?
           generate_code('true')
         else
-          redirect_to home_url
+          redirect_to reg_complete_path
         end
          
       else
-        redirect_to home_url
+        redirect_to reg_complete_path
       end
       
     end      
