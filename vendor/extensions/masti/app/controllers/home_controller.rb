@@ -87,7 +87,7 @@ class HomeController < Spree::BaseController
   def cmom
     
   end
-  
+    
   def from_cmom_check
    user = User.find_by_email(params[:user_email])
     referer = User.find_by_email(params[:referer_email])

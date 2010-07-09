@@ -33,7 +33,7 @@ map.reg_complete '/registration-success',:controller => "home", :action => "inde
 # seo purpose url
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
-
+map.referral '/referral', :controller=>"home", :action => "cmom"
 
 map.namespace :admin do |admin|
    admin.resources :vendors

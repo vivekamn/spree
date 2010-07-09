@@ -7,6 +7,17 @@
       <img src="/images/wrong.jpg?1262930051" onclick="close_send_share_this();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
     </td>
 </tr>
+<% if request.request_uri =="/referral"%>
+<tr valign="middle">
+    <td>
+      <p align="center">Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Deals!</span>
+      <br><br>
+    Please Complete the registration using Referer E-mail id to earn <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>.
+    </p> 
+    </td>
+    
+  </tr>
+<%else%>
 <tr valign="middle">
     <td>
       <p align="center">Hello <span class='green' style='color:#DDA7EB;margin-left:0px;font-size:18px;font-weight:bold;'>CMOM!</span> Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Deals!</span>
@@ -16,9 +27,22 @@
     </td>
     
   </tr>
-  
+<%end%>
 <tr>
 	<td width="500px">
+		<% if request.request_uri =="/referral"%>
+		<table width="500px">
+			<tr>
+				<td align="center">
+					<img src="/images/cmom_intro/50_indian.jpg" style="border:0px;">
+				</td>
+				<td align="center">
+					<img src="/images/cmom_intro/Sathyam-Cinemas.jpg" style="border:0px;">
+				</td>
+			</tr>
+		</table>
+		
+		<%else%>
 		<table width="500px">
 			<tr>
 				<td>
@@ -32,6 +56,7 @@
 				</td>
 			</tr>
 		</table>
+		<%end%>
 	</td>
 </tr>
 <tr valign="middle">

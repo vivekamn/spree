@@ -134,7 +134,7 @@
                     <td width="30%" height="35">
                         Reffered By
                         <br>
-                        (CMOM'S E-mail)
+                        (E-mail)
                         <font color="red">
                         </font>
                     </td>
@@ -180,13 +180,18 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="from" name="from" value='<%= params[:from]%>'>
+<input type="hidden" id="ref" name="ref" value='<%= params[:ref]%>'>
 <input type="hidden" id="email_hidden_script" name="email_hidden_script">
 <input type="hidden" id="phone_hidden_script" name="phone_hidden_script">
 <input type="hidden" id="password_hidden_script" name="password_hidden_script">
 <input type="hidden" id="conform_hidden_script" name="conform_hidden_script">
 <input type="hidden" id="referedby_hidden_script" name="referedby_hidden_script" value="true">
-<script>
+<%if !params[:ref].nil?%>
+	<script type="text/javascript">
+		document.getElementById('user_refered_by').value = document.getElementById("ref").value;
+	</script>
+<%end%>
+<script type="text/javascript">
 	
     function email_check(giv_email){
         //alert(giv_email + 'email check given email');
