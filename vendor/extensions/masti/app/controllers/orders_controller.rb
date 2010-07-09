@@ -76,6 +76,9 @@ class OrdersController < Spree::BaseController
     if params[:type]
       object.update_attributes(:gift => 1)
     end
+    unless session[:src].nil?
+      object.update_attributes(:source => session[:src])
+    end
   end
   
   def create_before

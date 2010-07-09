@@ -11,8 +11,11 @@ class UsersController < Spree::BaseController
 	#Cannot use resource_controller for create action
 	#as openID expects block passed to user.save method
 	def create
-	  @user = User.new(params[:user])    
-	  @user.save do |result|
+	  @user = User.new(params[:user])
+    unless session[:src].nil?
+      @user.source = session[:src]
+    end
+    @user.save do |result|
 	    if result       
 	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
 	       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
@@ -22,9 +25,9 @@ class UsersController < Spree::BaseController
          send_sms(@user.phone_no,message)
         @user.roles << Role.find_by_name("admin") unless admin_created?
         if @user.refered_by.nil? or @user.refered_by.empty?
-          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}"
+          redirect_to "http://192.168.1.14:3005/deals/verify_referer/1?email=#{@user.email}"
         else
-          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}&referer=#{@user.refered_by}"
+          redirect_to "http://192.168.1.14:3005/deals/verify_referer/1?email=#{@user.email}&referer=#{@user.refered_by}"
         end
 #        respond_to do |format|
 #	        format.html { redirect_back_or_default home_url }

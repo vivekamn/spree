@@ -32,6 +32,9 @@ class UserSessionsController < Spree::BaseController
   def destroy
     current_user_session.destroy
     session.clear
+    unless session[:src].nil?
+      session[:src].clear
+    end
     flash[:notice] = t("logged_out")
     redirect_to home_url
   end
