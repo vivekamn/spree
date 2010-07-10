@@ -7,7 +7,7 @@
       <img src="/images/wrong.jpg?1262930051" onclick="close_send_share_this();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
     </td>
 </tr>
-<% if request.request_uri =="/referral"%>
+<% if request.request_uri.split('?')[0] =="/referral"%>
 <tr valign="middle">
     <td>
       <p align="center">Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Deals!</span>
@@ -30,7 +30,7 @@
 <%end%>
 <tr>
 	<td width="500px">
-		<% if request.request_uri =="/referral"%>
+		<% if request.request_uri.split('?')[0] =="/referral"%>
 		<table width="500px">
 			<tr>
 				<td align="center">

@@ -12,6 +12,10 @@ class UsersController < Spree::BaseController
 	#as openID expects block passed to user.save method
 	def create
 	  @user = User.new(params[:user])
+    unless session[:ref].nil?
+      @user.refered_by = session[:ref]
+      session.delete :ref
+    end
     unless session[:src].nil?
       @user.source = session[:src]
     end
