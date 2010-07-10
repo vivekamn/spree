@@ -1,0 +1,52 @@
+<table>
+	<tr>
+		<td>
+			<% if deal_info == 'side_deal' %>
+				Last Minute Deals
+			<%else%>
+				Today's Deals
+			<%end%>			
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td background="blue">
+						<%= image_tag(side_deal_product.images.first.attachment.url(:small),:alt=> side_deal_product.name,:width=>"100px",:style=>"margin-left:2px;margin-top:2px;width: 100px;") %>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Title : 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Name : <%= side_deal_product.name%>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Selling Price : <%= side_deal_product.price.to_i%>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Business name : 
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Discount : <%= side_deal_product.discount%>%
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Save amount : <%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i%>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
