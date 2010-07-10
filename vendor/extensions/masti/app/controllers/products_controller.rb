@@ -1,6 +1,6 @@
 class ProductsController < Spree::BaseController
   HTTP_REFERER_REGEXP = /^https?:\/\/[^\/]+\/t\/([a-z0-9\-\/]+\/)$/
-
+  
   prepend_before_filter :reject_unknown_object, :only => [:show]
   before_filter :load_data, :only => :show
   before_filter :require_user, :only =>[:show]
@@ -13,40 +13,41 @@ class ProductsController < Spree::BaseController
   end
   
   def show
-    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-    cur_product = Product.find(:first, :conditions => ['id = ?',deal.product_id])
+#    puts "#its comming to the product show============================id:==========#{}======="
+#    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+    cur_product = Product.find_by_permalink(params[:id])
     oreders = current_user.orders
     count = 0
     oreders.each do |order|
-     order.line_items.each do |line_item|
-       if line_item.variant.id ==  cur_product.variant.id
-         if order.state == "paid"
-           count += line_item.quantity
-         end
+      order.line_items.each do |line_item|
+        if line_item.variant.id ==  cur_product.variant.id
+          if order.state == "paid"
+            count += line_item.quantity
+          end
+        end
       end
-     end
-   end
-      if cur_product.max_vouchers.nil? or count < cur_product.max_vouchers
-        session[:order_id] = nil
-        redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
-      else
-        flash[:error] = "You have already bought the maximum allowed number of purchases in this deal.  We implement the maximum number of purchases per user to ensure that a large number of users can use this offer."
-        redirect_to :back
-      end
-      
+    end
+    if cur_product.max_vouchers.nil? or count < cur_product.max_vouchers
+      session[:order_id] = nil
+      redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
+    else
+      flash[:error] = "You have already bought the maximum allowed number of purchases in this deal.  We implement the maximum number of purchases per user to ensure that a large number of users can use this offer."
+      redirect_to :back
+    end
+    
   end
-
+  
   include Spree::Search
   layout 'spree_application'
-
+  
   def change_image
     @product = Product.available.find_by_param(params[:id])
     img = Image.find(params[:image_id])
     render :partial => 'image', :locals => {:image => img}
   end
-
+  
   private
-
+  
   def load_data    
     #load_object     
     @variants = Variant.active.find_all_by_product_id(@product.id, 
@@ -54,14 +55,14 @@ class ProductsController < Spree::BaseController
     @product_properties = ProductProperty.find_all_by_product_id(@product.id, 
                           :include => [:property])
     @selected_variant = @variants.detect { |v| v.available? }
-
+    
     referer = request.env['HTTP_REFERER']
-
+    
     if referer  && referer.match(HTTP_REFERER_REGEXP)
       @taxon = Taxon.find_by_permalink($1)
     end
   end
-
+  
   def collection
     retrieve_products
   end
@@ -69,5 +70,5 @@ class ProductsController < Spree::BaseController
   def accurate_title
     @product ? @product.name : nil
   end
-
+  
 end

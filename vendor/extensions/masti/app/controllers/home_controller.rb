@@ -1,12 +1,26 @@
 class HomeController < Spree::BaseController
-    require 'RubyRc4.rb'
-    require 'base64'
-    ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
-   before_filter :require_user,:only=>[:verify_mobile,:invite_friends]
-    skip_filter :protect_from_forgery
-#    before_filter :update_user_credit,:only=>[:from_cmom_check]
+  require 'RubyRc4.rb'
+  require 'base64'
+  ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
+  before_filter :require_user,:only=>[:verify_mobile,:invite_friends]
+  skip_filter :protect_from_forgery
+  #    before_filter :update_user_credit,:only=>[:from_cmom_check]
   def index
-    @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])  
+    if params[:side_deal_info].nil?
+      @deal_param = 'side_deal'
+      @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+    else
+      if params[:side_deal_info] == 'side_deal'
+        @deal_param = 'main_deal'
+        @deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+        @side_deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+      else
+        @deal_param = 'side_deal'
+        @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+        @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+      end
+    end
     @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
     @price = @featured_product.price.to_i
     @discount = @featured_product.discount
@@ -26,8 +40,8 @@ class HomeController < Spree::BaseController
   def order_vendor
     unless params[:id].nil?
       begin 
-         @variant = Variant.find(:first,:include => {:product => {}},:conditions=>['id = ?',params[:id]])
-         @orders = Order.find(:all,:include => {:line_items=>{},:user => {},:checkout => {}, :bill_address=>{}},:joins =>["INNER JOIN line_items ON orders.id = line_items.order_id INNER JOIN variants ON variants.id = line_items.variant_id"],:conditions=>["variants.id = ? and orders.state = 'paid'",params[:id]])
+        @variant = Variant.find(:first,:include => {:product => {}},:conditions=>['id = ?',params[:id]])
+        @orders = Order.find(:all,:include => {:line_items=>{},:user => {},:checkout => {}, :bill_address=>{}},:joins =>["INNER JOIN line_items ON orders.id = line_items.order_id INNER JOIN variants ON variants.id = line_items.variant_id"],:conditions=>["variants.id = ? and orders.state = 'paid'",params[:id]])
       rescue
         flash[:error] = 'Cannot find the product.Please check the product id Correctly'  
       end
@@ -132,10 +146,10 @@ class HomeController < Spree::BaseController
   end
   
   def verifiy_your_phone
-     if current_user.mobile_verify==true
-       flash[:error]='Your mobile number has already been verified'
-       redirect_to home_url
-     end
+    if current_user.mobile_verify==true
+      flash[:error]='Your mobile number has already been verified'
+      redirect_to home_url
+    end
   end
   
   def generate_code(md_user=nil)
@@ -172,17 +186,18 @@ class HomeController < Spree::BaseController
     recipients = params[:recipients]
     name = params[:recipients]
     from=params[:from]
-    current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
-    product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
+    product_id = params[:product_id]
+#    current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+    product = Product.find(:first, :conditions =>['id = ?',product_id])
     split_recipients = recipients.split(",")
     split_recipients.each do |recipient|
       UserMailer.deliver_share_this(recipient,from,product,params[:name])
     end
     flash[:success]="Deal Shared to your friends"
-    redirect_to home_url
+    redirect_to :back 
   end
   
-   def check_email
+  def check_email
     recipients = params[:email]
     @trimmed_line = recipients.delete(' ').lstrip
     @split_recipients = @trimmed_line.split(",");
