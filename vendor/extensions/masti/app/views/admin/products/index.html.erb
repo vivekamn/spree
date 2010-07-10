@@ -1,103 +1,120 @@
 <% render :partial => 'admin/shared/product_sub_menu' %>
-
 <div class='toolbar'>
-  <ul class='actions'>
-    <li id="new_ot_link">
-      <%= button_link_to_remote t("new_product"),
-                         {:url => new_object_url,
-                         :method => :get,
-                         :update => "new-product"}, :icon => 'add' %>
-    </li>
-  </ul>
-  <br class='clear' />
+    <ul class='actions'>
+        <li id="new_ot_link">
+            <%= button_link_to_remote t("new_product"),
+            {:url => new_object_url,
+            :method => :get,
+            :update => "new-product"}, :icon => 'add' %>
+        </li>
+    </ul>
+    <br class='clear' />
 </div>
-
 <h1><%= "#{t("actions.listing")} #{t("products")}" %></h1>
-
 <%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
-<div id="new-product"></div>
+<div id="new-product">
+</div>
 <table class="index">
-  <tr>
-    <% hook :admin_products_index_headers do %>
-      <th><%= t("sku") %></th>
-      <th><%= order @search, :by => :name, :as => t("name") %></th>
-      <th><%= order @search, :by => :master_price, :as => t("master_price") %></th>
+    <tr>
+        <% hook :admin_products_index_headers do %>
+        <th>
+            <%= t("sku") %>
+        </th>
+        <th>
+            <%= order @search, :by => :name, :as => t("name") %>
+        </th>
+        <th>
+            <%= order @search, :by => :master_price, :as => t("master_price") %>
+        </th>
+        <% end %>
+        <th>
+            <% hook :admin_products_index_header_actions %>
+        </th>
+    </tr>
+    <%deal=current_product %>
+    <% @collection.each do |product| %>
+    <tr<%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
+        <%- locals = {:product => product} -%>
+        <% hook :admin_products_index_rows, locals do %>
+        <td>
+            <%= product.sku %>
+        </td>
+        <td>
+            <%= product.name %>
+        </td>
+        <td>
+            <%= product.price %>
+        </td>
+        <% end %>
+        <td class="actions">
+            <% hook :admin_products_index_row_actions, locals do %>
+            <%if deal.product_id==product.id %>
+	            <%if params[:flag].nil? and product.deal_expiry_date>Time.now %>
+	            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
+	            <%elsif product.deal_expiry_date<=Time.now %>
+	            <span style="color:red">Expired</span>
+	            <%else %>
+	            <span style="color:red">Sold out</span>
+	            <%end %>
+            <%elsif side_deal_product.product_id == product.id %>
+	            <%if product.deal_expiry_date>Time.now %>
+	            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make side deal Sold Out</a>
+	            <%elsif product.deal_expiry_date<=Time.now %>
+	            <span style="color:red">Expired</span>
+	            <%elsif side_deal_product.sold_out == 1 %>
+	            <span style="color:red">Sold out</span>
+	            <%end %>
+            <%else %>
+            	<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted? %>
+            <%end %>
+	            &nbsp; <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
+	            &nbsp;<%= link_to_edit product unless product.deleted? %>
+	            &nbsp;<%= link_to_clone product %>
+	            &nbsp;<%= link_to_delete product unless product.deleted? %>
+            <% end %>
+        </td>
+    </tr>
     <% end %>
-    <th>
-      <% hook :admin_products_index_header_actions %>
-    </th>
-  </tr>
-  <%deal=current_product%>
-<% @collection.each do |product| %>
-  <tr <%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
-    <%- locals = {:product => product} -%>
-    <% hook :admin_products_index_rows, locals do %>
-      <td><%= product.sku %></td>
-      <td><%= product.name %></td>
-      <td><%= product.price %></td>
-    <% end %>
-    <td class="actions">
-      <% hook :admin_products_index_row_actions, locals do %>
-        <%if deal.product_id==product.id %>
-          <%if params[:flag].nil? and product.deal_expiry_date>Time.now%>
-            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
-          <%elsif product.deal_expiry_date<=Time.now%>
-            <span style="color:red">Expired</span>
-          <%else%>
-            <span style="color:red">Sold out</span>
-          <%end%>
-        <%else%>
-          <%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted?  %> 
-        <%end%>
-        &nbsp;        
-        <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
-        &nbsp;
-        <%= link_to_edit product unless product.deleted?  %>
-        &nbsp;
-        <%= link_to_clone product %>
-        &nbsp;
-        <%= link_to_delete product unless product.deleted?  %>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
 </table>
 <%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
-
 <% content_for :sidebar do %>
-
-  <% form_for @search do |f| %>
-    <div class="box">
-      <h3><%= t(:search) %></h3>
-
-      <%- locals = {:f => f} -%>
-      <% hook :admin_products_index_search, locals do %>
-        <p>
-          <label><%= t("name") %></label><br />
-          <%= f.text_field :name_contains, :size => 15 %>
-        </p>
-
-        <p>
-          <label><%= t("sku") %></label><br />
-          <%= f.text_field :variants_including_master_sku_contains, :size => 15 %>
-        </p>
-        <p>
-          <label><%= t("show_deleted") %></label><br />
-          <%= f.check_box :deleted_at_not_null, {}, "1", "" %>
-        </p>
-      <% end %>
-
-      <% hook :admin_products_index_search_buttons, locals do %>
-        <p class="form-buttons">
-          <%= button t("search") %>
-        </p>
-      <% end %>
-    </div>
-  <% end %>
-
+<% form_for @search do |f| %>
+<div class="box">
+    <h3><%= t(:search) %></h3>
+    <%- locals = {:f => f} -%>
+    <% hook :admin_products_index_search, locals do %>
+    <p>
+        <label>
+            <%= t("name") %>
+        </label>
+        <br/>
+        <%= f.text_field :name_contains, :size => 15 %>
+    </p>
+    <p>
+        <label>
+            <%= t("sku") %>
+        </label>
+        <br/>
+        <%= f.text_field :variants_including_master_sku_contains, :size => 15 %>
+    </p>
+    <p>
+        <label>
+            <%= t("show_deleted") %>
+        </label>
+        <br/>
+        <%= f.check_box :deleted_at_not_null, {}, "1", "" %>
+    </p>
+    <% end %>
+    <% hook :admin_products_index_search_buttons, locals do %>
+    <p class="form-buttons">
+        <%= button t("search") %>
+    </p>
+    <% end %>
+</div>
+<% end %>
 <% end %>
 <script>
-	<%if params[:search].nil?%>
-		window.location.href='/admin/products?search[order]=descend_by_created_at';
-	<%end%>
+    	<%if params[:search].nil?%>
+    		window.location.href='/admin/products?search[order]=descend_by_created_at';
+    	<%end%>
 </script>

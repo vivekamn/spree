@@ -150,7 +150,7 @@ def self.sufficient_inventory(line_item)
       variant = line_item.variant
       quantity = line_item.quantity
       product=variant.product 
-      current_deal=DealHistory.find_by_is_active(true)
+      current_deal=DealHistory.find(:first, :conditions=>['product_id=? AND (is_active = ? OR is_side_deal = ?)',line_item.variant.product.id,true,true ])
       if product.deal_expiry_date<Time.now
         status="expired"
         current_deal.sell_out
@@ -172,8 +172,9 @@ end
       variant = line_item.variant
       quantity = line_item.quantity
       product=line_item.product
-      current_deal=DealHistory.find_by_is_active(true)
+#      current_deal=DealHistory.find_by_is_active(true)
       # mark all of these units as sold and associate them with this order
+      current_deal=DealHistory.find(:first, :conditions=>['product_id=? AND (is_active = ? OR is_side_deal = ?)',product.id,true,true ])
       remaining_quantity = variant.count_on_hand - quantity
       status=self.sufficient_inventory(line_item)
       if status=="available"

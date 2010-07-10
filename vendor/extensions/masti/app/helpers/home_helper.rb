@@ -83,9 +83,16 @@ module HomeHelper
     cities<<[city.name, city.name]
   end
   
-  def featured_product
-    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-    Product.find(:first, :conditions => ['id = ?',deal.product_id])
+  def featured_product(order)
+    #deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+    #Product.find(:first, :conditions => ['id = ?',deal.product_id])
+     order.line_items[0].variant.product
   end
 
+  def active_side_deal(side_deal_product_id,deal_info)
+    
+    side_deal_product = Product.find(:first, :conditions => ['id = ?',side_deal_product_id])
+#    puts "#{side_deal.product_id}============#{side_deal_product.id}==================="
+    render :file => "#{RAILS_ROOT}/vendor/extensions/masti/app/views/home/show_side_deal.html.erb", :use_full_path => false,:locals => { :side_deal_product => side_deal_product, :deal_info => deal_info}
+  end
 end

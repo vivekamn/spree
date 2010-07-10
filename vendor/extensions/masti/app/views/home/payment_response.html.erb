@@ -74,7 +74,7 @@
 				<p>
 					<h3>
 						Sorry. The order could not be processed completey. Your credit card has not been charged. Please 
-						<%if featured_product.id == @order.line_items[0].variant.product.id%><%=link_to "Click Here", featured_product%> to buy again.  <%end%>
+						<%=link_to "Click Here", featured_product(@order) %> to buy again.  <%end%>
 					</h3>
 				</p>
 				<%end%>					

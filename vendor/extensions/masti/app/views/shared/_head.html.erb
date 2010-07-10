@@ -7,7 +7,7 @@
     function adjustNotes(){
         var default_notes_top = 138;
         var default_screen_width = 935;
-		var home_coordinates = getElementOffsetScrollable(document.getElementById("home_menu"));
+        var home_coordinates = getElementOffsetScrollable(document.getElementById("home_menu"));
         var pageY;
         if (typeof(window.pageYOffset) == 'number') {
             pageY = window.pageYOffset;
@@ -21,196 +21,217 @@
         
         if (document.getElementById("notes_div")) {
             document.getElementById("notes_div").style.top = default_notes_top + "px";
-			document.getElementById("notes_div").style.left = default_screen_width + home_coordinates.left + "px";
-           
+            document.getElementById("notes_div").style.left = default_screen_width + home_coordinates.left + "px";
+            
         }
     }
     
     window.onscroll = adjustNotes;
     window.onload = adjustNotes;
     window.onresize = adjustNotes;
-    
 </script>
-
 <script type="text/javascript">
-<!--
-function MM_preloadImages() { //v3.0
-  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-}
-function MM_swapImgRestore() { //v3.0
-  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
-}
-
-function MM_findObj(n, d) { //v4.01
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && d.getElementById) x=d.getElementById(n); return x;
-}
-
-function MM_swapImage() { //v3.0
-  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
-   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
-}
-//-->
+    <!--
+    function MM_preloadImages(){ //v3.0
+        var d = document;
+        if (d.images) {
+            if (!d.MM_p) 
+                d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
+            for (i = 0; i < a.length; i++) 
+                if (a[i].indexOf("#") != 0) {
+                    d.MM_p[j] = new Image;
+                    d.MM_p[j++].src = a[i];
+                }
+        }
+    }
+    
+    function MM_swapImgRestore(){ //v3.0
+        var i, x, a = document.MM_sr;
+        for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) 
+            x.src = x.oSrc;
+    }
+    
+    function MM_findObj(n, d){ //v4.01
+        var p, i, x;
+        if (!d) 
+            d = document;
+        if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document;
+            n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) 
+            x = d.all[n];
+        for (i = 0; !x && i < d.forms.length; i++) 
+            x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) 
+            x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) 
+            x = d.getElementById(n);
+        return x;
+    }
+    
+    function MM_swapImage(){ //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments;
+        document.MM_sr = new Array;
+        for (i = 0; i < (a.length - 2); i += 3) 
+            if ((x = MM_findObj(a[i])) != null) {
+                document.MM_sr[j++] = x;
+                if (!x.oSrc) 
+                    x.oSrc = x.src;
+                x.src = a[i + 2];
+            }
+    }
+    
+    //-->
 </script>
 <style>
-	a{
-		text-decoration: none;
-	}
-	img{
-	border:0;
-}	
+    a {
+        text-decoration: none;
+    }
+    
+    img {
+        border: 0;
+    }
 </style>
 <div class="toplogo">
-  <div class="logopart"><a href="/home" style="text-decoration:none;"><img src="/images/logo.gif" border="0" width="305" height="71" alt="Best Deals@masthideals.com"/></a></div>
-  <div class="logoright">
-    <% if current_user %>
-      <div class="loggedinpart" style="padding-left: 30px;">
-        <div class="fl username">Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span></div>
-        <div class="fl username"><%= link_to 'Account', user_path(current_user) %></div>
-        <div class="fl username"><%= link_to 'Logout', logout_path %></div>
-      </div>
-    <% else %>
-	<div class="submitpart">
-	<div class="join">
-		<table cellpadding="1" cellspacing="1">
-			<tr>
-				<td>
-					<%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path %>
-				</td>
-				<td>
-					<table style="border-right: 1px solid;">
-						<tbody>
-							<tr height="10px">
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td style="font-size: 12px; padding-left: 9px;">
-					New here? &nbsp;<%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>Up</span>", signup_path  %>	
-				</td>
-			</tr>
-		</table>
-		</div>				
-	  </div>
-    <% end %>
-	
-    <div class="emailpart">
-  <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f|%>
-      <div class="fl"><img src="/images/email.gif" width="239" height="25" /></div>
-      <div class="w190"><%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %><br/>
-	  <div class="errormesg" id="error_email" style="color:red;"></div>
-	  </div>
-      <div class="fl"><%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %></div>
-	<%end%>    
-	</div>
-	<div class="submitpart">
-	<table width="431px">
-		<tr>
-			<td align="right">
-				<%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Invite Yo</span><span class='blue' style='font-size:16px;font-weight:bold;'>ur Friends</span>",invite_friends_path%>
-			</td>
-		</tr>
-	</table>
-
-</div>
-  </div>
-</div>
-<div class="navouter">
-  <!--<div class="fl"><img src="/images/leftcurve.gif" width="5" height="47" /></div>-->
-  <div class="navinner">
-  	<% if @bar_selected == "how_masthi_works"%>
-	    <div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how_on.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
-		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
-	<% elsif @bar_selected == "get_featured" %>
-		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get_on.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
-		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
-	<% elsif @bar_selected == "upcoming_deals" %>
-		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming_on.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
-		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
-	<%elsif @bar_selected == "recent_deals"%>
-		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
-		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent_on.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
-	<%else%>
-		<div class="thedeal" id="home_menu"><a href="<%= home_path%>" ><img src="/images/deal_on.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="howwork"><a href="<%= how_masti_works_path%>" ><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();" /></a></div>
-		<div class="getfeatures"><a href="<%= get_featured_path %>" ><img src="/images/get.gif" name="Image3" width="188" height="37" border="0" id="Image3" onmouseover="MM_swapImage('Image3','','/images/get_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a></div>
-		<div class="upcoming"><a href="<%= upcoming_path %>"><img src="/images/upcoming.gif" name="Image4" width="188" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image4','','/images/upcoming_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Upcoming Deals" title="Upcoming Deals"/></div>
-		<div class="recent"><a href="<%= recent_path %>"><img src="/images/recent.gif" name="Image5" width="185" height="37" border="0" id="Image4" onmouseover="MM_swapImage('Image5','','/images/recent_hover.gif',1);" onmouseout="MM_swapImgRestore();" alt="Recent Deals" title="Recent Deals"/></div>
-	<%end%>
-	
-  </div>
-  <!--<div class="fl"><img src="/images/rightcurve.gif" width="5" height="47" /></div>-->
-</div>
-  
-  <% if admin?%>
-  	<div style='position:absolute;left:0px;top:390px;'>
-    	<%= render :partial => "/shared/whos_among_us" %>
-	</div>
-   <% else %>
-    <div style='display:none'>
-  		 <%= render :partial => "/shared/whos_among_us" %>
+    <div class="logopart">
+        <a href="/home" style="text-decoration:none;"><img src="/images/logo.gif" border="0" width="305" height="71" alt="Best Deals@masthideals.com"/></a>
     </div>
-  <% end %>
-  
-  <table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
-        <tr>
-			 <td>
-				 <table border=0 cellpadding=0 cellspacing=0>
-		        	 <tr>
-		        		 <td>
-		         	 		<a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/masthi_cmoms.jpeg" /></a>	
-					 	</td>
-					</tr>
-				</table>
-		</td>
-	</tr>
-		 <tr>
-        	 <td>
-        	 	<div id="chat_div">
-	         	 	<table align="right" cellpadding="0px" cellspacing="0px">
-					<tr>
-						<td align="right">
-							<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> <object width="190" height="275" ><param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/><embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275"></embed></object>
-						</td>
-						<td valign="top" width="18px">
-							<%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
-						</td>
-					</tr>
-				</table>
-				</div>	
-			 </td>
-		</tr>
-		</table> 
-  
-
+    <div class="logoright">
+        <% if current_user %>
+        <div class="loggedinpart" style="padding-left: 30px;">
+            <div class="fl username">
+                Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>
+            </div>
+            <div class="fl username">
+                <%= link_to 'Account', user_path(current_user) %>
+            </div>
+            <div class="fl username">
+                <%= link_to 'Logout', logout_path %>
+            </div>
+        </div>
+        <% else %>
+        <div class="submitpart">
+            <div class="join">
+                <table cellpadding="1" cellspacing="1">
+                    <tr>
+                        <td>
+                            <%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path %>
+                        </td>
+                        <td>
+                            <table style="border-right: 1px solid;">
+                                <tbody>
+                                    <tr height="10px">
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td style="font-size: 12px; padding-left: 9px;">
+                            New here? &nbsp;<%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>Up</span>", signup_path %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <% end %>
+        <div class="emailpart">
+            <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f| %>
+            <div class="fl">
+                <img src="/images/email.gif" width="239" height="25" />
+            </div>
+            <div class="w190">
+                <%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"textfield1",:onkeypress=>"submitForm_on_enter(event,'deals_notification')" %>
+                <br/>
+                <div class="errormesg" id="error_email" style="color:red;">
+                </div>
+            </div>
+            <div class="fl">
+                <%= image_submit_tag "go.gif",:border=>0,:onclick=>"return email_validate_head();" %>
+            </div>
+            <%end %>
+        </div>
+        <div class="submitpart">
+            <table width="431px">
+                <tr>
+                    <td align="right">
+                        <%= link_to "<span class='green' style='font-weight:bold;font-size:16px;'>Invite Yo</span><span class='blue' style='font-size:16px;font-weight:bold;'>ur Friends</span>",invite_friends_path %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<%= render :partial => "/shared/menu" %>
+<% if admin? %>
+<div style='position:absolute;left:0px;top:390px;'>
+    <%= render :partial => "/shared/whos_among_us" %>
+</div>
+<% else %>
+<div style='display:none'>
+    <%= render :partial => "/shared/whos_among_us" %>
+</div>
+<% end %>
+<table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
+    <tr>
+        <td>
+            <table border=0 cellpadding=0 cellspacing=0>
+                <tr>
+                    <td>
+                        <a href="http://www.chennaimoms.com?from=masthideals" target="_blank"><img src="/images/masthi_cmoms.jpeg" /></a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+	<% unless @side_deal.nil? %>
+    <tr>
+        <td>
+            <div id="side_deal_div">
+                <table style="border:2px solid #76A045;height:250px;width:190px;background:white;">
+                    <tr>
+                        <td valign="top">
+                        	<a href="/home/index?side_deal_info=<%= @deal_param %>"><%= active_side_deal(@side_deal.product_id,@deal_param) %></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+	<%end%>
+    <tr>
+        <td>
+            <div id="chat_div" style="display:none;">
+                <table align="right" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td align="right">
+                            <!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! -->
+                            <object width="190" height="275">
+                                <param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/>
+                                <embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275">
+                                </embed>
+                            </object>
+                        </td>
+                        <td valign="top" width="18px">
+                            <%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
 <script type="text/javascript">
-	
-	function clear_email(){
-		document.getElementById('deals_notification_email').value="";
-	}
-	function load_email(){
-		if (document.getElementById('deals_notification_email').value=="")
-		{
-			document.getElementById('deals_notification_email').value="E-mail id";
-		}
-	}
+    
+    function clear_email(){
+        document.getElementById('deals_notification_email').value = "";
+    }
+    
+    function load_email(){
+        if (document.getElementById('deals_notification_email').value == "") {
+            document.getElementById('deals_notification_email').value = "E-mail id";
+        }
+    }
 </script>
-

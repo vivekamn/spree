@@ -4,6 +4,10 @@ module Admin::ProductsHelper
     return DealHistory.find(:first, :conditions => ['is_active = ?', true])
   end
   
+  def side_deal_product
+    return DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+  end
+  
   def option_type_select(so)
     select(:new_variant, 
            so.option_type.presentation, 
