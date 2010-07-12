@@ -99,9 +99,9 @@ class HomeController < Spree::BaseController
   end
   
   def cmom
-   unless params[:ref].nil?
-     session[:ref]=params[:ref]
-   end
+    unless params[:ref].nil?
+      session[:ref]=params[:ref]
+    end
   end
   
   def from_cmom_check
@@ -189,7 +189,7 @@ class HomeController < Spree::BaseController
     name = params[:recipients]
     from=params[:from]
     product_id = params[:product_id]
-#    current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+    #    current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
     product = Product.find(:first, :conditions =>['id = ?',product_id])
     split_recipients = recipients.split(",")
     split_recipients.each do |recipient|

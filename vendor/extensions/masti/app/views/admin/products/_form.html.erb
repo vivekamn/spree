@@ -1,193 +1,200 @@
 <%= javascript_include_tag :ckeditor %>
-
 <div class="yui-gc">
-  <div class="yui-u first">
-    <%- locals = {:f => f} -%>
-    <% hook :admin_product_form_left, locals do %>
-      <% f.field_container :name do %>
-        <%= f.label :name, t("name") %> <span class="required">*</span><br />
-        <%= f.text_field :name, :class => 'fullwidth title'  %>
+    <div class="yui-u first">
+        <%- locals = {:f => f} -%>
+        <% hook :admin_product_form_left, locals do %>
+        <% f.field_container :name do %>
+        <%= f.label :name, t("name") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :name, :class => 'fullwidth title' %>
         <%= f.error_message_on :name %>
-      <% end %>
-
-      <% f.field_container :permalink do %>
-        <%= f.label :permalink, t("permalink") %> <span class="required">*</span><br />
-        <%= f.text_field :permalink, :class => 'fullwidth title'  %>
+        <% end %>
+        <% f.field_container :side_deal_title do %>
+        <%= f.label :side_deal_title, t("side_deal_title") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :side_deal_title, :class => 'fullwidth title' %>
+        <%= f.error_message_on :side_deal_title %>
+        <% end %>
+        <% f.field_container :permalink do %>
+        <%= f.label :permalink, t("permalink") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :permalink, :class => 'fullwidth title' %>
         <%= f.error_message_on :permalink %>
-      <% end %>
-      
-	  <% f.field_container :deal_info do %>
-        <%= f.label :deal_info, "Deal Info" %> <span class="required">*</span><br />
-        <%= f.text_field :deal_info, :class => 'fullwidth title'  %>
+        <% end %>
+        <% f.field_container :deal_info do %>
+        <%= f.label :deal_info, "Deal Info" %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :deal_info, :class => 'fullwidth title' %>
         <%= f.error_message_on :deal_info %>
-      <% end %>
-	  
-      <% f.field_container :voucher_text do %>
-        <%= f.label :voucher_text, "Voucher Text" %> <span class="required">*</span><br />
-        <%= f.text_field :voucher_text, :class => 'fullwidth title'  %>
+        <% end %>
+        <% f.field_container :voucher_text do %>
+        <%= f.label :voucher_text, "Voucher Text" %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :voucher_text, :class => 'fullwidth title' %>
         <%= f.error_message_on :voucher_text %>
-      <% end %>
-     
-	 <% f.field_container :gift_sms do %>
-        <%= f.label :gift_sms, "Gift SMS Text" %> <span class="required">*</span><br />
-        <%= f.text_field :gift_sms, :class => 'fullwidth title'  %>
+        <% end %>
+        <% f.field_container :gift_sms do %>
+        <%= f.label :gift_sms, "Gift SMS Text" %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :gift_sms, :class => 'fullwidth title' %>
         <%= f.error_message_on :gift_sms %>
-      <% end %>
-	
-	  <% f.field_container :sms_notification do %>
-        <%= f.label :sms_notification, "SMS Notification Text" %> <span class="required">*</span><br />
-        <%= f.text_field :sms_notification, :class => 'fullwidth title'  %>
+        <% end %>
+        <% f.field_container :sms_notification do %>
+        <%= f.label :sms_notification, "SMS Notification Text" %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :sms_notification, :class => 'fullwidth title' %>
         <%= f.error_message_on :sms_notification %>
-      <% end %>	
-
-      <% f.field_container :description do %>
-        <%= f.label :description, t("description")%><br />
+        <% end %>
+        <% f.field_container :description do %>
+        <%= f.label :description, t("description") %>
+        <br/>
         <%= f.cktext_area :description, :toolbar=>'Full', :width=>'495px', :height => '200px' %>
         <%= f.error_message_on :description %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="yui-u">
-    <% hook :admin_product_form_right, locals do %>
-      <% f.field_container :price do %>
-        <%= f.label :price, t("master_price")%> <span class="required">*</span><br />
-        <%= f.text_field :price, :value => number_with_precision(@product.price, :precision => 2)  %>
+        <% end %>
+        <% end %>
+    </div>
+    <div class="yui-u">
+        <% hook :admin_product_form_right, locals do %>
+        <% f.field_container :price do %>
+        <%= f.label :price, t("master_price") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :price, :value => number_with_precision(@product.price, :precision => 2) %>
         <%= f.error_message_on :price %>
-      <% end %>
-
-      <% f.field_container :discount do %>
-        <%= f.label :discount, t("discount") %> <span class="required">*</span><br />
+        <% end %>
+        <% f.field_container :discount do %>
+        <%= f.label :discount, t("discount") %><span class="required">*</span>
+        <br/>
         <%= f.text_field :discount, :value => @product.discount %>
-        <%= f.error_message_on :discount%>
-      <% end %>
-
-      <p>
-        <%= f.label :available_on, t("available_on") %><br />
-        <%= f.error_message_on :available_on %>
-        <%= f.unobtrusive_date_text_picker :available_on %>
-      </p>
-      <p>
-        <%= f.label :deal_expiry_date, t("deal_expiry_date") %><br />
-        <%= f.error_message_on :deal_expiry_date %>
-        <%= f.unobtrusive_date_text_picker :deal_expiry_date %>
-      </p>       
-
-      <p>
-        <%= f.label :validity_from, t("validity_from") %><br />
-        <%= f.error_message_on :validity_from %>
-        <%= f.unobtrusive_date_text_picker :validity_from %>
+        <%= f.error_message_on :discount %>
+        <% end %>
+        <p>
+            <%= f.label :available_on, t("available_on") %>
+            <br/>
+            <%= f.error_message_on :available_on %>
+            <%= f.unobtrusive_date_text_picker :available_on %>
         </p>
-
-      <p>
-        <%= f.label :validity_to, t("validity_to") %><br />
-        <%= f.error_message_on :validity_to %>
-        <%= f.unobtrusive_date_text_picker :validity_to %>
-      </p>       
-      <!--p>
+        <p>
+            <%= f.label :deal_expiry_date, t("deal_expiry_date") %>
+            <br/>
+            <%= f.error_message_on :deal_expiry_date %>
+            <%= f.unobtrusive_date_text_picker :deal_expiry_date %>
+        </p>
+        <p>
+            <%= f.label :validity_from, t("validity_from") %>
+            <br/>
+            <%= f.error_message_on :validity_from %>
+            <%= f.unobtrusive_date_text_picker :validity_from %>
+        </p>
+        <p>
+            <%= f.label :validity_to, t("validity_to") %>
+            <br/>
+            <%= f.error_message_on :validity_to %>
+            <%= f.unobtrusive_date_text_picker :validity_to %>
+        </p>
+        <!--p>
         <%= f.label :sku, t("sku") %><br />
         <%= f.text_field :sku, :size => 16 %>
-      </p-->
-      <% unless @product.has_variants? %>
-      <% f.field_container :price do %>
+        </p--><% unless @product.has_variants? %>
+        <% f.field_container :price do %>
         <p>
-          <%= f.label :on_hand, t("on_hand")%><br />
-          <%= @product.count_on_hand%>
+            <%= f.label :on_hand, t("on_hand") %>
+            <br/>
+            <%= @product.count_on_hand %>
         </p>
         <p>
-          <%= f.label :increased_count, t("inc_count")%><br />
-          <%= f.text_field :increased_count, :size => 4 %>
-        </p>   
+            <%= f.label :increased_count, t("inc_count") %>
+            <br/>
+            <%= f.text_field :increased_count, :size => 4 %>
+        </p>
         <p>
-          <%= f.label :maximum_number, t("maximum_number")%><br />
-          <%= @product.maximum_number%>
-        </p>   
-        <%end%>
+            <%= f.label :maximum_number, t("maximum_number") %>
+            <br/>
+            <%= @product.maximum_number %>
+        </p>
+        <%end %>
         <!--ul id="shipping-specs">
-          <li>
-            <%= f.label :weight, t("weight")%>
-            <%= f.text_field :weight, :size => 4 %>
-          </li>
-          <li>
-            <%= f.label :height, t("height")%>
-            <%= f.text_field :height, :size => 4 %>
-          </li>
-          <li>
-            <%= f.label :width, t("width")%>
-            <%= f.text_field :width, :size => 4 %>
-          </li>
-          <li>
-            <%= f.label :depth, t("depth")%>
-            <%= f.text_field :depth, :size => 4 %>
-          </li>
-        </ul-->
-      <% end %>
-      <!--p>
+        <li>
+        <%= f.label :weight, t("weight")%>
+        <%= f.text_field :weight, :size => 4 %>
+        </li>
+        <li>
+        <%= f.label :height, t("height")%>
+        <%= f.text_field :height, :size => 4 %>
+        </li>
+        <li>
+        <%= f.label :width, t("width")%>
+        <%= f.text_field :width, :size => 4 %>
+        </li>
+        <li>
+        <%= f.label :depth, t("depth")%>
+        <%= f.text_field :depth, :size => 4 %>
+        </li>
+        </ul--><% end %>
+        <!--p>
         <%= f.label :shipping_category_id, t("shipping_categories")%><br />
         <%= f.collection_select(:shipping_category_id, @shipping_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"}) %>
         <%= f.error_message_on :shipping_category %>
-      </p>
-
-      <p>
+        </p>
+        <p>
         <%= f.label :tax_category_id, t("tax_category")%><br />
         <%= f.collection_select(:tax_category_id, @tax_categories, :id, :name, {:include_blank => true}, {"style" => "width:200px"}) %>
         <%= f.error_message_on :tax_category%>
-        </p-->
-      <% end %>
-  </div>
-
-  <div class="yui-u first">
-    <% f.field_container :catch_message do %>
-      <%= f.label :catch_message, t("catch_message")%><br />
-      <%= f.cktext_area :catch_message, :toolbar=>'Full', :width=>'495px', :height => '200px' %>
-      <%= f.error_message_on :catch_message%>
-    <% end %>
-  </div>    
-  <div class="yui-u">   
-    <% f.field_container :minimum_number do %>
-      <%= f.label :minimum_number, t("minimum_number") %> <span class="required">*</span><br />
-      <%= f.text_field :minimum_number, :value => @product.minimum_number %>
-      <%= f.error_message_on :minimum_number%>
-    <% end %>
-
-    <% f.field_container :currently_bought_count do %>
-      <%= f.label :currently_bought_count, t("currently_bought_count") %> <span class="required">*</span><br />
-      <%= f.text_field :currently_bought_count, :value => @product.currently_bought_count %>
-      <%= f.error_message_on :currently_bought_count%>
-	 <% end %>
-	
-	   <% f.field_container :max_vouchers do %>
-      <%= f.label :max_vouchers, t("max_vouchers") %> <br />
-      <%= f.text_field :max_vouchers, :value => @product.max_vouchers %>
-      <%= f.error_message_on :max_vouchers%>
-    <% end %>
-  </div>
-  <div class="yui-u first">
-    <% f.field_container :reviews do %>
-      <%= f.label :reviews, t("reviews")%><br />
-      <%= f.cktext_area :reviews, :toolbar=>'Full', :width=>'495px', :height => '200px'%>
-      <%= f.error_message_on :reviews%>
-    <% end %>
-  </div>
-
-</div>     
- 
-
+        </p--><% end %>
+    </div>
+    <div class="yui-u first">
+        <% f.field_container :catch_message do %>
+        <%= f.label :catch_message, t("catch_message") %>
+        <br/>
+        <%= f.cktext_area :catch_message, :toolbar=>'Full', :width=>'495px', :height => '200px' %>
+        <%= f.error_message_on :catch_message %>
+        <% end %>
+    </div>
+    <div class="yui-u">
+        <% f.field_container :minimum_number do %>
+        <%= f.label :minimum_number, t("minimum_number") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :minimum_number, :value => @product.minimum_number %>
+        <%= f.error_message_on :minimum_number %>
+        <% end %>
+        <% f.field_container :currently_bought_count do %>
+        <%= f.label :currently_bought_count, t("currently_bought_count") %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :currently_bought_count, :value => @product.currently_bought_count %>
+        <%= f.error_message_on :currently_bought_count %>
+        <% end %>
+        <% f.field_container :max_vouchers do %>
+        <%= f.label :max_vouchers, t("max_vouchers") %>
+        <br/>
+        <%= f.text_field :max_vouchers, :value => @product.max_vouchers %>
+        <%= f.error_message_on :max_vouchers %>
+        <% end %>
+    </div>
+    <div class="yui-u first">
+        <% f.field_container :reviews do %>
+        <%= f.label :reviews, t("reviews") %>
+        <br/>
+        <%= f.cktext_area :reviews, :toolbar=>'Full', :width=>'495px', :height => '200px' %>
+        <%= f.error_message_on :reviews %>
+        <% end %>
+    </div>
+</div>
 <h2><%= t("metadata") %></h2>
 <% hook :admin_product_form_meta, locals do %>
-  <p>
-    <%= f.label :meta_keywords, t("meta_keywords")%><br />
+<p>
+    <%= f.label :meta_keywords, t("meta_keywords") %>
+    <br/>
     <%= f.text_field :meta_keywords, :class => 'fullwidth' %>
-  </p>
-  <p>
-    <%= f.label :meta_description, t("meta_description")%><br />
+</p>
+<p>
+    <%= f.label :meta_description, t("meta_description") %>
+    <br/>
     <%= f.text_field :meta_description, :class => 'fullwidth' %>
-  </p>
+</p>
 <% end %>
-
 <!--
 <% hook :admin_product_form_additional_fields, locals do %>
-  <% Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product) }.each do |field| %>
-    <%= render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f} %>
-  <% end %>
+<% Variant.additional_fields.select{|af| af[:only].nil? || af[:only].include?(:product) }.each do |field| %>
+<%= render :partial => "admin/shared/additional_field", :locals => {:field => field, :f => f} %>
+<% end %>
 <% end %>
 -->

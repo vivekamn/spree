@@ -1,90 +1,115 @@
 <%= error_messages_for :transaction %>
 <div class="bannerouter">
-	<div class="tiles">
-<table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;">
-	
-</table>
-<table  style="margin-bottom: 30px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
-       <tr><%if !@err_message%>
-           <td colspan='2' width="100%">
-           	<%if @order.state!='new' and @order.state!='canceled'%>
-           	<% if @order.state=='paid'%>
-				<p>
-					<h3>
-						Hi <%= @order.bill_address.name %>,
-					</h3>
-				</p>
-				
-				<p>
-				<% unless @order.gift? %>
-					<h3>
-						Your payment has been successful and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>.
-	 					Please note your payment details for further correspondence.
-					</h3> 
-				<%else%>
-				<% old_count=featured_product.currently_bought_count - @order.line_items[0].quantity %>
-					<%if featured_product.currently_bought_count>=featured_product.minimum_number and  old_count>=featured_product.minimum_number  %>
-					<h3>
-						Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>. <br/><br/>
-						We have sent the gift voucher to <%= @order.giftee_name%>.<br/><br/>
-						
-						Please note your payment details for further correspondence.
-					</h3>
-					<%else featured_product.currently_bought_count< featured_product.minimum_number%>
-						<h3>
-							Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email%></b></span>. <br/><br/>
-							We will send the gift voucher to <%= @order.giftee_name%> once the deal goes live. <br/><br/>
-							
-							Please note your payment details for further correspondence.
-						</h3>
-					<%end%>
-				<%end%>
-				</p>
-				<%elsif @order.state=='credit_owed'%>
-				<p>
-					<h3>
-						We are sorry, though your payment was successful, the item you ordered was <%=@status%>. But do not worry, the amount will not be debited from your account. Please preserve your following payment details for further queries.
-					</h3>
-				</p>				
-				<%end%>
-				<h2>Payment Details</h2>
-				<table>
-					<tr>
-						<td>Payment ID</td>
-						<td>:</td>
-						<td><%=@response_txt['PaymentID']%></td>
-					</tr>
-					<tr>
-						<td>Amount</td>
-						<td>:</td>
-						<td>Rs. <%=@response_txt['Amount']%></td>
-					</tr>
-					<tr>
-						<td>Merchant Ref No</td>
-						<td>:</td>
-						<td><%=@response_txt['MerchantRefNo']%></td>
-					</tr>
-					<tr>
-						<td>Date</td>
-						<td>:</td>
-						<td><% date_p = Time.parse(@response_txt['DateCreated']) %><%=date_p.strftime '%d/%m/%Y'%></td>
-					</tr>					
-				</table>
-				<%else%>
-				<p>
-					<h3>
-						Sorry. The order could not be processed completey. Your credit card has not been charged. Please 
-						<%=link_to "Click Here", featured_product(@order) %> to buy again.  <%end%>
-					</h3>
-				</p>
-				<%end%>					
-		</td>
-		<%else%>
-		<td colspan='2' width="100%">
-			<span style="color:red; font-size:24px;">This order is placed and <%=@order.state%> already. Current payment process cannot be accepted</span>
-		</td>
-		<%end%>
-	</tr>
-</table>
-<table><tr><td height="10px"></td></tr></table></div>
+    <div class="tiles">
+        <table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;">
+        </table>
+        <table style="margin-bottom: 30px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
+            <tr>
+                <%if !@err_message %>
+	                <td colspan='2' width="100%">
+	                    <%if @order.state!='new' and @order.state!='canceled' %>
+	                    	<% if @order.state=='paid' %>
+			                    <p>
+			                        <h3>Hi <%= @order.bill_address.name %>,</h3>
+			                    </p>
+			                    <p>
+			                        <% unless @order.gift? %>
+			                        <h3>Your payment has been successful and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email %></b></span>.
+			                            Please note your payment details for further correspondence.</h3>
+			                        <%else %>
+			                        <% old_count=featured_product.currently_bought_count - @order.line_items[0].quantity %>
+			                        <%if featured_product.currently_bought_count>=featured_product.minimum_number and  old_count>=featured_product.minimum_number %>
+			                        <h3>Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email %></b></span>. 
+			                            <br/>
+			                            <br/>
+			                            We have sent the gift voucher to <%= @order.giftee_name %>.
+			                            <br/>
+			                            <br/>
+			                            Please note your payment details for further correspondence.
+			                        </h3>
+			                        <%else featured_product.currently_bought_count< featured_product.minimum_number %>
+			                        <h3>Your payment has been made successfully and a confirmation mail has been sent to <span style="color:blue;"><b><%=@order.checkout.email %></b></span>. 
+			                            <br/>
+			                            <br/>
+			                            We will send the gift voucher to <%= @order.giftee_name %>once the deal goes live. 
+			                            <br/>
+			                            <br/>
+			                            Please note your payment details for further correspondence.
+			                        </h3>
+			                        <%end %>
+			                        <%end %>
+			                    </p>
+	                    	<%elsif @order.state=='credit_owed' %>
+			                    <p>
+			                        <h3>We are sorry, though your payment was successful, the item you ordered was <%=@status %>. But do not worry, the amount will not be debited from your account. Please preserve your following payment details for further queries.</h3>
+			                    </p>
+	                    	<%end %>
+		                    <h2>Payment Details</h2>
+		                    <table>
+		                        <tr>
+		                            <td>
+		                                Payment ID
+		                            </td>
+		                            <td>
+		                                :
+		                            </td>
+		                            <td>
+		                                <%=@response_txt['PaymentID'] %>
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td>
+		                                Amount
+		                            </td>
+		                            <td>
+		                                :
+		                            </td>
+		                            <td>
+		                                Rs. <%=@response_txt['Amount'] %>
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td>
+		                                Merchant Ref No
+		                            </td>
+		                            <td>
+		                                :
+		                            </td>
+		                            <td>
+		                                <%=@response_txt['MerchantRefNo'] %>
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td>
+		                                Date
+		                            </td>
+		                            <td>
+		                                :
+		                            </td>
+		                            <td>
+		                                <% date_p = Time.parse(@response_txt['DateCreated']) %><%=date_p.strftime '%d/%m/%Y' %>
+		                            </td>
+		                        </tr>
+		                    </table>
+	                    <%else %>
+		                    <p>
+		                        <h3>Sorry. The order could not be processed completey. Your credit card has not been charged. Please <%=link_to "Click Here", featured_product(@order) %> to buy again. 
+		                        </h3>
+		                    </p>
+	                    <%end %>
+	                </td>
+                <%else %>
+	                <td colspan='2' width="100%">
+	                    <span style="color:red; font-size:24px;">This order is placed and <%=@order.state %> already. Current payment process cannot be accepted</span>
+	                </td>
+                <%end %>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td height="10px">
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

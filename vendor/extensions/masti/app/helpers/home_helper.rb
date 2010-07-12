@@ -84,6 +84,7 @@ module HomeHelper
   end
   
   def featured_product(order)
+    puts "#{order.inspect}================"
     #deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
     #Product.find(:first, :conditions => ['id = ?',deal.product_id])
      order.line_items[0].variant.product

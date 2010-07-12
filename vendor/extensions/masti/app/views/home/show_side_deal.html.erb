@@ -2,9 +2,9 @@
 	<tr>
 		<td>
 			<% if deal_info == 'side_deal' %>
-				Last Minute Deals
+				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;">Today's</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;">Side Deals</span>
 			<%else%>
-				Today's Deals
+				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;">Today's</span>  <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;">Deals</span>
 			<%end%>			
 		</td>
 	</tr>
@@ -18,32 +18,23 @@
 				</tr>
 				<tr>
 					<td>
-						Title : 
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Title :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.side_deal_title%></span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Value :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.price.to_i%></span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Name : <%= side_deal_product.name%>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Discount :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.discount%>%</span>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						Selling Price : <%= side_deal_product.price.to_i%>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Business name : 
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Discount : <%= side_deal_product.discount%>%
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Save amount : <%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i%>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">You Save :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i%></span>
 					</td>
 				</tr>
 			</table>

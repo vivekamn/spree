@@ -83,6 +83,7 @@ en-US:
         description: Description
         master_price: "Master Price"
         name: Name
+        side_deal_title: Side Deal Title
         on_hand: "On Hand"
         shipping_category: "Shipping Category"
         tax_category: "Tax Category"        
@@ -463,6 +464,7 @@ en-US:
   my_account: "My Account"
   my_orders: "My Orders"
   name: Name
+  side_deal_title: Side Deal Title
   new: New
   new_adjustment: "New Adjustment"
   new_billing_integration: New Billing Integration

@@ -11,6 +11,11 @@
     <%= f.text_field :name, :class => 'fullwidth title'  %>
     <%= f.error_message_on :name %>
   <% end %>
+  <% f.field_container :side_deal_title do %>
+   <%= f.label :side_deal_title, t("side_deal_title") %><span class="required">*</span><br />
+    <%= f.text_field :side_deal_title, :class => 'fullwidth title'  %>
+    <%= f.error_message_on :side_deal_title %>
+  <% end %>
   
    <% f.field_container :deal_info do %>
         <%= f.label :deal_info, "Deal Info" %> <span class="required">*</span><br />
