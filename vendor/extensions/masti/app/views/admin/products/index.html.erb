@@ -48,45 +48,43 @@
         <% end %>
         <td class="actions">
             <% hook :admin_products_index_row_actions, locals do %>
-			<%unless side_deal_product.nil? %>
-            <%if deal.product_id==product.id %>
-	            <%if params[:flag].nil? and product.deal_expiry_date>Time.now %>
-	            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
-	            <%elsif product.deal_expiry_date<=Time.now %>
-	            <span style="color:red">Expired</span>
-	            <%else %>
-	            <span style="color:red">Sold out</span>
-	            <%end %>
-				
-            <%elsif side_deal_product.product_id == product.id %>
-	            <%if product.deal_expiry_date>Time.now %>
-	            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make side deal Sold Out</a>
-	            <%elsif product.deal_expiry_date<=Time.now %>
-	            <span style="color:red">Expired</span>
-	            <%elsif side_deal_product.sold_out == 1 %>
-	            <span style="color:red">Sold out</span>
-	            <%end %>
-				
+            <%unless side_deal_product.nil? %>
+            	<%if deal.product_id==product.id %>
+            		<%if params[:flag].nil? and product.deal_expiry_date>Time.now %>
+            			<a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
+            		<%elsif product.deal_expiry_date<=Time.now %>
+            			<span style="color:red">Expired</span>
+            		<%else %>
+            			<span style="color:red">Sold out</span>
+            		<%end %>
+            	<%elsif side_deal_product.product_id == product.id %>
+            		<%if product.deal_expiry_date>Time.now %>
+            			<a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make side deal Sold Out</a>
+            		<%elsif product.deal_expiry_date<=Time.now %>
+            			<span style="color:red">Expired</span>
+            		<%elsif side_deal_product.sold_out == 1 %>
+            			<span style="color:red">Sold out</span>
+            		<%end %>
+            	<%else %>
+            		<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted? %>
+            	<%end %>
             <%else %>
-            	<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted? %>
+            	<%if deal.product_id==product.id %>
+            		<%if params[:flag].nil? and product.deal_expiry_date>Time.now %>
+            			<a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
+            		<%elsif product.deal_expiry_date<=Time.now %>
+            			<span style="color:red">Expired</span>
+            		<%else %>
+            			<span style="color:red">Sold out</span>
+            		<%end %>
+            	<%else %>
+            		<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted? %>
+            	<%end %>
             <%end %>
-			<%else%>
-				<%if deal.product_id==product.id %>
-	            <%if params[:flag].nil? and product.deal_expiry_date>Time.now %>
-	            <a href="/admin/deals/make_soldout/<%= product.id %>" linkindex="28" style="color: red;">Make Sold Out</a>
-	            <%elsif product.deal_expiry_date<=Time.now %>
-	            <span style="color:red">Expired</span>
-	            <%else %>
-	            <span style="color:red">Sold out</span>
-	            <%end %>
-            <%else %>
-            	<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online", :id => product.id  unless product.deleted? %>
-            <%end %>
-			<%end%>
-	            &nbsp; <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
-	            &nbsp;<%= link_to_edit product unless product.deleted? %>
-	            &nbsp;<%= link_to_clone product %>
-	            &nbsp;<%= link_to_delete product unless product.deleted? %>
+            &nbsp; <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
+            &nbsp;<%= link_to_edit product unless product.deleted? %>
+            &nbsp;<%= link_to_clone product %>
+            &nbsp;<%= link_to_delete product unless product.deleted? %>
             <% end %>
         </td>
     </tr>
@@ -130,7 +128,7 @@
 <% end %>
 <% end %>
 <script>
-    	<%if params[:search].nil?%>
-    		window.location.href='/admin/products?search[order]=descend_by_created_at';
-    	<%end%>
+            	<%if params[:search].nil?%>
+            		window.location.href='/admin/products?search[order]=descend_by_created_at';
+            	<%end%>
 </script>
