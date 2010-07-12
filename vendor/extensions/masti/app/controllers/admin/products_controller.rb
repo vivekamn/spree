@@ -1,6 +1,7 @@
 class Admin::ProductsController < Admin::BaseController
   resource_controller
   before_filter :load_data, :except => :index
+  before_filter :set_city
 
   index.response do |wants|
     wants.html { render :action => :index }
@@ -63,6 +64,13 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   private
+
+  def set_city
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end
+  end
+
     def load_data
       @tax_categories = TaxCategory.find(:all, :order=>"name")
       @shipping_categories = ShippingCategory.find(:all, :order=>"name")
@@ -74,12 +82,17 @@ class Admin::ProductsController < Admin::BaseController
 
         # Note: the SL scopes are on/off switches, so we need to select "not_deleted" explicitly if the switch is off
         # QUERY - better as named scope or as SL scope?
+#        puts "#{params[:search][:city_id]}====>"
+#        puts "#{session[:city_id]}===========>"
+#        params[:search][:city_id] = session[:city_id]
         if params[:search].nil? || params[:search][:deleted_at_not_null].blank?
           base_scope = base_scope.not_deleted
         end
-
-        @search = base_scope.group_by_products_id.searchlogic(params[:search])
-        @search.order ||= "ascend_by_name"
+#        params[:search_city_id] = session[:city_id]
+#        params[:search][:order] = "descend_by_created_at" 
+        @search = base_scope.group_by_products_id.searchlogic(:city_id => session[:city_id])
+#        @search = base_scope.group_by_products_id.searchlogic(params[:search])
+        @search.order ||= "descend_by_created_at"
 
         @collection = @search.paginate(:include  => {:variants => [:images, :option_values]},
                                        :per_page => Spree::Config[:admin_products_per_page],

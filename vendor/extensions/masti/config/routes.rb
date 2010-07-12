@@ -15,7 +15,7 @@ map.payment_response '/payment_response' ,:controller=>"home",:action=>"payment_
 map.chennai '/chennai', :controller=>'home', :action=>'index'
 map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
 map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
-map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
+map.bangalore '/bangalore', :controller=>'home', :action=>'index'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
 map.recent '/recent-deals', :controller=>'home',  :action=>'recent_deals'

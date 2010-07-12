@@ -28,7 +28,7 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+       attr_accessible :city_id,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
        attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :voucher_text
@@ -82,6 +82,7 @@ class MastiExtension < Spree::Extension
 #       attr_accessor :bill_address, :bill_address_attributes
        accepts_nested_attributes_for :bill_address
       attr_accessible :phone_no,:refered_by
+	 attr_accessible :phone_no,:corporate_id, :city_id
       has_one :verification_code
       has_one :user_promotion
       #validates_presence_of :phone_no
@@ -113,12 +114,19 @@ Address.class_eval do
 
  
 
-
+      
 
     # make your helper avaliable in all views
      Spree::BaseController.class_eval do
        helper HomeHelper
-        before_filter :call_logging
+       before_filter :call_logging
+       before_filter :set_city
+       def set_city
+         if session[:city_id].nil?
+           session[:city_id] = 1
+         end
+       end
+        
        def call_logging
          if controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home"
           url_split = request.request_uri.split('?')

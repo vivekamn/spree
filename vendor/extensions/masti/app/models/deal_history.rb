@@ -15,7 +15,7 @@ class DealHistory < ActiveRecord::Base
     self.save!
   end
   
-  def deal_notify    
+  def deal_notify 
     if (self.is_active == true)
       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
       product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")

@@ -42,17 +42,22 @@ def create_admin_user
     :password_confirmation => password,
     :email => email,
     :login => email,
-    :phone_no => "9444444444"
+    :phone_no => "1234567890"
   }
   require File.join(SPREE_ROOT, 'app/models/user.rb')
   if User.find_by_login(email)
     say "\nWARNING: There is already a user with the email: #{email}, so no account changes were made.  If you wish to create an additional admin user, please run rake db:admin:create again with a different email.\n\n"
   else
     admin = User.create(attributes)
+    admin.save
     # create an admin role and and assign the admin user to that role
     role = Role.find_or_create_by_name "admin"
     admin.roles << role
-    admin.save
+    if admin.save
+      puts "Created the admin user."
+    else
+      puts "could not create the admin user."
+    end
   end      
 end
 
