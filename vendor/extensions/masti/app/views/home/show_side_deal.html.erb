@@ -2,40 +2,62 @@
 	<tr>
 		<td>
 			<% if deal_info == 'side_deal' %>
-				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;">Today's</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;">Side Deals</span>
+				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;"><u>Today's</u></span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;"><u>Side Deal</u></span>
 			<%else%>
-				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;">Today's</span>  <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;">Deals</span>
+				<span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#6cab16; font-weight:bold;"><u>Today's</u></span>  <span style="font-family:Tahoma, Geneva, sans-serif; font-size:14px; color:#214d76; font-weight:bold;"><u>Deal</u></span>
 			<%end%>			
 		</td>
 	</tr>
 	<tr>
+		<td background="blue" align="center">
+			<%= image_tag(side_deal_product.images.first.attachment.url(:product),:alt=> side_deal_product.name,:style=>"margin-left:2px;margin-top:2px;width: 150px;height:90px;") %>
+		</td>
+	</tr>
+	<tr>
 		<td>
-			<table>
-				<tr>
-					<td background="blue">
-						<%= image_tag(side_deal_product.images.first.attachment.url(:small),:alt=> side_deal_product.name,:width=>"100px",:style=>"margin-left:2px;margin-top:2px;width: 100px;") %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Title :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.side_deal_title%></span>
-					</td>
-				</tr>
-				
+			<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.side_deal_title%></span>
+		</td>
+	</tr>
+	<tr>
+		<td width="100%">
+			<table width="100%">
 				<tr>
 					<td>
-						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Value :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.price.to_i%></span>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Value </span>
 					</td>
+					<td>
+						:
+					</td>
+					<td>
+						 <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.price.to_i%></span>
+					</td>
+							
 				</tr>
 				<tr>
+					
 					<td>
-						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Discount :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.discount%>%</span>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">Discount </span>
 					</td>
+					<td>
+						:
+					</td>
+					<td>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= side_deal_product.discount%>%</span>	
+					</td>
+							
 				</tr>
 				<tr>
+					
 					<td>
-						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">You Save :</span> <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i%></span>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#6cab16; font-weight:bold;">You Save </span>			
 					</td>
+					<td>
+						:
+					</td>
+					<td>
+						<span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#214d76; font-weight:bold;"><%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i%></span>			
+					</td>
+							
 				</tr>
 			</table>
 		</td>
