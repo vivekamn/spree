@@ -19,20 +19,25 @@ class DealHistory < ActiveRecord::Base
     if (self.is_active == true)
       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
       product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
-      all_deals_notify_email = DealsNotification.find(:all, :select => "email")
-      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user' and is_sample = ?",false])
+      all_deals_notify_email = DealsNotification.find(:all, :select => "email",:conditions=>['unusbcribed = ?',false])
+      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user' and is_sample = ? and unusbcribed = ?",false,false])
       message = product.sms_notification.to_s
       flag = 1
       qry_str = ""
-     all_user_email.each do |user|
-       unless user.phone_no.nil?
+    all_phone_nos = []
+    all_phone_nos = all_user_email.collect{|x| x.phone_no}
+    sms_mobile_no = []
+    sms_nitifies = SmsNotify.find(:all)
+    sms_mobile_no = sms_nitifies.collect{|x| x.mobile_no}
+    all_phone_nos = all_phone_nos.concat(sms_mobile_no)
+    all_phone_nos.uniq!
+    all_phone_nos.each do |mobile|
          if flag==1
-            qry_str = "('#{ user.phone_no }','#{ message }')"
+            qry_str = "('#{ mobile }','#{ message }')"
           else
-            qry_str = qry_str + ", ('#{ user.phone_no }','#{ message }')"
+            qry_str = qry_str + ", ('#{ mobile }','#{ message }')"
           end
           flag = 2
-        end
       end
       query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
       result = ActiveRecord::Base.connection.execute(query)

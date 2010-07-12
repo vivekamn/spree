@@ -47,7 +47,7 @@ class HomeController < Spree::BaseController
       end
     end
   end
-
+  
   def unique_email
     count = User.count(:all, :conditions => ['email = ?',params[:email]] )
     if count > 0
@@ -67,50 +67,52 @@ class HomeController < Spree::BaseController
   end
   
   def verify_mobile
-   if current_user.mobile_verify==true
-     flash[:error]='Your mobile number has already been verified'
-     redirect_to home_url
-   else
-    verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
-    if verification_code.code == params[:code]
-     if current_user.is_cmom==true
-      create_user_promotion current_user
-      redirect_to invite_friends_path(:from=>"reg_complete")  
+    if current_user.mobile_verify==true
+      flash[:error]='Your mobile number has already been verified'
+      redirect_to home_url
     else
-      update_referer_promotion
-      user = User.find_by_email(current_user.refered_by)
-      unless user.nil?
-        count= user.invited_count
-        UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
-        
+      verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
+      if verification_code.code == params[:code]
+        if current_user.is_cmom==true
+          create_user_promotion current_user
+          redirect_to invite_friends_path(:from=>"reg_complete")  
+        else
+          update_referer_promotion
+          user = User.find_by_email(current_user.refered_by)
+          unless user.nil?
+            count= user.invited_count
+            UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
+            
+          end
+          redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
+        end
+      else
+        unless params[:md_user_ref].nil?
+          flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code?from=resend'>Click here</a>"
+          redirect_to verifiy_your_phone_path(:md_user=>'true')
+        else
+          flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
+          redirect_to verifiy_your_phone_path()
+        end
       end
-      redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
-     end
-   else
-     unless params[:md_user_ref].nil?
-        flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code?from=resend'>Click here</a>"
-        redirect_to verifiy_your_phone_path(:md_user=>'true')
-     else
-        flash[:error]="Please Enter Correct code.If you want to send the code again Please <a href='/generate-code'>Click here</a>"
-        redirect_to verifiy_your_phone_path()
-     end
     end
-   end
   end
   
   def cmom
-    
+   unless params[:ref].nil?
+     session[:ref]=params[:ref]
+   end
   end
-    
+  
   def from_cmom_check
-   user = User.find_by_email(params[:user_email])
+    user = User.find_by_email(params[:user_email])
     referer = User.find_by_email(params[:referer_email])
     if user and referer
       current_user.is_cmom=true
       current_user.save!
       if params[:phone_verify]=="true"
         create_user_promotion user
-#        update_user_promotion referer
+        #        update_user_promotion referer
         redirect_to invite_friends_path(:from=>"reg_complete")
       else
         generate_code
@@ -125,10 +127,10 @@ class HomeController < Spree::BaseController
         generate_code
       end
     elsif referer
-#      update_user_promotion referer
-       generate_code('true')
-#       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
-#      redirect_to home_url
+      #      update_user_promotion referer
+      generate_code('true')
+      #       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
+      #      redirect_to home_url
     else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
         user = User.find_by_email(current_user.refered_by)
@@ -137,7 +139,7 @@ class HomeController < Spree::BaseController
         else
           redirect_to reg_complete_path
         end
-         
+        
       else
         redirect_to reg_complete_path
       end
@@ -240,73 +242,73 @@ class HomeController < Spree::BaseController
     end
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
     begin
-    @order.update_payment_info(@response_txt)
-    unless @order.user.user_promotion.nil?
-      @order.update_user_promotion
-    end
-    if @order.state=='new' # check if user is paying again for a paid order or cancelled order
-      if @response_txt['ResponseMessage']=='Transaction Successful'
-        @status=@order.update_payment
-        if @status!='out_of_stock' and @status!='sold_out'
-          logger.info "about to accept the payment..........."
-          @order.pay!  # accept the payment    
-          logger.info "order updated as paid after successful payment response received.........."
-          InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails 
-          logger.info "confirmation mails sent...................." 
-        else          
-          @order.update_attribute(:state, 'credit_owed') 
-           # mark as over paid so that it can be reimbursed to users
-          logger.info "order under count after payment success and marked as over paid"
-          if @status=="out_of_stock"
-            logger.info "retrieving out of stock items.............."
-            flash[:error] = 'Following out of stock'
-            flash[:error] += '<ul>'
-            @order.out_of_stock_items.each do |item|
-              flash[:error] += '<li>' + t(:count_of_reduced_by,
+      @order.update_payment_info(@response_txt)
+      unless @order.user.user_promotion.nil?
+        @order.update_user_promotion
+      end
+      if @order.state=='new' # check if user is paying again for a paid order or cancelled order
+        if @response_txt['ResponseMessage']=='Transaction Successful'
+          @status=@order.update_payment
+          if @status!='out_of_stock' and @status!='sold_out'
+            logger.info "about to accept the payment..........."
+            @order.pay!  # accept the payment    
+            logger.info "order updated as paid after successful payment response received.........."
+            InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails 
+            logger.info "confirmation mails sent...................." 
+          else          
+            @order.update_attribute(:state, 'credit_owed') 
+            # mark as over paid so that it can be reimbursed to users
+            logger.info "order under count after payment success and marked as over paid"
+            if @status=="out_of_stock"
+              logger.info "retrieving out of stock items.............."
+              flash[:error] = 'Following out of stock'
+              flash[:error] += '<ul>'
+              @order.out_of_stock_items.each do |item|
+                flash[:error] += '<li>' + t(:count_of_reduced_by,
                               :name => item[:line_item].variant.name,
                               :count => item[:count]) +
                           '</li>'
-            end
-            flash[:error] += '<ul>'
-          end   
-          InventoryUnit.deal_status_update(@order) if @order.email
+              end
+              flash[:error] += '<ul>'
+            end   
+            InventoryUnit.deal_status_update(@order) if @order.email
+          end
+        else
+          @order.cancel! if @order.state!='canceled'   # just mark the order as cancel as payment failed
+          logger.info "payment failed and order cancelled"  
         end
       else
-        @order.cancel! if @order.state!='canceled'   # just mark the order as cancel as payment failed
-        logger.info "payment failed and order cancelled"  
+        @err_message = "Already Paid or Cancelled Order "
       end
-    else
-      @err_message = "Already Paid or Cancelled Order "
-    end
-  rescue Exception=>e
-    logger.info e.message
-    #flash[:error]=e.message
-    redirect_to :action=>'payment_failure'
+    rescue Exception=>e
+      logger.info e.message
+      #flash[:error]=e.message
+      redirect_to :action=>'payment_failure'
     end
   end
-
+  
   def sitemap
     
   end
   
-#to get the email id from the user and store it in the deal notifications table
-
+  #to get the email id from the user and store it in the deal notifications table
+  
   def email_deal_notify
-      @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
-      if @deals_notify.nil?
-        @deals_notify = DealsNotification.new(params[:deals_notification])
-        if @deals_notify.save
-          flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
-        else
-          flash[:error]="E-mail subscription Failed."
-        end
+    @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
+    if @deals_notify.nil?
+      @deals_notify = DealsNotification.new(params[:deals_notification])
+      if @deals_notify.save
+        flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
+      else
+        flash[:error]="E-mail subscription Failed."
+      end
     else
       #if the user have already subscribed means it will show error
       flash[:error]="You have already subscribed to MasthiDeals Newsletter. Would you like to register another email id?"      
     end
     redirect_to :back
   end
- 
+  
   def voucher
     @order=Order.find(params[:id])
     line_items_coll=@order.line_items
@@ -319,11 +321,11 @@ class HomeController < Spree::BaseController
   def create
     @enquiry=Enquiry.new(params[:enquiry])
     begin
-    @enquiry.save!
+      @enquiry.save!
       flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
       redirect_to home_url    
-  rescue Exception=>e
-     flash[:error]=e.message      
+    rescue Exception=>e
+      flash[:error]=e.message      
       redirect_to :back
     end
   end
@@ -331,11 +333,11 @@ class HomeController < Spree::BaseController
   def progress_bar
     current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
     variant=current_deal.master
-      if variant.count_on_hand==0
-        bought_percent = 300
-      else
-          bought_percent = (current_deal.currently_bought_count*300)/(current_deal.currently_bought_count+variant.count_on_hand)
-      end
+    if variant.count_on_hand==0
+      bought_percent = 300
+    else
+      bought_percent = (current_deal.currently_bought_count*300)/(current_deal.currently_bought_count+variant.count_on_hand)
+    end
     render(:text =>bought_percent)
   end
   
@@ -392,10 +394,10 @@ class HomeController < Spree::BaseController
       end
     end 
   end
-
+  
   private
   
- def send_sms(phone_no,message)
+  def send_sms(phone_no,message)
     query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
     result = ActiveRecord::Base.connection.execute(query)
   end
@@ -406,11 +408,11 @@ class HomeController < Spree::BaseController
     current_user.save!
     user=User.find_by_email(current_user.refered_by)
     unless user.nil?
-       user.invited_count +=1
-       user.save!
-     end
+      user.invited_count +=1
+      user.save!
+    end
   end
-
+  
   def update_referer_promotion
     referer_promotion = UserPromotion.find_by_user_id(current_user.id)    
     if referer_promotion.nil?
@@ -422,10 +424,10 @@ class HomeController < Spree::BaseController
     current_user.mobile_verify=true
     current_user.save!
     user=User.find_by_email(current_user.refered_by)
-     unless user.nil?
-       user.invited_count +=1
-       user.save!
-     end
+    unless user.nil?
+      user.invited_count +=1
+      user.save!
+    end
   end
   
 end
