@@ -15,19 +15,19 @@ class ProductsController < Spree::BaseController
   def show
 #    puts "#its comming to the product show============================id:==========#{}======="
 #    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-    cur_product = Product.find_by_permalink(params[:id])
+    @product = Product.find_by_permalink(params[:id])
     oreders = current_user.orders
     count = 0
     oreders.each do |order|
       order.line_items.each do |line_item|
-        if line_item.variant.id ==  cur_product.variant.id
+        if line_item.variant.id ==  @product.variant.id
           if order.state == "paid"
             count += line_item.quantity
           end
         end
       end
     end
-    if cur_product.max_vouchers.nil? or count < cur_product.max_vouchers
+    if @product.max_vouchers.nil? or count < @product.max_vouchers
       session[:order_id] = nil
       redirect_to(:controller => "orders", :product => @product.id, :type => params[:type])
     else
