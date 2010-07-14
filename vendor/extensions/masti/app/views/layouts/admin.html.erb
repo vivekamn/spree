@@ -16,8 +16,8 @@
   <div id="header">
     <% if current_user -%>
     <ul id="login-nav">
-      <li><%= link_to "Chennai", :controller => "admin/products", :city_id => 1 %></li>
-	    <li><%= link_to "Banglore", :controller => "admin/products", :city_id => 2 %></li>
+      <li><%= link_to "Chennai", :controller => "home/get_city", :city_id => 1 %></li>
+	    <li><%= link_to "Banglore", :controller => "home/get_city", :city_id => 2 %></li>
       <li><%= t('logged_in_as') %>: <strong><%= current_user.email %></strong></li>
       <li><%= link_to t('account'), user_path(current_user) %></li>
       <li><%= link_to t('logout'), logout_path %></li>

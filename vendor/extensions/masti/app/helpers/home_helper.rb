@@ -65,22 +65,36 @@ module HomeHelper
     end
   end
   
-   def get_states
-    states=[]
-    state=State.find(1061493609)
-    states<<[state.name, state.id]
-  end
+#   def get_states
+#    states=[]
+#    state=current_user.city.state
+#    states<<[state.name, state.id]
+#  end
   
-  def get_countries
-    countries=[]
-    country = Country.find(92)
-    countries<<[country.name, country.id]
-  end
+#  def get_countries
+#    countries=[]
+#    country = Country.find(92)
+#    countries<<[country.name, country.id]
+#  end
   
   def get_cities
     cities=[]
-    city=City.find_by_state_id(1061493609)
-    cities<<[city.name, city.name]
+#    city=City.find_by_state_id(1061493609)
+    city = City.find(:all, :conditions => ['is_active = ?',  true])
+    city.each do |cty|
+      cities << [cty.name, cty.id]  
+    end
+    cities
+  end
+  
+  def get_all_cities
+    cities=[]
+#    city=City.find_by_state_id(1061493609)
+    city = City.find(:all)
+    city.each do |cty|
+      cities << [cty.name, cty.id]  
+    end
+    cities
   end
   
   def featured_product

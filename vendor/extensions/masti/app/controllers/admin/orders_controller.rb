@@ -14,6 +14,16 @@ class Admin::OrdersController < Admin::BaseController
 #    end
   end
 
+#  
+#  def index
+#    if params[:page].nil?
+#      params[:page] = 1
+#    end
+#    @orders = Order.find(:all, :conditions => ['city_id = ?', session[:city_id]])
+#    @orders.paginate(:page=>params[:page], :per_page => 20)
+#    collection
+#  end
+
   def new
     @order = Order.create
   end
@@ -46,7 +56,16 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def collection
-    @search = Order.searchlogic(params[:search])
+#    @search = Order.searchlogic(params[:search])
+#    puts "#{params[:search]}=============="
+    unless params[:search].nil?
+      params[:search][:city_id]= session[:city_id]
+      @search = Order.searchlogic(params[:search])
+    else
+     @search = Order.searchlogic(:city_id => session[:city_id]) 
+    end
+
+    
     @search.order ||= "descend_by_created_at"
 
     # QUERY - get per_page from form ever???  maybe push into model

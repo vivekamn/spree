@@ -1,47 +1,47 @@
 class HomeController < Spree::BaseController
-
-    require 'RubyRc4.rb'
-    require 'base64'
-    ssl_required  :index, :unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
-#   before_filter :require_user,:only=>[:get_featured]
-    skip_filter :protect_from_forgery
-    before_filter :set_city
-
-  def set_chennai
+  
+  require 'RubyRc4.rb'
+  require 'base64'
+  ssl_required  :index, :unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities,:error
+  #   before_filter :require_user,:only=>[:get_featured]
+  skip_filter :protect_from_forgery
+  
+  def get_city
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
-    end    
-    redirect_to chennai_path
+    end
+    if params[:city_id] == 2
+      redirect_to :back
+    else
+      redirect_to :back     
+    end
   end
-
-  def set_bangalore
-    unless params[:city_id].nil?
-      session[:city_id] = params[:city_id]
-    end    
-    redirect_to bangalore_path
-  end  
-
-
+  
   def index
-    if session[:city_id].nil?
-      session[:city_id] = 1
-    end   
-    @deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])  
-    @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
-    @price = @featured_product.price.to_i
-    @discount = @featured_product.discount
-    @saving = (@price*@discount/100).to_i
-    @bought_count = @featured_product.currently_bought_count
-    unless params[:email].nil? and params[:product_id].nil?
-      email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
-      if email_trace.nil?
-        email_trace = EmailTrace.new 
-        email_trace.email = params[:email]
-        email_trace.product_id = params[:product_id]
-        email_trace.save!
+#    if session[:city_id].nil?
+#      session[:city_id] = 1
+#    end
+    @deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]]) 
+    if @deal.nil?
+      redirect_to error_path
+    else
+      @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
+      @price = @featured_product.price.to_i
+      @discount = @featured_product.discount
+      @saving = (@price*@discount/100).to_i
+      @bought_count = @featured_product.currently_bought_count
+      unless params[:email].nil? and params[:product_id].nil?
+        email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
+        if email_trace.nil?
+          email_trace = EmailTrace.new 
+          email_trace.email = params[:email]
+          email_trace.product_id = params[:product_id]
+          email_trace.save!
+        end
       end
     end
   end
+  
   
   def order_vendor
     unless params[:id].nil?
@@ -105,9 +105,9 @@ class HomeController < Spree::BaseController
   end
   
   def cmom
-   unless params[:ref].nil?
-     session[:ref]=params[:ref]
-   end
+    unless params[:ref].nil?
+      session[:ref]=params[:ref]
+    end
   end
   
   def from_cmom_check
@@ -182,12 +182,6 @@ class HomeController < Spree::BaseController
     else
       redirect_to verifiy_your_phone_path  
     end
-    
-    
-  end
-  
-  def invite_friends
-    
   end
   
   def share_this
@@ -292,10 +286,6 @@ class HomeController < Spree::BaseController
     end
   end
   
-  def sitemap
-    
-  end
-  
   #to get the email id from the user and store it in the deal notifications table
   
   def email_deal_notify
@@ -346,14 +336,6 @@ class HomeController < Spree::BaseController
     render(:text =>bought_percent)
   end
   
-  def terms_conditions
-    
-  end
-  
-  def about_us
-    
-  end
-  
   def recent_deals
     @bar_selected="recent_deals"
   end
@@ -366,18 +348,8 @@ class HomeController < Spree::BaseController
     @bar_selected="how_masthi_works"
   end
   
-  def faq
-  end
-  
-  def contact_us
-  end
-  
   def get_featured
     @bar_selected="get_featured"
-  end 
-  
-  def other_cities
-    
   end 
   
   def update_assets
@@ -399,7 +371,37 @@ class HomeController < Spree::BaseController
       end
     end 
   end
-
+  
+  def error
+    
+  end
+  
+  def invite_friends
+    
+  end
+  
+  def sitemap
+    
+  end
+  
+  def terms_conditions
+    
+  end
+  
+  def about_us
+    
+  end
+  
+  def faq
+  end
+  
+  def contact_us
+  end
+  
+  def other_cities
+    
+  end
+  
   
   private
   
@@ -436,13 +438,4 @@ class HomeController < Spree::BaseController
     end
   end
   
-
-  private
-
-  def set_city
-    unless params[:city_id].nil?
-      session[:city_id] = params[:city_id]
-    end
-  end  
-
 end

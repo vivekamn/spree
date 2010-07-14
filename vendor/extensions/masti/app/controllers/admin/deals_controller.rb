@@ -19,13 +19,6 @@ class Admin::DealsController < ApplicationController
     redirect_to admin_products_url(:city_id => city_id)
   end
   
-  def create_city_session
-    unless params[:city_id].nil?
-       session[:city_id] = params[:city_id]
-   end
-   redirect_to admin_products_url
-  end
-  
   
   def make_soldout
     product=Product.find(params[:id])

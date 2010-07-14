@@ -12,10 +12,6 @@ map.progress_bar '/progress_bar',:controller=>"home",:action=>"progress_bar"
 map.terms_conditions '/terms-conditions',:controller=>"home",:action=>"terms_conditions"
 map.voucher '/voucher' ,:controller=>"home",:action=>"voucher"
 map.payment_response '/payment_response' ,:controller=>"home",:action=>"payment_response"
-map.chennai '/chennai', :controller=>'home', :action=>'index'
-map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
-map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
-map.bangalore '/bangalore', :controller=>'home', :action=>'index'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
 map.recent '/recent-deals', :controller=>'home',  :action=>'recent_deals'
@@ -30,10 +26,24 @@ map.invite_friends '/invite-your-friends',:controller => "home", :action => "inv
 map.verifiy_your_phone '/verifiy-your-phone',:controller => "home", :action => "verifiy_your_phone"
 map.generate_code '/generate-code',:controller => "home", :action => "generate_code"
 map.reg_complete '/registration-success',:controller => "home", :action => "index"
+
+
+
+#city path
+map.chennai '/chennai', :controller=>'home', :action=>'index'
+map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
+map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
+map.bangalore '/bangalore', :controller=>'home', :action=>'index'
+
+
+#error path
+map.error '/nodeal', :controller => 'home', :action=> 'error'
+
 # seo purpose url
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
 map.referral '/referral', :controller=>"home", :action => "cmom"
+
 
 map.namespace :admin do |admin|
    admin.resources :vendors

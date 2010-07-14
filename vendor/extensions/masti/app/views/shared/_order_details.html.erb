@@ -1,84 +1,126 @@
 <table class="index" width="70%" align="center" cellpadding=5 cellspacing=2>
-  <tbody id='line-items'>
-    <tr>
-      <% hook :order_details_line_items_headers do %>
-        <th align="left"><%= t('item_description') %></th>
-        <th class="price" style="width: 7%;"><%= t('price') %></th>
-        <th class="qty" style="width: 7%;"><%= t('qty') %></th>
-        <th class="total" align="left" style="width: 7%;"><span><%= t('total') %></span></th>
-		 <% if params.has_key? :checkout_complete %>
-		<td width="" rowspan="2" >
-			<table border="0">
-			        <tbody><tr>
-			          <td align="right" width="273px">
-			            <img src="/images/ebs.gif">
-			          </td>
-			          <td valign="center">
-			            <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
-			          </td>
-			        </tr>
-			      </tbody></table>
-		</td>
-      <%end%>
-	  <% end %>
-    </tr>
-
-    <% @order.line_items.each do |item| %>
-      <tr>
-        <%- locals = {:item => item} -%>
-        <% hook :order_details_line_item_row, locals do %>
-          <td width="300"><%=item.variant.product.name-%> <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %></td>
-          <td class="price"><center>Rs.<%=  item.price.to_i -%></center></td>
-          <td class="qty"><center><%=item.quantity-%></center></td>
-          <td class="total"><span> Rs. <%=(item.price * item.quantity).to_i-%></span></td>
+    <tbody id='line-items'>
+        <tr>
+            <% hook :order_details_line_items_headers do %>
+            <th align="left">
+                <%= t('item_description') %>
+            </th>
+            <th class="price" style="width: 7%;">
+                <%= t('price') %>
+            </th>
+            <th class="qty" style="width: 7%;">
+                <%= t('qty') %>
+            </th>
+            <th class="total" align="left" style="width: 7%;">
+                <span><%= t('total') %></span>
+            </th>
+            <% if params.has_key? :checkout_complete %>
+            <td width="" rowspan="2">
+                <table border="0">
+                    <tbody>
+                        <tr>
+                            <td align="right" width="273px">
+                                <img src="/images/ebs.gif">
+                            </td>
+                            <td valign="center">
+                                <img width="170px" onmouseout="this.src='/images/cooltext457817582.png';" onmouseover="this.src='/images/cooltext457817582MouseOver.png';" src="/images/cooltext457817582.png">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td><%end %>
+            <% end %>
+        </tr><% @order.line_items.each do |item| %>
+        <tr>
+            <%- locals = {:item => item} -%>
+            <% hook :order_details_line_item_row, locals do %>
+            <td width="300">
+                <%=item.variant.product.name -%><%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %>
+            </td>
+            <td class="price">
+                <center>
+                    Rs.<%= item.price.to_i -%>
+                </center>
+            </td>
+            <td class="qty">
+                <center>
+                    <%=item.quantity -%>
+                </center>
+            </td>
+            <td class="total">
+                <span>Rs. <%=(item.price * item.quantity).to_i -%></span>
+            </td>
+            <% end %>
+        </tr>
         <% end %>
-      </tr>
+        <%unless @order.user.user_promotion.nil? %>
+        <% hook :order_details_subtotal do %>
+        <tbody id='subtotal'>
+            <tr class="total" id="subtotal-row">
+                <td colspan="3">
+                    <b><%= t('your_credit_amount') %>:</b>
+                </td>
+                <td class="total">
+                    <span>Rs.<%= @order.user.user_promotion.credit_amount.to_i -%></span>
+                </td>
+            </tr>
+        </tbody>
+        <% end %>
+    </tbody>
+    <%end %>
+    <% hook :order_details_subtotal do %>
+    <tbody id='subtotal'>
+        <tr class="total" id="subtotal-row">
+            <td colspan="3">
+                <b><%= t('subtotal') %>:</b>
+            </td>
+            <td class="total">
+                <span>Rs.<%= @order.item_total.to_i -%></span>
+            </td>
+        </tr>
+    </tbody>
     <% end %>
-  <%unless @order.user.user_promotion.nil?%>
-  <% hook :order_details_subtotal do %>
-    <tbody id='subtotal'>
-      <tr class="total" id="subtotal-row">
-        <td colspan="3"><b><%= t('your_credit_amount') %>:</b></td>
-        <td class="total"><span>Rs.<%=  @order.user.user_promotion.credit_amount.to_i -%></span></td>
-      </tr>
-    </tbody>
-  <% end %>    
-  </tbody>
-  <%end%>
-  <% hook :order_details_subtotal do %>
-    <tbody id='subtotal'>
-      <tr class="total" id="subtotal-row">
-        <td colspan="3"><b><%= t('subtotal') %>:</b></td>
-        <td class="total"><span>Rs.<%=  @order.item_total.to_i -%></span></td>
-      </tr>
-    </tbody>
-  <% end %>
-  <% hook :order_details_charges do %>
+    <% hook :order_details_charges do %>
     <tbody id="order-charges">
-      <% @order.charges.each do |charge| %>
+        <% @order.charges.each do |charge| %>
         <tr class="total">
-          <td colspan="3"><strong> Rs. <%=charge.description %></strong></td>
-          <td class="total"><span>  Rs. <%=charge.amount -%></span></center></td>
+            <td colspan="3">
+                <strong>Rs. <%=charge.description %></strong>
+            </td>
+            <td class="total">
+            <span>Rs. <%=charge.amount -%></span>
+            </center>
+        </td>
         </tr>
-      <% end %>
+        <% end %>
     </tbody>
-  <% end %>
-  <% hook :order_details_credits do %>
+    <% end %>
+    <% hook :order_details_credits do %>
     <tbody id="order-credits">
-      <% @order.credits.each do |credit| %>
+        <% @order.credits.each do |credit| %>
         <tr class="total">
-          <td colspan="3"><%= credit.description %></td>
-          <td class="total"><span> Rs. <%=credit.amount -%></span></center></td>
+            <td colspan="3">
+                <%= credit.description %>
+            </td>
+            <td class="total">
+            <span>Rs. <%=credit.amount -%></span>
+            </center>
+        </td>
         </tr>
-      <% end %>
+        <% end %>
     </tbody>
-  <% end %>
-  <% hook :order_details_total do %>
+    <% end %>
+    <% hook :order_details_total do %>
     <tbody id='order-total'>
-      <tr class="total">
-        <td colspan="3"><b><%= t('order_total') %>:</b></td>
-        <td class="total"><span id="order_total">Rs. <%=@order.total.to_i -%></span></center></td>
-      </tr>
+        <tr class="total">
+            <td colspan="3">
+                <b><%= t('order_total') %>:</b>
+            </td>
+            <td class="total">
+            <span id="order_total">Rs. <%=@order.total.to_i -%></span>
+            </center>
+        </td>
+        </tr>
     </tbody>
-  <% end %>
+    <% end %>
 </table>

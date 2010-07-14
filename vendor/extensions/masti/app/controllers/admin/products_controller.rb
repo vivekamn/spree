@@ -90,7 +90,12 @@ class Admin::ProductsController < Admin::BaseController
         end
 #        params[:search_city_id] = session[:city_id]
 #        params[:search][:order] = "descend_by_created_at" 
-        @search = base_scope.group_by_products_id.searchlogic(:city_id => session[:city_id])
+        unless params[:search].nil?
+          params[:search][:city_id]= session[:city_id]
+          @search = base_scope.group_by_products_id.searchlogic(params[:search])
+        else
+          @search = base_scope.group_by_products_id.searchlogic(:city_id => session[:city_id])
+        end
 #        @search = base_scope.group_by_products_id.searchlogic(params[:search])
         @search.order ||= "descend_by_created_at"
 
