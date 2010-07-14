@@ -7,11 +7,11 @@ class UsersController < Spree::BaseController
   ssl_required :new, :create, :edit, :update, :show
   
   actions :all, :except => [:index, :destroy]
-	
-	#Cannot use resource_controller for create action
-	#as openID expects block passed to user.save method
-	def create
-	  @user = User.new(params[:user])
+  
+  #Cannot use resource_controller for create action
+  #as openID expects block passed to user.save method
+  def create
+    @user = User.new(params[:user])
     unless session[:ref].nil?
       @user.refered_by = session[:ref]
       session.delete :ref
@@ -20,31 +20,32 @@ class UsersController < Spree::BaseController
       @user.source = session[:src]
     end
     @user.save do |result|
-	    if result       
-	      flash[:notice] = t(:user_created_successfully) unless session[:return_to]
-	       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+      if result       
+        flash[:notice] = t(:user_created_successfully) unless session[:return_to]
+         current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
          product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
          UserMailer.deliver_registration(@user,product)
          message = "Hi,Thanks for registering with  MasthiDeals.com. We will give you great deals from restaurants, spas, resorts etc  periodically- MasthiDeals team."
          send_sms(@user.phone_no,message)
         @user.roles << Role.find_by_name("admin") unless admin_created?
-        if @user.refered_by.nil? or @user.refered_by.empty?
-          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}"
-        else
-          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}&referer=#{@user.refered_by}"
-        end
+#        if @user.refered_by.nil? or @user.refered_by.empty?
+#          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}"
+#        else
+#          redirect_to "http://www.chennaimoms.com/deals/verify_referer/1?email=#{@user.email}&referer=#{@user.refered_by}"
+#        end
+        redirect_to "/home/from_cmom_check"
 #        respond_to do |format|
-#	        format.html { redirect_back_or_default home_url }
-#	        format.js { render :js => true.to_json }
-#	      end
-	    else            
-	      respond_to do |format|
-	        format.html { render :action => :new }
-	        format.js { render :js => @user.errors.to_json }
-	      end
-	    end
-	  end
-	end
+#         format.html { redirect_back_or_default home_url }
+#         format.js { render :js => true.to_json }
+#       end
+      else            
+        respond_to do |format|
+          format.html { render :action => :new }
+          format.js { render :js => @user.errors.to_json }
+        end
+      end
+    end
+  end
 
   show.before :show_before
   new_action.before :new_action_before
