@@ -7,13 +7,19 @@ class HomeController < Spree::BaseController
   skip_filter :protect_from_forgery
   
   def get_city
+    
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
-    if params[:city_id] == 2
-      redirect_to :back
+#    if params[:city_id] == 2
+#      redirect_to bangalore_path
+#    else
+#      redirect_to chennai_path     
+#    end
+    if params[:from] == 'home'
+      redirect_to home_path
     else
-      redirect_to :back     
+      redirect_to :back
     end
   end
   

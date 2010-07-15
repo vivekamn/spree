@@ -31,8 +31,8 @@ map.reg_complete '/registration-success',:controller => "home", :action => "inde
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index'
-map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
-map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
+map.delhi '/delhi', :controller=>'home', :action=>'index'
+map.mumbai '/mumbai', :controller=>'home', :action=>'index'
 map.bangalore '/bangalore', :controller=>'home', :action=>'index'
 
 

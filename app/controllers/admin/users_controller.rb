@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::BaseController
     unless request.xhr?
       unless params[:search].nil?
         params[:search][:city_id]= session[:city_id]
-         @search = User.searchlogic(params[:search])
+        @search = User.searchlogic(params[:search])
       else
         @search = User.searchlogic(:city_id => session[:city_id])
       end
