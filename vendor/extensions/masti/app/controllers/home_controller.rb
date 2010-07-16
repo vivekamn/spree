@@ -48,6 +48,29 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def insert_email_notify
+   if (params[:email].match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i))
+     @deals_notify = DealsNotification.find_by_email(params[:email])
+      if @deals_notify.nil?
+        @deals_notify = DealsNotification.new
+        @deals_notify.email = params[:email] 
+      unless session[:src].nil?
+        @deals_notify.source = session[:src]
+      end
+        if @deals_notify.save
+          render(:text => "Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com")      
+        else
+          render(:text => 'false' )
+        end
+      else
+        #if the user have already subscribed means it will show error
+        render(:text => 'You have already subscribed to MasthiDeals Newsletter.' ) 
+    end
+  else
+    render(:text => 'false')
+   end 
+  end
+  
   def unique_email
     count = User.count(:all, :conditions => ['email = ?',params[:email]] )
     if count > 0
