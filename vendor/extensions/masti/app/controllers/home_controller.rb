@@ -128,33 +128,30 @@ class HomeController < Spree::BaseController
   end
   
   def from_cmom_check
-    user = User.find_by_email(params[:user_email])
-    referer = User.find_by_email(params[:referer_email])
-    if user and referer
-      current_user.is_cmom=true
-      current_user.save!
-      if params[:phone_verify]=="true"
-        create_user_promotion user
-        #        update_user_promotion referer
-        redirect_to invite_friends_path(:from=>"reg_complete")
-      else
-        generate_code
-      end
-    elsif user
-      current_user.is_cmom=true
-      current_user.save!
-      if params[:phone_verify]=="true"
-        create_user_promotion user
-        redirect_to invite_friends_path(:from=>"reg_complete")
-      else
-        generate_code
-      end
-    elsif referer
-      #      update_user_promotion referer
-      generate_code('true')
-      #       flash[:success]="You have successfully completed the registration. You have been credited 50 MasthiDeals Money which you can use to buy any deal.You can also win two tickets to Satyam Cinemas if you <a href='/invite-your-friends'>invite five of your friends</a> to register with www.masthideals.com. "
-      #      redirect_to home_url
-    else
+#    user = User.find_by_email(params[:user_email])
+#    referer = User.find_by_email(params[:referer_email])
+#    if user and referer
+#      current_user.is_cmom=true
+#      current_user.save!
+#      if params[:phone_verify]=="true"
+#        create_user_promotion user
+#        #        update_user_promotion referer
+#        redirect_to invite_friends_path(:from=>"reg_complete")
+#      else
+#        generate_code
+#      end
+#    elsif user
+#      current_user.is_cmom=true
+#      current_user.save!
+#      if params[:phone_verify]=="true"
+#        create_user_promotion user
+#        redirect_to invite_friends_path(:from=>"reg_complete")
+#      else
+#        generate_code
+#      end
+#    elsif referer
+#      generate_code('true')
+#    else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
         user = User.find_by_email(current_user.refered_by)
         unless user.nil?
@@ -166,8 +163,7 @@ class HomeController < Spree::BaseController
       else
         redirect_to reg_complete_path
       end
-      
-    end      
+#    end      
   end
   
   def verifiy_your_phone

@@ -32,11 +32,9 @@
                         <div style="float:left;">
                             <%= f.text_field :email, :class=>"textbox",:onblur=>"javascript:email_validation();" %>
                         </div>
-                    </td>
-					<td valign="top" height="35">
-						<div id="email_image" style="float:right;">
+						<div id="email_image" >
                         </div>
-					</td>
+                    </td>
                 </tr>
 				<tr>
                     <td></td>
@@ -60,11 +58,9 @@
                         <div id="password-credentials" style="<%=password_style(@user)%>">
                             <%= f.password_field :password, :class=>"textbox",:onblur=>"javascript:password_validation();" %>
                         </div>
-                    </td>
-					<td valign="top" height="35">
-						<div id="password_image" style="float:right;">
+						<div id="password_image">
                         </div>
-					</td>
+                    </td>
                 </tr>
 				<tr>
                     <td></td>
@@ -88,11 +84,9 @@
                         <div id="password-credentials" style="<%=password_style(@user)%>">
                             <%= f.password_field :password_confirmation,:class=>"textbox",:onblur=>"javascript:conformpassword_validation();" %>
                         </div>
-                    </td>
-					<td valign="top" height="35">
-						<div id="conform_image" style="float:right;">
+						<div id="conform_image">
                         </div>
-					</td>
+                    </td>
                 </tr>
 				
 				<tr>
@@ -114,14 +108,14 @@
                         :+91
                     </td>
                     <td width="66%" height="35">
-                        <%= f.text_field :phone_no, :class=>"textbox",:onblur=>"javascript:phone_validation();" %>
-                    </td>
-					<td valign="top" height="35">
-						<div id="phone_image" style="float:right;">
+                        <div style="float:left;">
+							<%= f.text_field :phone_no, :class=>"textbox",:onblur=>"javascript:phone_validation();" %>
+						</div>
+						<div id="phone_image">
                         </div>
-					</td>
+                    </td>
                 </tr>
-				
+				<!--
                 <tr>
                     <td></td>
                     <td></td>
@@ -151,7 +145,7 @@
                         </div>
 					</td>
                 </tr>
-				
+				-->
                 <tr>
                 	<td>
                 	</td>
@@ -471,7 +465,7 @@
 		
 		//alert("email==="+email + "-phone==="+phone + "-password==="+password+ "-conform==="+conform+ "-refer==="+referedby);
         
-        if (email == 'true' && phone == 'true' && password == 'true' && conform == 'true' && referedby == 'true') {
+        if (email == 'true' && phone == 'true' && password == 'true' && conform == 'true') {
             return true;
         }
         else {
