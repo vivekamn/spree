@@ -1,21 +1,21 @@
 class OrdersController < Spree::BaseController     
   prepend_before_filter :reject_unknown_object,  :only => [:show, :edit, :update, :checkout]
   before_filter :prevent_editing_complete_order, :only => [:edit, :update, :checkout]            
-
+  
   ssl_required :show,:edit,:update
-
+  
   resource_controller
   actions :all, :except => [:index]
   
   helper :products
-
+  
   create.before :create_before
   create.after :create_after 
-
+  
   def index
     create
   end
-
+  
   # override the default r_c behavior (remove flash - redirect to edit details instead of show)
   create do
     flash nil 
@@ -24,24 +24,24 @@ class OrdersController < Spree::BaseController
   end 
   
   #index.before :create_before
-
+  
   # override the default r_c behavior (remove flash - redirect to edit details instead of show)
   
   # override the default r_c flash behavior
   update do  
     flash nil
     success.wants.html { 
-    if object.gift.nil?
-      redirect_to edit_order_url(object)
-    else
-      redirect_to edit_order_checkout_url(object)   
-    end
-   
+      if object.gift.nil?
+        redirect_to edit_order_url(object)
+      else
+        redirect_to edit_order_checkout_url(object)   
+      end
+      
     }
     failure.wants.html { render :template => "orders/edit" }
   end  
   
- 
+  
   #override r_c default b/c we don't want to actually destroy, we just want to clear line items
   def destroy
     flash[:notice] = I18n.t(:basket_successfully_cleared)
@@ -51,7 +51,7 @@ class OrdersController < Spree::BaseController
     set_flash :destroy
     response_for :destroy
   end
-
+  
   destroy.response do |wants|
     wants.html { redirect_to(edit_object_url) } 
   end
@@ -61,7 +61,7 @@ class OrdersController < Spree::BaseController
     session[:order_token] ||= params[:order_token]
     order.grant_access?(session[:order_token])
   end
-    
+  
   private
   def build_object
     @object ||= find_order
@@ -71,7 +71,7 @@ class OrdersController < Spree::BaseController
     @object ||= Order.find_by_number(params[:id], :include => :adjustments) if params[:id]
     return @object || find_order
   end
-
+  
   def create_after
     if params[:type]
       object.update_attributes(:gift => 1)
@@ -83,7 +83,7 @@ class OrdersController < Spree::BaseController
   
   def create_before
     quantity=1      
-     product=Product.find(params[:product])    
+    product=Product.find(params[:product])    
     params[:products].each do |product_id,variant_id|     
       quantity = params[:quantity].to_i if !params[:quantity].is_a?(Array)
       quantity = params[:quantity][variant_id].to_i if params[:quantity].is_a?(Array)      
@@ -110,5 +110,5 @@ class OrdersController < Spree::BaseController
   end 
   
   
- 
+  
 end
