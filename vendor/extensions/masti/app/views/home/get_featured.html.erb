@@ -1,198 +1,244 @@
 <% @page_title = "Daily Deals at Masthideals.com – Share Your Deals, Offers and Coupons Online!" %>
-<% @description = "Masthideals.com – Hot your deals place right here! Want to get your business featured? If you would like us to feature your business in an awesome deal then fill out the form. "%>
-<% @keywords = "hot deals coupons, online discount deals, best spa resort deals bangalore, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages "%>
-<div class="flash errors" id="flash_error" style="display:none;" ></div>
-
+<% @description = "Masthideals.com – Hot your deals place right here! Want to get your business featured? If you would like us to feature your business in an awesome deal then fill out the form. " %>
+<% @keywords = "hot deals coupons, online discount deals, best spa resort deals bangalore, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages " %>
+<div class="flash errors" id="flash_error" style="display:none;">
+</div>
 <div class="tiles">
-<table><tr><td height="10px"></td></tr></table>
-
-<div id="addenquiry" style="margin-left:0px">
-	<center>
-<%form_for :enquiry , :url => {:controller => "home" ,:action => "create"} ,:html => {:id => "enquiry_form"} do |f|%>
-	<div style="margin-left:-343px;">	
-	<span class="green" style="font-size:30px;">Ready to schedule</span><span class="blue" style="font-size:30px;"> your MasthiDeals?</span>
-	<br /><br />
-	</div>
-	<div>
-<table class="tes" style="margin-bottom: 20px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;" align="center" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
-       <tr>
-           <td colspan='2' width="100%">	
-    <table border="0" cellspacing="10" cellpadding="5" style="margin:15px 0px 0px 20px;">
-	    <tr> 
-			<td width="25%">First Name:
-						 <font color="red">
-                            *
-                          </font>
-						  </td>
-			<td><%=f.text_field :first_name %>
-			<div id="error_firstname" class="errormesg" style="color:red;"></div></td>
-	  	</tr>
-		<tr> 
-			<td width="25%">Last Name:
-				<font color="red">
-                	*
-              </font>
-			</td>
-			<td><%=f.text_field :last_name %>
-			<div class="errormesg" id="error_lastname" style="color:red;"></div></td>
-	  	</tr>
-		<tr>
-			<td width="25%">Company:
-				<font color="red">
-                	*
-              </font>
-			
-			</td>
-			<td><%=f.text_field :company %>
-			<div class="errormesg" id="error_company" style="color:red;"></div></td>
-		</tr>
-		<tr>
-			<td width="25%">Phone No:
-				<font color="red">
-                	*
-              </font>
-			</td>
-			<td><%=f.text_field :phone_no %>
-			<div class="errormesg" id="error_phone" style="color:red;"></div></td>
-		</tr>        
-		<tr>
-			<td width="25%">Email:
-				<font color="red">
-                	*
-              </font>
-			</td>
-			<td><%=f.text_field :email  %>
-			<div class="errormesg" id="enquiry_email_msg" style="color:red;"></div></td>
-	  	</tr>		
-		<tr>
-			<td width="25%">City:
-				<font color="red">
-                	*
-              </font>
-			</td>
-			<td><%=f.select :city, get_cities, {} %>
-			<div class="errormesg" id="error_city" style="color:red;"></div></td>
-		</tr>		
-		<tr>
-			<td colspan="2">Tell us a little bit about what you would like to feature on MasthiDeals<font color="red">*</font></td>						
-		</tr>
-		<tr>
-			<td colspan="2"><%= f.text_area :query, :rows => 5, :cols=> 47 %>
-			<div class="errormesg" id="error_text" style="color:red;"></div></td>
-		</tr>
-		<tr>
-            <td align="right" class="cancel" colspan="2" style="padding-right:40px">
-		   <%= submit_tag "Save",:onclick=> "return email_validate();",:style=>"background-color:#008AD5" %>
-			<input type="reset" style="background-color:#008AD5;" value="Cancel" onclick="javascript:submitUrl('/home')">
+    <table>
+        <tr>
+            <td height="10px">
+            </td>
         </tr>
-		
-   </table>
-   
-<%end%>
-</center>
-</td>
-</tr>
-</table>
-</div>
-</div>
+    </table>
+    <div id="addenquiry" style="margin-left:0px">
+        <center>
+            <%form_for :enquiry , :url => {:controller => "home" ,:action => "create"} ,:html => {:id => "enquiry_form"} do |f| %>
+            <div style="margin-left:-343px;">
+                <span class="green" style="font-size:30px;">Ready to schedule</span>
+                <span class="blue" style="font-size:30px;">your MasthiDeals?</span>
+                <br/>
+                <br/>
+            </div>
+            <div>
+                <table class="tes" style="margin-bottom: 20px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;" align="center" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
+                    <tr>
+                        <td colspan='2' width="100%">
+                            <table border="0" cellspacing="10" cellpadding="5" style="margin:15px 0px 0px 20px;">
+                                <tr>
+                                    <td width="25%">
+                                        First Name:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.text_field :first_name %>
+                                        <div id="error_firstname" class="errormesg" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">
+                                        Last Name:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.text_field :last_name %>
+                                        <div class="errormesg" id="error_lastname" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">
+                                        Company:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.text_field :company %>
+                                        <div class="errormesg" id="error_company" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">
+                                        Phone No:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.text_field :phone_no %>
+                                        <div class="errormesg" id="error_phone" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">
+                                        Email:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.text_field :email %>
+                                        <div class="errormesg" id="enquiry_email_msg" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">
+                                        City:
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                    <td>
+                                        <%=f.select :city, get_cities, {} %>
+                                        <div class="errormesg" id="error_city" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Tell us a little bit about what you would like to feature on MasthiDeals
+                                        <font color="red">
+                                            *
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <%= f.text_area :query, :rows => 5, :cols=> 47 %>
+                                        <div class="errormesg" id="error_text" style="color:red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="cancel" colspan="2" style="padding-right:40px">
+                                        <%= submit_tag "Save",:onclick=> "return email_validate();",:style=>"background-color:#008AD5" %>
+                                        <input type="reset" style="background-color:#008AD5;" value="Cancel" onclick="javascript:submitUrl('/home')">
+                                        </tr>
+                                    </table><%end %>
+                                    </center>
+                                </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </center>
+    </div>
 </div>
 <script type="text/javascript">
-	
-	function email_validate(){
-	var error_msg_div = document.getElementById('enquiry_email_msg');
-	var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
-	var NAME_REGEX = /^[A-Za-z]+$/;
-	var PHONE_REGEX	= /^[0-9]+$/;
-	var email_name = document.getElementById('enquiry_email').value;
-	var first_name = document.getElementById('enquiry_first_name').value;
-	var last_name = document.getElementById('enquiry_last_name').value;
-	var comp_name = document.getElementById('enquiry_company').value;
-	var city_name = document.getElementById('enquiry_city').value;
-	var phone_number = document.getElementById('enquiry_phone_no').value;
-	var text_query = document.getElementById('enquiry_query').value;
-	var msg='';
-	
-	var flag_em=true;	
-	
-		 first_value = NAME_REGEX.test(new String(first_name)); 	
-	if(first_name == '' || first_name == null || first_value!=1 ){
-		msg += '<br/>First name is invalid';
-		//document.getElementById('error_firstname').innerHTML="Please enter proper First name";
-		flag_em=false;
-	}else{
-		document.getElementById('error_firstname').innerHTML="";
-	}	
-		 last_value = NAME_REGEX.test(new String(last_name)); 
-	if(last_name == '' || last_name == null || last_value!=1 ){
-		msg += '<br/>Last name is invalid';
-		//document.getElementById('error_lastname').innerHTML = "Please enter proper Last name";
-		flag_em=false;
-	}else{
-		document.getElementById('error_lastname').innerHTML ="";
-	}
-	if(comp_name == '' || comp_name == null){
-		msg += '<br/>Company name is invalid';
-		//document.getElementById('error_company').innerHTML = "Please enter the Company name";
-		flag_em=false;
-	}else{
-		document.getElementById('error_company').innerHTML = "";
-	}	
-		 city_value = NAME_REGEX.test(new String(city_name)); 	
-	if(city_name == '' || city_name == null || city_value!=1){
-		msg += '<br/>city is invalid';
-		//document.getElementById('error_city').innerHTML = "Please enter proper  city";
-		flag_em=false;
-	}else{
-		document.getElementById('error_city').innerHTML = "";
-	}	
-		 phone_value = PHONE_REGEX.test(new String(phone_number)); 
-	if(phone_number =='' || phone_number == null || phone_value!=1){
-		msg += '<br/>Phone number is invalid';
-		//document.getElementById('error_phone').innerHTML = "Please enter proper Phone number";
-		flag_em=false;
-	}else{
-		document.getElementById('error_phone').innerHTML = "";
-	}
-	
-	if (email_name != ''){
-		if (email_name.length != 0){
-		 email_my = new String(email_name);
-		 email_value = EMAIL_REGEX.test(email_my); 
-		 if(email_value != 1){
-			msg += '<br/>E-mail is invalid';
-			//error_msg_div.innerHTML = "Please enter valid E-mail";
-			flag_em=false;	
-		 }
-		}
-		else{
-			msg += '<br/>E-mail is invalid';
-			//error_msg_div.innerHTML = "Please enter valid E-mail";
-			flag_em=false;	
-		}
-	}else{
-		msg += '<br/>E-mail is invalid';
-		//error_msg_div.innerHTML = "Please enter valid E-mail";
-		flag_em=false;
-	}
-	
-	if(text_query == '' || text_query == null){
-		msg += '<br/>Description is invalid';
-		//document.getElementById('error_text').innerHTML = "Please enter proper description";
-		flag_em=false;
-	}else{
-		document.getElementById('error_text').innerHTML = "";
-	}
-	
-	if(!flag_em){
-		document.getElementById('flash_error').style.display='';
-		document.getElementById('flash_error').innerHTML = msg;
-		return flag_em;
-	}else{
-		document.getElementById('flash_error').style.display=none;
-		error_msg_div.innerHTML = "";
-		return flag_em;
-	}
-	
-		
-}
+    
+    function email_validate(){
+        var error_msg_div = document.getElementById('enquiry_email_msg');
+        var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+        var NAME_REGEX = /^[A-Za-z]+$/;
+        var PHONE_REGEX = /^[0-9]+$/;
+        var email_name = document.getElementById('enquiry_email').value;
+        var first_name = document.getElementById('enquiry_first_name').value;
+        var last_name = document.getElementById('enquiry_last_name').value;
+        var comp_name = document.getElementById('enquiry_company').value;
+        var city_name = document.getElementById('enquiry_city').value;
+        var phone_number = document.getElementById('enquiry_phone_no').value;
+        var text_query = document.getElementById('enquiry_query').value;
+        var msg = '';
+        
+        var flag_em = true;
+        
+        first_value = NAME_REGEX.test(new String(first_name));
+        if (first_name == '' || first_name == null || first_value != 1) {
+            msg += '<br/>First name is invalid';
+            //document.getElementById('error_firstname').innerHTML="Please enter proper First name";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_firstname').innerHTML = "";
+        }
+        last_value = NAME_REGEX.test(new String(last_name));
+        if (last_name == '' || last_name == null || last_value != 1) {
+            msg += '<br/>Last name is invalid';
+            //document.getElementById('error_lastname').innerHTML = "Please enter proper Last name";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_lastname').innerHTML = "";
+        }
+        if (comp_name == '' || comp_name == null) {
+            msg += '<br/>Company name is invalid';
+            //document.getElementById('error_company').innerHTML = "Please enter the Company name";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_company').innerHTML = "";
+        }
+        city_value = NAME_REGEX.test(new String(city_name));
+        if (city_name == '' || city_name == null || city_value != 1) {
+            msg += '<br/>city is invalid';
+            //document.getElementById('error_city').innerHTML = "Please enter proper  city";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_city').innerHTML = "";
+        }
+        phone_value = PHONE_REGEX.test(new String(phone_number));
+        if (phone_number == '' || phone_number == null || phone_value != 1) {
+            msg += '<br/>Phone number is invalid';
+            //document.getElementById('error_phone').innerHTML = "Please enter proper Phone number";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_phone').innerHTML = "";
+        }
+        
+        if (email_name != '') {
+            if (email_name.length != 0) {
+                email_my = new String(email_name);
+                email_value = EMAIL_REGEX.test(email_my);
+                if (email_value != 1) {
+                    msg += '<br/>E-mail is invalid';
+                    //error_msg_div.innerHTML = "Please enter valid E-mail";
+                    flag_em = false;
+                }
+            }
+            else {
+                msg += '<br/>E-mail is invalid';
+                //error_msg_div.innerHTML = "Please enter valid E-mail";
+                flag_em = false;
+            }
+        }
+        else {
+            msg += '<br/>E-mail is invalid';
+            //error_msg_div.innerHTML = "Please enter valid E-mail";
+            flag_em = false;
+        }
+        
+        if (text_query == '' || text_query == null) {
+            msg += '<br/>Description is invalid';
+            //document.getElementById('error_text').innerHTML = "Please enter proper description";
+            flag_em = false;
+        }
+        else {
+            document.getElementById('error_text').innerHTML = "";
+        }
+        
+        if (!flag_em) {
+            document.getElementById('flash_error').style.display = '';
+            document.getElementById('flash_error').innerHTML = msg;
+            return flag_em;
+        }
+        else {
+            document.getElementById('flash_error').style.display = none;
+            error_msg_div.innerHTML = "";
+            return flag_em;
+        }
+        
+        
+    }
 </script>
