@@ -4,7 +4,13 @@
 <table style="border:4px solid #29689E;background-color:#FFFFFF;" height="350px" width="550px">
   <tr>
 <td width="100%" valign="top" align="right">
-      <img src="/images/wrong.jpg?1262930051" onclick="close_send_share_this();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+	<% if request.request_uri.split('?')[0] =="/for_invite"%>	
+      <img src="/images/wrong.jpg?1262930051" onclick="close_invite();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+	<%else%>
+		<img src="/images/wrong.jpg?1262930051" onclick="close_send_share_this();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+	<%end%> 
+	
+      
     </td>
 </tr>
 <% if request.request_uri.split('?')[0] =="/referral"%>
@@ -12,7 +18,15 @@
     <td>
       <p align="center">Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Deals!</span>
       <br><br>
-    Please Complete the registration using Referer E-mail id to earn <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>.
+    Please Complete the registration to earn <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>.
+    </p> 
+    </td>
+    
+  </tr>
+<% elsif request.request_uri.split('?')[0] =="/for_invite"%>
+<tr valign="middle">
+    <td>
+      <p align="center">Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Deals!</span>
     </p> 
     </td>
     
@@ -41,7 +55,20 @@
 				</td>
 			</tr>
 		</table>
-		
+		<% elsif request.request_uri.split('?')[0] =="/for_invite"%>
+		<table width="500px">
+			<tr>
+				<td>
+					<img src="/images/cmom_intro/50_indian.jpg" style="border:0px;">
+				</td>
+				<td>
+					<img src="/images/cmom_intro/Sathyam-Cinemas.jpg" style="border:0px;">
+				</td>
+				<td>
+					<img src="/images/cmom_intro/GRT-Grand.gif" style="border:0px;">
+				</td>
+			</tr>
+		</table>
 		<%else%>
 		<table width="500px">
 			<tr>
@@ -61,7 +88,11 @@
 </tr>
 <tr valign="middle">
     <td align="center">
-      <input type="button" value="Register Now!" onclick="close_send_share_this();" style="background-color: rgb(168, 208, 39);">
+    <% if request.request_uri.split('?')[0] =="/for_invite"%>	
+      <input type="button" value="Invite Now!" onclick="close_invite();" style="background-color: rgb(168, 208, 39);">
+	<%else%>
+		<input type="button" value="Register Now!" onclick="close_send_share_this();" style="background-color: rgb(168, 208, 39);">
+	<%end%>  
     </td>
     
   </tr>
@@ -77,5 +108,8 @@
 	}
 	function close_send_share_this(){
 		window.location.href="/signup"
+	}
+	function close_invite(){
+		window.location.href="/invite-your-friends"	
 	}
 </script>

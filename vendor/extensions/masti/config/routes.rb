@@ -34,6 +34,7 @@ map.reg_complete '/registration-success',:controller => "home", :action => "inde
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
 map.referral '/referral', :controller=>"home", :action => "cmom"
+map.referral '/for_invite', :controller=>"home", :action => "cmom"
 
 map.namespace :admin do |admin|
    admin.resources :vendors
