@@ -55,7 +55,7 @@
                         :
                     </td>
                     <td width="66%" height="35">
-                        <div id="password-credentials" style="<%=password_style(@user)%>">
+                        <div id="password-credentials" style="<%=password_style(@user)%>;float:left;">
                             <%= f.password_field :password, :class=>"textbox",:onblur=>"javascript:password_validation();" %>
                         </div>
 						<div id="password_image">
@@ -81,7 +81,7 @@
                         :
                     </td>
                     <td width="60%" height="35">
-                        <div id="password-credentials" style="<%=password_style(@user)%>">
+                        <div id="password-credentials" style="<%=password_style(@user)%>;float:left;">
                             <%= f.password_field :password_confirmation,:class=>"textbox",:onblur=>"javascript:conformpassword_validation();" %>
                         </div>
 						<div id="conform_image">
