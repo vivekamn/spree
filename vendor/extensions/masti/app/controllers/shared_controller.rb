@@ -35,7 +35,7 @@ class SharedController < ApplicationController
     else
       cnt= "one"
     end
-    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com. Since YOU invited them, we are gifting 50 MasthiDeals Money to your friends. If five of your friend register then you get #{cnt} satyam cinema tickets free. Do you want to  <a href='/invite-your-friends'>invite more of your friends?</a>".to_html
+    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com".to_html
     redirect_to reg_complete_path
   end
   

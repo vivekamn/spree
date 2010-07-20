@@ -34,22 +34,17 @@
         	<input type="hidden" value='Home' id="send_from" name="send_from">
         </td>
       </tr>
-	 <%if current_user.is_cmom==true%>
+	<%if !current_user.source.nil? and !current_user.source.empty?%>
 	  <tr>
 	  	<td colspan="2">
 	  		<div id="" class="" style="width:98%">
 	  			<p style="margin-left:15px;"> 
-				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span> You have earned 
-				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>100 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money!</span>
-				  You will get two tickets to 
-				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Satyam</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Cinemas</span>
-				 if five of your friends successfully register with us.
-				<br/><br/>
-				Wait. We have some thing more to offer. You can also become the 
-				<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Queen</span>
-				 and win a romantic dinner for two at 
-				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>GRT Grand</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Days</span>
-				  <br/>if you have the highest number of friends who register.<br/><br/> Go ahead and Invite them. Your friends will get <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span> when they register with MasthiDeals.com 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Congrats!</span>  You have earned 100 Rs to buy any deal in 
+				 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com!</span>
+				  &nbsp;&nbsp;You can win an Iphone by inviting your friends to register with 
+				<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com.</span>
+				  &nbsp;&nbsp; So go ahead and invite your friends to win an <span class='blue' style='font-size:18px;font-weight:bold;'>Iphone</span>.
+				<br/>
 				 </p>
 	  		</div>
 	  	</td>

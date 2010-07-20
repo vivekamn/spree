@@ -367,4 +367,18 @@ th { font-weight: bold; }
 .product-listing li:hover a.info {
   background: #1b1b1b url(../images/bottom_shine.png) bottom left repeat-x;
   color: #ffffff;
-} 	
+}
+.flash {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  padding: 0.8em;
+}
+.flash.invite {
+  background: white url(../images/shadow_top.png) 0px -50px repeat-x;
+  line-height:27px;
+  color: #8B4513;
+  border: 3px solid #214D76;
+}	

@@ -3,6 +3,7 @@ class HomeController < Spree::BaseController
   require 'base64'
   ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
   before_filter :require_user,:only=>[:verify_mobile,:invite_friends]
+  before_filter :fls_fr_okt_fb_user, :only => [:index,:how_masti_works,:get_featured,:upcoming_deals,:recent_deals]
   skip_filter :protect_from_forgery
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
   def index
@@ -37,6 +38,17 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def fls_fr_okt_fb_user
+    unless current_user
+      unless session[:src].nil?
+        if session[:src] == '/facebook' or session[:src] == '/orkut'
+          puts "#{session[:src]}=========================="
+          flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com( its easy and free)</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Go ahead and register</u></a></span>.".to_html    
+        end
+      end      
+    end
+  end
+  
   def order_vendor
     unless params[:id].nil?
       begin 
@@ -49,14 +61,14 @@ class HomeController < Spree::BaseController
   end
   
   def insert_email_notify
-   if (params[:email].match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i))
-     @deals_notify = DealsNotification.find_by_email(params[:email])
+    if (params[:email].match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i))
+      @deals_notify = DealsNotification.find_by_email(params[:email])
       if @deals_notify.nil?
         @deals_notify = DealsNotification.new
         @deals_notify.email = params[:email] 
-      unless session[:src].nil?
-        @deals_notify.source = session[:src]
-      end
+        unless session[:src].nil?
+          @deals_notify.source = session[:src]
+        end
         if @deals_notify.save
           render(:text => "Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com")      
         else
@@ -65,10 +77,10 @@ class HomeController < Spree::BaseController
       else
         #if the user have already subscribed means it will show error
         render(:text => 'You have already subscribed to MasthiDeals Newsletter.' ) 
-    end
-  else
-    render(:text => 'false')
-   end 
+      end
+    else
+      render(:text => 'false')
+    end 
   end
   
   def unique_email
@@ -96,7 +108,7 @@ class HomeController < Spree::BaseController
     else
       verification_code = VerificationCode.find(:first, :conditions => ["user_id = ? and verify_type= ?", current_user.id,"Mobile"])
       if verification_code.code == params[:code]
-        if current_user.is_cmom==true
+        if !current_user.source.nil? and !current_user.source.empty?
           create_user_promotion current_user
           redirect_to invite_friends_path(:from=>"reg_complete")  
         else
@@ -128,30 +140,37 @@ class HomeController < Spree::BaseController
   end
   
   def from_cmom_check
-#    user = User.find_by_email(params[:user_email])
-#    referer = User.find_by_email(params[:referer_email])
-#    if user and referer
-#      current_user.is_cmom=true
-#      current_user.save!
-#      if params[:phone_verify]=="true"
-#        create_user_promotion user
-#        #        update_user_promotion referer
-#        redirect_to invite_friends_path(:from=>"reg_complete")
-#      else
-#        generate_code
-#      end
-#    elsif user
-#      current_user.is_cmom=true
-#      current_user.save!
-#      if params[:phone_verify]=="true"
-#        create_user_promotion user
-#        redirect_to invite_friends_path(:from=>"reg_complete")
-#      else
-#        generate_code
-#      end
-#    elsif referer
-#      generate_code('true')
-#    else
+    #    user = User.find_by_email(params[:user_email])
+    #    referer = User.find_by_email(params[:referer_email])
+    #    if user and referer
+    #      current_user.is_cmom=true
+    #      current_user.save!
+    #      if params[:phone_verify]=="true"
+    #        create_user_promotion user
+    #        #        update_user_promotion referer
+    #        redirect_to invite_friends_path(:from=>"reg_complete")
+    #      else
+    #        generate_code
+    #      end
+    #    elsif user
+    #      current_user.is_cmom=true
+    #      current_user.save!
+    #      if params[:phone_verify]=="true"
+    #        create_user_promotion user
+    #        redirect_to invite_friends_path(:from=>"reg_complete")
+    #      else
+    #        generate_code
+    #      end
+    #    elsif referer
+    #      generate_code('true')
+    #    else
+    unless current_user.source.nil? or current_user.source.empty?
+      if session[:src] == '/facebook' or session[:src] == '/orkut'
+        generate_code        
+      else
+        redirect_to reg_complete_path
+      end
+    else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
         user = User.find_by_email(current_user.refered_by)
         unless user.nil?
@@ -163,7 +182,8 @@ class HomeController < Spree::BaseController
       else
         redirect_to reg_complete_path
       end
-#    end      
+    end
+    #    end      
   end
   
   def verifiy_your_phone
@@ -316,9 +336,9 @@ class HomeController < Spree::BaseController
     @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
     if @deals_notify.nil?
       @deals_notify = DealsNotification.new(params[:deals_notification])
-     unless session[:src].nil?
-      @deals_notify.source = session[:src]
-    end
+      unless session[:src].nil?
+        @deals_notify.source = session[:src]
+      end
       if @deals_notify.save
         flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
       else
