@@ -1,0 +1,19 @@
+Congrats! You have earned 100 MasthiDeals Rs by registering with MasthiDeals.com You can use this money to buy any deals in Masthideals.com.
+<br/><br/>
+Your username is <%= @email %>. <br/><br/>Your password is : “Test1234”. <br/><br/>You can change this password in the Accounts page of masthideals.com .
+<br/><br/>
+MasthiDeals.com provides highly discounted deals from your favourite Restaurants, Spas, Resorts, Movie tickets etc 
+<br/><br/>
+Some of the past deals include  40% discount from Inox Movie Tickets, Queensland Amusement Park, Hotel Benz Park, 80% discount from VLCC etc.
+<br/><br/>
+Now you can win a ticket to Satyam Cinemas by inviting your friends to successfully register with masthideals.com. Go ahead and <a href="http://www.masthideals.com/home/invite_friends/1">invite your friends.</a>
+<br/><br/>
+<strong>Current Deal:</strong><br/><br/>
+<%=@product.name%><br/><br/>
+<img width="540" src="http://www.masthideals.com<%= @product.images.first.attachment.url(:large) %>">
+<br/><br/>
+
+With Regards,<br/>
+<br/>
+Customer Support Team.<br/><br/>
+<img width="305" height="71" src="http://www.masthideals.com/images/logo.gif">
