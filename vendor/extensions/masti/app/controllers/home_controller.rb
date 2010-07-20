@@ -41,7 +41,7 @@ class HomeController < Spree::BaseController
   def fls_fr_okt_fb_user
     unless current_user
       unless session[:src].nil?
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com( its easy and free)</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Go ahead and register</u></a></span>.".to_html
+        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
       end      
     end
   end
