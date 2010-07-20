@@ -41,6 +41,31 @@ class UserMailer < ActionMailer::Base
     body           'product' => product,'name'=>name
   end
   
+  def already_registered(user,product)
+#   content_type "text/html"
+    from           "customersupport@masthideals.com"
+    recipients    user.email
+    bcc           Spree::Config[:mail_bcc]
+    subject        "Welcome to MasthiDeals community. You have already registered with us." 
+    sent_on        Time.now.utc
+    content_type    "multipart/alternative"
+    part :content_type => "text/html",
+        :body => render_message("already_registered", :product => product,:user=>user)
+  end
+ 
+  def success_sms_registration(user,product)
+#   content_type "text/html"
+    from           "customersupport@masthideals.com"
+    recipients    user.email
+    bcc           Spree::Config[:mail_bcc]
+    subject        "Welcome to MasthiDeals community. Now you have 100 Rs to spend!" 
+    sent_on        Time.now.utc
+    content_type    "multipart/alternative"
+    part :content_type => "text/html",
+        :body => render_message("success_sms_registration", :product => product,:email=>user.email)
+  end
+  
+  
   def registration(user,product)
     content_type "text/html"
     from           "customersupport@masthideals.com"
@@ -52,12 +77,15 @@ class UserMailer < ActionMailer::Base
   end
   
   def users_deal_notify(recipients,product)
-    content_type "text/html"
+#   content_type "text/html"
    from           "customersupport@masthideals.com"
    bcc            recipients
    subject        "New product in Masti Deals - #{product.name}" 
    sent_on        Time.now.utc
-   body          "product" => product,"url"=>default_url_options[:host]
+   content_type    "multipart/alternative"
+#   body          "product" => product,"url"=>default_url_options[:host]
+    part :content_type => "text/html",
+        :body => render_message("users_deal_notify", :product => product)
  end
  
   def notify_admin(user, product, msg)

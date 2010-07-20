@@ -1,27 +1,54 @@
 class SharedController < ApplicationController
+ 
    def plaxo_cb
     render :layout => false
   end
   
   def sms_deal_notify
-#    if !params[:name].nil? and !params[:mobile_no].nil?
-      sms_notify = SmsNotify.find_by_mobile_no(params[:mobile_no])
-      if sms_notify.nil?
-        sms_notify = SmsNotify.new
-        sms_notify.name = params[:name]
-        sms_notify.mobile_no = params[:mobile_no]
-        sms_notify.save
+ mobile_no = params[:mobile_no]
+    mobile_no = mobile_no[-10..-1]
+    if !params[:mobile_no].nil? and params[:mobile_no].length>=10 and params[:mobile_no].length<=13
+       if params[:name].match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i)
+         current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+         product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
+         user = User.find(:first,:conditions=>['email = ? or phone_no= ?',params[:name],mobile_no])
+         if user.nil?
+           user = User.new(:email=>params[:name],:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>mobile_no)
+           user.mobile_verify=true
+           if user.save!
+             UserPromotion.create(:credit_amount => 100, :user_id => user.id)
+             UserMailer.deliver_success_sms_registration(user,product)
+             message="Thanks for registering with MasthiDeals.com. Your username/ pwd is emailed to you. You have earned 100 Rs which you can use to buy any deal in Masthideals..com"
+             send_sms(params[:mobile_no], message,100)
+             redirect_to logout_url
+          end
+        else
+           UserMailer.deliver_already_registered(user,product)
+           message="You have already registered with us. Your Login for masthideal.com is #{ user.email }. Please Check your email id for further Details."
+           send_sms(params[:mobile_no], message,100)
+           redirect_to home_url
+       end
+       else
+         sms_notify = SmsNotify.find_by_mobile_no(mobile_no)
+          if sms_notify.nil?
+            sms_notify = SmsNotify.new
+            sms_notify.name = params[:name]
+            sms_notify.mobile_no = mobile_no
+            sms_notify.save
+          end
+          message = "Hi, Congrats! You have successfully registered with MasthiDeals.com. We will inform you about the new deals we lauch.For more details, please logon to www.masthideals.com - Lakshmi, MasthiDeals Team."
+          send_sms(params[:mobile_no], message,100)
+          redirect_to home_url
       end
-      message = "Hi, Congrats! You have successfully registered with MasthiDeals.com. We will inform you about the new deals we lauch.For more details, please logon to www.masthideals.com - Lakshmi, MasthiDeals Team."
-      send_sms(params[:mobile_no], message)    
-#    end
-    redirect_to home_url
+    else
+      redirect_to home_url
+   end
   end
   
-   def send_sms(phone_no,message)
-      query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
-      result = ActiveRecord::Base.connection.execute(query)
-    end
+  def send_sms(phone_no,message,priority)
+    query = "INSERT INTO jenooutbox (mobilenumber,message,priority) VALUES('#{ phone_no }','#{message}',#{priority});"
+    result = ActiveRecord::Base.connection.execute(query)
+  end
   
   def plaxo_invite
     recipients = params[:recipients]
@@ -29,13 +56,13 @@ class SharedController < ApplicationController
     name = params[:name] 
 #    count=recipients.split(",").count
 #    count = current_user.invited_count
-    UserMailer.deliver_plaxo_invite(current_user.email,recipients,name,content)
-    if current_user.is_cmom==true
-      cnt= "two"
+    if cookies[:email].nil?
+      UserMailer.deliver_plaxo_invite(current_user.email,recipients,name,content)
     else
-      cnt= "one"
+      UserMailer.deliver_plaxo_invite(cookies[:email],recipients,name,content)
     end
-    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com".to_html
+    cnt= "one"
+    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com. Since YOU invited them, we are gifting 50 MasthiDeals Money to your friends. If five of your friend register then you get #{cnt} satyam cinema tickets free. Do you want to  <a href='/invite-your-friends'>invite more of your friends?</a>".to_html
     redirect_to reg_complete_path
   end
   

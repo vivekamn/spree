@@ -2,7 +2,8 @@ class HomeController < Spree::BaseController
   require 'RubyRc4.rb'
   require 'base64'
   ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
-  before_filter :require_user,:only=>[:verify_mobile,:invite_friends]
+  before_filter :require_user,:only=>[:verify_mobile]
+  before_filter :req_user_invite,:only=>:invite_friends
   before_filter :fls_fr_okt_fb_user, :only => [:index,:how_masti_works,:get_featured,:upcoming_deals,:recent_deals]
   skip_filter :protect_from_forgery
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
@@ -213,7 +214,6 @@ class HomeController < Spree::BaseController
   end
   
   def invite_friends
-    
   end
   
   def share_this
@@ -432,8 +432,34 @@ class HomeController < Spree::BaseController
   
   private
   
-  def send_sms(phone_no,message)
-    query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES('#{ phone_no }','#{message}');"
+  def req_user_invite
+     if cookies[:email].nil? and params[:email].nil? 
+       unless current_user
+        store_location
+        flash[:notice] = I18n.t("page_only_viewable_when_logged_in")
+        redirect_to new_user_session_url
+        return false
+      end
+    elsif !cookies[:email].nil?
+      return true
+    else
+     user= User.count(:conditions=>['email = ?',params[:email]]) 
+      if user>0
+       cookies[:email]=params[:email]
+      else
+         unless current_user
+          store_location
+          flash[:notice] = I18n.t("page_only_viewable_when_logged_in")
+          redirect_to new_user_session_url
+          return false
+        end
+      end
+    end
+  end
+  
+  
+  def send_sms(phone_no,message,priority)
+    query = "INSERT INTO jenooutbox (mobilenumber,message,priority) VALUES('#{ phone_no }','#{message}',#{priority});"
     result = ActiveRecord::Base.connection.execute(query)
   end
   

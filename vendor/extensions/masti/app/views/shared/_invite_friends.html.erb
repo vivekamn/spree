@@ -34,6 +34,7 @@
         	<input type="hidden" value='Home' id="send_from" name="send_from">
         </td>
       </tr>
+	<%if cookies[:email].nil?%>
 	<%if !current_user.source.nil? and !current_user.source.empty?%>
 	  <tr>
 	  	<td colspan="2">
@@ -85,6 +86,24 @@
 	  	</td>
 	  </tr>
       <%end%>
+	  <%else%>
+		  <tr>
+		  	<td colspan="2" align="center">
+		  		<div id="" class="" style="width:98%">
+		  			<p style="margin-left:10px;"> 
+					  You will get a ticket to 
+					 <img src="/images/cmom_intro/sathyam_logo1.jpg" style="border:0px;">
+					 if five of your friends successfully register with us.
+					  <br/><br/>Go ahead and 
+					  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Invite</span> <span class='blue' style='font-size:18px;font-weight:bold;'> them</span>
+					  . Your friends will get 
+					  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>
+					   when they register with MasthiDeals.com 
+					 </p>
+		  		</div>
+		  	</td>
+		  </tr>
+	  <%end%>
 	  <tr>
         <td colspan="8" align="left" style='padding-left:150px;font-size:12px'>
           
