@@ -203,7 +203,7 @@ class HomeController < Spree::BaseController
     verification_code.verify_type="Mobile"
     verification_code.save!
     message = "Hi,Your Verification code is #{random} - MasthiDeals team."
-    send_sms(current_user.phone_no,message)
+    send_sms(current_user.phone_no,message,100)
     if md_user=='true'
       redirect_to verifiy_your_phone_path(:md_user=>'true')
     else

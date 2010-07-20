@@ -56,13 +56,18 @@ class SharedController < ApplicationController
     name = params[:name] 
 #    count=recipients.split(",").count
 #    count = current_user.invited_count
-    if cookies[:email].nil?
-      UserMailer.deliver_plaxo_invite(current_user.email,recipients,name,content)
+    if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords'
+      money = 100
     else
-      UserMailer.deliver_plaxo_invite(cookies[:email],recipients,name,content)
+      money = 50
+    end
+    if cookies[:email].nil?
+      UserMailer.deliver_plaxo_invite(current_user.email,recipients,name,content,money)
+    else
+      UserMailer.deliver_plaxo_invite(cookies[:email],recipients,name,content,money)
     end
     cnt= "one"
-    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com. Since YOU invited them, we are gifting 50 MasthiDeals Money to your friends. If five of your friend register then you get #{cnt} satyam cinema tickets free. Do you want to  <a href='/invite-your-friends'>invite more of your friends?</a>".to_html
+    flash[:success] = "Thanks for inviting your friends to MasthiDeals.com"
     redirect_to reg_complete_path
   end
   

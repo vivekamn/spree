@@ -7,7 +7,7 @@ Hi,
 </p>
 <br/>
 <%end %>
-<% if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwrods' %>
+<% if @money == 100 %>
 I am a member of  <a href="http://www.masthideals.com/adwords">www.masthideals.com</a> which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.
 <%else%>
 I am a member of  <a href="http://www.masthideals.com/referral?ref=<%=@from%>">www.masthideals.com</a> which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.
@@ -32,7 +32,7 @@ Some of the past deals include
 40 % discount for Beauty services from <b>La belle</b>
 <br/>
 <br/>
-<% if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwrods' %>
+<% if @money == 100 %>
 If you register in <a href="http://www.masthideals.com/adwords"><b>www.masthideals.com</b></a> before 30, July, 2010  you will get <b>100 Rs</b> which you can use to buy any deal in MasthiDeals.
 <br/>
 <br/>

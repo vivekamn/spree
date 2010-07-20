@@ -21,14 +21,14 @@ class UserMailer < ActionMailer::Base
     body           "ref_email" => user,"count"=>count,"current_user"=>current_user
   end
   
-  def plaxo_invite(from,recipients,name,body)
+  def plaxo_invite(from,recipients,name,body,money)
     content_type "text/html"
     from           from
     recipients    recipients
     bcc           Spree::Config[:mail_bcc]
-    subject      "Become a part of MasthiDeals and earn 50 MasthiDeals Money which you can use to buy any deal."
+    subject      "Become a part of MasthiDeals and earn #{money} MasthiDeals Money which you can use to buy any deal."
     sent_on        Time.now.utc
-    body           "name" => name,"from"=>from,"body"=>body
+    body           "name" => name,"from"=>from,"body"=>body,"money"=>money
   end
   
   def share_this(recipient,from,product,name)
