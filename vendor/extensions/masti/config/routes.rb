@@ -19,9 +19,7 @@ map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
 map.recent '/recent-deals', :controller=>'home',  :action=>'recent_deals'
-map.email_camp '/email_camp',:controller => "home", :action => "index"
 map.forum '/forum',:controller => "home", :action => "index"
-
 map.classifieds '/classifieds',:controller => "home", :action => "index"
 map.directory '/directory',:controller => "home", :action => "index"
 map.bookmarking '/bookmarking',:controller => "home", :action => "index"
@@ -31,12 +29,13 @@ map.verifiy_your_phone '/verifiy-your-phone',:controller => "home", :action => "
 map.generate_code '/generate-code',:controller => "home", :action => "generate_code"
 map.reg_complete '/registration-success',:controller => "home", :action => "index"
 
-# seo purpose url
+# seo purpose & promotion
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
 map.referral '/referral', :controller=>"home", :action => "cmom"
 map.referral '/for_invite', :controller=>"home", :action => "cmom"
 map.facebook '/facebook',:controller => "home", :action => "index"
+map.email_camp '/email_camp',:controller => "home", :action => "index"
 
 map.namespace :admin do |admin|
    admin.resources :vendors
