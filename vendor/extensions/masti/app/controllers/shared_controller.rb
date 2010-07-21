@@ -13,7 +13,7 @@ class SharedController < ApplicationController
          product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
          user = User.find(:first,:conditions=>['email = ? or phone_no= ?',params[:name],mobile_no])
          if user.nil?
-           user = User.new(:email=>params[:name],:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>mobile_no)
+           user = User.new(:email=>params[:name],:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>mobile_no,:source=>"SMS")
            user.mobile_verify=true
            if user.save!
              UserPromotion.create(:credit_amount => 100, :user_id => user.id)
