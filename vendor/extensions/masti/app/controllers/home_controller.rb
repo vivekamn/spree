@@ -41,7 +41,7 @@ class HomeController < Spree::BaseController
   
   def fls_fr_okt_fb_user
     unless current_user
-      unless session[:src].nil?
+      if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp'
         flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
       end      
     end
@@ -163,7 +163,11 @@ class HomeController < Spree::BaseController
     #      generate_code('true')
     #    else
     unless current_user.source.nil? or current_user.source.empty?
-      generate_code        
+      if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp'
+        generate_code        
+      else
+        redirect_to reg_complete_path
+      end
     else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
         user = User.find_by_email(current_user.refered_by)
