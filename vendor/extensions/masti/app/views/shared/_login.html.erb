@@ -10,7 +10,7 @@
     <tr>
       <td width="30%" height="35" valign="middle"  style="margin-top:20px;">Email</td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%" valign="middle"><%= text_field :user_session, 'login', :class=>"textbox" %>
+      <td width="66%" valign="middle"><%= text_field :user_session, 'login', :class=>"textbox" ,:value=> cookies[:email] %>
         </td>
     </tr>
     <tr>
@@ -19,14 +19,16 @@
       <td width="66%"><%= password_field :user_session, 'password', :class=>"textbox"  %>
         </td>
     </tr>
-	<!--<tr>
-		<td height="61" colspan="3">
+	<tr>
+		<td width="30%" height="35"></td>
+	    <td width="4%" height="35"></td>
+		<td height="61" width="66%">
 			<label>
 		      <%= check_box :user_session, :remember_me %>
 		      <%= label :user_session, :remember_me, t('remember_me') %>
 		   </label>
 		</td>
-	</tr>-->	
+	</tr>	
     <tr>
       <td height="61" colspan="3" align="right" style="padding-right:42px"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
         </td>

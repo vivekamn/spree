@@ -88,7 +88,7 @@ class MastiExtension < Spree::Extension
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
       
       def call_count_mailer
-        user_count = User.count(:all,:conditions =>['is_sample != ?',true])
+        user_count = User.count(:conditions =>['is_sample != 1'])
         UserMailer.deliver_count_to_admin(user_count,self.email,"Masthideals")
       end
       

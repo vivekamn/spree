@@ -711,7 +711,7 @@ en-US:
   register: Register as a New User
   register_or_guest: Checkout as Guest or Register
   registration: Registration
-  remember_me: "Remember me"
+  remember_me: "Remember my Email"
   remove: Remove
   reports: Reports
   required_for_solo_and_maestro: Required for Solo and Maestro cards.

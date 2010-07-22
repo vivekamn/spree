@@ -58,8 +58,12 @@ class UserSessionsController < Spree::BaseController
     @user_session = UserSession.new(data)
     @user_session.save do |result|
       if result
+
         respond_to do |format|
           format.html {
+            if data[:remember_me] == "1"
+               cookies[:email]=data[:login]
+            end
             flash[:notice] = t("logged_in_succesfully") unless session[:return_to]
             redirect_back_or_default home_url
           }
