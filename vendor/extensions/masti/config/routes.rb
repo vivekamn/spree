@@ -36,6 +36,7 @@ map.referral '/referral', :controller=>"home", :action => "cmom"
 map.referral '/for_invite', :controller=>"home", :action => "cmom"
 map.facebook '/facebook',:controller => "home", :action => "index"
 map.email_camp '/email_camp',:controller => "home", :action => "index"
+map.email_camp_diff '/email_camp_diff',:controller => "home", :action => "index"
 
 map.namespace :admin do |admin|
    admin.resources :vendors
