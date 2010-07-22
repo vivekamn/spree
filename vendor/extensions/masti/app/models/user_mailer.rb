@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
   def count_to_admin(count,email,from1)
     content_type "text/html"
     from           "customersupport@masthideals.com"
-    recipients    "ramanavel@gmail.com"
+    recipients    "akvsaran@gmail.com"
     subject      " #{from1} User Count in Masthideals.com: #{count}"
     sent_on        Time.now.utc
     body           "email" => email,"count"=>count,"from1"=>from1
