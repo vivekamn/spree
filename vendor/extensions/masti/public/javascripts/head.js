@@ -47,6 +47,7 @@ function MM_swapImage() { //v3.0
 		if (email_name != ''){
 		if (email_name.length != 0){
 		 email_my = new String(email_name);
+		 email_my=email_my.trim();
 		 email_value = EMAIL_REGEX.test(email_my); 
 		 if(email_value != 1){
 			error_msg_div.innerHTML = "Please enter valid E-mail";

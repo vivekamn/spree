@@ -330,9 +330,10 @@ class HomeController < Spree::BaseController
   #to get the email id from the user and store it in the deal notifications table
   
   def email_deal_notify
-    @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email])
+    @deals_notify = DealsNotification.find_by_email(params[:deals_notification][:email].strip)
     if @deals_notify.nil?
-      @deals_notify = DealsNotification.new(params[:deals_notification])
+      @deals_notify = DealsNotification.new
+      @deals_notify.email = params[:deals_notification][:email].strip.downcase
       unless session[:src].nil?
         @deals_notify.source = session[:src]
       end
