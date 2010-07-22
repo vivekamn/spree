@@ -127,8 +127,10 @@ Address.class_eval do
        def call_logging
          if controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai"
           url_split = request.request_uri.split('?')
-          if url_split[1].nil? or url_split[1].empty? 
-            session[:src]=request.request_uri  
+          if url_split[1].nil? or url_split[1].empty?
+            session[:src]=request.request_uri
+            else
+            session[:src]=url_split[0]
           end
          end
          if current_user
