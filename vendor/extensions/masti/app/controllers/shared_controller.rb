@@ -4,16 +4,32 @@ class SharedController < ApplicationController
     render :layout => false
   end
   
+  def unsubscribe
+    user = User.find_by_email(params[:email])
+    unless user.nil?
+      user.unusbcribed = true
+      user.save!
+      @user_flag=true
+    end
+    deal_notify = DealsNotification.find_by_email(params[:email])
+    unless deal_notify.nil?
+       deal_notify.unusbcribed = true
+       deal_notify.save!
+       @notify_flag=true
+    end
+  end
+  
   def sms_deal_notify
  mobile_no = params[:mobile_no]
     mobile_no = mobile_no[-10..-1]
     if !params[:mobile_no].nil? and params[:mobile_no].length>=10 and params[:mobile_no].length<=13
-       if params[:name].match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i)
+       if params[:name].strip.match(/^([a-z0-9._%+-]+)@((?:[-a-z0-9]+\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)$)$/i)
          current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
          product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
          user = User.find(:first,:conditions=>['email = ? or phone_no= ?',params[:name],mobile_no])
          if user.nil?
-           user = User.new(:email=>params[:name],:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>mobile_no,:source=>"SMS")
+           user = User.new(:email=>params[:name].strip.downcase,:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>mobile_no)
+           user.source="SMS"
            user.mobile_verify=true
            if user.save!
              UserPromotion.create(:credit_amount => 100, :user_id => user.id)

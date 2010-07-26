@@ -29,16 +29,37 @@
         <a href="<%=bangalore_path%>" class="company">Bangalore</a>
         <br/>
     </div>
-    <div class="footertop4"><b>Follow Us</b><br/>
-    <a href="http://twitter.com/masthideals" class="company" target="_blank">Twitter</a><br/>
-    <a href="http://www.facebook.com/masthideals" class="company" target="_blank">Facebook</a><br/>
-    
-	</div>
+    <div class="footertop4">
+        <table border="0" width="100%" style="margin-left: -20px;">
+            <tr>
+                <td colspan="4">
+                    <b>Follow Us</b>
+                </td>
+            </tr>
+            <tr>
+                <td width="25%">
+                    <a href="http://www.facebook.com/masthideals" class="company" target="_blank"><img src="/images/follow-us/facebook.png" border="0"/></a>
+                </td>
+                <td width="25%">
+                    <a href="http://twitter.com/masthideals" class="company" target="_blank"><img src="/images/follow-us/twitter.png" border="0"/></a>
+                </td>
+                <td width="25%">
+                    <a href="http://www.orkut.co.in/Main#Community?cmm=102824332" class="company" target="_blank"><img src="/images/follow-us/orkut.png" border="0"/></a>
+                </td>
+                <td width="25%">
+                    <a href="http://masthideals.blogspot.com" class="company" target="_blank"><img src="/images/follow-us/blogger.png" border="0"/></a>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="footertop5">
         © 2010 Masthideals.
-    <br/>
-    All Rights Reserved.
+        <br/>
+        All Rights Reserved.
     </div>
 </div>
 </div>
 </div>
+<%# if cookies[:close].nil? or cookies[:close].empty? %>
+<%# render :partial => "/shared/close_script" %>
+<%#end %>
