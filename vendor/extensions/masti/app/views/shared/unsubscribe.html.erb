@@ -1,0 +1,32 @@
+<div class="bannerouter">
+	<div class="tiles">
+<table  style="margin-top: 100px;margin-bottom: 180px;margin-left: 30px;width:880px;float:left;" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
+       <tr>
+           <td align="center" width="100%">
+           	<p>
+           		Email : <%= params[:email]%>
+           	</p>
+			<br/>
+			<br/>
+           	<% if @user_flag==true or @notify_flag==true %>
+				<% if @user_flag==true %>
+				<p>
+					<span class="green">User Unsubscribed </span><span class="blue">form our mailing list</span>
+				</p>
+				<%end%>
+				<% if @notify_flag==true %>
+				<p>
+					<span class="green">Deal notification Unsubscribed </span><span class="blue">form our mailing list</span>
+				</p>
+				<%end%>
+			<%else%>
+			<p>
+				<span class="green">User not found </span><span class="blue">in our mailing list</span>
+			</p>
+			<%end%>
+           </td>
+	</tr>
+</table>	
+
+	</div>
+</div>
