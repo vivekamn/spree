@@ -4,6 +4,21 @@ class SharedController < ApplicationController
     render :layout => false
   end
   
+  def unsubscribe
+    user = User.find_by_email(params[:email])
+    unless user.nil?
+      user.unusbcribed = true
+      user.save!
+      @user_flag=true
+    end
+    deal_notify = DealsNotification.find_by_email(params[:email])
+    unless deal_notify.nil?
+       deal_notify.unusbcribed = true
+       deal_notify.save!
+       @notify_flag=true
+    end
+  end
+  
   def sms_deal_notify
  mobile_no = params[:mobile_no]
     mobile_no = mobile_no[-10..-1]
