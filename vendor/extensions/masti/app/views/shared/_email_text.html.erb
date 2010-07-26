@@ -36,14 +36,8 @@
 				40 % discount for Beauty services from <b>La belle</b>
 				<br/>
 				<br/>
-				<% if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff' %>
-					If you register in <a href="http://www.masthideals.com/"><b>www.masthideals.com</b></a> before 30, July, 2010  you will get <b>100 Rs</b> which you can use to buy any deal in MasthiDeals.
-					<br/>
-					<br/>
-					You can win an  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Iphone</span> by inviting your friends to register with <a href="http://www.masthideals.com/">www.masthideals.com</a>.  
-					<br/>
-					<br/>
-					So go ahead and invite your friends to win an <span class='blue' style='font-size:18px;font-weight:bold;'>Iphone</span>
+				<% if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff' or session[:src] == '/email_camp_info' or session[:src] == '/email_camp_tcs' or session[:src] == '/email_camp_cts' or session[:src] == '/email_camp_polaris' %>
+					If you register in <a href="http://www.masthideals.com/"><b>www.masthideals.com</b></a> before 3, August, 2010  you will get <b>100 Rs</b> which you can use to buy any deal in MasthiDeals and a <b>chance to win an Iphone*</b>.
 				<%else%>
 					 If you register in <a href="http://www.masthideals.com/"><b>www.masthideals.com</b></a> before 30, July, 2010 you will get <b>50 MD Money</b> which you can use to buy any deal in MasthiDeals.
 					<br/>

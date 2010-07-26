@@ -72,7 +72,7 @@ class SharedController < ApplicationController
     name = params[:name] 
 #    count=recipients.split(",").count
 #    count = current_user.invited_count
-    if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff'
+    if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff' or session[:src] == '/email_camp_info' or session[:src] == '/email_camp_tcs' or session[:src] == '/email_camp_cts' or session[:src] == '/email_camp_polaris'
       money = 100
     else
       money = 50

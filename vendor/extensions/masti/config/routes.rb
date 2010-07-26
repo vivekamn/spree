@@ -37,6 +37,10 @@ map.referral '/for_invite', :controller=>"home", :action => "cmom"
 map.facebook '/facebook',:controller => "home", :action => "index"
 map.email_camp '/email_camp',:controller => "home", :action => "index"
 map.email_camp_diff '/email_camp_diff',:controller => "home", :action => "index"
+map.email_camp_info '/email_camp_info', :controller => "home", :action => "index"
+map.email_camp_tcs '/email_camp_tcs', :controller => "home", :action => "index"
+map.email_camp_cts '/email_camp_cts', :controller => "home", :action => "index"
+map.email_camp_polaris '/email_camp_polaris', :controller => "home", :action=>"index"
 
 map.namespace :admin do |admin|
    admin.resources :vendors
