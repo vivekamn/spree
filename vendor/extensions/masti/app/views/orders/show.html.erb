@@ -24,35 +24,43 @@
     <div id="order">
       <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
     </div>      
-    <%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
-      <input name="account_id" type="hidden" value="6246" />
-      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
-      <% if RAILS_ENV == 'development' %>
-        <input name="mode" type="hidden" value="TEST" />
-      <% else %>
-        <input name="mode" type="hidden" value="LIVE" />
-      <% end %>
-      <input name="reference_no" type="hidden" value="<%=@order.number%>" />
-      <input name="amount" type="hidden" value="<%=@order.total%>"/>
-      <input name="description" type="hidden" value="<%=@order.state%>" />
-      <input name="name" type="hidden" maxlength="255" value="<%=@order.checkout.bill_address.name%>" />
-      <input name="address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
-      <input name="city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
-      <input name="state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
-      <input name="postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
-      <input name="country" type="hidden" value="IND" />
-      <input name="email" type="hidden" value="<%=@order.checkout.email%>" />
-      <input name="phone" type="hidden" maxlength="20" value="<%=@order.checkout.bill_address.phone%>" />
-      <input name="ship_name" type="hidden" value="<%=@order.checkout.bill_address.name%>" />
-      <input name="ship_address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
-      <input name="ship_city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
-      <input name="ship_state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
-      <input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
-      <input name="ship_country" type="hidden" value="IND" />
-      <input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-      <div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> 
-      </div>
-    <%end%>
+    <% if @order.total>0 %>
+		<%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
+	      <input name="account_id" type="hidden" value="6246" />
+	      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
+	      <% if RAILS_ENV == 'development' %>
+	        <input name="mode" type="hidden" value="TEST" />
+	      <% else %>
+	        <input name="mode" type="hidden" value="LIVE" />
+	      <% end %>
+	      <input name="reference_no" type="hidden" value="<%=@order.number%>" />
+	      <input name="amount" type="hidden" value="<%=@order.total%>"/>
+	      <input name="description" type="hidden" value="<%=@order.state%>" />
+	      <input name="name" type="hidden" maxlength="255" value="<%=@order.checkout.bill_address.name%>" />
+	      <input name="address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
+	      <input name="city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
+	      <input name="state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
+	      <input name="postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
+	      <input name="country" type="hidden" value="IND" />
+	      <input name="email" type="hidden" value="<%=@order.checkout.email%>" />
+	      <input name="phone" type="hidden" maxlength="20" value="<%=@order.checkout.bill_address.phone%>" />
+	      <input name="ship_name" type="hidden" value="<%=@order.checkout.bill_address.name%>" />
+	      <input name="ship_address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
+	      <input name="ship_city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />
+	      <input name="ship_state" type="hidden" value="<%=@order.checkout.bill_address.state%>" />
+	      <input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
+	      <input name="ship_country" type="hidden" value="IND" />
+	      <input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
+	      <div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> 
+	      </div>
+		  <%end%>
+	  <%else%>
+		  	 <%form_for "frmTransaction" ,:url=>{:controller=>"home",:action=>"zero_payment"} ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
+			 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
+	      		<input name="amount" type="hidden" value="<%=@order.total%>"/>
+				<div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> </div>
+			 <%end%>	
+	  <%end%>
   </div>
 <% else %>
   <%= render :partial => 'failure', :locals => {:order => @order} -%>

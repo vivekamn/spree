@@ -272,6 +272,63 @@ class HomeController < Spree::BaseController
     @bought_count = @featured_product.currently_bought_count   
   end
   
+  def zero_payment
+    puts "success====================>"
+    @response_txt={}
+    @response_txt['MerchantRefNo']=params[:reference_no]
+    @response_txt['Amount']=params[:amount]
+    @response_txt['ResponseMessage']='Transaction Successful'
+    @response_txt['ResponseCode']="0"
+    @response_txt['PaymentID']=nil
+    @response_txt['DateCreated']=Time.now.to_s
+    @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
+    begin
+      @order.update_payment_info(@response_txt)
+      unless @order.user.user_promotion.nil?
+        @order.update_user_promotion
+      end
+      if @order.state=='new' # check if user is paying again for a paid order or cancelled order
+        if @response_txt['ResponseMessage']=='Transaction Successful'
+          @status=@order.update_payment
+          if @status!='out_of_stock' and @status!='sold_out'
+            logger.info "about to accept the payment..........."
+            @order.pay!  # accept the payment    
+            logger.info "order updated as paid after successful payment response received.........."
+            InventoryUnit.deal_status_update(@order) if @order.email # send confirmation mails 
+            logger.info "confirmation mails sent...................." 
+          else          
+            @order.update_attribute(:state, 'credit_owed') 
+            # mark as over paid so that it can be reimbursed to users
+            logger.info "order under count after payment success and marked as over paid"
+            if @status=="out_of_stock"
+              logger.info "retrieving out of stock items.............."
+              flash[:error] = 'Following out of stock'
+              flash[:error] += '<ul>'
+              @order.out_of_stock_items.each do |item|
+                flash[:error] += '<li>' + t(:count_of_reduced_by,
+                              :name => item[:line_item].variant.name,
+                              :count => item[:count]) +
+                          '</li>'
+              end
+              flash[:error] += '<ul>'
+            end   
+            InventoryUnit.deal_status_update(@order) if @order.email
+          end
+        else
+          @order.cancel! if @order.state!='canceled'   # just mark the order as cancel as payment failed
+          logger.info "payment failed and order cancelled"  
+        end
+      else
+        @err_message = "Already Paid or Cancelled Order "
+      end
+    rescue Exception=>e
+      logger.info e.message
+      #flash[:error]=e.message
+      redirect_to :action=>'payment_failure'
+    end
+  end
+  
+  
   def payment_response
     @key = '5fa2c2ffb54022d1b4e849668119e7b5'
     @DR = params[:DR]
