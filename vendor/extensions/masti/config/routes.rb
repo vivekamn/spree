@@ -50,6 +50,7 @@ map.email_camp_oracle '/email_camp_oracle', :controller => "home", :action => "i
 map.email_camp_hp '/email_camp_hp', :controller => "home", :action => "index"
 map.email_camp_scope '/email_camp_scope', :controller => "home", :action => "index"
 map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action => "index"
+map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 
 
 map.namespace :admin do |admin|

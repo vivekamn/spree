@@ -16,7 +16,8 @@ EMAIL_CAMP['/email_camp_ibm'] = 'IBM'
 EMAIL_CAMP['email_camp_oracle'] = 'Oracle' 
 EMAIL_CAMP['email_camp_hp'] = 'HP'
 EMAIL_CAMP['/email_camp_ceequence'] = 'Ceequence'
-EMAIL_CAMP['/email_camp_scope']='Scope International'
+EMAIL_CAMP['/email_camp_scope']='Scope Intl'
+EMAIL_CAMP['/email_camp_hcl'] = 'HCL'
 
 #Email camp for facebook,orkut,adwords,email_camp,diff
 EMAIL_CAMP_ADD = {}
