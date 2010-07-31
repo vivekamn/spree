@@ -41,7 +41,6 @@ class HomeController < Spree::BaseController
   
   def fls_fr_okt_fb_user
     unless current_user
-      puts "#{EMAIL_CAMP_ADD[session[:src]]}============#{EMAIL_CAMP[session[:src]]}=================================="
       if !EMAIL_CAMP_ADD[session[:src]].nil? 
         flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
       end
@@ -167,12 +166,9 @@ class HomeController < Spree::BaseController
     #      generate_code('true')
     #    else
     unless current_user.source.nil? or current_user.source.empty?
-      puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test====================="
       if !EMAIL_CAMP[session[:src]].nil?  or !EMAIL_CAMP_ADD[session[:src]].nil?
-        puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test====================inside if="
         generate_code        
       else
-        puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test========else="
         redirect_to reg_complete_path
       end
     else
