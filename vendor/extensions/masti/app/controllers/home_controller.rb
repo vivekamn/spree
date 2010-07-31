@@ -41,20 +41,12 @@ class HomeController < Spree::BaseController
   
   def fls_fr_okt_fb_user
     unless current_user
-      if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff'
+      puts "#{EMAIL_CAMP_ADD[session[:src]]}============#{EMAIL_CAMP[session[:src]]}=================================="
+      if !EMAIL_CAMP_ADD[session[:src]].nil? 
         flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
-      end 
-      if session[:src] == '/email_camp_info'
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>Infosys Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can get <br> 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
       end
-      if session[:src]=='/email_camp_tcs'
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>TCS Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can get <br> 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
-      end
-      if session[:src]=='/email_camp_cts'
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>CTS Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can get <br> 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
-      end
-      if session[:src]=='/email_camp_polaris'
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>Polaris Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can get <br> 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
+      if !EMAIL_CAMP[session[:src]].nil? 
+        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>"+EMAIL_CAMP[session[:src]]+" Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can get <br> 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
       end
     end
   end
@@ -175,9 +167,12 @@ class HomeController < Spree::BaseController
     #      generate_code('true')
     #    else
     unless current_user.source.nil? or current_user.source.empty?
-      if session[:src]=='/facebook' or session[:src]=='/orkut' or session[:src]=='/adwords' or session[:src]=='/email_camp' or session[:src]=='/email_camp_diff' or session[:src] == '/email_camp_info' or session[:src] == '/email_camp_tcs' or session[:src] == '/email_camp_cts' or session[:src] == '/email_camp_polaris'
+      puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test====================="
+      if !EMAIL_CAMP[session[:src]].nil?  or !EMAIL_CAMP_ADD[session[:src]].nil?
+        puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test====================inside if="
         generate_code        
       else
+        puts "#{EMAIL_CAMP_ADD[session[:src]]}=====test=======#{EMAIL_CAMP[session[:src]]}=============test========else="
         redirect_to reg_complete_path
       end
     else
@@ -273,7 +268,6 @@ class HomeController < Spree::BaseController
   end
   
   def zero_payment
-    puts "success====================>"
     @response_txt={}
     @response_txt['MerchantRefNo']=params[:reference_no]
     @response_txt['Amount']=params[:amount]
@@ -507,8 +501,8 @@ class HomeController < Spree::BaseController
   private
   
   def req_user_invite
-     if cookies[:email].nil? and params[:email].nil? 
-       unless current_user
+    if cookies[:email].nil? and params[:email].nil? 
+      unless current_user
         store_location
         flash[:notice] = I18n.t("page_only_viewable_when_logged_in")
         redirect_to new_user_session_url
@@ -517,11 +511,11 @@ class HomeController < Spree::BaseController
     elsif !cookies[:email].nil?
       return true
     else
-     user= User.count(:conditions=>['email = ?',params[:email]]) 
+      user= User.count(:conditions=>['email = ?',params[:email]]) 
       if user>0
-       cookies[:email]=params[:email]
+        cookies[:email]=params[:email]
       else
-         unless current_user
+        unless current_user
           store_location
           flash[:notice] = I18n.t("page_only_viewable_when_logged_in")
           redirect_to new_user_session_url

@@ -41,6 +41,16 @@ map.email_camp_info '/email_camp_info', :controller => "home", :action => "index
 map.email_camp_tcs '/email_camp_tcs', :controller => "home", :action => "index"
 map.email_camp_cts '/email_camp_cts', :controller => "home", :action => "index"
 map.email_camp_polaris '/email_camp_polaris', :controller => "home", :action=>"index"
+map.email_camp_eds '/email_camp_eds', :controller => "home", :action => "index"
+map.email_camp_wipro 'email_camp_wipro', :controller => "home", :action => "index"
+map.email_camp_flsmidth '/email_camp_flsmidth', :controller => "home", :action => "index"
+map.email_camp_aircel '/email_camp_aircel', :controller => "home", :action => "index"
+map.email_camp_ibm '/email_camp_ibm', :controller => "home", :action => "index"
+map.email_camp_oracle '/email_camp_oracle', :controller => "home", :action => "index"
+map.email_camp_hp '/email_camp_hp', :controller => "home", :action => "index"
+map.email_camp_scope '/email_camp_scope', :controller => "home", :action => "index"
+map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action => "index"
+
 
 map.namespace :admin do |admin|
    admin.resources :vendors

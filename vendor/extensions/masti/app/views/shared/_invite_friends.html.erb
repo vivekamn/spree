@@ -36,7 +36,7 @@
       </tr>
 	<%if cookies[:email].nil?%>
 		<%if !current_user.source.nil? and !current_user.source.empty?%>
-			<%if session[:src] == '/email_camp_info' or session[:src] == '/email_camp_tcs' or session[:src] == '/email_camp_cts' or session[:src] == '/email_camp_polaris' %>
+			<% if !EMAIL_CAMP[session[:src]].nil?  or !EMAIL_CAMP_ADD[session[:src]].nil? %>
 			  <tr>
 			  	<td colspan="2">
 			  		<div id="" class="" style="width:98%">
