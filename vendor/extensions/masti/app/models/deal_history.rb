@@ -49,11 +49,12 @@ class DealHistory < ActiveRecord::Base
       recipient_str=""
       recipients.each do |recipient|
        recipient_str += recipient.to_s
-       recipient_str += ','
-        if count==200
+        if count==100
           recp_arr<<recipient_str
           recipient_str=""
           count = 0
+        elsif !recipients.last==recipient
+          recipient_str += ','
         end
         count += 1
     end
