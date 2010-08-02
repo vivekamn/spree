@@ -43,25 +43,22 @@ class DealHistory < ActiveRecord::Base
 #      result = ActiveRecord::Base.connection.execute(query)
       all_emails = all_deals_notify_email.concat(all_user_email)
       all_emails = all_emails.uniq
-      recipients = all_emails.collect{|x| x.email}
+      all_email_arr = []
       count=0
-      recp_arr = []
-      recipient_str=""
-      recipients.each do |recipient|
-       recipient_str += recipient.to_s
-        if count==100
-          recp_arr<<recipient_str
-          recipient_str=""
-          count = 0
-        elsif !recipients.last==recipient
-          recipient_str += ','
+      all_emails.each do |all_email|
+        all_email_arr << all_email
+        if count==200
+          recipients = all_email_arr.collect{|x| x.email}.join(',')
+          UserMailer.deliver_users_deal_notify(recipients, product)
+          all_email_arr=nil
+          all_email_arr=[]
+          count=0
         end
-        count += 1
+        count+=1
     end
-     recp_arr<<recipient_str
-     recp_arr.each do |recp|
-       UserMailer.deliver_users_deal_notify(recp, product)
-     end
+      recipients = all_email_arr.collect{|x| x.email}.join(',')
+      UserMailer.deliver_users_deal_notify(recipients, product)
+#      recipients = all_emails.collect{|x| x.email}.join(',')
 #      UserMailer.deliver_users_deal_notify(recipients, product)    
     end
   end
