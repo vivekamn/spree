@@ -34,5 +34,12 @@ class Admin::DealsController < ApplicationController
     active_deal.save
     redirect_to admin_products_url(:flag=>'sold_out')
   end
-
+  
+  def manual_send_mail
+    active_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
+    active_deal.deal_notify
+    flash[:success]="successsfully sent"
+    redirect_to admin_products_url
+  end
+  
 end
