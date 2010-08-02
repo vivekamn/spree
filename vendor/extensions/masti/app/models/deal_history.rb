@@ -40,11 +40,28 @@ class DealHistory < ActiveRecord::Base
           flag = 2
       end
       query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
-      result = ActiveRecord::Base.connection.execute(query)
+#      result = ActiveRecord::Base.connection.execute(query)
       all_emails = all_deals_notify_email.concat(all_user_email)
       all_emails = all_emails.uniq
-      recipients = all_emails.collect{|x| x.email}.join(',')
-      UserMailer.deliver_users_deal_notify(recipients, product)    
+      recipients = all_emails.collect{|x| x.email}
+      count=0
+      recp_arr = []
+      recipient_str=""
+      recipients.each do |recipient|
+       recipient_str += recipient.to_s
+       recipient_str += ','
+        if count==200
+          recp_arr<<recipient_str
+          recipient_str=""
+          count = 0
+        end
+        count += 1
+    end
+     recp_arr<<recipient_str
+     recp_arr.each do |recp|
+       UserMailer.deliver_users_deal_notify(recp, product)
+     end
+#      UserMailer.deliver_users_deal_notify(recipients, product)    
     end
   end
   
