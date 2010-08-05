@@ -257,10 +257,17 @@ class HomeController < Spree::BaseController
   
   def product_preview
     @featured_product = Product.find_by_permalink(params[:id])
-    @price = @featured_product.price.to_i
-    @discount = @featured_product.discount
-    @saving = (@price*@discount/100).to_i
-    @bought_count = @featured_product.currently_bought_count   
+    @deal = DealHistory.find(:first, :conditions =>['(is_active = ? or is_side_deal = ? ) and product_id = ?', true,true,@featured_product.id])
+    if @deal.is_side_deal
+      redirect_to home_url+"/home/index?side_deal_info=side_deal"
+    elsif @deal.is_active
+       redirect_to home_url
+     else
+      @price = @featured_product.price.to_i
+      @discount = @featured_product.discount
+      @saving = (@price*@discount/100).to_i
+      @bought_count = @featured_product.currently_bought_count
+   end
   end
   
   def zero_payment
