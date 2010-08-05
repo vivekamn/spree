@@ -28,8 +28,8 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-       attr_accessible :side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
-       attr_accessor :increased_count, :decreased_count
+     attr_accessible :star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+     attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :side_deal_title
       validates_presence_of :voucher_text
@@ -124,6 +124,11 @@ Address.class_eval do
      Spree::BaseController.class_eval do
        helper HomeHelper
         before_filter :call_logging
+#        def call_pop
+#          if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
+#            cookies[:time_remaining]=40
+#          end
+#        end
        def call_logging
          url_split = request.request_uri.split('?')
          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index"

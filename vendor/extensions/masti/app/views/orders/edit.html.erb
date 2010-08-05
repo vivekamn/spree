@@ -15,10 +15,10 @@
       </div>
     <% end %>
     <div class="shoppinginner">
-         <%unless current_user.user_promotion.nil?%>
-		  <div>
+         <%if !current_user.user_promotion.nil? and current_user_credit_amount>0%>
+		  <div style="margin-top:20px;">
             You have <%= current_user_credit_amount %>MD Money in your account. This  will be adjusted against the payment to be made for this purchasal.
-	    </div>
+	      </div>
 		<%end%>
       <div class="shoptable" style="padding:0px">
         <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>

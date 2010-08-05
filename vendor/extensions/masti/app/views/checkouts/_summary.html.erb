@@ -25,7 +25,7 @@
       <td><strong><%= t('order_total') %>:</strong></td>
       <td><strong><span id='summary-order-total'>Rs. <%= @order.total.to_i %></span></strong></td>
     </tr>
-	<%unless current_user.user_promotion.nil?%>	
+	<%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount.to_i>0%>	
 	<tr>
       <td><strong>Balance MD Money:</strong></td>
       <td><strong><span id='summary-order-total'>Rs. 

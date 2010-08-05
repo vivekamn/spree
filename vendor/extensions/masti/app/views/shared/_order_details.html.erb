@@ -34,15 +34,24 @@
         <% end %>
       </tr>
     <% end %>
-  <%unless @order.user.user_promotion.nil?%>
-  <% hook :order_details_subtotal do %>
-    <tbody id='subtotal'>
-      <tr class="total" id="subtotal-row">
-        <td colspan="3"><b><%= t('your_credit_amount') %>:</b></td>
-        <td class="total"><span>Rs.<%=  @order.user.user_promotion.credit_amount.to_i -%></span></td>
-      </tr>
-    </tbody>
-  <% end %>    
+  <%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount>0%>
+	  <% hook :order_details_subtotal do %>
+	    <tbody id='subtotal'>
+	      <tr class="total" id="subtotal-row">
+	        <td colspan="3"><b><%= t('your_credit_amount') %>:</b></td>
+	        <td class="total"><span>Rs.<%=  @order.user.user_promotion.credit_amount.to_i -%></span></td>
+	      </tr>
+	    </tbody>
+	  <% end %>
+   <%elsif !EMAIL_CAMP[current_user.source].nil? and @order.line_items[0].variant.product.star_discount!=0.0%>
+       <% hook :order_details_subtotal do %>
+	    <tbody id='subtotal'>
+	      <tr class="total" id="subtotal-row">
+	        <td colspan="3"><b><%= t('star_customer_discount') %>:</b></td>
+	        <td class="total"><span>Rs.<%= (((@order.line_items[0].price * @order.line_items[0].quantity)) - @order.item_total.to_i).to_i %></span></td>
+	      </tr>
+	    </tbody>
+	  <% end %>
   </tbody>
   <%end%>
   <% hook :order_details_subtotal do %>

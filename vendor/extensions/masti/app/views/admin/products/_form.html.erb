@@ -168,6 +168,12 @@
         <%= f.text_field :max_vouchers, :value => @product.max_vouchers %>
         <%= f.error_message_on :max_vouchers %>
         <% end %>
+		<% f.field_container :star_discount do %>
+        <%= f.label :star_discount, t("star_discount") %>
+        <br/>
+        <%= f.text_field :star_discount, :value => @product.star_discount %>
+        <%= f.error_message_on :star_discount %>
+        <% end %>
     </div>
     <div class="yui-u first">
         <% f.field_container :reviews do %>

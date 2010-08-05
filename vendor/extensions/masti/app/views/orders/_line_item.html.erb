@@ -22,7 +22,7 @@
     <% hook :cart_item_price, locals do %>
       <!--<%=  product_price(line_item) %>-->
 	  <strong>Rs. <%=line_item.price.to_i%>
-	  <%unless current_user.user_promotion.nil?%>
+	  <%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount>0%>
 	  	- <%= current_user_credit_amount %>&nbsp;(MD Money)
 	  <%end%>
 	  </strong>

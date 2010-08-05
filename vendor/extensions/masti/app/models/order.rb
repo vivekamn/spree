@@ -277,14 +277,23 @@ class Order < ActiveRecord::Base
   end
 
   def update_totals(force_adjustment_recalculation=false)
-    self.item_total       = self.line_items.total
-    unless self.user.user_promotion.nil?
+    self.item_total  = self.line_items.total
+    if !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
       if total_amount < credit_amount
         self.item_total = 0
       else
         self.item_total -= credit_amount
+      end
+    elsif !EMAIL_CAMP[self.user.source].nil?
+      star_discount=nil
+      self.line_items.each do |line_item|
+        star_discount = line_item.variant.product.star_discount
+      end
+      unless star_discount.nil? or star_discount==0.0
+        star_discount = self.line_items[0].variant.product.star_discount
+        self.item_total -= ((self.line_items[0].variant.product.star_discount/100)*self.item_total)
       end
     end
 
