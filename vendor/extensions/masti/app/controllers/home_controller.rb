@@ -39,6 +39,22 @@ class HomeController < Spree::BaseController
     end
   end
   
+  def product_preview
+    @featured_product = Product.find_by_permalink(params[:id])
+    @deal = DealHistory.find(:first, :conditions =>['(is_active = ? or is_side_deal = ? ) and product_id = ?', true,true,@featured_product.id])
+    @price = @featured_product.price.to_i
+    @discount = @featured_product.discount
+    @saving = (@price*@discount/100).to_i
+    @bought_count = @featured_product.currently_bought_count
+    if @deal.nil? or @deal.is_active
+      @deal_param = 'side_deal'
+      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+    elsif @deal.is_side_deal
+      @deal_param = 'main_deal'
+      @side_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
+   end
+  end
+  
   def fls_fr_okt_fb_user
     unless current_user
       if !EMAIL_CAMP_ADD[session[:src]].nil? 
@@ -253,21 +269,6 @@ class HomeController < Spree::BaseController
     else
       render(:text => "Invalid")
     end
-  end
-  
-  def product_preview
-    @featured_product = Product.find_by_permalink(params[:id])
-    @deal = DealHistory.find(:first, :conditions =>['(is_active = ? or is_side_deal = ? ) and product_id = ?', true,true,@featured_product.id])
-    if @deal.nil?
-      @price = @featured_product.price.to_i
-      @discount = @featured_product.discount
-      @saving = (@price*@discount/100).to_i
-      @bought_count = @featured_product.currently_bought_count
-    elsif @deal.is_active
-       redirect_to home_url
-     else
-      redirect_to home_url+"home/index?side_deal_info=side_deal"
-   end
   end
   
   def zero_payment
