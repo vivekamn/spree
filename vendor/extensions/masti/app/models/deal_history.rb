@@ -15,7 +15,7 @@ class DealHistory < ActiveRecord::Base
     self.save!
   end
   
-  def deal_notify    
+  def deal_notify 
     if (self.is_active == true)
       current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
       product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
@@ -40,7 +40,7 @@ class DealHistory < ActiveRecord::Base
           flag = 2
       end
       query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
-#      result = ActiveRecord::Base.connection.execute(query)
+      result = ActiveRecord::Base.connection.execute(query)
       all_emails = all_deals_notify_email.concat(all_user_email)
       all_emails = all_emails.uniq
       all_email_arr = []
@@ -56,8 +56,8 @@ class DealHistory < ActiveRecord::Base
         end
         count+=1
     end
-      recipients = all_email_arr.collect{|x| x.email}.join(',')
-      UserMailer.deliver_users_deal_notify(recipients, product)
+#      recipients = all_email_arr.collect{|x| x.email}.join(',')
+#      UserMailer.deliver_users_deal_notify(recipients, product)
 #      recipients = all_emails.collect{|x| x.email}.join(',')
 #      UserMailer.deliver_users_deal_notify(recipients, product)    
     end
