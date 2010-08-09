@@ -3,7 +3,7 @@ class SharedController < ApplicationController
    def plaxo_cb
     render :layout => false
   end
-  
+
   def unsubscribe
     user = User.find_by_email(params[:email])
     unless user.nil?

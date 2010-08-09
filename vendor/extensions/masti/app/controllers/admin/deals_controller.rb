@@ -41,5 +41,10 @@ class Admin::DealsController < ApplicationController
     flash[:success]="successsfully sent"
     redirect_to admin_products_url
   end
-  
+  def manual_send_sms
+    active_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
+    active_deal.deal_notify
+    flash[:success]="SMS Added"
+    redirect_to home_url
+  end
 end
