@@ -16,9 +16,12 @@ class UsersController < Spree::BaseController
       @user.refered_by = session[:ref]
       session.delete :ref
     end
-    unless session[:src].nil?
-      @user.source = session[:src]
+    if session[:city_id] == '1'
+      unless session[:src].nil?
+        @user.source = session[:src]
+      end
     end
+    @user.city_id = session[:city_id]
     @user.save do |result|
       if result       
         flash[:notice] = t(:user_created_successfully) unless session[:return_to]

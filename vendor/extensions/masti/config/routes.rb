@@ -54,7 +54,7 @@ map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index'
-map.delhi '/hyderabad', :controller=>'home', :action=>'index'
+map.hyderabad '/hyderabad', :controller=>'home', :action=>'index'
 map.bangalore '/bangalore', :controller=>'home', :action=>'index'
 
 #error path

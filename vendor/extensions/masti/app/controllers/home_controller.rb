@@ -9,15 +9,17 @@ class HomeController < Spree::BaseController
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
   
   def get_city
-    
+    puts "#{params[:city_id]}====================="
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
-    #    if params[:city_id] == 2
-    #      redirect_to bangalore_path
-    #    else
-    #      redirect_to chennai_path     
-    #    end
+#    if params[:city_id] == 2
+#      redirect_to bangalore_path
+#    elsif params[:city_id] == 5
+#      redirect_to hyderabad_path
+#    else  
+#      redirect_to chennai_path     
+#    end
     if params[:from] == 'home'
       redirect_to home_path
     else
@@ -26,7 +28,7 @@ class HomeController < Spree::BaseController
   end
   
   def index
-    puts "#{ session[:city_id]}========session============session city"
+    puts "#{session[:city_id]}===============session[:city_id]========="
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
@@ -45,8 +47,6 @@ class HomeController < Spree::BaseController
     if @deal.nil?
       redirect_to error_path
     else
-      
-      puts "#{@deal.inspect}==============="
       @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
       @price = @featured_product.price.to_i
       @discount = @featured_product.discount
@@ -81,13 +81,15 @@ class HomeController < Spree::BaseController
   end
   
   def fls_fr_okt_fb_user
-    unless current_user
-      if !EMAIL_CAMP_ADD[session[:src]].nil? 
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
-      end
-      if !EMAIL_CAMP[session[:src]].nil? 
-        flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>"+EMAIL_CAMP[session[:src]]+" Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can <br> get 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
-      end
+    if session[:city_id] == 1
+      unless current_user
+        if !EMAIL_CAMP_ADD[session[:src]].nil? 
+          flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>.".to_html
+        end
+        if !EMAIL_CAMP[session[:src]].nil? 
+          flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>"+EMAIL_CAMP[session[:src]]+" Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can <br> get 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>.".to_html
+        end
+      end      
     end
   end
   

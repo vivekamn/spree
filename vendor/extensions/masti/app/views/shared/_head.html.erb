@@ -100,9 +100,22 @@
     </div>
 	<div>
         Select the city &nbsp;&nbsp;
-		<% get_city_menu.each do |cty|%>
-			<%= link_to cty.name, :controller => "home", :action => 'get_city',:city_id => cty.id, :from=>'home' %> &nbsp;&nbsp;
+		<%if session[:city_id] == '1'%>
+		<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
+		<%else%>
+		<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
 		<%end%>
+		<%if session[:city_id] == '2'%>
+		<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
+		<%else%>
+		<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
+		<%end%>
+		<%if session[:city_id] == '5'%>
+			<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
+		<%else%>
+			<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
+		<%end%>
+		
     </div>
     <div class="logoright">
         <% if current_user %>

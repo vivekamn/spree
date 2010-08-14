@@ -13,6 +13,7 @@ class Admin::UsersController < Admin::BaseController
   private
   def collection
     unless request.xhr?
+      params[:search][:city_id]= session[:city_id]
       @search = User.searchlogic(params[:search])
 
       #set order by to default or form result
