@@ -200,7 +200,13 @@
             <table border=0 cellpadding=0 cellspacing=0>
                 <tr>
                     <td>
-                        <a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/masthi_cmoms.jpeg" /></a>
+	                	<%if session[:city_id] == '1'%>
+							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/chennai.jpeg" /></a>						
+						<%elsif session[:city_id] == '2' %>
+							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/bangalore.jpg" /></a>
+						<%elsif session[:city_id] == '5'%>
+							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/hyderabad.jpg" /></a>
+						<%end%>
                     </td>
                 </tr>
             </table>
