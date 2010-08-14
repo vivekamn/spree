@@ -179,7 +179,7 @@
             document.getElementById('error_company').innerHTML = "";
         }
         city_value = NAME_REGEX.test(new String(city_name));
-        if (city_name == '' || city_name == null || city_value != 1) {
+        if (city_name == '' || city_name == null) {
             msg += '<br/>city is invalid';
             //document.getElementById('error_city').innerHTML = "Please enter proper  city";
             flag_em = false;
