@@ -159,6 +159,7 @@
             </div>
             <%end %>
         </div>
+		<% if session[:city_id] == '1'%>
         <div class="submitpart">
             <table width="431px">
                 <tr>
@@ -168,6 +169,7 @@
                 </tr>
             </table>
         </div>
+		<%end%>
     </div>
 </div>
 <%= render :partial => "/shared/menu" %>
@@ -213,12 +215,29 @@
                 <table align="right" cellpadding="0px" cellspacing="0px">
                     <tr>
                         <td align="right">
-                            <!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! -->
-                            <object width="190" height="275">
-                                <param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/>
-                                <embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275">
-                                </embed>
-                            </object>
+                        	<%if session[:city_id] == '1'%>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! -->
+                            	<object width="190" height="275">
+                                	<param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/>
+                                	<embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275">
+                                	</embed>
+                            	</object>
+							<%elsif session[:city_id] == '2' %>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
+								<object width="190" height="275" >
+									<param name="movie" value="http://widget.meebo.com/mm.swf?URcgUwoRMI"/>
+									<embed src="http://widget.meebo.com/mm.swf?URcgUwoRMI" type="application/x-shockwave-flash" width="190" height="275">
+									</embed>
+								</object>
+							<%elsif session[:city_id] == '5'%>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
+								<object width="190" height="275" >
+									<param name="movie" value="http://widget.meebo.com/mm.swf?htmPUDSLst"/>
+									<embed src="http://widget.meebo.com/mm.swf?htmPUDSLst" type="application/x-shockwave-flash" width="190" height="275">
+									</embed>
+								</object> 
+							<%end%>
+                            
                         </td>
                         <td valign="top" width="18px">
                             <%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>

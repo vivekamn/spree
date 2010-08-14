@@ -67,7 +67,12 @@ module HomeHelper
   
    def get_states
     states=[]
-    state=State.find(1061493609)
+    city = City.find(:first, :conditions => ['is_active = ? AND id = ?',  true, session[:city_id]])
+    puts "city.........#{city.inspect}"
+    state = city.state
+    puts "#{state.inspect}==================="
+    puts "#{state.name}============"
+#    state=State.find(1061493609)
     states<<[state.name, state.id]
   end
   
