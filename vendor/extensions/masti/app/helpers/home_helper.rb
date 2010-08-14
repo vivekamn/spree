@@ -68,10 +68,7 @@ module HomeHelper
    def get_states
     states=[]
     city = City.find(:first, :conditions => ['is_active = ? AND id = ?',  true, session[:city_id]])
-    puts "city.........#{city.inspect}"
     state = city.state
-    puts "#{state.inspect}==================="
-    puts "#{state.name}============"
 #    state=State.find(1061493609)
     states<<[state.name, state.id]
   end
@@ -88,10 +85,20 @@ module HomeHelper
 #    cities<<[city.name, city.name]
 #  end
   
+  def get_city_bill_address
+    cities=[]
+#    city=City.find_by_state_id(1061493609)
+    city = City.find(:first, :conditions => ['is_active = ? AND id = ? ',  true,session[:city_id]])
+#    city.each do |cty|
+    cities << [city.name, city.id] 
+#    end
+    cities
+  end
+  
   def get_cities
     cities=[]
 #    city=City.find_by_state_id(1061493609)
-    city = City.find(:all, :conditions => ['is_active = ?',  true])
+    city = City.find(:all, :conditions => ['is_active = ? ',  true])
     city.each do |cty|
       cities << [cty.name, cty.id]  
     end

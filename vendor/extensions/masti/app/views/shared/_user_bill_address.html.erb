@@ -18,7 +18,7 @@
 	<tr>
       <td width="30%" height="35"> <%= bill_form.label :city, t(:city) %><span class="req" style="float:none;">*</span></td>
 	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= bill_form.select :city, get_cities, {}, :class => 'textbox' -%>	  
+      <td width="66%"><%= bill_form.select :city, get_city_bill_address, {}, :class => 'textbox' -%>	  
         </td>		
     </tr>  
 	<tr>
