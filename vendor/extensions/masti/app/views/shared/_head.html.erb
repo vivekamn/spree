@@ -98,6 +98,12 @@
     <div class="logopart">
         <a href="/home" style="text-decoration:none;"><img src="/images/logo.gif" border="0" width="305" height="71" alt="Best Deals@masthideals.com"/></a>
     </div>
+	<div>
+        Select the city &nbsp;&nbsp;
+		<% get_city_menu.each do |cty|%>
+			<%= link_to cty.name, :controller => "home", :action => 'get_city',:city_id => cty.id, :from=>'home' %> &nbsp;&nbsp;
+		<%end%>
+    </div>
     <div class="logoright">
         <% if current_user %>
         <div class="loggedinpart" style="padding-left: 30px;">

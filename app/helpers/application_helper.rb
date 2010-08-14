@@ -11,4 +11,8 @@ module ApplicationHelper
     "#{code.to_s.split("-").last.downcase}.png"
   end
   
+  def get_city_menu
+    city = City.find(:all, :conditions => ['is_active = ?',  true])
+  end
+  
 end

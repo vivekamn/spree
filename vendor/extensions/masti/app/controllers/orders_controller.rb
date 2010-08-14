@@ -75,6 +75,7 @@ class OrdersController < Spree::BaseController
   def create_after
     if params[:type]
       object.update_attributes(:gift => 1)
+      object.update_attributes(:city_id => session[:city_id])
     end
     unless session[:src].nil?
       object.update_attributes(:source => session[:src])

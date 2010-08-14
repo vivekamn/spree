@@ -1,6 +1,7 @@
 class Admin::ProductsController < Admin::BaseController
   resource_controller
   before_filter :load_data, :except => :index
+  before_filter :set_city
 
   index.response do |wants|
     wants.html { render :action => :index }
@@ -49,6 +50,12 @@ class Admin::ProductsController < Admin::BaseController
     end
   end
 
+  def set_city
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end
+  end
+  
   def clone
     load_object
     @new = @product.duplicate
@@ -78,9 +85,16 @@ class Admin::ProductsController < Admin::BaseController
           base_scope = base_scope.not_deleted
         end
 
-        @search = base_scope.group_by_products_id.searchlogic(params[:search])
-        @search.order ||= "ascend_by_name"
-
+#        @search = base_scope.group_by_products_id.searchlogic(params[:search])
+#        @search.order ||= "ascend_by_name"
+        
+        unless params[:search].nil?
+          params[:search][:city_id]= session[:city_id]
+          @search = base_scope.group_by_products_id.searchlogic(params[:search])
+        else
+          @search = base_scope.group_by_products_id.searchlogic(:city_id => session[:city_id])
+        end
+        @search.order ||= "descend_by_created_at"
         @collection = @search.paginate(:include  => {:variants => [:images, :option_values]},
                                        :per_page => Spree::Config[:admin_products_per_page],
                                        :page     => params[:page])

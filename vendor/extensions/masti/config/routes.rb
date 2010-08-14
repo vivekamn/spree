@@ -52,6 +52,13 @@ map.email_camp_scope '/email_camp_scope', :controller => "home", :action => "ind
 map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action => "index"
 map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 
+#city path
+map.chennai '/chennai', :controller=>'home', :action=>'index'
+map.delhi '/hyderabad', :controller=>'home', :action=>'index'
+map.bangalore '/bangalore', :controller=>'home', :action=>'index'
+
+#error path
+map.error '/nodeal', :controller => 'home', :action=> 'error'
 
 map.namespace :admin do |admin|
    admin.resources :vendors

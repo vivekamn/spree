@@ -15,7 +15,8 @@ class ProductsController < Spree::BaseController
   def show
 #    puts "#its comming to the product show============================id:==========#{}======="
 #    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-    @product = Product.find_by_permalink(params[:id])
+#    @product = Product.find_by_permalink(params[:id])
+    @product = Product.find(:first, :conditions => ['permalink = ? AND city_id =? ', params[:id],session[:city_id]])
     oreders = current_user.orders
     count = 0
     oreders.each do |order|

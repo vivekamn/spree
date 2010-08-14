@@ -54,7 +54,10 @@
         <%= f.label :prototype_id, t("prototype") %><br />
         <%= f.collection_select :prototype_id, Prototype.all, :id, :name, :include_blank => true %>
       </p>
-
+	  <p>
+        <%= f.label :city_id,"City" %><br />
+        <%= f.collection_select :city_id, City.all, :id, :name, :include_blank => false %>
+       </p>
     </div>
     <div class="yui-u">
 

@@ -16,6 +16,9 @@
   <div id="header">
     <% if current_user -%>
     <ul id="login-nav">
+		<% get_city_menu.each do |cty|%>
+			<li><%= link_to cty.name, :controller => "home/get_city", :city_id => cty.id %></li>
+		<%end%>
       <li><%= t('logged_in_as') %>: <strong><%= current_user.email %></strong></li>
       <li><%= link_to t('account'), user_path(current_user) %></li>
       <li><%= link_to t('logout'), logout_path %></li>

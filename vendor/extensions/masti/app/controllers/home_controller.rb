@@ -1,40 +1,65 @@
 class HomeController < Spree::BaseController
   require 'RubyRc4.rb'
   require 'base64'
-  ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities
+  ssl_required  :index,:unique_email,:product_preview,:payment_response,:sitemap,:email_deal_notify,:voucher,:create,:create,:progress_bar,:get_featured,:terms_conditions,:about_us,:upcoming_deals,:how_masti_works,:faq,:contact_us,:other_cities,:error
   before_filter :require_user,:only=>[:verify_mobile]
   before_filter :req_user_invite,:only=>:invite_friends
   before_filter :fls_fr_okt_fb_user, :only => [:index,:how_masti_works,:get_featured,:upcoming_deals,:recent_deals]
   skip_filter :protect_from_forgery
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
+  
+  def get_city
+    
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end
+    #    if params[:city_id] == 2
+    #      redirect_to bangalore_path
+    #    else
+    #      redirect_to chennai_path     
+    #    end
+    if params[:from] == 'home'
+      redirect_to home_path
+    else
+      redirect_to :back
+    end
+  end
+  
   def index
+    puts "#{ session[:city_id]}========session============session city"
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
-      @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+      @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
+      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ? AND city_id = ?', true,session[:city_id]])
     else
       if params[:side_deal_info] == 'side_deal'
         @deal_param = 'main_deal'
-        @deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
-        @side_deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+        @deal = DealHistory.find(:first, :conditions => ['is_side_deal = ? AND city_id = ? ', true, session[:city_id]])
+        @side_deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true, session[:city_id]])
       else
         @deal_param = 'side_deal'
-        @deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-        @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+        @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ? ', true, session[:city_id]])
+        @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ? AND city_id = ?', true, session[:city_id]])
       end
     end
-    @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
-    @price = @featured_product.price.to_i
-    @discount = @featured_product.discount
-    @saving = (@price*@discount/100).to_i
-    @bought_count = @featured_product.currently_bought_count
-    unless params[:email].nil? and params[:product_id].nil?
-      email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
-      if email_trace.nil?
-        email_trace = EmailTrace.new 
-        email_trace.email = params[:email]
-        email_trace.product_id = params[:product_id]
-        email_trace.save!
+    if @deal.nil?
+      redirect_to error_path
+    else
+      
+      puts "#{@deal.inspect}==============="
+      @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
+      @price = @featured_product.price.to_i
+      @discount = @featured_product.discount
+      @saving = (@price*@discount/100).to_i
+      @bought_count = @featured_product.currently_bought_count
+      unless params[:email].nil? and params[:product_id].nil?
+        email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
+        if email_trace.nil?
+          email_trace = EmailTrace.new 
+          email_trace.email = params[:email]
+          email_trace.product_id = params[:product_id]
+          email_trace.save!
+        end
       end
     end
   end
@@ -52,7 +77,7 @@ class HomeController < Spree::BaseController
     elsif @deal.is_side_deal
       @deal_param = 'main_deal'
       @side_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
-   end
+    end
   end
   
   def fls_fr_okt_fb_user
@@ -446,6 +471,10 @@ class HomeController < Spree::BaseController
       bought_percent = (current_deal.currently_bought_count*300)/(current_deal.currently_bought_count+variant.count_on_hand)
     end
     render(:text =>bought_percent)
+  end
+  
+  def error
+    
   end
   
   def terms_conditions

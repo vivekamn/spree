@@ -22,7 +22,8 @@ class UsersController < Spree::BaseController
     @user.save do |result|
       if result       
         flash[:notice] = t(:user_created_successfully) unless session[:return_to]
-         current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+#         current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+         current_deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])
          product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
          UserMailer.deliver_registration(@user,product)
          message = "Hi,Thanks for registering with  MasthiDeals.com. We will give you great deals from restaurants, spas, resorts etc  periodically- MasthiDeals team."

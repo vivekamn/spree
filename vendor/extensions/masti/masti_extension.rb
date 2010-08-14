@@ -28,7 +28,7 @@ class MastiExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :vendor
-     attr_accessible :star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+     attr_accessible :city_id,:star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
      attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :side_deal_title
@@ -77,12 +77,16 @@ class MastiExtension < Spree::Extension
       end
     end    
     
+    State.class_eval do
+      has_one :city
+    end 
     
      User.class_eval do
       accepts_nested_attributes_for :bill_address
       attr_accessible :phone_no,:refered_by
       has_one :verification_code
       has_one :user_promotion
+      belongs_to :city
       after_create :call_count_mailer
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
@@ -124,11 +128,20 @@ Address.class_eval do
      Spree::BaseController.class_eval do
        helper HomeHelper
         before_filter :call_logging
+        before_filter :set_city
+        
 #        def call_pop
 #          if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
 #            cookies[:time_remaining]=40
 #          end
 #        end
+
+       def set_city
+        if session[:city_id].nil?
+          session[:city_id] = 1
+        end
+      end
+      
        def call_logging
          url_split = request.request_uri.split('?')
          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index"
