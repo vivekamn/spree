@@ -17,17 +17,18 @@ class DealHistory < ActiveRecord::Base
   
   def deal_notify 
     if (self.is_active == true)
-      current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+#      current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
+      current_deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
       product = Product.find(:first, :conditions =>"id = #{current_deal.product_id}")
-      all_deals_notify_email = DealsNotification.find(:all, :select => "email",:conditions=>['unusbcribed = ?',false])
-      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user' and is_sample = ? and unusbcribed = ?",false,false])
+      all_deals_notify_email = DealsNotification.find(:all, :select => "email",:conditions=>['unusbcribed = ? AND city_id = ?',false,session[:city_id]])
+      all_user_email = User.find(:all,:include => :roles,:select => "email", :conditions => ["roles.name = 'user' and is_sample = ? and unusbcribed = ? AND city_id = ? ",false,false,session[:city_id]])
       message = product.sms_notification.to_s
       flag = 1
       qry_str = ""
     all_phone_nos = []
     all_phone_nos = all_user_email.collect{|x| x.phone_no}
     sms_mobile_no = []
-    sms_nitifies = SmsNotify.find(:all)
+    sms_nitifies = SmsNotify.find(:all, :conditions => ['city_id = ?', session[:city_id]])
     sms_mobile_no = sms_nitifies.collect{|x| x.mobile_no}
     all_phone_nos = all_phone_nos.concat(sms_mobile_no)
     all_phone_nos.uniq!
