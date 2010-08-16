@@ -107,21 +107,21 @@
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '1' %>
-							<a href="<%if session[:affiliate].nil?%><%= chennai_path %><%else%><%= chennai_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
+							<img src="/images/city/chennai.gif" border="0" />&nbsp;&nbsp;
 						<%else%>
 							<a href="<%if session[:affiliate].nil?%><%= chennai_path %><%else%><%= chennai_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '2' %>
-							<a href="<%if session[:affiliate].nil?%><%= bangalore_path %><%else%><%= bangalore_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
+							<img src="/images/city/bangalore.gif" border="0" />&nbsp;&nbsp;
 						<%else%>
 							<a href="<%if session[:affiliate].nil?%><%= bangalore_path %><%else%><%= bangalore_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '5' %>
-							<a href="<%if session[:affiliate].nil?%><%= hyderabad_path %><%else%><%= hyderabad_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
+							<img src="/images/city/hyderabad.gif" border="0" />&nbsp;&nbsp;
 						<%else%>
 							<a href="<%if session[:affiliate].nil?%><%= hyderabad_path %><%else%><%= hyderabad_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
@@ -183,7 +183,7 @@
             </div>
             <%end %>
         </div>
-		<% if session[:city_id] == '1'%>
+		<% if session[:city_id].to_s == '1'%>
         <div class="submitpart">
             <table width="431px">
                 <tr>
