@@ -52,7 +52,7 @@
         </div>
         <div class="bought" id="bought" style="display:none;">
             <div class="bought1">
-                <span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %>Bought</span>
+                <span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span>
                 <br/>
                 <br/>
             </div>
@@ -64,7 +64,7 @@
                 <%if @deal and deal_live @deal, @featured_product %>
                 <%if deal_on @featured_product %>
                 Hurray, the deal is already on. Just go ahead to get your masthi savings <%else %>
-                If <%= @featured_product.minimum_number %>people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. <%end %>
+                If <%= @featured_product.minimum_number %> people buy in to this deal before time runs out we all save big... but it won't happen without <%= @featured_product.minimum_number %>. <%end %>
                 <%end %>
             </div>
         </div>
