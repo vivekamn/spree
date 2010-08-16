@@ -13,8 +13,10 @@ before_filter :find_and_set_affiliate, :only => :index
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
-
-    if params[:from] == 'home'
+    if params[:from]=='cities'
+      redirect_to home_path(:idev_id=>session[:affiliate], :city_id => params[:city_id].to_s)
+   
+    elsif params[:from] == 'home'
       unless session[:affiliate].nil?
         redirect_to home_path(:idev_id=>session[:affiliate])
       else
