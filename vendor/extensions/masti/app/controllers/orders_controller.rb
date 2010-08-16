@@ -74,6 +74,11 @@ class OrdersController < Spree::BaseController
   
   def create_after
     object.update_attributes(:city_id => session[:city_id])
+	unless session[:renewed_aff_session_after_pay].nil?
+      object.update_attributes(:affiliate_id => session[:renewed_aff_session_after_pay])
+    else
+      object.update_attributes(:affiliate_id => session[:affiliate])
+    end
     if params[:type]
       object.update_attributes(:gift => 1)
     end

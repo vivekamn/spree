@@ -3,6 +3,7 @@ class Spree::BaseController < ActionController::Base
   helper :application, :hook
   before_filter :instantiate_controller_and_action_names
   before_filter :touch_sti_subclasses
+  #after_filter :find_and_set_affiliate
   filter_parameter_logging :password, :password_confirmation, :number, :verification_value
   helper_method :current_user_session, :current_user, :title, :title=, :get_taxonomies, :current_gateway
 
@@ -181,6 +182,18 @@ class Spree::BaseController < ActionController::Base
     if RAILS_ENV == 'development'
       load(File.join(SPREE_ROOT,'config/initializers/touch.rb'))
     end
+  end
+  
+  def find_and_set_affiliate    
+    if params[:idev_id].nil? and session[:logged_in_from_affiliate].nil? and session[:renewed_aff_session_after_pay].nil?
+      session[:affiliate] = nil unless session[:affiliate].nil?
+    else
+      session[:affiliate] = params[:idev_id] unless params[:idev_id].nil?
+      session[:affiliate] = session[:logged_in_from_affiliate] unless session[:logged_in_from_affiliate].nil?
+      session[:affiliate] = session[:renewed_aff_session_after_pay] unless session[:renewed_aff_session_after_pay].nil?
+      session[:logged_in_from_affiliate] = nil
+      session[:renewed_aff_session_after_pay] = nil
+    end   
   end
 
 end

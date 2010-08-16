@@ -7,6 +7,7 @@ class HomeController < Spree::BaseController
   before_filter :fls_fr_okt_fb_user, :only => [:index,:how_masti_works,:get_featured,:upcoming_deals,:recent_deals]
   skip_filter :protect_from_forgery
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
+before_filter :find_and_set_affiliate, :only => :index
   
   def get_city
     unless params[:city_id].nil?
@@ -20,7 +21,11 @@ class HomeController < Spree::BaseController
 #      redirect_to chennai_path     
 #    end
     if params[:from] == 'home'
-      redirect_to home_path
+      unless session[:affiliate].nil?
+        redirect_to home_path(:idev_id=>session[:affiliate])
+      else
+        redirect_to home_path
+      end
     else
       redirect_to :back
     end
@@ -371,6 +376,7 @@ class HomeController < Spree::BaseController
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
     begin
       @order.update_payment_info(@response_txt)
+      session[:renewed_aff_session_after_pay] = @order.affiliate_id
       unless @order.user.user_promotion.nil?
         @order.update_user_promotion
       end
