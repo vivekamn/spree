@@ -73,9 +73,9 @@ class OrdersController < Spree::BaseController
   end
   
   def create_after
+    object.update_attributes(:city_id => session[:city_id])
     if params[:type]
       object.update_attributes(:gift => 1)
-      object.update_attributes(:city_id => session[:city_id])
     end
     unless session[:src].nil?
       object.update_attributes(:source => session[:src])
