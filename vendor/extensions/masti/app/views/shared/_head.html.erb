@@ -5,7 +5,7 @@
 <%= javascript_include_tag "utils" %>
 <script>
     function adjustNotes(){
-        var default_notes_top = 138;
+        var default_notes_top = 160;
         var default_screen_width = 935;
         var home_coordinates = getElementOffsetScrollable(document.getElementById("home_menu"));
         var pageY;
@@ -98,25 +98,37 @@
     <div class="logopart">
         <a href="/home" style="text-decoration:none;"><img src="/images/logo.gif" border="0" width="305" height="71" alt="Best Deals@masthideals.com"/></a>
     </div>
-	<div>
-        Select the city &nbsp;&nbsp;
-		<%if session[:city_id] == '1'%>
-		<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
-		<%else%>
-		<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
-		<%end%>
-		<%if session[:city_id] == '2'%>
-		<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
-		<%else%>
-		<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
-		<%end%>
-		<%if session[:city_id] == '5'%>
-			<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
-		<%else%>
-			<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
-		<%end%>
-    </div>
     <div class="logoright">
+    	<div style="padding-left: 30px;padding-top:4px;">
+			<table>
+				<tr>
+					<td valign="middle">
+						Select the city &nbsp;&nbsp;
+					</td>
+					<td>
+						<%if session[:city_id].to_s == '1' %>
+							<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
+						<%else%>
+							<a href="/home/get_city?city_id=1&from=home"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
+						<%end%>
+					</td>
+					<td>
+						<%if session[:city_id].to_s == '2' %>
+							<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
+						<%else%>
+							<a href="/home/get_city?city_id=2&from=home"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
+						<%end%>
+					</td>
+					<td>
+						<%if session[:city_id].to_s == '5' %>
+							<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
+						<%else%>
+							<a href="/home/get_city?city_id=5&from=home"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
+						<%end%>
+					</td>
+				</tr>
+			</table>
+	    </div>
         <% if current_user %>
         <div class="loggedinpart" style="padding-left: 30px;">
             <div class="fl username">
@@ -200,12 +212,12 @@
             <table border=0 cellpadding=0 cellspacing=0>
                 <tr>
                     <td>
-	                	<%if session[:city_id] == '1'%>
+	                	<%if session[:city_id].to_s == '1'%>
 							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/chennai.jpeg" /></a>						
-						<%elsif session[:city_id] == '2' %>
-							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/bangalore.jpg" /></a>
-						<%elsif session[:city_id] == '5'%>
-							<a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/hyderabad.jpg" /></a>
+						<%elsif session[:city_id].to_s == '2' %>
+							<a href="http://www.blrmoms.com.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/bangalore.jpg" /></a>
+						<%elsif session[:city_id].to_s == '5'%>
+							<a href="http://www.hyderabadmoms.com/?from=masthideals" target="_blank"><img src="/images/cmoms_banner/hyderabad.jpg" /></a>
 						<%end%>
                     </td>
                 </tr>
@@ -233,21 +245,21 @@
                 <table align="right" cellpadding="0px" cellspacing="0px">
                     <tr>
                         <td align="right">
-                        	<%if session[:city_id] == '1'%>
+                        	<%if session[:city_id].to_s == '1'%>
 								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! -->
                             	<object width="190" height="275">
                                 	<param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/>
                                 	<embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275">
                                 	</embed>
                             	</object>
-							<%elsif session[:city_id] == '2' %>
+							<%elsif session[:city_id].to_s == '2' %>
 								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
 								<object width="190" height="275" >
 									<param name="movie" value="http://widget.meebo.com/mm.swf?URcgUwoRMI"/>
 									<embed src="http://widget.meebo.com/mm.swf?URcgUwoRMI" type="application/x-shockwave-flash" width="190" height="275">
 									</embed>
 								</object>
-							<%elsif session[:city_id] == '5'%>
+							<%elsif session[:city_id].to_s == '5'%>
 								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
 								<object width="190" height="275" >
 									<param name="movie" value="http://widget.meebo.com/mm.swf?htmPUDSLst"/>

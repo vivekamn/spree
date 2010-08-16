@@ -10,7 +10,13 @@ module HomeHelper
   
    def page_title
      if @featured_product
-        "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Best Deals Website - Masthideals.com"
+       if session[:city_id].to_s == '1'
+          "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Best Deals Website - Masthideals.com" 
+       elsif session[:city_id].to_s == '2'
+          "Bangalore Restaurant Deals | Good Spa Reviews | Online Shopping Discount | Movie Tickets Coupon - Masthideals.com"
+       elsif session[:city_id].to_s == '5'
+          "Hyderabad Spa Discounts | Online Restaurant Coupons | Good Shopping Reviews | Adventure Sports Tickets - Masthideals.com"
+       end
     else
       @page_title
     end
@@ -117,7 +123,6 @@ module HomeHelper
   
   
   def featured_product(order)
-    puts "#{order.inspect}================"
     #deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
     #Product.find(:first, :conditions => ['id = ?',deal.product_id])
      order.line_items[0].variant.product

@@ -9,7 +9,6 @@ class HomeController < Spree::BaseController
   #    before_filter :update_user_credit,:only=>[:from_cmom_check]
   
   def get_city
-    puts "#{params[:city_id]}====================="
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
@@ -28,7 +27,6 @@ class HomeController < Spree::BaseController
   end
   
   def index
-    puts "#{session[:city_id]}===============session[:city_id]========="
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
