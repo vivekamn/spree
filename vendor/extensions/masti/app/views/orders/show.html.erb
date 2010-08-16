@@ -51,7 +51,7 @@
 	      <input name="ship_postal_code" type="hidden" value="<%=@order.checkout.bill_address.zipcode%>" />
 	      <input name="ship_country" type="hidden" value="IND" />
 	      <input name="ship_phone" type="hidden" value="<%=@order.checkout.bill_address.phone%>" />
-	      <div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> 
+	      <div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif", :onclick=>"clear_session();"%> 
 	      </div>
 		  <%end%>
 	  <%else%>
@@ -70,6 +70,9 @@
 
  
 <script type="text/javascript">
+	function clear_session(){
+		var clear = "<%=clear_affiliate_session%>";
+	}
   function checkState(){
     var state='<%=@order.state%>'
       if(state=='new'){

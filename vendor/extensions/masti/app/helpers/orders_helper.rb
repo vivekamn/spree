@@ -42,5 +42,10 @@ module OrdersHelper
   def current_user_credit_amount
     current_user.user_promotion.credit_amount
   end
+  
+  def clear_affiliate_session    
+    session[:affiliate] = nil
+    return true
+  end
 
 end

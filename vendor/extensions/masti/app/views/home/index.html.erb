@@ -17,6 +17,10 @@
 </style>
 <% @description = "Find all upcoming online deals, discount coupons and great shopping offers for your favorite online store at Masthideals.com" %>
 <% @keywords = "hot deals coupons, online discount deals, best spa resort deals chennai, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages " %>
+<%if current_user and pay_affiliate_signup?(current_user)%>
+<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&&affiliate_id=<%=current_user.affiliate_id%>&idev_commission=<%=SIGN_UP_AFFILIATE_COMMISSION%>" width="1" height="1">
+<%pay_affiliate_signup(current_user)%>
+<%end%>
 <div class="title" style="margin-left:20px;margin-top:10px;font-size:20px;font-weight:bold; color:#00a8ff;">
     <% unless @featured_product.name.nil? %>
     <%=@featured_product.name %>

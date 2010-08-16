@@ -3,7 +3,7 @@
     <div class="navinner">
         <% if @bar_selected == "how_masthi_works" %>
         <div class="thedeal" id="home_menu">
-            <a href="<%= home_path%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
+            <a href="<%if session[:affiliate].nil? %><%=home_path %><%else%><%=home_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
         </div>
         <div class="howwork">
             <a href="<%= how_masti_works_path%>"><img src="/images/how_on.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
@@ -23,7 +23,7 @@
         </div>
 		<% elsif @bar_selected == "get_featured" %>
         <div class="thedeal" id="home_menu">
-            <a href="<%= home_path%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
+            <a href="<%if session[:affiliate].nil? %><%=home_path %><%else%><%=home_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
         </div>
         <div class="howwork">
             <a href="<%= how_masti_works_path%>"><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
@@ -43,7 +43,7 @@
         </div>
 		<% elsif @bar_selected == "upcoming_deals" %>
         <div class="thedeal" id="home_menu">
-            <a href="<%= home_path%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
+            <a href="<%if session[:affiliate].nil? %><%=home_path %><%else%><%=home_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
         </div>
         <div class="howwork">
             <a href="<%= how_masti_works_path%>"><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
@@ -63,7 +63,7 @@
         </div>
 		<%elsif @bar_selected == "recent_deals" %>
         <div class="thedeal" id="home_menu">
-            <a href="<%= home_path%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
+            <a href="<%if session[:affiliate].nil? %><%=home_path %><%else%><%=home_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/deal.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
         </div>
         <div class="howwork">
             <a href="<%= how_masti_works_path%>"><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
@@ -83,7 +83,7 @@
         </div>
 		<%else %>
         <div class="thedeal" id="home_menu">
-            <a href="<%= home_path%>"><img src="/images/deal_on.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
+            <a href="<%if session[:affiliate].nil? %><%=home_path %><%else%><%=home_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/deal_on.gif" name="Image1" width="188" height="37" border="0" id="Image1" onmouseover="MM_swapImage('Image1','','/images/deal_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>
         </div>
         <div class="howwork">
             <a href="<%= how_masti_works_path%>"><img src="/images/how.gif" name="Image2" width="188" height="37" border="0" id="Image2" onmouseover="MM_swapImage('Image2','','/images/how_hover.gif',1);" onmouseout="MM_swapImgRestore();"/></a>

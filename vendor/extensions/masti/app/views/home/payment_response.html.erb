@@ -8,6 +8,10 @@
                 <%if !@err_message %>
 	                <td colspan='2' width="100%">
 	                    <%if @order.state!='new' and @order.state!='canceled' %>
+							<%if pay_affiliate_sale?(@order)%>
+								<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&idev_saleamt=<%=@response_txt['Amount']%>&idev_ordernum=<%=@response_txt['MerchantRefNo'] %>&affiliate_id=<%=@order.affiliate_id%>" width="1" height="1">
+								<%pay_affiliate_sale(@order)%>
+							<%end%>
 	                    	<% if @order.state=='paid' %>
 			                    <p>
 			                        <h3>Hi <%= @order.bill_address.name %>,</h3>

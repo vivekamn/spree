@@ -26,3 +26,5 @@ EMAIL_CAMP_ADD['/orkut'] = 'orkut'
 EMAIL_CAMP_ADD['/adwords'] = 'adwords'
 EMAIL_CAMP_ADD['/email_camp'] = 'camp'
 EMAIL_CAMP_ADD['/email_camp_diff'] = 'diff'
+
+SIGN_UP_AFFILIATE_COMMISSION="25"
