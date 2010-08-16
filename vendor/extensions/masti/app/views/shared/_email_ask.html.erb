@@ -1,0 +1,167 @@
+<div style="height:370px;width:690px;background-color:#FFFFFF;border: 5px solid #29689E;">
+    <%form_for :email_ask , :url => {:controller => "home" ,:action => "email_deal_notify_by_ask"} ,:html => {:id => "eamil_ask"} do |f| %>
+    <table width="690">
+        <tr>
+            <td>
+                <table width="690">
+                    <tr>
+                    	<td align="right">
+                    		<img src="/images/wrong.jpg?1262930051" onclick="javascript:hidePop('email_ask_div');" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+                    	</td>
+                    </tr>	
+					<tr style="">
+                        <td style="padding: 20px;">
+                            <!--  <span class='green' style='font-weight:bold;font-size:16px;'>If you have registered your email </span>
+                            <span class='blue' style='font-size:16px;font-weight:bold;'>with us you would not have missed</span>-->
+                        </td>
+                    </tr>
+					
+                </table>
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <td>
+                    <table width="690" style="padding-left: 20px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_inox_logo.jpeg">
+                                </td>
+                                <td>
+                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_queens_logo.jpeg">
+                                </td>
+                                <td>
+                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_pepper_logo.jpeg">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="690px" align="center">
+                    <table style="margin-left: -18px;margin-top: 28px;">
+                        <tbody>
+                            <tr>
+                                <td style="font-size: 15px;">
+                                    Notify me on Great Deals from
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="690px" align="center">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" value="resturent" id="resturent" name="resturent" checked="checked">Restaurant
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="spa" id="spa" name="spa" checked="checked">Spa
+                                </td>
+                                <td>
+                                    <input type="checkbox" value="movie" id="movie" name="movie" checked="checked">Movie Shows
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="690px" align="center">
+                    <table style="padding-left: 70px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="w190">
+                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="E-mail id">
+                                        <br>
+                                        <div class="errormesg" id="error_email_ask" style="color: red;">
+                                        </div>
+                                    </div>
+                                    <div class="fl">
+                                        <input type="image" border="0" onclick="return email_validate_head();" src="/images/go.gif?1266899706">
+                                    </div>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:hidePop('email_ask_div');">No Thanks</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="690px" align="center">
+                    <table style="padding-left: 25px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <font style="color: red;">
+                                        * 
+                                    </font>
+                                    We don't share your email id nor do we spam
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <%end %>
+</div>
+<script type="text/javascript">
+    
+    function clear_email(){
+        document.getElementById('email_ask_email').value = "";
+    }
+    
+    function load_email(){
+        if (document.getElementById('email_ask_email').value == "") {
+            document.getElementById('email_ask_email').value = "E-mail id";
+        }
+    }
+    
+    function email_validate_head(){
+        var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+        var flag_em = true;
+        var email_name = document.getElementById('email_ask_email').value;
+        var error_msg_div = document.getElementById('error_email_ask');
+        if (email_name != '') {
+            if (email_name.length != 0) {
+                email_my = new String(email_name);
+                email_my = email_my.trim();
+                email_value = EMAIL_REGEX.test(email_my);
+                if (email_value != 1) {
+                    error_msg_div.innerHTML = "Please enter valid E-mail";
+                    flag_em = false;
+                }
+            }
+            else {
+                error_msg_div.innerHTML = "Please enter valid E-mail";
+                flag_em = false;
+            }
+        }
+        else {
+            error_msg_div.innerHTML = "Please enter valid E-mail";
+            flag_em = false;
+        }
+        
+        return flag_em;
+        
+    }
+    
+</script>
