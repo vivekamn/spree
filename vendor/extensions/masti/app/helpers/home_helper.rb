@@ -134,4 +134,42 @@ module HomeHelper
 #    puts "#{side_deal.product_id}============#{side_deal_product.id}==================="
     render :file => "#{RAILS_ROOT}/vendor/extensions/masti/app/views/home/show_side_deal.html.erb", :use_full_path => false,:locals => { :side_deal_product => side_deal_product, :deal_info => deal_info}
   end
+  
+  def pay_affiliate_signup?(user)    
+    if !user.affiliate_id.nil? and !user.paid_affiliate
+      return true
+#    elsif user.paid_affiliate
+#      puts "to clear session........"
+#      session[:affiliate]=nil
+#      puts "after help.....#{session[:affiliate]}"
+#      return false
+    else
+      return false
+    end
+  end
+  
+  def pay_affiliate_signup(user)
+    user.paid_affiliate = true
+    user.save
+    session[:affiliate]=nil
+  end
+  
+  def pay_affiliate_sale?(order)        
+    if !order.affiliate_id.nil? and !order.paid_affiliate
+      return true
+#    elsif user.paid_affiliate
+#      puts "to clear session........"
+#      session[:affiliate]=nil
+#      puts "after help.....#{session[:affiliate]}"
+#      return false
+    else
+      return false
+    end
+  end
+  
+  def pay_affiliate_sale(order)
+    order.paid_affiliate = true
+    order.save
+    session[:affiliate]=nil
+  end
 end

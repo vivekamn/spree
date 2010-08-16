@@ -8,7 +8,7 @@ class UserSessionsController < Spree::BaseController
     @user_session = UserSession.new
   end
 
-  def create
+  def create    
     not_need_user_auto_creation = 
         user_without_openid(params[:user_session]) ||
         user_with_openid_exists?(:openid_identifier => params['openid.identity']) ||
@@ -58,7 +58,7 @@ class UserSessionsController < Spree::BaseController
     @user_session = UserSession.new(data)
     @user_session.save do |result|
       if result
-
+        session[:logged_in_from_affiliate] = session[:affiliate]
         respond_to do |format|
           format.html {
             if data[:remember_me] == "1"
