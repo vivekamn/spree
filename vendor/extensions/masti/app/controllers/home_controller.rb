@@ -431,6 +431,7 @@ class HomeController < Spree::BaseController
       unless session[:src].nil?
         @deals_notify.source = session[:src]
       end
+      @deals_notify.city_id = session[:city_id]
       if @deals_notify.save
         flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
       else
@@ -442,6 +443,46 @@ class HomeController < Spree::BaseController
     end
     redirect_to :back
   end
+  
+   def email_deal_notify_by_ask
+    deals_notify = DealsNotification.find_by_email(params[:email_ask][:email].strip)
+    if deals_notify.nil?
+      deals_notify = DealsNotification.new
+      deals_notify.email = params[:email_ask][:email].strip.downcase
+      unless session[:src].nil?
+        deals_notify.source = session[:src]
+      end
+      deals_notify.city_id = session[:city_id]
+      deal_arr = []
+      unless params[:resturent].nil?
+        deal_arr << "resturent"
+      end
+      
+       unless params[:spa].nil?
+        deal_arr << "spa"
+      end
+      
+       unless params[:movie].nil?
+        deal_arr << "movie"
+      end
+      
+      unless deal_arr.size==0
+          deal_str=deal_arr.collect{|x| x}.join(',').to_s  
+      end
+      deals_notify.deals = deal_str
+      if deals_notify.save
+        flash[:success]="Thanks for registering with MasthiDeals hot deals update. You will recieve email alerts on new deals posted in MasthiDeals.com"      
+      else
+        flash[:error]="E-mail subscription Failed."
+      end
+    else
+      #if the user have already subscribed means it will show error
+      flash[:error]="You have already subscribed to MasthiDeals Newsletter. Would you like to register another email id?"      
+    end
+    redirect_to :back
+  end
+  
+  
   
   def voucher
     @order=Order.find(params[:id])

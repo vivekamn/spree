@@ -127,14 +127,14 @@ class MastiExtension < Spree::Extension
     # make your helper avaliable in all views
     Spree::BaseController.class_eval do
       helper HomeHelper
-      before_filter :call_logging
+      before_filter :call_logging,:call_pop
       before_filter :set_city
       
-      #        def call_pop
-      #          if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
-      #            cookies[:time_remaining]=40
-      #          end
-      #        end
+      def call_pop
+        if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
+          cookies[:time_remaining]=10
+        end
+      end
       
       def set_city
         if session[:city_id].nil?
