@@ -13,13 +13,7 @@ before_filter :find_and_set_affiliate, :only => :index
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
-#    if params[:city_id] == 2
-#      redirect_to bangalore_path
-#    elsif params[:city_id] == 5
-#      redirect_to hyderabad_path
-#    else  
-#      redirect_to chennai_path     
-#    end
+
     if params[:from] == 'home'
       unless session[:affiliate].nil?
         redirect_to home_path(:idev_id=>session[:affiliate])
@@ -32,6 +26,9 @@ before_filter :find_and_set_affiliate, :only => :index
   end
   
   def index
+    unless params[:city_id].nil?
+      session[:city_id] = params[:city_id]
+    end
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
