@@ -12,10 +12,6 @@ map.progress_bar '/progress_bar',:controller=>"home",:action=>"progress_bar"
 map.terms_conditions '/terms-conditions',:controller=>"home",:action=>"terms_conditions"
 map.voucher '/voucher' ,:controller=>"home",:action=>"voucher"
 map.payment_response '/payment_response' ,:controller=>"home",:action=>"payment_response"
-map.chennai '/chennai', :controller=>'home', :action=>'index'
-map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
-map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
-map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 map.sitemap '/sitemap', :controller=>'home',  :action=>'sitemap'
 map.upcoming '/upcoming-deals', :controller=>'home',  :action=>'upcoming_deals'
 map.recent '/recent-deals', :controller=>'home',  :action=>'recent_deals'
@@ -56,6 +52,10 @@ map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 map.chennai '/chennai', :controller=>'home', :action=>'index'
 map.hyderabad '/hyderabad', :controller=>'home', :action=>'index'
 map.bangalore '/bangalore', :controller=>'home', :action=>'index'
+#map.chennai '/chennai', :controller=>'home', :action=>'index'
+#map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
+#map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
+#map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
 
 #error path
 map.error '/nodeal', :controller => 'home', :action=> 'error'
