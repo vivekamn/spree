@@ -49,9 +49,9 @@ map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action
 map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 
 #city path
-map.chennai '/chennai', :controller=>'home', :action=>'get_city', :city_id => 1, :from=>'cities'
-map.hyderabad '/hyderabad', :controller=>'home', :action=>'get_city', :city_id => 5, :from=>'cities'
-map.bangalore '/bangalore', :controller=>'home', :action=>'get_city', :city_id => 2, :from=>'cities'
+map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
+map.hyderabad '/hyderabad', :controller=>'home', :action=>'index', :city_id => 5
+map.bangalore '/bangalore', :controller=>'home', :action=>'index', :city_id => 2
 #map.chennai '/chennai', :controller=>'home', :action=>'index'
 #map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
 #map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'

@@ -107,23 +107,23 @@
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '1' %>
-							<a href="<%= chennai_path %>"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= chennai_path %><%else%><%= chennai_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/chennai.gif" border="0" /></a>&nbsp;&nbsp;
 						<%else%>
-							<a href="<%= chennai_path %>"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= chennai_path %><%else%><%= chennai_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/chennai_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '2' %>
-							<a href="<%= bangalore_path %>"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= bangalore_path %><%else%><%= bangalore_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/bangalore.gif" border="0" /></a>&nbsp;&nbsp;
 						<%else%>
-							<a href="<%= bangalore_path %>"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= bangalore_path %><%else%><%= bangalore_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/bangalore_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
 					</td>
 					<td>
 						<%if session[:city_id].to_s == '5' %>
-							<a href="<%= hyderabad_path %>"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= hyderabad_path %><%else%><%= hyderabad_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/hyderabad.gif" border="0" /></a>&nbsp;&nbsp;
 						<%else%>
-							<a href="<%= hyderabad_path %>"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
+							<a href="<%if session[:affiliate].nil?%><%= hyderabad_path %><%else%><%= hyderabad_path(:idev_id=>session[:affiliate]) %><%end%>"><img src="/images/city/hyderabad_select.gif" border="0" /></a>&nbsp;&nbsp;
 						<%end%>
 					</td>
 				</tr>
