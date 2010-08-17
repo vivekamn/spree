@@ -83,7 +83,7 @@ before_filter :find_and_set_affiliate, :only => :index
   end
   
   def fls_fr_okt_fb_user
-    if session[:city_id].to_s == '1'
+    #if session[:city_id].to_s == '1'
       unless current_user
         if !EMAIL_CAMP_ADD[session[:src]].nil? 
           flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>."
@@ -92,7 +92,7 @@ before_filter :find_and_set_affiliate, :only => :index
           flash[:invite] = "<span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'>Register now and get the Star Customer benefit as you are an elite </span><span class='blue' style='font-size:16px;font-weight:bold;'>"+EMAIL_CAMP[session[:src]]+" Employee!</span><span class='green' style='margin-left:0px;font-size:16px;font-weight:bold;'> As a Star Customer, you can <br> get 3 – 10% extra discount*,</span> <span class='blue' style='font-size:16px;font-weight:bold;'>access to exclusive deals for Star Customer Club etc. You will also earn Rs 100 credit by registering with MasthiDeals.com ( Its easy and free! ). Hence  <a href='/signup'><u>go ahead and register</u></a></span>."
         end
       end      
-    end
+    #end
   end
   
   def order_vendor
