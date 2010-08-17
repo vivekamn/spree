@@ -20,7 +20,7 @@ class UsersController < Spree::BaseController
       @user.refered_by = session[:ref]
       session.delete :ref
     end
-    if session[:city_id] == '1'
+    if session[:city_id].to_s == '1'
       unless session[:src].nil?
         @user.source = session[:src]
       end

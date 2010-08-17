@@ -143,7 +143,7 @@ class MastiExtension < Spree::Extension
       end
       
       def call_logging
-        if session[:city_id] == 1
+        if session[:city_id].to_s == '1'
           url_split = request.request_uri.split('?')
           if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index"
             if url_split[1].nil? or url_split[1].empty? 
