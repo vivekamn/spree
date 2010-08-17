@@ -28,7 +28,6 @@ before_filter :find_and_set_affiliate, :only => :index
   end
   
   def index
-    puts session[:src]
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
