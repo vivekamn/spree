@@ -84,7 +84,7 @@ before_filter :find_and_set_affiliate, :only => :index
   end
   
   def fls_fr_okt_fb_user
-    if session[:city_id].to_i==1
+    if session[:city_id].to_s == '1'
       unless current_user
         if !EMAIL_CAMP_ADD[session[:src]].nil? 
           flash[:invite] = "<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>You can earn 100 Rs  by registering with MasthiDeals.com ( Its easy and free! )</span>. <span class='blue' style='font-size:18px;font-weight:bold;'>You can use this money to buy any deal in MasthiDeals.com. <a href='/signup'><u>Please go ahead and register</u></a></span>."
