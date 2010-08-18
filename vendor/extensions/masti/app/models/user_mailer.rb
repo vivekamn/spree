@@ -11,13 +11,13 @@ class UserMailer < ActionMailer::Base
     body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
   end
   
-  def count_to_admin(count,email,from1)
+  def count_to_admin(count,email,from1,source,city)
     content_type "text/html"
     from           "customersupport@masthideals.com"
     recipients    ["akvsaran@gmail.com","akvmurlai@gmail.com"]
     subject      " #{from1} User Count in Masthideals.com: #{count}"
     sent_on        Time.now.utc
-    body           "email" => email,"count"=>count,"from1"=>from1
+    body           "email" => email,"count"=>count,"from1"=>from1,"source"=>source,"city"=>city
   end
   
   def success_invite(referer,count,user,current_user)

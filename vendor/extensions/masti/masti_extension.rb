@@ -93,7 +93,7 @@ class MastiExtension < Spree::Extension
       
       def call_count_mailer
         user_count = User.count(:conditions =>['is_sample != 1'])
-        UserMailer.deliver_count_to_admin(user_count,self.email,"Masthideals")
+        UserMailer.deliver_count_to_admin(user_count,self.email,"Masthideals",self.source,self.city.name)
       end
       
     end 
@@ -145,7 +145,7 @@ class MastiExtension < Spree::Extension
       def call_logging
         #if session[:city_id].to_s == '1'
           url_split = request.request_uri.split('?')
-          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index"
+          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore"
             if url_split[1].nil? or url_split[1].empty? 
               session[:src]=request.request_uri
             else
