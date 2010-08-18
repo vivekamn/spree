@@ -25,7 +25,7 @@ class UsersController < Spree::BaseController
         @user.source = session[:src]
       end
     #end
-    @user.city_id = session[:city_id]
+#    @user.city_id = session[:city_id]
     @user.save do |result|
       if result       
         flash[:notice] = t(:user_created_successfully) unless session[:return_to]

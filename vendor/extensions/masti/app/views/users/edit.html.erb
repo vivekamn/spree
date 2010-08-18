@@ -31,6 +31,12 @@
       <td width="66%"><%= f.text_field :phone_no, :class=>"textbox" %>
         </td>
     </tr>
+	<tr>
+		<td width="30%" height="35">City</td>
+	  <td width="4%" height="35"> :</td>
+      <td width="66%"><%= f.select :city_id, get_cities, {}, :class => 'textbox' -%>
+        </td>
+	</tr>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>

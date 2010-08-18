@@ -115,6 +115,24 @@
                         </div>
                     </td>
                 </tr>
+				<tr>
+                    <td width="30%" height="35">
+                        City 
+                        <font color="red">
+                            *
+                        </font>
+                    </td>
+                    <td width="4%" height="35">
+                       :
+                    </td>
+                    <td width="66%" height="35">
+                        <div style="float:left;">
+							<%= f.select :city_id, get_cities, {}, :class => 'textbox' -%>
+						</div>
+						<div id="phone_image">
+                        </div>
+                    </td>
+                </tr>
 				<!--
                 <tr>
                     <td></td>

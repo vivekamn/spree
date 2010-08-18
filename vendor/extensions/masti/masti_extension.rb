@@ -83,7 +83,7 @@ class MastiExtension < Spree::Extension
     
     User.class_eval do
       accepts_nested_attributes_for :bill_address
-      attr_accessible :phone_no,:refered_by
+      attr_accessible :phone_no,:refered_by,:city_id
       has_one :verification_code
       has_one :user_promotion
       belongs_to :city
