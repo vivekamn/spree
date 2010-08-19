@@ -34,7 +34,7 @@
         <% end %>
       </tr>
     <% end %>
-  <%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount>0%>
+  <%if !@order.user.user_promotion.nil?%>
 	  <% hook :order_details_subtotal do %>
 	    <tbody id='subtotal'>
 	      <tr class="total" id="subtotal-row">

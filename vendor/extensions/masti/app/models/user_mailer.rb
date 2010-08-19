@@ -25,7 +25,7 @@ class UserMailer < ActionMailer::Base
     from           "lakshmi@masthideals.com"
     recipients    referer
     bcc           Spree::Config[:mail_bcc]
-    subject      "Thanks . You are close to winning the #{call_count(current_user)} Satyam tickets."
+    subject      "Thanks . You are close to winning the #{call_count(current_user)} Inox ticket(s)."
     sent_on        Time.now.utc
     body           "ref_email" => user,"count"=>count,"current_user"=>current_user
   end
