@@ -9,11 +9,11 @@
                                 <tbody>
                                     <tr>
                                         <td valign="top" style="padding: 18px 0pt 0pt 15px; width: 110px; min-height: 37px;">
-                                            <% if @money == 100 %>
-												<a href="http://www.masthideals.com/adwords" style="text-decoration: none;" target="_blank" linkindex="0">
-											<%else%>
+                                            <%# if @money == 100 %>
+												<!--<a href="http://www.masthideals.com/adwords" style="text-decoration: none;" target="_blank" linkindex="0">-->
+											<%#else%>
 												<a href="http://www.masthideals.com/referral?ref=<%=@from%>" style="text-decoration: none;" target="_blank" linkindex="0">
-											<%end%>
+											<%#end%>
 											<span style="font-size: 35px; font-weight: bold; color: rgb(108, 171, 22);">Masthi</span><span style="color: rgb(33, 77, 118); font-size: 35px; font-weight: bold;">Deals</span><span style="font-size: 35px; font-weight: bold; color: rgb(108, 171, 22);">.com</span></a>
                                         </td>
                                         <td align="right" valign="top" style="padding-right: 20px; padding-top: 21px;">
@@ -76,11 +76,11 @@
                                                         Hi,
                                                         <br/>
                                                         <br/>
-                                                        <% if @money == 100 %>
-                                                        I am a member of <a href="http://www.masthideals.com/adwords">www.masthideals.com</a>
-                                                        which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.<%else %>
+                                                        <%# if @money == 100 %>
+                                                        <!--I am a member of <a href="http://www.masthideals.com/adwords">www.masthideals.com</a>
+                                                        which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.--><%#else %>
                                                         I am a member of <a href="http://www.masthideals.com/referral?ref=<%=@from%>">www.masthideals.com</a>
-                                                        which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.<%end %>
+                                                        which provides great deals from Restaurants, Spas, Resorts with discounts ranging from 50% to 90%.<%#end %>
                                                         <br/>
                                                         <br/>
                                                         Some of the upcoming deals include
@@ -98,11 +98,11 @@
                                                         40% discount for <b>Cafe Coffee Day</b>
                                                         <br/>
                                                         <br/>
-                                                        <% if @money == 100 %>
-                                                        If you register in <a href="http://www.masthideals.com/adwords"><b>www.masthideals.com</b></a>
+                                                        <%# if @money == 100 %>
+                                                        <!--If you register in <a href="http://www.masthideals.com/adwords"><b>www.masthideals.com</b></a>
                                                         before 30, Aug, 2010  you will get <b>50 Rs</b>
                                                         which you can use to buy any deal in MasthiDeals and a <b>chance to win an Iphone*</b>.
-                                                        <%else %>
+                                                        --><%#else %>
                                                         If you register in <a href="http://www.masthideals.com/referral?ref=<%=@from%>"><b>www.masthideals.com</b></a>
                                                         before 30, Aug, 2010 you will get <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;color:#6CAB16;'>50 </span>
                                                         <span class='blue' style='font-size:18px;font-weight:bold;color:#214D76;'>MD Money</span>
@@ -117,7 +117,7 @@
                                                         So go ahead and <a href="http://www.masthideals.com/referral?ref=<%=@from%>">invite your friends and win a ticket to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Inox</span><span class='blue' style='font-size:18px;font-weight:bold;color:#214D76;'> Movies</span>.</a>
                                                         <br/>
                                                         <br/>
-                                                        <%end %>
+                                                        <%#end %>
                                                         <br/>
                                                         <br/>
 														<% unless @body.nil? %>
