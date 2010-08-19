@@ -36,12 +36,12 @@
       </tr>
 	<%if cookies[:email].nil?%>
 		<%if !current_user.source.nil? and !current_user.source.empty?%>
-			<% if !EMAIL_CAMP[session[:src]].nil?  or !EMAIL_CAMP_ADD[session[:src]].nil? %>
+			<% if !EMAIL_CAMP[current_user.source].nil? %>
 			  <tr>
 			  	<td colspan="2">
 			  		<div id="" class="" style="width:98%">
 			  			<p style="margin-left:15px;"> 
-						 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Congrats!</span>  You have become a member of  Star Customer Club. You will get 3 - 10% addtional discount* and access to Exclusive deals for Start Customer Club.
+						 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Congrats!</span>  You have become a member of  Star Customer Club. You will get 3 - 10% addtional discount* and access to Exclusive deals for Star Customer Club.
 						  &nbsp;&nbsp;You can win an Iphone* by inviting your friends to register with
 						<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com.</span>
 						  &nbsp;&nbsp; So go ahead and invite your friends to win an <span class='blue' style='font-size:18px;font-weight:bold;'>Iphone</span>.
@@ -50,7 +50,7 @@
 			  		</div>
 			  	</td>
 			 </tr>
-			<%else%>
+			<%elsif !EMAIL_CAMP_ADD[current_user.source].nil?%>
 				<tr>
 				  	<td colspan="2">
 				  		<div id="" class="" style="width:98%">
