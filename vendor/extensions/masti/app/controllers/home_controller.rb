@@ -458,7 +458,12 @@ before_filter :find_and_set_affiliate, :only => :index
       unless session[:src].nil?
         deals_notify.source = session[:src]
       end
-      deals_notify.city_id = session[:city_id]
+      deals_notify.source = session[:src]
+      deals_notify.city_id = params[:city_id]
+      unless params[:email_ask][:mobile_no].nil?
+        sms_notify=SmsNotify.new(:mobile_no=>params[:email_ask][:mobile_no],:city_id=>params[:city_id])
+        sms_notify.save!
+      end
       deal_arr = []
       unless params[:resturent].nil?
         deal_arr << "resturent"

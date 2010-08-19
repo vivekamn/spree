@@ -1,127 +1,207 @@
-<div style="height:370px;width:690px;background-color:#FFFFFF;border: 5px solid #29689E;">
-    <%form_for :email_ask , :url => {:controller => "home" ,:action => "email_deal_notify_by_ask"} ,:html => {:id => "eamil_ask"} do |f| %>
-    <table width="690">
+<style>
+    .title-p {
+        font-size: 22px;
+        line-height: 26px;
+        margin: 0 0 15px 15px;
+    }
+    
+    .title-p span {
+        color: #1C679E;
+    }
+   .email_ask{
+    	border:2px solid #E5E5E5;
+    }
+</style>
+<div style="height:420px;width:950px;background-color:#FFFFFF;border: 5px solid #29689E;">
+    <table style="width:950px;">
         <tr>
-            <td>
-                <table width="690">
-                    <tr>
-                    	<td align="right">
-                    		<img src="/images/wrong.jpg?1262930051" onclick="javascript:hidePop('email_ask_div');" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
-                    	</td>
-                    </tr>	
-					<tr style="">
-                        <td style="padding: 20px;">
-                            <!--  <span class='green' style='font-weight:bold;font-size:16px;'>If you have registered your email </span>
-                            <span class='blue' style='font-size:16px;font-weight:bold;'>with us you would not have missed</span>-->
-                        </td>
-                    </tr>
-					
-                </table>
+            <td align="right">
+                <img src="/images/wrong.jpg?1262930051" onclick="javascript:hidePop('email_ask_div');" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
             </td>
         </tr>
+    </table>
+    <table>
         <tbody>
             <tr>
-                <td>
-                    <table width="690" style="padding-left: 20px;">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_inox_logo.jpeg">
-                                </td>
-                                <td>
-                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_vlcc_logo.jpg">
-                                </td>
-                                <td>
-                                    <img border="1" style="border: 1px solid black;" src="/images/email_ask/masthi_pepper_logo.jpeg">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <td colspan="2">
+                    <span style="text-align: center; color: rgb(28, 103, 158);" class="title-p"><b>Save upto 80 % on restaurants, movies, spas and many more fun places.</b></span>
                 </td>
             </tr>
-            <tr>
-                <td width="690px" align="center">
-                    <table style="margin-left: -18px;margin-top: 28px;">
-                        <tbody>
-                            <tr>
-                                <td style="font-size: 15px;">
-                                    Notify me on Great Deals from
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td width="690px" align="center">
+            <tr style="padding: 10px;">
+                <td valign="top" style="margin: 60px;">
                     <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="checkbox" value="resturent" id="resturent" name="resturent" checked="checked">Restaurant
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img width="161" height="112" class="email_ask" style="padding-bottom: 0px;border:1px solid balck;" src="http://www.mastideal.com/assets/products/1043/product/inox1.jpeg">
+                                    <br>
+									<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Movies
+                                    <br>
+                                    (upto 80% discount)
                                 </td>
                                 <td>
-                                    <input type="checkbox" value="spa" id="spa" name="spa" checked="checked">Spa
+                                    &nbsp;
                                 </td>
                                 <td>
-                                    <input type="checkbox" value="movie" id="movie" name="movie" checked="checked">Movie Shows
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    <img width="161" height="112" class="email_ask" style="padding-bottom: 0px;border:1px solid balck;" src="/images/email_ask/resturent.jpeg">
+                                    <br>
+									<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Restaurants
+                                    <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;(upto 80% discount)
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    <img width="161" height="112" class="email_ask" style="padding-bottom: 0px;border:1px solid balck;" src="/images/email_ask/games.jpeg">
+                                    <br>
+									<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fun places
+                                    <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;(upto 80% discount)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
+                                    <div style="text-align: left; color: rgb(28, 103, 158);" class="title-p">
+                                        <b>How it Works</b>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">
+                                    <ul>
+                                        <li style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                            1. Subscribe for email alerts/mobile alerts or register.
+                                        </li>
+                                        <li style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                            2. Get Deal alerts, browse the deal, purchase online or call us
+                                        </li>
+                                        <li style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                            3. Get the voucher
+                                        </li>
+                                        <li style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                            4. Redeem and enjoy !!!
+                                        </li>
+                                    </ul>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </td>
-            </tr>
-            <tr>
-                <td width="690px" align="center">
-                    <table style="padding-left: 70px;">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="w190">
-                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="E-mail id">
-                                        <br>
-                                        <div class="errormesg" id="error_email_ask" style="color: red;">
+                <td width="43%" valign="top" style="padding-top:24px;">
+                    <%form_for :email_ask , :url => {:controller => "home" ,:action => "email_deal_notify_by_ask"} ,:html => {:id => "eamil_ask"} do |f| %>
+                        <table align="right" class="email_ask">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div style="text-align: left; font-size: 20px; color: rgb(28, 103, 158); line-height: 20px;">
+                                            <b>Do not want to miss any deal??</b>
                                         </div>
-                                    </div>
-                                    <div class="fl">
-                                        <input type="image" border="0" onclick="return email_validate_head();" src="/images/go.gif?1266899706">
-                                    </div>
-                                </td>
-                                <td>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="javascript:hidePop('email_ask_div');">No Thanks</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td width="690px" align="center">
-                    <table style="padding-left: 25px;">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <font style="color: red;">
-                                        * 
-                                    </font>
-                                    We don't share your email id nor do we spam
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 5px;" colspan="2">
+                                        <b>Subscribe for email alerts/mobile alerts</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td style="padding-left: 5px;" colspan="2">
+                                        <input type="checkbox" value="resturent" id="resturent" name="resturent" checked="checked">Restaurant Deals&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" value="spa" id="spa" name="spa" checked="checked">Spa Deals&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="checkbox" value="movie" id="movie" name="movie" checked="checked">Movie Show Deals&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                    </td>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                         <div class="errormesg" id="error_email_ask" style="color: red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        Email Id<span style="color: red;">*</span>
+                                    </td>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="E-mail id">
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                    </td>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                         <div class="errormesg" id="error_email_ask_mob" style="color: red;">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        Mobile
+                                        <br>
+                                        (10 digit)
+                                    </td>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        <input type="text" value="" id="email_ask_mobile_no" class="textfield1" name="email_ask[mobile_no]">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        City<span style="color: red;">*</span>
+                                    </td>
+                                    <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                        <select id="city_id" name="city_id" gtbfieldid="1">
+                                            <option selected="" value="1">Chennai</option>
+                                            <option value="2">Bengaluru</option>
+											<option value="5">Hyderabad</option>
+                                            <option value="0">Other cities</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
+                                    </td>
+									 <td style="padding-left: 5px; padding-bottom: 0px; padding-top: 5px;">
+									 <input type="submit" value="Alert me" id="EmailAlertForm" onclick="return email_validate_head();">&nbsp;&nbsp;&nbsp;
+                                        <a href="javascript:hidePop('email_ask_div');">No Thanks</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <%end %>
                 </td>
             </tr>
         </tbody>
     </table>
-    <%end %>
 </div>
 <script type="text/javascript">
     
@@ -140,7 +220,9 @@
         var flag_em = true;
         var email_name = document.getElementById('email_ask_email').value;
         var error_msg_div = document.getElementById('error_email_ask');
-        if (email_name != '') {
+        var error_msg_div_mob = document.getElementById('error_email_ask_mob');
+		var mobile_no=document.getElementById("email_ask_mobile_no").value;
+		if (email_name != '') {
             if (email_name.length != 0) {
                 email_my = new String(email_name);
                 email_my = email_my.trim();
@@ -159,9 +241,19 @@
             error_msg_div.innerHTML = "Please enter valid E-mail";
             flag_em = false;
         }
-        
+        if (mobile_no.length != 0) {
+				var PHONE_REGEX = /^[0-9]+$/;
+				phone_value = PHONE_REGEX.test(new String(mobile_no));
+				if (phone_value != 1) {
+					error_msg_div_mob.innerHTML = "Please enter valid Mobile number";
+					flag_em = false;
+				}
+				if (mobile_no.length != 10) {
+					error_msg_div_mob.innerHTML = "Please enter valid Mobile number";
+					flag_em = false;
+			}
+		}
         return flag_em;
         
     }
-    
 </script>
