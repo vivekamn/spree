@@ -33,8 +33,8 @@ map.referral '/for_invite', :controller=>"home", :action => "cmom"
 map.facebook '/facebook',:controller => "home", :action => "index"
 map.email_camp '/email_camp',:controller => "home", :action => "index"
 
-map.email_camp_blr '/email_camp_blr',:controller => "home", :action => "index"
-map.email_camp_hyd '/email_camp_hyd',:controller => "home", :action => "index"
+map.email_camp_blr '/email_camp_blr',:controller => "home", :action => "index", :city_id => 2
+map.email_camp_hyd '/email_camp_hyd',:controller => "home", :action => "index", :city_id => 5
 
 map.email_camp_diff '/email_camp_diff',:controller => "home", :action => "index"
 map.email_camp_info '/email_camp_info', :controller => "home", :action => "index"
