@@ -214,7 +214,9 @@ before_filter :find_and_set_affiliate, :only => :index
 #      if !EMAIL_CAMP[session[:src]].nil? or !EMAIL_CAMP_ADD[session[:src]].nil?
        if !EMAIL_CAMP_ADD[session[:src]].nil?
         generate_code        
-      else
+      elsif !EMAIL_CAMP[session[:src]].nil?
+        redirect_to invite_friends_path
+       else
         redirect_to reg_complete_path
       end
     else
