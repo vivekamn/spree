@@ -5,7 +5,13 @@ class DealsNotification < ActiveRecord::Base
   belongs_to :city
    def call_count_mailer
       user_count = DealsNotification.count(:all)
-      UserMailer.deliver_count_to_admin(user_count,self.email,"Deal Notification",self.source,self.city.name)
+       unless self.city.name?
+        city= self.city.name
+       else
+         city= "Other"
+       end
+    
+      UserMailer.deliver_count_to_admin(user_count,self.email,"Deal Notification",self.source,city)
     end
   
   def self.find_by_email(email)
