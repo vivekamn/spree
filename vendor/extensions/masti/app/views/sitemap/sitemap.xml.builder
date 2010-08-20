@@ -16,7 +16,13 @@ xml.urlset(
     xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
     xml.changefreq  "monthly"
   end
-
+  
+  xml.url do
+    xml.loc         "http://www.masthideals.com/affiliate"
+    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+    xml.changefreq  "monthly"
+  end
+  
   xml.url do
     xml.loc         "http://www.masthideals.com/faq"
     xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
