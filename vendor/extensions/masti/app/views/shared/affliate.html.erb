@@ -1,0 +1,193 @@
+<style>
+    .email_ask {
+        border: 2px solid #E5E5E5;
+    }
+</style>
+<table cellspacing="10" cellpadding="0" border="0" align="center" width="95%" style="line-height:24px;margin-top: 50px;margin-bottom: 20px; margin-left: 30px; width: 880px; border: 1px solid rgb(171, 171, 171); float: left;">
+    <tbody>
+        <tr>
+            <td width="100%" colspan="2">
+                <div style="margin: 1ex;">
+                    <div>
+                        <p>
+                            Hi,
+                        </p>
+                        <p>
+                            I am Saravanan, from MasthiDeals.com. 
+                            www.masthideals.com is a social shopping website which sells deeply  
+                            discounted deals from SPAs, Restaurant, Resorts etc 
+                        </p>
+                        <p>
+                            We are currently operating in Chennai 
+                            , Hyderabad and Bangalore. We are launching in Delhi, Mumbai and Pune  
+                            in September.&nbsp; We have Corporate Employee Tie up with Infosys,&nbsp; 
+                            FLSmidth,&nbsp; Aircel, Indian Oil Corporation. 
+                        </p>
+                        <p>
+                            <h2><span class="green_h2">Affiliate Partner</span><span class="blue_h2"> Program</span></h2>
+                        </p>
+                        <p>
+                            &nbsp;MasthiDeals.com offers an attractive 
+                            affiliate partnership program which enables you to monetize your site  
+                            traffic and increase revenue in a customized and traceable way.&nbsp; 
+                        </p>
+                        <p>
+                            <h2><span class="green_h2">High Performing</span><span class="blue_h2"> Offers</span></h2>
+                        </p>
+                        <p>
+                            MasthiDeals.com provides attractive 
+                            ads leading to interesting content for your user. This ensures more  
+                            clicks and completion of actions resulting in higher revenue. 
+                        </p>
+                        <p>
+                            <h2><span class="green_h2">Reliable</span><span class="blue_h2"> Tracking</span></h2>
+                        </p>
+                        <div align="left">
+                            <p style="border: 1px solid rgb(26, 130, 176); padding: 10px;">
+                                MasthiDeals.com’s 
+                                affiliate partnership plan is powered by the industry standard iDevAffiliate  
+                                software which tracks the lead generated in a fool proof and transparent 
+                                fashion
+                            </p>
+                        </div>
+                        &nbsp;
+                        <br>
+                        <p>
+                            <h2><span class="green_h2">Personal Publisher</span><span class="blue_h2"> Support</span></h2>
+                        </p>
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            We  
+                            provide personal technical support in setting up the affiliate partnership 
+                            setup. We also guide you on the best ad format, placement etc to generate 
+                            maximum revenue for your site
+                        </p>
+                        <p>
+                            <b>Flexible Payment mode and payment 
+                                cycle</b>
+                        </p>
+                        <table border="0" width="100%">
+                            <tr>
+                                <td>
+                                    <p>
+                                        <h2><span class="green_h2">Types of Ads</span><span class="blue_h2"> supported</span></h2>
+                                    </p>
+                                    <ul style="line-height:24px;">
+                                        <li>
+                                            Text Ads
+                                        </li>
+                                        <li>
+                                            Image Ads
+                                        </li>
+                                        <li>
+                                            Html Link Ad
+                                        </li>
+                                        <li>
+                                            Facebook Link Ad
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        If you are interested please contact 
+                                        me for further details.
+                                    </p>
+                                    <p>
+                                        Regards,
+                                    </p>
+                                    <p>
+                                        Saravanan&nbsp; Vivekanandan
+                                    </p>
+                                    <p>
+                                        Manager &ndash;&nbsp;Corporate  Relations
+                                    </p>
+                                </td>
+                                <td>
+                                	<%form_for :affliate_enquiry , :url => {:controller => "shared" ,:action => "create_affliate"} ,:html => {:id => "enquiry_form"} do |f| %>
+                                    <table align="right" class="email_ask" width="90%" style="padding:20px;">
+                                        <tr>
+                                            <td>
+                                                
+												<table>
+                                                    <tr>
+                                                        <td>
+                                                            Website Name
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                        	 <%=f.text_field :site_name %>
+                                                        </td>
+                                                    </tr>
+													 <tr>
+                                                        <td>
+                                                            Website URL
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                        	 <%=f.text_field :site_url %>
+                                                        </td>
+                                                    </tr>
+													 <tr>
+                                                        <td>
+                                                            Name
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                        	 <%=f.text_field :name %>
+                                                        </td>
+                                                    </tr>
+													 <tr>
+                                                        <td>
+                                                            Email
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                        	 <%=f.text_field :email %>
+                                                        </td>
+                                                    </tr>
+													 <tr>
+                                                        <td>
+                                                            Phone Number
+                                                        </td>
+                                                        <td>
+                                                            :
+                                                        </td>
+                                                        <td>
+                                                        	 <%=f.text_field :phone_no %>
+                                                        </td>
+                                                    </tr>
+													<tr>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td align="center">
+                                                        	 <%= image_submit_tag "submit1.gif", :alt => 'submit_btn', :class  => "cursor_pointer", :id => "submit_btn"%>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+									<%end%>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script>
+  	function on_affliate_validation(){
+	  alert('hi');
+	  return true;
+	}
+</script>
