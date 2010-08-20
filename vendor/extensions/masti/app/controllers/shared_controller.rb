@@ -3,7 +3,16 @@ class SharedController < ApplicationController
    def plaxo_cb
     render :layout => false
   end
-
+  
+  def affliate
+    
+  end
+  
+  def create_affliate
+    affliate = AffliateEnquiry.new(params[:affliate_enquiry])
+    affliate.save!
+  end
+  
   def unsubscribe
     user = User.find_by_email(params[:email])
     unless user.nil?
