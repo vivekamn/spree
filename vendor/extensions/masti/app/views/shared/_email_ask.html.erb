@@ -153,7 +153,7 @@
                                         Email Id<span style="color: red;">*</span>
                                     </td>
                                     <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
-                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="E-mail id">
+                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="<%= cookies[:email] unless cookies[:email].nil?%>">
                                     </td>
                                 </tr>
 								 <tr>

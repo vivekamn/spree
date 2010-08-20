@@ -153,6 +153,9 @@ class MastiExtension < Spree::Extension
             end
           #end
         end
+        unless params[:email].nil?
+          cookies[:email] = params[:email]
+        end
         if current_user
           logger.info "#{current_user.email} is in Controller---> (#{controller_name}) action---> (#{ action_name}) Browser-----> (#{request.env["HTTP_USER_AGENT"]})"
         else
