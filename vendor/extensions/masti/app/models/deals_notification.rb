@@ -5,7 +5,7 @@ class DealsNotification < ActiveRecord::Base
   belongs_to :city
    def call_count_mailer
       user_count = DealsNotification.count(:all)
-       unless self.city.name?
+       unless self.city.nil?
         city= self.city.name
        else
          city= "Other"
