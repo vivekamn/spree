@@ -18,7 +18,8 @@
 <% @description = "Find all upcoming online deals, discount coupons and great shopping offers for your favorite online store at Masthideals.com" %>
 <% @keywords = "hot deals coupons, online discount deals, best spa resort deals chennai, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages " %>
 <%if current_user and pay_affiliate_signup?(current_user) %>
-<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&&affiliate_id=<%=current_user.affiliate_id%>&idev_commission=<%=SIGN_UP_AFFILIATE_COMMISSION%>" width="1" height="1"><%pay_affiliate_signup(current_user) %>
+<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&&affiliate_id=<%=current_user.affiliate_id%>&idev_commission=<%=SIGN_UP_AFFILIATE_COMMISSION%>" width="1" height="1">
+<%pay_affiliate_signup(current_user) %>
 <%end %>
 <div class="title" style="margin-left:20px;margin-top:10px;font-size:20px;font-weight:bold; color:#00a8ff;">
     <% unless @featured_product.name.nil? %>
@@ -227,48 +228,44 @@
         	just_call_porgress_bar();
         	function just_call_porgress_bar(){
         		new Ajax.Request('/progress_bar?id=<%=@featured_product.id%>',{
-        asynchronous:true, evalScripts:true, onComplete:function(request){
-        	if (request.responseText != null){
-        		document.getElementById('bought').style.display = '';
-        		document.getElementById('progress').style.width=request.responseText+'px';
+        			asynchronous:true, evalScripts:true, onComplete:function(request){
+        				if (request.responseText != null){
+        					document.getElementById('bought').style.display = '';
+        					document.getElementById('progress').style.width=request.responseText+'px';
+        				}
+        				else{
+        					document.getElementById('progress').style.width=0;
+        				}
+        		}});
         	}
-        	else{
-        		document.getElementById('progress').style.width=0;
+	        var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+          	updateTime();
+          	function updateTime() {
+          		today = new Date();
+          		expiry_datetime = document.getElementById("end_time").value;
+          		var todayy = today.getYear();
+          		if (todayy < 1000)
+        			todayy+=1900;
+          			var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+           			var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
+          			timeLeft = Date.parse(exp)-Date.parse(curr);
+          			msPerDay = 24 * 60 * 60 * 1000 ;  
+          			if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
+          				e_daysLeft = timeLeft / msPerDay;
+          				daysLeft = Math.floor(e_daysLeft);
+          				e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+          				hrsLeft = Math.floor(e_hrsLeft);
+          				e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+          				minsLeft = Math.floor(e_minsLeft);
+          				scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
+						document.getElementById("countdown_time").innerHTML ="<table border=0 width='160px'><tr><td align='right'>"+ daysLeft +"</td><td align='left'  colsapn='2'>Days</td> <td align='right'>"+ hrsLeft +"</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>"+ minsLeft +"</td><td align='left' colsapn='2'>Mins</td><td align='right'>"+ scesLeft +"</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
+          				setTimeout('updateTime()', 1000);
+          			}
+         			else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
+        				window.location.reload();
+        			} 
+          			else{
+          				document.getElementById("countdown_time").innerHTML = "<table border=0 width='160px'><tr><td align='right'>0</td><td align='left'  colsapn='2'>Days</td> <td align='right'>0</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>0</td><td align='left' colsapn='2'>Mins</td><td align='right'>0</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
+          			}
         	}
-        	}});
-        
-        	}
-          var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-          updateTime();
-          function updateTime() {
-        
-          today = new Date();
-          expiry_datetime = document.getElementById("end_time").value;
-          var todayy = today.getYear();
-          if (todayy < 1000)
-        	todayy+=1900;
-          var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-           var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
-          timeLeft = Date.parse(exp)-Date.parse(curr);
-          msPerDay = 24 * 60 * 60 * 1000 ;  
-          if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
-          	e_daysLeft = timeLeft / msPerDay;
-          	daysLeft = Math.floor(e_daysLeft);
-          	e_hrsLeft = (e_daysLeft - daysLeft) * 24;
-          	hrsLeft = Math.floor(e_hrsLeft);
-          	e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
-          	minsLeft = Math.floor(e_minsLeft);
-          	scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
-        	
-          	document.getElementById("countdown_time").innerHTML ="<table border=0 width='160px'><tr><td align='right'>"+ daysLeft +"</td><td align='left'  colsapn='2'>Days</td> <td align='right'>"+ hrsLeft +"</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>"+ minsLeft +"</td><td align='left' colsapn='2'>Mins</td><td align='right'>"+ scesLeft +"</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
-          	setTimeout('updateTime()', 1000);
-          }
-         else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
-        		window.location.reload();
-        	} 
-          else{
-          	
-          	document.getElementById("countdown_time").innerHTML = "<table border=0 width='160px'><tr><td align='right'>0</td><td align='left'  colsapn='2'>Days</td> <td align='right'>0</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>0</td><td align='left' colsapn='2'>Mins</td><td align='right'>0</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
-          }
-        }
 </script>

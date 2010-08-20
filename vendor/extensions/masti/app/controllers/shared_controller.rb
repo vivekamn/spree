@@ -11,6 +11,8 @@ class SharedController < ApplicationController
   def create_affliate
     affliate = AffliateEnquiry.new(params[:affliate_enquiry])
     affliate.save!
+    flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."
+    redirect_to :back
   end
   
   def unsubscribe
