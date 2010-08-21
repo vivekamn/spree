@@ -260,7 +260,7 @@
         //alert(site_name + " : site name===" + site_url + " :site url===" + name + " :name=====" + email + " :email======" + phone_no + " : phone no --------");
         
         if (site_name == null || site_name == '') {
-            document.getElementById('error_site_name').innerHTML = "Website name should not empty";
+            document.getElementById('error_site_name').innerHTML = "Invalid Website name";
             flag = false;
         }
         else {
@@ -269,14 +269,14 @@
                 document.getElementById('error_site_name').innerHTML = "";
             }
             else {
-                document.getElementById('error_site_name').innerHTML = "Website name not valid";
+                document.getElementById('error_site_name').innerHTML = "Invalid Website name";
                 flag = false;
             }
             
         }
         
         if (site_url == null || site_url == '') {
-            document.getElementById('error_site_url').innerHTML = "Site ulr should not empty";
+            document.getElementById('error_site_url').innerHTML = "Invalid Website url";
             flag = false;
         }
         else {
@@ -286,13 +286,13 @@
                 document.getElementById('error_site_url').innerHTML = "";
             }
             else {
-                document.getElementById('error_site_url').innerHTML = "Website address not valid";
+                document.getElementById('error_site_url').innerHTML = "Invalid Website url";
                 flag = false;
             }
         }
         
         if (name == null || name == '') {
-            document.getElementById('error_name').innerHTML = "Name should not empty";
+            document.getElementById('error_name').innerHTML = "Invalid Name";
             flag = false;
         }
         else {
@@ -301,13 +301,13 @@
                 document.getElementById('error_name').innerHTML = "";
             }
             else {
-                document.getElementById('error_name').innerHTML = "Name not valid";
+                document.getElementById('error_name').innerHTML = "Invalid Name";
                 flag = false;
             }
         }
         
         if (email == null || email == '') {
-            document.getElementById('error_email_field').innerHTML = "Email should not empty";
+            document.getElementById('error_email_field').innerHTML = "Invalid Emailid";
             flag = false;
         }
         else {
@@ -316,12 +316,12 @@
                 document.getElementById('error_email_field').innerHTML = "";
             }
             else {
-                document.getElementById('error_email_field').innerHTML = "Email not valid";
+                document.getElementById('error_email_field').innerHTML = "Invalid Emailid";
                 flag = false;
             }
         }
         if (phone_no == null || phone_no == '') {
-            document.getElementById('error_phone_no').innerHTML = "Phone no should not empty";
+            document.getElementById('error_phone_no').innerHTML = "Invalid Phone no";
             flag = false;
         }
         else {
@@ -331,12 +331,12 @@
                     document.getElementById('error_phone_no').innerHTML = "";
                 }
                 else {
-                    document.getElementById('error_phone_no').innerHTML = "Phone no not valid";
+                    document.getElementById('error_phone_no').innerHTML = "Invalid Phone no";
                     flag = false;
                 }
             }
             else {
-                document.getElementById('error_phone_no').innerHTML = "Phone not valid";
+                document.getElementById('error_phone_no').innerHTML = "Invalid Phone no";
                 flag = false;
             }
             
