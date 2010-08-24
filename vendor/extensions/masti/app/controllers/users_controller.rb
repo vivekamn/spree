@@ -8,10 +8,13 @@ class UsersController < Spree::BaseController
   
   actions :all, :except => [:index, :destroy]
   
+#  def xd_receiver
+#    render :layout => false
+#  end
   #Cannot use resource_controller for create action
   #as openID expects block passed to user.save method
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user])    
     unless session[:affiliate].nil?
       @user.affiliate_id = session[:affiliate]
       session[:affiliate] = nil
@@ -27,7 +30,9 @@ class UsersController < Spree::BaseController
     #end
 #    @user.city_id = session[:city_id]
     @user.save do |result|
-      if result       
+      if result
+        session[:fb_logged] = "true" unless @user.fb_user_id.nil?
+        session[:needs_fb_linking]=nil unless session[:needs_fb_linking].nil?
         flash[:notice] = t(:user_created_successfully) unless session[:return_to]
 #         current_deal = DealHistory.find(:first, :conditions => "is_active = 1")
          current_deal = DealHistory.find(:first, :conditions =>['is_active = ? and city_id =?', true, session[:city_id]])
@@ -46,7 +51,7 @@ class UsersController < Spree::BaseController
 #         format.html { redirect_back_or_default home_url }
 #         format.js { render :js => true.to_json }
 #       end
-      else            
+else  
         respond_to do |format|
           format.html { render :action => :new }
           format.js { render :js => @user.errors.to_json }

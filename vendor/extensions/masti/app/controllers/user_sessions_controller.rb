@@ -3,11 +3,31 @@ class UserSessionsController < Spree::BaseController
   before_filter :require_user, :only => :destroy
    ssl_required :new, :create, :destroy, :update
   ssl_allowed :login_bar
-    
+    def xd_receiver
+    render :layout => false
+  end
   def new
     @user_session = UserSession.new
   end
-
+  def create_by_facebook_id  
+    facebook_id=params[:fb_id_hidden]    
+    @current_user = already_connected?(facebook_id)  
+    if @current_user           
+      #      puts "going to creation"
+   #@user_session = UserSession.new(@current_user)
+   #@user_session.save!   
+   create_user_session(@current_user)
+    #redirect_to :controller=>'home', :action=>'index'
+#      @user_session = UserSession.new
+#      create
+else
+  session[:needs_fb_linking]="true"
+      redirect_to :controller=>'user_sessions', :action=>'new'
+    end
+  end
+  def already_connected?(facebook_id)
+    User.find_by_fb_user_id(facebook_id)    
+  end
   def create    
     not_need_user_auto_creation = 
         user_without_openid(params[:user_session]) ||
@@ -15,7 +35,7 @@ class UserSessionsController < Spree::BaseController
         user_with_openid_exists?(params[:user_session]) 
 
     if not_need_user_auto_creation
-      create_user_session(params[:user_session])   
+      create_user_session(params[:user_session], params[:fb_id_hid])   
     else
       create_user(params[:user_session])
     end
@@ -30,11 +50,14 @@ class UserSessionsController < Spree::BaseController
   end
 
   def destroy
+    session[:fb_logged]=nil unless session[:fb_logged].nil?
+    session[:needs_fb_linking]=nil unless session[:needs_fb_linking].nil?
     current_user_session.destroy
     session.clear
     unless session[:src].nil?
       session[:src].clear
     end
+    
     flash[:notice] = t("logged_out")
     redirect_to home_url
   end
@@ -54,10 +77,10 @@ class UserSessionsController < Spree::BaseController
     data && data[:openid_identifier].blank?
   end
   
-  def create_user_session(data)
+  def create_user_session(data, fb_id_hid=nil)
     @user_session = UserSession.new(data)
     @user_session.save do |result|
-      if result
+      if result        
         session[:logged_in_from_affiliate] = session[:affiliate]
         respond_to do |format|
           format.html {
@@ -65,6 +88,13 @@ class UserSessionsController < Spree::BaseController
                cookies[:email]=data[:login]
             end
             flash[:notice] = t("logged_in_succesfully") unless session[:return_to]
+            session[:needs_fb_linking]=nil
+            unless fb_id_hid.nil?             
+             user = @user_session.record if @user_session.record
+            user.fb_user_id = fb_id_hid
+            user.save!
+            end
+            session[:fb_logged] = "true" unless @user_session.record.fb_user_id.nil?            
             redirect_back_or_default home_url
           }
           format.js {

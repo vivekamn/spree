@@ -129,25 +129,43 @@
 				</tr>
 			</table>
 	    </div>
-        <% if current_user %>
+        <% if current_user %>				
         <div class="loggedinpart" style="padding-left: 30px;">
-            <div class="fl username">
-                Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>
-            </div>
+			<%unless session[:fb_logged].nil?%>
+				<div class="fl username">
+					<fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic>
+					<fb:name uid='loggedinuser' useyou='false' linked='false' ></fb:name>
+					
+                <%= link_to 'Account', user_path(current_user) %>
+           
+			
+					<a href = '#' onclick ="FB.Connect.logoutAndRedirect('/logout'); return(false);"><img id = 'fb_logout_image' src = 'http://static.ak.fbcdn.net/images/fbconnect/logout-buttons/logout_small.gif' alt = 'Connect' border='0' /></a>
+		    	
+		    	</div>
+			<%else%>
+            	<div class="fl username">
+                	Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>
+            	</div>		
             <div class="fl username">
                 <%= link_to 'Account', user_path(current_user) %>
-            </div>
-            <div class="fl username">
-                <%= link_to 'Logout', logout_path %>
-            </div>
+            </div>			
+            	<div class="fl username">
+                	<%= link_to 'Logout', logout_path %>
+            	</div>
+			<%end%>
         </div>
         <% else %>
+		<input type="hidden" id = "log_not_locked" />		
         <div class="submitpart">
-            <div class="join">
+            <div class="join" style="width: 340px;">
                 <table cellpadding="1" cellspacing="1">
                     <tr>
+                    	<td>
+                    		<fb:login-button size="medium" onlogin="javascript:follow_connection();">
+                            </fb:login-button>
+                    	</td>
                         <td>
-                            <%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_session_path %>
+                            <%= link_to "<span class='green' style='font-size:16px;font-weight:bold;'>Sign</span> <span class='blue' style='font-size:16px;font-weight:bold;'>In</span>", new_user_sessions_path %>
                         </td>
                         <td>
                             <table style="border-right: 1px solid;">
