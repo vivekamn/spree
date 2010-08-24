@@ -3,6 +3,9 @@
 <% @keywords = "online shopping coupon, best spa deals in chennai, restaurant discount deals, special packages in bangalore, resorts deals in delhi, spa resort deals in newdelhi, hot deals in mumbai, online discount coupon, online store coupon, pubs deals in bangalore, spa deals, restaurant offers, pubs discount, resorts coupons"%>
 <% @body_id = 'login' %>
 <div id="existing-customer">
+	<%unless session[:needs_fb_linking].nil?%><br />
+	<div align = "center">Link my existing MasthiDeals account with my connected facebook account ( one time process, need not repeat next time )</div>
+	<%end%>
   <% hook :login do %>
     <%= render :partial => 'shared/login' %>
     <!--<%= t("or") %> <%= link_to t("create_a_new_account"), signup_path %> | <%= link_to t("forgot_password"), new_password_reset_path %>-->
