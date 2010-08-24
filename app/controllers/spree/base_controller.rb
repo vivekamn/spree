@@ -108,7 +108,7 @@ class Spree::BaseController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = I18n.t("page_only_viewable_when_logged_in")
-      redirect_to new_user_session_url
+      redirect_to new_user_sessions_url
       return false
     end
   end
@@ -125,8 +125,8 @@ class Spree::BaseController < ActionController::Base
   def store_location
     # disallow return to login, logout, signup pages
     disallowed_urls = [signup_url, login_url, logout_url]
-    disallowed_urls.map!{|url| url[/\/\w+$/]}
-    unless disallowed_urls.include?(request.request_uri)
+    disallowed_urls.map!{|url| url[/\/\w+$/]}    
+    unless disallowed_urls.include?(request.request_uri)      
       session[:return_to] = request.request_uri
     end
   end
