@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "products", :action => "index"
 
-  map.resource :user_session, :member => {:nav_bar => :get}
+  map.resource :user_sessions, :member => {:nav_bar => :get}
   map.resource :account, :controller => "users"
   map.resources :password_resets
 
@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.admin '/admin', :controller => 'admin/overview', :action => 'index'
-
+  
   map.resources :tax_categories
   map.resources :countries, :has_many => :states, :only => :index
   map.resources :states, :only => :index
@@ -111,7 +111,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :trackers
     admin.resources :payment_methods
   end
-
+#map.connect ':controller/:id/:action'
   map.connect ':controller/:action/:id.:format'
   map.connect ':controller/:action/:id'
 
