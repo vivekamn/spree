@@ -1,0 +1,156 @@
+<div style="height:359px;width:355px;background-color:#FFFFFF;border: 5px solid #29689E;">
+    <% form_for :share_sms ,:url => {:controller =>'shared' , :action => 'share_this_via_mobile'},:html => {:id => "share_sms",:method=>"post"} do |f| %>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="4" align="right">
+                <%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_mobile_share_this();" %>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center">
+                <span class='green' style='font-weight:bold;font-size:16px;'>Share Your Friends About </span>
+                <span class='blue' style='font-size:16px;font-weight:bold;'>This Great Deal</span>
+            </td>
+        </tr>
+        <tr height="15">
+            <td>
+            </td>
+            <td>
+                &nbsp; 
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-left:80px;padding-bottom:10px;">
+                Your Name:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-left:80px;padding-bottom:10px;">
+                <input type="text" name="mob_name" id="mob_name" style="font-family:arial;font-size:small;color:#707070;" class="textbox">
+                <br/>
+                <div class="errormesg" id="error_name_msg" style="color:red;display:block;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-left:80px;padding-bottom:10px;">
+                Your Friend's Mobile numbers:
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-left:80px;padding-bottom:10px;">
+                <textarea name="mob_recipients" id="mob_recipients" class="textarea"></textarea>
+                <br/>
+                <div id="div_recipients_msg" style="display:none;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-left:80px;padding-bottom:10px;">
+                * Enter comma separated emails
+            </td>
+        </tr>
+        <tr height="20">
+            <td>
+            </td>
+            <td>
+                &nbsp; 
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td align='center'>
+                <div id="change_image_mob">
+                    <input type="button" style="background-color:#A8D027;" class="forward_but" value="Send to friends" onclick="validate_share_this();"/>
+                </div>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" name="page" value="<%= @page %>" /><input type="hidden" name="match" id="match"><input type="hidden" name="variant_id" id="product_id" value="<%= deal.product.variant.id %>"><% end %>
+</div>
+<script type="text/javascript">
+    function validate_share_this(){
+        var msg_recipients = document.getElementById('div_recipients_msg');
+        var get_recipients = document.getElementById('mob_recipients').value;
+        var name = document.getElementById('mob_name').value;
+        var name_msg_div = document.getElementById('error_name_msg');
+        name_msg_div.innerHTML = "";
+        msg_recipients.innerHTML = "";
+		alert(name);
+		if (name != '' && name.length != 0) {
+            if (get_recipients != "" && get_recipients.length != 0) {
+                new Ajax.Request('/shared/check_mobile_no?mobile=' + get_recipients, {
+                    asynchronous: true,
+                    evalScripts: true,
+                    onComplete: function(request){
+                        if (request.responseText == "valid") {
+                            document.getElementById('change_image_cancel_share_this').onclick = function(){
+                            };
+                            document.getElementById('change_image_mob').innerHTML = '<input type="button" class="forward_but" value="Forwarding..." style="cursor:wait;"/>';
+                            document.getElementById('share_sms').submit();
+                        }
+                        else {
+                            msg_recipients.style.display = "block";
+                            msg_recipients.innerHTML = "<font color='red'>One or more mobile numbers given are invalid.<\/font>";
+                        }
+                    }
+                });
+            }
+            else {
+                msg_recipients.style.display = "block";
+                msg_recipients.innerHTML = "<font color='red'>Please enter your friends mobile no.</font>";
+            }
+        }
+        else {
+			name_msg_div.innerHTML = "Please enter Name";
+        }
+    }
+    
+    function clear_message(){
+        document.getElementById('div_recipients').style.display = "none";
+    }
+    
+    function clear_value(){
+        document.getElementById('recipients').value = "";
+    }
+    
+    function fill_value(){
+        var recipients = document.getElementById('recipients').value;
+        recipients1 = new String(recipients);
+        if (recipients == null || recipients == '' || recipients1.length == 0) {
+            document.getElementById('recipients').value = "Enter comma separated emails";
+        }
+    }
+</script>
