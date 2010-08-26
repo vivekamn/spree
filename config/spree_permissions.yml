@@ -45,18 +45,30 @@
 # By default, admin role is required for all controllers extending Admin::BaseController (unless otherwise specified here)
 'Admin::BaseController':
   permission1:
+    roles : [admin,post]
+'Admin::UsersController':   
+  permission1:
     roles : [admin]
+'Admin::ConfigurationsController':
+ permission1:
+    roles : [admin]
+'Admin::DealsController':
+ permission1:
+    roles : [admin]
+'Admin::ReportsController':
+ permission1:
+    roles : [admin]    
 # Users can only see their own accounts
 'UsersController':
   permission1:
     roles : [admin]
     options :
-      except : [new, create]   
+      except : [new, create]
       unless : "current_user and current_user.id == object.id"
 'OrdersController':
   permission1:
     # Users can only see their own orders
-    roles : [admin]
+    roles : [admin,post]
     options :
       except : [new, create, cvv]   
       unless : can_access?  #orders_controller may grant access based on presence of token, etc.
