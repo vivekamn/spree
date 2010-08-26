@@ -23,12 +23,12 @@ class MastiExtension < Spree::Extension
     {:name => 'validity_from', :only => [:product]},
     {:name => 'validity_to', :only => [:product]},
     {:name => 'catch_message', :only => [:product]},
-    {:name => 'location', :only => [:product]},        
+    {:name => 'location', :only => [:product]}
     ]
     
     Product.class_eval do
       belongs_to :vendor
-      attr_accessible :city_id,:star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+      attr_accessible :sms_share_text,:city_id,:star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
       attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :side_deal_title
@@ -40,7 +40,7 @@ class MastiExtension < Spree::Extension
       validates_presence_of :validity_from
       validates_presence_of :validity_to        
       validates_presence_of :vendor_id
-      delegate_belongs_to :master, :count_on_hand
+      delegate_belongs_to :master, :count_on_hand,:sms_share_text
       validates_presence_of :count_on_hand       
       validate :minimum_less_than_maximum, :deal_expiry, :bought_count
       before_save :calc_count_on_hand
@@ -62,6 +62,8 @@ class MastiExtension < Spree::Extension
       def bought_count
         if currently_bought_count > maximum_number
           errors.add(:currently_bought_count, "should be less than maximum number")
+        else
+          self.variant.count_on_hand = maximum_number - currently_bought_count
         end
       end
       def calc_count_on_hand

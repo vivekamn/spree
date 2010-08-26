@@ -45,6 +45,12 @@
         <%= f.text_field :sms_notification, :class => 'fullwidth title' %>
         <%= f.error_message_on :sms_notification %>
         <% end %>
+		<% f.field_container :sms_share_text do %>
+        <%= f.label :sms_share_text, "SMS Share Text" %><span class="required">*</span>
+        <br/>
+        <%= f.text_field :sms_share_text, :class => 'fullwidth title' %>
+        <%= f.error_message_on :sms_share_text %>
+        <% end %>
         <% f.field_container :description do %>
         <%= f.label :description, t("description") %>
         <br/>

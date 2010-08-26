@@ -282,7 +282,7 @@ before_filter :find_and_set_affiliate, :only => :index
     split_recipients.each do |recipient|
       UserMailer.deliver_share_this(recipient,from,product,params[:name])
     end
-    flash[:success]="Deal Shared to your friends"
+    flash[:success]="Thanks for sharing this deal with your friends"
     redirect_to :back 
   end
   

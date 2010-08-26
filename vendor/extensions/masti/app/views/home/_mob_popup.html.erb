@@ -108,7 +108,6 @@
         var name_msg_div = document.getElementById('error_name_msg');
         name_msg_div.innerHTML = "";
         msg_recipients.innerHTML = "";
-		alert(name);
 		if (name != '' && name.length != 0) {
             if (get_recipients != "" && get_recipients.length != 0) {
                 new Ajax.Request('/shared/check_mobile_no?mobile=' + get_recipients, {

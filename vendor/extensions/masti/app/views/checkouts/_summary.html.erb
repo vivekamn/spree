@@ -30,7 +30,11 @@
       <td><strong>Balance MD Money:</strong></td>
       <td><strong><span id='summary-order-total'>Rs. 
 	  <%if current_user.user_promotion.credit_amount > @order.line_items.total.to_i%>
-      	<%=current_user.user_promotion.credit_amount - @order.line_items.total.to_i%>
+	    <% if current_user.user_promotion.credit_amount>50 and @order.line_items.total>50 %>
+		   <%=current_user.user_promotion.credit_amount - 50%>
+	    <%else%>
+          <%=current_user.user_promotion.credit_amount - @order.line_items.total.to_i%>
+        <%end%>
 	  <%else %>
        0
     <%end%>

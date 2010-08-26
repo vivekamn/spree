@@ -23,7 +23,12 @@
       <!--<%=  product_price(line_item) %>-->
 	  <strong>Rs. <%=line_item.price.to_i%>
 	  <%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount>0%>
-	  	- <%= current_user_credit_amount %>&nbsp;(MD Money)
+	  	- 
+		<% if current_user.user_promotion.credit_amount>50 and @order.line_items.total>50 %>
+		   50 (MD Money)
+	    <%else%>
+          <%= current_user_credit_amount %>&nbsp;(MD Money)
+        <%end%>
 	  <%end%>
 	  </strong>
     <% end %>
