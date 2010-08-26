@@ -13,11 +13,16 @@ class Admin::UsersController < Admin::BaseController
   private
   def collection
     unless request.xhr?
-      params[:search][:city_id]= session[:city_id]
-      @search = User.searchlogic(params[:search])
+      if !params[:search].nil?
+        params[:search][:city_id]= session[:city_id]
+        @search = User.searchlogic(params[:search])
+      else
+        @search = User.searchlogic(:city_id=>session[:city_id],:is_sample=>0)
+      end
+      
 
       #set order by to default or form result
-      @search.order ||= "ascend_by_email"
+      @search.order ||= "descend_by_created_at"
 
       @collection_count = @search.count
       @collection = @search.paginate(:per_page => Spree::Config[:admin_products_per_page],
