@@ -28,7 +28,7 @@ class Admin::DealsController < ApplicationController
     new_deal.is_active = 1
     new_deal.city_id = city_id
     new_deal.save
-#    new_deal.deal_notify
+    new_deal.deal_notify
     redirect_to admin_products_url(:city_id => city_id)
   end
   
