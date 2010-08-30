@@ -28,7 +28,7 @@ class Admin::DealsController < ApplicationController
     new_deal.is_active = 1
     new_deal.city_id = city_id
     new_deal.save
-    new_deal.deal_notify
+    new_deal.deal_notify(session[:city_id])
     redirect_to admin_products_url(:city_id => city_id)
   end
   
@@ -44,13 +44,13 @@ class Admin::DealsController < ApplicationController
   
   def manual_send_mail
     active_deal = DealHistory.find(:first, :conditions => ['is_active = ? AND city_id =? ', true, session[:city_id]])
-    active_deal.deal_notify
+    active_deal.deal_notify(session[:city_id])
     flash[:success]="successsfully sent"
     redirect_to admin_products_url
   end
   def manual_send_sms
     active_deal = DealHistory.find(:first, :conditions => ['is_active = ? AND city_id =?', true, session[:city_id]])
-    active_deal.deal_notify
+    active_deal.deal_notify(session[:city_id])
     flash[:success]="SMS Added"
     redirect_to home_url
   end
