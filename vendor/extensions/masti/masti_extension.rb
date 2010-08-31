@@ -89,7 +89,7 @@ class MastiExtension < Spree::Extension
       has_one :verification_code
       has_one :user_promotion
       belongs_to :city
-      hasa_one  :referer
+      has_one  :referer
       after_create :call_count_mailer
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
