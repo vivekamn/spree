@@ -185,6 +185,12 @@
 </table>
 
 <script type="text/javascript">    
+  function select_all(obj) {
+  var text_val=eval(obj);
+  text_val.focus();
+  text_val.select();
+  }
+
     function set_messages(inputs){
         document.getElementById('invite_from').innerHTML = inputs.value;
     }
