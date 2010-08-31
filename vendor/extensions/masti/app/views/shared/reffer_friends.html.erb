@@ -1,0 +1,228 @@
+<%= javascript_include_tag "utils" %>
+<script type="text/javascript">
+        function showPlaxoChooser(){
+            showPlaxoABChooser('recipient_list', '/shared/plaxo_cb');
+            return false;
+        }
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/util.js">
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/basic.js">
+    </script>
+    <script type="text/javascript" src="/javascripts/plaxo/abc_launcher.js">
+    </script>
+ 	<script type="text/javascript">
+      function onABCommComplete() {
+        // grab all of the emails from Plaxo
+        // ADJUST TO POINT TO YOUR TEXTAREA
+        var emails = document.getElementById('recipient_list').value;
+        // strip out all of the names associated with emails
+        emails = emails.match(/<([^>]+)>/g).join(', ');
+        // strip out the opening and closing brackets
+        emails = emails.replace(/[<>]/g,'');
+
+        // ADJUST TO POINT TO YOUR TEXTAREA
+        document.getElementById('recipient_list').value = emails;
+      }
+    </script>
+<style>
+    .bluebox {
+        background: none repeat scroll 0 0 #DBEBFF;
+        font-size: 125% !important;
+        margin-bottom: 1em;
+        padding: 0.5em 0.5em 0.5em 10px;
+        -moz-box-shadow: 2px 2px 3px rgba(136, 136, 136, 0.24);
+        border: 2px solid #75A1F8;
+        color: #000000;
+    }
+    
+	 .greenbox {
+        background: none repeat scroll 0 0 #D7FFD7;
+        font-size: 125% !important;
+        margin-bottom: 1em;
+        padding: 5px 5px 20px 10px;
+        -moz-box-shadow: 2px 2px 3px rgba(136, 136, 136, 0.24);
+        border: 2px solid #02D402;
+        color: #000000;
+		text-align:center;
+    }
+    .clear-left {
+        clear: left;
+    }
+    
+    .column {
+        float: left;
+        margin-right: 0.25em;
+    }
+    
+    .column.share {
+        padding-left: 10px;
+        text-align: center;
+        width: 25%;
+    }
+    
+    .column.left {
+        font-size: 90%;
+        padding-top: 6px;
+        width: 70%;
+    }
+	
+	.column.left1 {
+        font-size: 90%;
+        padding-top: 6px;
+		padding-bottom: 6px;
+		width:100%;
+		
+    }
+</style>
+<table style="margin-bottom: 30px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;margin-top:50px;" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
+    <tr>
+        <td width="100%" align="center" style="font-size:200%;">
+            Masthideals is more fun with friends.
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        	<table width="70%">
+        		<tr>
+        			<td>
+                		Some taxt
+					</td>
+        		</tr>
+        	</table>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        	<table width="70%">
+        		<tr>
+        			<td>
+        				<div class="bluebox">
+                <div class="column left">
+                    Click to post to Facebook or Twitter. It's a simple, low-key way to let your friends know about Masthideals.
+                </div>
+                <div class="column share">
+                    <a href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com/?r=<%= @refferer.code %>&t=Masthideals.com"><img src="https://images.homerun.com/images/shared/share-button-fb.png?1266879606" class="fb-share highlight"></a>
+					<a href="http://twitter.com/home?status=Join my team and help unlock awesome deals and lower prices at MasthiDeals.com http://www.masthideals.com/?r=<%= @refferer.code %>" title="Click to send this page to Twitter!" target="_blank">
+						<img src="https://images.homerun.com/images/shared/share-button-twitter.png?1266879606" class="twitter-share highlight" style="padding-left:5px;">
+					</a>
+                </div>
+                <div class="clear-left">
+                </div>
+            </div>
+        			</td>
+        		</tr>
+        	</table>
+            
+        </td>
+    </tr>
+	<tr>
+		<td align="center">
+        	<table width="70%">
+        		<tr>
+        			<td>
+        				<div class="greenbox">
+                <div class="column left1">
+                    Send your unique invite code to your friends via IM or email:
+                </div>
+                <div>
+                   <input type="text" value="http://www.masthideals.com:3006/?r=<%= @refferer.code %>" readonly="readonly" id="url" onclick="select_all(this)"  data-size="medium" size="50">
+                </div>
+				
+            </div>
+        			</td>
+        		</tr>
+        	</table>
+            
+        </td>
+	</tr>
+	<tr>
+		<td align="center">
+        	<table width="70%">
+        		<tr>
+        			<td>
+        				<div style="background-color: rgb(255, 255, 255); border: 2px solid rgb(41, 104, 158);">
+							<% form_for :connections ,:url => {:controller =>'shared' , :action => 'plaxo_invite'}, :html => {:id => "plaxo_invite_submit"} do |f| %>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding-top:10px;padding-bottom:10px;padding-left:10px;">
+								<tr>
+									<td colspan="3" align="center">
+										<%= image_tag '/images/addressBook_btn.jpg', :onclick => "showPlaxoChooser();", :border => '0', :width => '216px', :height => '44px', :alt => "Add from my address book", :class  => "cursor_pointer" %>	
+									</td>
+								</tr>
+								<tr height="10px">
+									
+								</tr>
+								<tr>
+									<td valign="middle">
+										Name <font style="color:red"> * </font>: <input type="text" id="name" name="name" size="38" onkeyup="set_name(this);" class="textbox"><br/>
+							           <div id="name_msg_div" style="display:none;"></div>	
+									</td>
+									<td valign="middle">
+										Your Friends Emails <font style="color:red"> * </font>:	
+									</td>
+									<td valign="top">
+										<textarea id="recipient_list" name="recipients" onfocus="clear_recipient_list_div();" class="textarea"></textarea><br />
+                                         <div id="recipient_list_div" style="display:none;"></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3" align="center">
+										<div id="change_image_plaxo">
+                            	<input type="button" onclick="validate_plaxo_invite();" value="Send" class="forward_but" style="background-color: rgb(168, 208, 39);">
+                            </div>    	
+									</td>
+								</tr>
+							</table>
+							<%end%>
+            			</div>
+        			</td>
+        		</tr>
+        	</table>
+            
+        </td>
+	</tr>
+</table>
+
+<script type="text/javascript">    
+    function set_messages(inputs){
+        document.getElementById('invite_from').innerHTML = inputs.value;
+    }
+	function set_name(inputs){
+        document.getElementById('invite_from_name').innerHTML = inputs.value;
+    }
+	function validate_plaxo_invite(){		
+		var recipient_list_field = document.getElementById('recipient_list').value;
+		var msg_recipient_list = document.getElementById('recipient_list_div');		
+		var name_box = document.getElementById('name').value;
+		document.getElementById("name_msg_div").style.display = "none";
+		msg_recipient_list.style.display = "none";
+		if(recipient_list_field.length != 0 && name_box.length !=0){
+			var change = document.getElementById('change_image_plaxo');
+			change.innerHTML = "<img src='/images/ajax_loader.gif' />";
+			new Ajax.Request('/shared/check_email_plaxo?recipients='+recipient_list_field, {asynchronous:true, evalScripts:true, onComplete:function(request){
+				if(request.responseText == "valid"){
+					document.getElementById('plaxo_invite_submit').submit();
+				}else{
+					change.innerHTML = "<input type='button' onclick='validate_plaxo_invite();' value='Send' class='forward_but' style='background-color: rgb(168, 208, 39);'/>";
+					msg_recipient_list.innerHTML = "<font color='red'>One or more email ids given are invalid.<\/font>";
+					msg_recipient_list.style.display = "block";
+				}
+			}});
+		}else{
+			if(name_box.length==0){
+				document.getElementById("name_msg_div").innerHTML="<font color='red'>Name should not be empty.</font>";
+				document.getElementById("name_msg_div").style.display = "block";
+			}
+			if(recipient_list_field.length==0){
+				msg_recipient_list.innerHTML = "<font color='red'>Email-Id should not be empty.<\/font>";
+				msg_recipient_list.style.display = "block";
+			}
+			
+		
+		}
+	}
+	function clear_recipient_list_div(){
+		document.getElementById('recipient_list_div').style.display = "none";
+	}
+</script>
