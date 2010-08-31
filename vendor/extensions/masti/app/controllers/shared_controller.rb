@@ -4,6 +4,25 @@ class SharedController < ApplicationController
     render :layout => false
   end
   
+  def invite
+   if current_user
+     redirect_to refer_friends_path
+   end
+  end
+  
+  def reffer_friends
+    begin
+    email = params[:email].nil? ? current_user.email : params[:email]
+    user = User.find_by_email(email)
+    user_id = user.id unless user.nil? 
+    @refferer = Refferer.find_by_email(email)
+    @refferer = Refferer.genarate_code(email,user_id) if @invite_friends.nil?
+    puts "#{@refferer.inspect}"
+    rescue Exception => e
+      redirect_to '/shared/invite'
+    end
+  end
+  
   def affliate
     
   end

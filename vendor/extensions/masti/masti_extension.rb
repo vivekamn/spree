@@ -89,6 +89,7 @@ class MastiExtension < Spree::Extension
       has_one :verification_code
       has_one :user_promotion
       belongs_to :city
+      hasa_one  :referer
       after_create :call_count_mailer
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
@@ -147,7 +148,7 @@ class MastiExtension < Spree::Extension
       def call_logging
         #if session[:city_id].to_s == '1'
           url_split = request.request_uri.split('?')
-          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore"
+          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore" and url_split[0]!="/"
             if url_split[1].nil? or url_split[1].empty? 
               session[:src]=request.request_uri
             else

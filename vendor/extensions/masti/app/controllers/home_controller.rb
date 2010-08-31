@@ -31,6 +31,10 @@ before_filter :find_and_set_affiliate, :only => :index
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
+    unless params[:r].nil?
+      session[:referer_code]=params[:r]
+    end
+    puts "#{session[:referer_code]}-------------->"
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
@@ -221,10 +225,12 @@ before_filter :find_and_set_affiliate, :only => :index
       end
     else
       unless current_user.refered_by.nil? or current_user.refered_by.empty?
-        user = User.find_by_email(current_user.refered_by)
+        user = Refferer.find(current_user.refered_by)
+        puts "coming herere erre ere "
         unless user.nil?
           generate_code('true')
         else
+          puts "coming herere erre ere "
           redirect_to reg_complete_path
         end
         
@@ -639,9 +645,9 @@ before_filter :find_and_set_affiliate, :only => :index
     end
     current_user.mobile_verify=true
     current_user.save!
-    user=User.find_by_email(current_user.refered_by)
+    user=Refferer.find(current_user.refered_by)
     unless user.nil?
-      user.invited_count +=1
+      user.invite_count +=1
       user.save!
     end
   end
