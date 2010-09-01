@@ -5,22 +5,39 @@ class SharedController < ApplicationController
   end
   
   def invite
-   if current_user
+   if current_user or !cookies[:email].nil?
      redirect_to refer_friends_path
    end
   end
   
   def reffer_friends
-    begin
-    email = params[:email].nil? ? current_user.email : params[:email]
-    user = User.find_by_email(email)
-    user_id = user.id unless user.nil? 
-    @refferer = Refferer.find_by_email(email)
-    @refferer = Refferer.genarate_code(email,user_id) if @invite_friends.nil?
-    puts "#{@refferer.inspect}"
-    rescue Exception => e
-      redirect_to '/shared/invite'
+#    begin
+#    email = params[:email].nil? ? current_user.email : params[:email]
+    if !current_user.nil?
+      email = current_user.email
+    elsif !params[:email].nil?
+      email = params[:email]
+    elsif !cookies[:email].nil?
+       email = cookies[:email]     
     end
+    unless email.nil? or email.empty?
+      invited_count=0
+      cookies[:email] = email
+      user = User.find_by_email(email)
+      unless user.nil?
+        user_id = user.id
+        invited_count = user.invited_count
+      end
+      @refferer = Refferer.find_by_email(email)
+      @refferer = Refferer.genarate_code(email,invited_count,user_id) if @refferer.nil?
+    else
+       redirect_to '/shared/invite'
+   end
+ 
+#  rescue Exception => e
+#     puts "#{e}--Exception from refer friends-->"
+#      redirect_to '/shared/invite'
+#    end
   end
   
   def affliate

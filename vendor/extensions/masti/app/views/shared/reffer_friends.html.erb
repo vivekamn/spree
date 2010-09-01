@@ -77,18 +77,81 @@
 </style>
 <table style="margin-bottom: 30px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;margin-top:50px;" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
     <tr>
-        <td width="100%" align="center" style="font-size:200%;">
+        <td width="100%" align="center" style="font-size:200%;color:#40A9FF;">
             Masthideals is more fun with friends.
         </td>
     </tr>
     <tr>
         <td align="center">
-        	<table width="70%">
-        		<tr>
-        			<td>
-                		Some taxt
-					</td>
-        		</tr>
+        	<table width="100%">
+		<%if !current_user.nil? and !current_user.source.nil? and !current_user.source.empty?%>
+			<% if !EMAIL_CAMP[current_user.source].nil? %>
+			  <tr>
+			  	<td colspan="2">
+			  		<div id="" class="" style="width:98%">
+			  			<p style="margin-left:15px;"> 
+						 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Congrats!</span>  You have become a member of  Star Customer Club. You will get 3 - 10% addtional discount* and access to Exclusive deals for Star Customer Club.
+						  &nbsp;&nbsp;You can win an Iphone* by inviting your friends to register with
+						<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com.</span>
+						  &nbsp;&nbsp; So go ahead and invite your friends to win an <span class='blue' style='font-size:18px;font-weight:bold;'>Iphone</span>.
+						<br/>
+						 </p>
+			  		</div>
+			  	</td>
+			 </tr>
+			<%elsif !current_user.nil? and !EMAIL_CAMP_ADD[current_user.source].nil?%>
+				<tr>
+				  	<td colspan="2">
+				  		<div id="" class="" style="width:98%">
+				  			<p style="margin-left:15px;"> 
+							 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Congrats!</span>  You have earned 50 Rs to buy any deal in 
+							 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com!</span>
+							  &nbsp;&nbsp;You can win an Iphone by inviting your friends to register with 
+							<span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span> <span class='blue' style='font-size:18px;font-weight:bold;'>Deals.com.</span>
+							  &nbsp;&nbsp; So go ahead and invite your friends to win an <span class='blue' style='font-size:18px;font-weight:bold;'>Iphone</span>.
+							<br/>
+							 </p>
+				  		</div>
+				  	</td>
+			  	</tr>
+			<%end%>
+		  
+		  <%elsif params[:from]=='reg_complete_md_ref'%>
+		  	<tr>
+		  	<td colspan="2" align="center">
+		  		<div id="" class="" style="width:98%">
+		  			<p style="margin-left:-3px;"> 
+					 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span>
+					 You have earned 
+					 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money!</span>
+					  You will get a ticket to 
+					 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Inox</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Movies</span>
+					 if five of your friends successfully register with us.
+					  <br/><br/>Go ahead and Invite them. Your friends will get 
+					  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>
+					   when they register with MasthiDeals.com 
+					 </p>
+		  		</div>
+		  	</td>
+		  </tr>
+		  <%else%>
+		  <tr>
+		  	<td colspan="2" align="center">
+		  		<div id="" class="" style="width:98%">
+		  			<p style="margin-left:10px;"> 
+					  You will get a ticket to 
+					 <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Inox</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Movies</span>
+					 if five of your friends successfully register with us.
+					  <br/><br/>Go ahead and 
+					  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Invite</span> <span class='blue' style='font-size:18px;font-weight:bold;'> them</span>
+					  . Your friends will get 
+					  <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>50 MD</span> <span class='blue' style='font-size:18px;font-weight:bold;'> Money</span>
+					   when they register with MasthiDeals.com 
+					 </p>
+		  		</div>
+		  	</td>
+		  </tr>
+	      <%end%>
         	</table>
             </p>
         </td>
@@ -100,7 +163,7 @@
         			<td>
         				<div class="bluebox">
                 <div class="column left">
-                    Click to post to Facebook or Twitter. It's a simple, low-key way to let your friends know about Masthideals.
+                    Just one Click ahead to share about MasthiDeals with your friends in facebook and twitter
                 </div>
                 <div class="column share">
                     <a href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com/?r=<%= @refferer.code %>&t=Masthideals.com"><img src="https://images.homerun.com/images/shared/share-button-fb.png?1266879606" class="fb-share highlight"></a>

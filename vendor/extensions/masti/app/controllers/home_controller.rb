@@ -169,7 +169,7 @@ before_filter :find_and_set_affiliate, :only => :index
             UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
             
           end
-          redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
+          redirect_to invite_friends_path(:from=>"reg_complete_md_ref")
         end
       else
         unless params[:md_user_ref].nil?
