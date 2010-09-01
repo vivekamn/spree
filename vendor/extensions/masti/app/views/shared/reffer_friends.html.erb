@@ -163,10 +163,10 @@
         			<td>
         				<div class="bluebox">
                 <div class="column left">
-                    Just one Click ahead to share about MasthiDeals with your friends in facebook and twitter
+                    Just one click ahead to share about MasthiDeals with your friends in facebook and twitter
                 </div>
                 <div class="column share">
-                    <a href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com/?r=<%= @refferer.code %>&t=Masthideals.com"><img src="https://images.homerun.com/images/shared/share-button-fb.png?1266879606" class="fb-share highlight"></a>
+                    <a href="http://www.facebook.com/sharer.php?u=http://www.masthideals.com/?r=<%= @refferer.code %>&t=Masthideals.com" target="_blank"><img src="https://images.homerun.com/images/shared/share-button-fb.png?1266879606" class="fb-share highlight"></a>
 					<a href="http://twitter.com/home?status=Join my team and help unlock awesome deals and lower prices at MasthiDeals.com http://www.masthideals.com/?r=<%= @refferer.code %>" title="Click to send this page to Twitter!" target="_blank">
 						<img src="https://images.homerun.com/images/shared/share-button-twitter.png?1266879606" class="twitter-share highlight" style="padding-left:5px;">
 					</a>
@@ -219,10 +219,10 @@
 								<tr>
 									<td valign="middle">
 										Name <font style="color:red"> * </font>: <input type="text" id="name" name="name" size="38" onkeyup="set_name(this);" class="textbox"><br/>
-							           <div id="name_msg_div" style="display:none;"></div>	
+							           <div id="name_msg_div" style="display:none;padding-left:50px;"></div>	
 									</td>
 									<td valign="middle">
-										Your Friends Emails <font style="color:red"> * </font>:	
+										Your Friends Email-id <font style="color:red"> * </font>:	
 									</td>
 									<td valign="top">
 										<textarea id="recipient_list" name="recipients" onfocus="clear_recipient_list_div();" class="textarea"></textarea><br />
@@ -274,7 +274,7 @@
 					document.getElementById('plaxo_invite_submit').submit();
 				}else{
 					change.innerHTML = "<input type='button' onclick='validate_plaxo_invite();' value='Send' class='forward_but' style='background-color: rgb(168, 208, 39);'/>";
-					msg_recipient_list.innerHTML = "<font color='red'>One or more email ids given are invalid.<\/font>";
+					msg_recipient_list.innerHTML = "<font color='red'>Invalid Email id.<\/font>";
 					msg_recipient_list.style.display = "block";
 				}
 			}});

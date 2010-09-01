@@ -37,7 +37,7 @@ class UserMailer < ActionMailer::Base
     bcc           Spree::Config[:mail_bcc]
     subject      "Become a part of MasthiDeals and earn #{money} MasthiDeals Money which you can use to buy any deal."
     sent_on        Time.now.utc
-    body           "name" => name,"from"=>from,"body"=>body,"money"=>money
+    body           "name" => name,"from"=>from,"body"=>body,"money"=>money,"code"=>get_code(from)
   end
   
   def share_this(recipient,from,product,name)
@@ -162,6 +162,10 @@ class UserMailer < ActionMailer::Base
    else
     "one" 
    end
+ end
+ 
+ def get_code(email)
+   Refferer.find_by_email(email).code
  end
  
 end
