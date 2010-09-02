@@ -5,13 +5,14 @@ class SharedController < ApplicationController
   end
   
   def invite
+   if params[:flag].nil?
    if current_user or !cookies[:email].nil?
      if params[:from].nil?
         redirect_to refer_friends_path
      else
         redirect_to refer_friends_path(:from=>params[:from])  
      end
-     
+    end
    end
   end
   
@@ -19,22 +20,22 @@ class SharedController < ApplicationController
 #    begin
 #    email = params[:email].nil? ? current_user.email : params[:email]
     if !current_user.nil?
-      email = current_user.email
+      @email = current_user.email
     elsif !params[:email].nil?
-      email = params[:email]
+      @email = params[:email]
     elsif !cookies[:email].nil?
-       email = cookies[:email]     
+       @email = cookies[:email]     
     end
-    unless email.nil? or email.empty?
+    unless @email.nil? or @email.empty?
       invited_count=0
-      cookies[:email] = email
-      user = User.find_by_email(email)
+      cookies[:email] = @email
+      user = User.find_by_email(@email)
       unless user.nil?
         user_id = user.id
         invited_count = user.invited_count
       end
-      @refferer = Refferer.find_by_email(email)
-      @refferer = Refferer.genarate_code(email,invited_count,user_id) if @refferer.nil?
+      @refferer = Refferer.find_by_email(@email)
+      @refferer = Refferer.genarate_code(@email,invited_count,user_id) if @refferer.nil?
     else
        redirect_to '/shared/invite'
    end

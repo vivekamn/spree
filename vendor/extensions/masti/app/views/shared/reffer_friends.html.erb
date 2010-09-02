@@ -40,7 +40,7 @@
         background: none repeat scroll 0 0 #D7FFD7;
         font-size: 125% !important;
         margin-bottom: 1em;
-        padding: 5px 5px 20px 10px;
+        padding: 5px 5px 40px 10px;
         -moz-box-shadow: 2px 2px 3px rgba(136, 136, 136, 0.24);
         border: 2px solid #02D402;
         color: #000000;
@@ -192,8 +192,12 @@
                 <div>
                    <input type="text" value="http://www.masthideals.com:3006/?r=<%= @refferer.code %>" readonly="readonly" id="url" onclick="select_all(this)"  data-size="medium" size="50">
                 </div>
-				
-            </div>
+		<% if current_user.nil?%>
+		 <div class="column left1">
+                    Your Email id : <%= @email %>. <a href="<%=invite_friends_path(:flag=>'1')%>">Want to change?</a>
+                </div>		
+                <%end%>
+		</div>
         			</td>
         		</tr>
         	</table>
