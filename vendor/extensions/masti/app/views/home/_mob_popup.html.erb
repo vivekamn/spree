@@ -98,7 +98,7 @@
             </td>
         </tr>
     </table>
-    <input type="hidden" name="page" value="<%= @page %>" /><input type="hidden" name="match" id="match"><input type="hidden" name="variant_id" id="product_id" value="<%= deal.product.variant.id %>"><% end %>
+    <input type="hidden" name="page" value="<%= @page %>" /><input type="hidden" name="match" id="match"><input type="hidden" name="variant_id" id="product_id" value="<%= deal.product.master.id %>"><% end %>
 </div>
 <script type="text/javascript">
     function validate_share_this(){

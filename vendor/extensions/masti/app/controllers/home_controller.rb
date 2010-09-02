@@ -34,7 +34,6 @@ before_filter :find_and_set_affiliate, :only => :index
     unless params[:r].nil?
       session[:referer_code]=params[:r]
     end
-    puts "#{session[:referer_code]}-------------->"
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
@@ -510,6 +509,7 @@ before_filter :find_and_set_affiliate, :only => :index
   
   def create
     @enquiry=Enquiry.new(params[:enquiry])
+    @enquiry.city= City.find(@enquiry.city_id).name
     begin
       @enquiry.save!
       flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly." 
