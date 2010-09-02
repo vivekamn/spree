@@ -17,7 +17,7 @@ class UsersController < Spree::BaseController
       session[:affiliate] = nil
     end
     unless session[:referer_code].nil?
-      @user.refered_by = Refferer.find_by_code(session[:referer_code])
+      @user.refferer_id = Refferer.find_by_code(session[:referer_code]).id
       session.delete :referer_code
     end
     #if session[:city_id].to_s == '1'

@@ -6,7 +6,12 @@ class SharedController < ApplicationController
   
   def invite
    if current_user or !cookies[:email].nil?
-     redirect_to refer_friends_path
+     if params[:from].nil?
+        redirect_to refer_friends_path
+     else
+        redirect_to refer_friends_path(:from=>params[:from])  
+     end
+     
    end
   end
   

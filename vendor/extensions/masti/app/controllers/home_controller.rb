@@ -163,9 +163,9 @@ before_filter :find_and_set_affiliate, :only => :index
           redirect_to invite_friends_path(:from=>"reg_complete")  
         else
           update_referer_promotion
-          user = User.find_by_email(current_user.refered_by)
+          user = Refferer.find(current_user.refferer_id)
           unless user.nil?
-            count= user.invited_count
+            count= user.invite_count
             UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
             
           end
@@ -224,13 +224,11 @@ before_filter :find_and_set_affiliate, :only => :index
         redirect_to reg_complete_path
       end
     else
-      unless current_user.refered_by.nil? or current_user.refered_by.empty?
-        user = Refferer.find(current_user.refered_by)
-        puts "coming herere erre ere "
+      unless current_user.refferer_id.nil?
+        user = Refferer.find(current_user.refferer_id)
         unless user.nil?
           generate_code('true')
         else
-          puts "coming herere erre ere "
           redirect_to reg_complete_path
         end
         
@@ -514,7 +512,8 @@ before_filter :find_and_set_affiliate, :only => :index
     @enquiry=Enquiry.new(params[:enquiry])
     begin
       @enquiry.save!
-      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
+      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly." 
+      UserMailer.deliver_enquiries(@enquiry)
       redirect_to home_url    
     rescue Exception=>e
       flash[:error]=e.message      
@@ -645,7 +644,7 @@ before_filter :find_and_set_affiliate, :only => :index
     end
     current_user.mobile_verify=true
     current_user.save!
-    user=Refferer.find(current_user.refered_by)
+    user=Refferer.find(current_user.refferer_id)
     unless user.nil?
       user.invite_count +=1
       user.save!
