@@ -8,6 +8,8 @@ class Refferer < ActiveRecord::Base
     end
     new_record = self.new(:email=>email,:code=>random,:user_id=>user_id,:invite_count=>invited_count)
     new_record.save
+    query = "UPDATE users SET refferer_id=#{new_record.id} WHERE refered_by='#{email}'"
+    connection.execute(query)
     return new_record
   end
   
