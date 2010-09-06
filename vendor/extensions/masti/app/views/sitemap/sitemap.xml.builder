@@ -76,17 +76,17 @@ xml.urlset(
     xml.changefreq  "monthly"
   end   
 
- xml.url do
-    xml.loc         "http://www.masthideals.com/delhi"
-    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
-    xml.changefreq  "monthly"
-  end   
-
- xml.url do
-    xml.loc         "http://www.masthideals.com/mumbai"
-    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
-    xml.changefreq  "monthly"
-  end  
+# xml.url do
+#    xml.loc         "http://www.masthideals.com/delhi"
+#    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+#    xml.changefreq  "monthly"
+#  end   
+#
+# xml.url do
+#    xml.loc         "http://www.masthideals.com/mumbai"
+#    xml.lastmod     Time.now.localtime.strftime("%Y-%m-%d")
+#    xml.changefreq  "monthly"
+#  end  
   
   xml.url do
     xml.loc         "http://www.masthideals.com/hyderabad"
