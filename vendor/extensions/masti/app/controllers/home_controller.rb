@@ -53,9 +53,12 @@ before_filter :find_and_set_affiliate, :only => :index
       redirect_to error_path
     else
       @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
+      variant = @featured_product.master
       @price = @featured_product.price.to_i
       @discount = @featured_product.discount
-      @saving = (@price*@discount/100).to_i
+      actual_discount = (variant.price-((variant.price*variant.product.discount)/100)).to_i
+      #@saving = ((@price*@discount/100).to_i
+      @saving = @price - actual_discount
       @bought_count = @featured_product.currently_bought_count
       unless params[:email].nil? and params[:product_id].nil?
         email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
@@ -73,8 +76,11 @@ before_filter :find_and_set_affiliate, :only => :index
     @featured_product = Product.find_by_permalink(params[:id])
     @deal = DealHistory.find(:first, :conditions =>['(is_active = ? or is_side_deal = ? ) and product_id = ?', true,true,@featured_product.id])
     @price = @featured_product.price.to_i
+    variant = @featured_product.master
     @discount = @featured_product.discount
-    @saving = (@price*@discount/100).to_i
+    actual_discount = (variant.price-((variant.price*variant.product.discount)/100)).to_i
+    #@saving = ((@price*@discount/100).to_i
+    @saving = @price - actual_discount
     @bought_count = @featured_product.currently_bought_count
     if @deal.nil? or @deal.is_active
       @deal_param = 'side_deal'

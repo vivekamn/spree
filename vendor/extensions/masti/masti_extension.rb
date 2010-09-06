@@ -133,7 +133,7 @@ class MastiExtension < Spree::Extension
       helper HomeHelper
       before_filter :call_logging,:call_pop
       before_filter :set_city
-      
+      require 'geoip'
       def call_pop
         if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
           cookies[:time_remaining]=10
@@ -142,7 +142,14 @@ class MastiExtension < Spree::Extension
       
       def set_city
         if session[:city_id].nil?
-          session[:city_id] = 1
+          db = GeoIP.new("#{RAILS_ROOT}/db/GeoLiteCity.dat") 
+          city_by_ip = db.country("115.117.228.241")
+          city = City.find_by_name(CITY_NAME[city_by_ip[7]]) if !city_by_ip.nil? and !city_by_ip[7].empty?
+          if city.nil?
+            session[:city_id] = 1
+          else
+            session[:city_id] = city.id
+          end
         end
       end
       
