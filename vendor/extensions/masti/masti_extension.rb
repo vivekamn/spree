@@ -143,7 +143,7 @@ class MastiExtension < Spree::Extension
       def set_city
         if session[:city_id].nil?
           db = GeoIP.new("#{RAILS_ROOT}/db/GeoLiteCity.dat") 
-          city_by_ip = db.country("115.117.228.241")
+          city_by_ip = db.country(request.remote_ip)
           city = City.find_by_name(CITY_NAME[city_by_ip[7]]) if !city_by_ip.nil? and !city_by_ip[7].empty?
           if city.nil?
             session[:city_id] = 1
