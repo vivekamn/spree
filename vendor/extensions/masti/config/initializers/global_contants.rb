@@ -1,6 +1,6 @@
 CITY_NAME = {}
 CITY_NAME['Madras']='Chennai'
-CITY_NAME['Bangalore']='Bengaluru'
+CITY_NAME['Bangalore']='Bangalore'
 CITY_NAME['Hyderabad']='Hyderabad'
 
 #Email campain contants
