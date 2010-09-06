@@ -142,26 +142,31 @@ class MastiExtension < Spree::Extension
       
       def set_city
         if session[:city_id].nil?
-          db = GeoIP.new("#{RAILS_ROOT}/db/GeoLiteCity.dat") 
-          city_by_ip = db.country(request.remote_ip)
-          city = City.find_by_name(CITY_NAME[city_by_ip[7]]) if !city_by_ip.nil? and !city_by_ip[7].empty?
-          if city.nil?
+          begin
+            db = GeoIP.new("#{RAILS_ROOT}/db/GeoLiteCity.dat") 
+            city_by_ip = db.country(request.remote_ip)
+            city = City.find_by_name(CITY_NAME[city_by_ip[7]]) if !city_by_ip.nil? and !city_by_ip[7].empty?
+            if city.nil?
+              session[:city_id] = 1
+            else
+              session[:city_id] = city.id
+            end
+          rescue Exception => e
+            logger.info "Error in setting city -----------#{e.to_s}"
             session[:city_id] = 1
-          else
-            session[:city_id] = city.id
           end
         end
       end
       
       def call_logging
         #if session[:city_id].to_s == '1'
-          url_split = request.request_uri.split('?')
-          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore" and url_split[0]!="/"
-            if url_split[1].nil? or url_split[1].empty? 
-              session[:src]=request.request_uri
-            else
-              session[:src]=url_split[0]
-            end
+        url_split = request.request_uri.split('?')
+        if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore" and url_split[0]!="/"
+          if url_split[1].nil? or url_split[1].empty? 
+            session[:src]=request.request_uri
+          else
+            session[:src]=url_split[0]
+          end
           #end
         end
         unless params[:email].nil?
