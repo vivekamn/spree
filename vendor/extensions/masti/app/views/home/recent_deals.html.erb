@@ -37,6 +37,13 @@
     .coupon_text {
         height: 53px;
     }
+	.image{
+		border : 3px solid #858585;
+	}
+	.link{
+		height:240px;
+		width:240px;
+	}
 </style>
 <% @page_title = "Masthideals.com - Showing All Recent Deals in Chennai, Bangalore, Mumbai & New Delhi" %>
 <% @description = "Find all recent online deals, discount coupons and great shopping offers for your favorite online store at Masthideals.com" %>
@@ -51,151 +58,10 @@
                 </td>
             </tr>
         </table>
-        <% if session[:city_id].to_s == '1' %>
         <table border="0" width="80%" cellspacing="0" cellpadding="0" style="margin-left:30px; margin-bottom:60px;">
             <tbody>
-            	<tr>
-                    <td align="right" width="50%" valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><a href="/home/product_preview/marrybrown-deal">60 Rs = 100 Rs. That is 40% discount on Marrybrown Vouchers. Enjoy the crispy fried Chicken / Veg Nuggets, Relish the great burgers and wraps in any one of the 17 Marrybrown outlets.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/marrybrown-deal"><img class="image" border="0" alt="Benzz_park" src="/images/recent-deals/marry-brown.jpeg"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/wildtriberanch-adventure-sports-deal">Rs 225 = Rs 500. Unleash the wild side of you. Roam in ATVs. Mimic Tom Cruise in Paint Ball. Tame the bull in bull ride. Let the adventure never end.  </a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/wildtriberanch-adventure-sports-deal"><img class="image" border="0" src="/images/recent-deals/wild-tribe.jpeg" alt="Inox-Deal"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-				
-            	<tr>
-                    <td align="right" width="50%" valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><a href="/home/product_preview/labelle-slimming-deals">Tired of looking fat? Start loosing pounds. 400 gms is a good start. Get Slim with Labelle for 400 Rs instead of 1000 Rs. That is a discount of 60%. </a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/labelle-slimming-deals"><img class="image" border="0" alt="Benzz_park" src="/images/recent-deals/labell2.jpeg"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/swissroll-cake-deal">Sugarless Sweet which get a A+ in taste. Enjoy the sweets for any function without piling up calories. Laddu, Kajhu Kathali, Jamoon... You name it, we have it. </a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/mithaimate-sweet-deal"><img class="image" border="0" src="/images/recent-deals/mithai.jpeg" alt="Inox-Deal"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-				
+            	<% @products.each_with_index do |product,index| %>
+			      <%if (index+1)%2==1 %>
 				<tr>
                     <td align="right" width="50%" valign="top">
                         <table border="0" width="400" cellspacing="0" cellpadding="0">
@@ -210,14 +76,14 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><a href="/home/product_preview/kings-mings-restaurant-deal">300 Rs = 500 Rs. That is 40% discount on great Chinese food, Indian delicacies and Tandoor best from Kings & Mings Restaurant at Anna Nagar. Choose any items you want from the multi cuisine menu. Eat for 500 Rs and pay just 300. </a></span>
+                                                                        <span style="color:blue;"><a href="/home/product_preview/<%= product.permalink %>"><%= product.name%></a></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td width="126" valign="top">
                                                                     </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/kings-mings-restaurant-deal"><img class="image" border="0" alt="Benzz_park" src="/images/recent-deals/kings.jpeg"></a>
+                                                                    <td align="right" width="250" valign="top" class="link" >
+                                                                        <a href="/home/product_preview/<%= product.permalink %>"><img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>"></a>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -231,6 +97,7 @@
                             </tbody>
                         </table>
                     </td>
+					<%else%>
                     <td valign="top">
                         <table border="0" width="400" cellspacing="0" cellpadding="0">
                             <tbody>
@@ -244,14 +111,14 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/swissroll-cake-deal">288 = 460 Rs. That is 40% discount on delicious Black Forest Cake with creamy decorations. Weddings, Birthdays, Anniversaries - Celebrate it with a mammoth 1.5 Kg black forest cake from SwissRoll - specialist in cakes and pastries in Anna Nagar. Buy the coupon now and use it for any function in the next three months. </a></span>
+                                                                        <span style="color:blue;"><a href="/home/product_preview/<%= product.permalink %>"><%= product.name%></a></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td width="126" valign="top">
                                                                     </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/swissroll-cake-deal"><img class="image" border="0" src="/images/recent-deals/cake.jpeg" alt="Inox-Deal"></a>
+                                                                    <td align="right" width="250" valign="top" class="link" >
+                                                                        <a href="/home/product_preview/<%= product.permalink %>"><img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>"></a>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -266,220 +133,15 @@
                         </table>
                     </td>
                 </tr>
+			<%end%>
+			<%end%>	
+		<%if (@products.size)%2==1%>		
+			<td>
 				
-				
-                <tr>
-                    <td align="right" width="50%" valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><a href="/home/product_preview/labelle-beauty-deal">760 Rs = 1900 Rs. That is 60% discount on great beauty services from La Belle, Kilpauk. Discover the pearly figure and glow like an angel. Head to Toe package has services from facial to haircut.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/labelle-beauty-deal"><img class="image" border="0" alt="Benzz_park" src="/images/recent-deals/la_belle1.jpeg"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/whitepepper-dining-deal">175 Rs = 300 Rs. That is 41% discount on great Chinese Food from White Pepper Dimsum Delicacy Restaurant at Thiruvanmiyur, Chennai. Enjoy FIFA 2010 World Cup knock out matches in the big screen as you enjoy the dinner.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/whitepepper-dining-deal"><img class="image" border="0" src="/images/recent-deals/white-pepper.jpeg" alt="Inox-Deal"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/ags-movie-ticket-deal">72 Rs = 136.5 Rs. That is 47% discount on Movie tickets for any movie , any show at INOX MultiPlex from www.bookmyshow.com.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/ags-movie-ticket-deal"><img class="image" border="0" src="/images/recent-deals/inox2.jpeg" alt="Inox-Deal"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td align="right" width="50%" valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><a href="/home/product_preview/benzzpark-restaurant-deal">Rs 265 = Rs 441. That is 40% discount from Hotel Benzz park for its dinner Buffet. Come and relish delicious starters, Veg / Non Veg main courses, Side Dishes and Desserts at the Porsche Multi cuisine Restaurant at (3 star) Hotel Benzz Park in T.Nagar.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/benzzpark-restaurant-deal"><img class="image" border="0" alt="Benzz_park" src="/images/recent-deals/benzz.jpeg"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top">
-                        <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/inox-movie-ticket-deal">72 Rs = 136.5 Rs. That is 47% discount on Movie tickets for any movie , any show at INOX MultiPlex from www.bookmyshow.com</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/inox-movie-ticket-deal"><img class="image" border="0" src="/images/recent-deals/inox.jpeg" alt="Inox-Deal"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td align="right" width="50%" valign="top">
-                       <table border="0" width="400" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <table border="0" align="right" width="400" cellspacing="0" cellpadding="10" class="recent_outer_left">
-                                            <tbody>
-                                                <tr height="290px">
-                                                    <td width="376">
-                                                        <table border="0" width="376" cellspacing="0" cellpadding="0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;" class="text"><a href="/home/product_preview/vlcc-spa-deal">Enjoy Services worth Rs.2199 in VLCC and pay only Rs.449.</a></span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td width="126" valign="top">
-                                                                    </td>
-                                                                    <td align="right" width="250" valign="top">
-                                                                        <a href="/home/product_preview/vlcc-spa-deal"><img class="image" border="0" src="/images/recent-deals/vlcc.jpeg" alt="VLCC"></a>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> 
-                    </td>
-                </tr>
-            </tbody>
+			</td>
+			</tr>	
+		<%end%>		
+	        </tbody>
         </table>
-        <%end %>
     </div>
 </div>

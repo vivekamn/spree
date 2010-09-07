@@ -552,6 +552,9 @@ before_filter :find_and_set_affiliate, :only => :index
   
   def recent_deals
     @bar_selected="recent_deals"
+    histories = DealHistory.find(:all,:include => {:product => {}},:conditions=>['is_active =0 and is_side_deal=0 and city_id= ? and is_sample=?',session[:city_id],false])
+    @products = histories.collect{|x| x.product}
+    @products = @products.uniq
   end
   
   def upcoming_deals
