@@ -401,10 +401,10 @@ class Order < ActiveRecord::Base
         if credit_amount>50 
            self.user.user_promotion.credit_amount -= 50
         else
-           self.user.user_promotion.credit_amount -= total_amount
+           self.user.user_promotion.credit_amount = 0
         end
       else 
-        self.user.user_promotion.credit_amount = 0
+        self.user.user_promotion.credit_amount -= total_amount
       end
       self.user.user_promotion.save
     end
