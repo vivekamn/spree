@@ -175,11 +175,17 @@
         <%= f.error_message_on :max_vouchers %>
         <% end %>
 		<% f.field_container :star_discount do %>
-        <%= f.label :star_discount, t("star_discount") %>
+        <%= f.label :star_discount, "Star Customer Discount" %>
         <br/>
         <%= f.text_field :star_discount, :value => @product.star_discount %>
         <%= f.error_message_on :star_discount %>
         <% end %>
+		<% f.field_container :use_md_money do %>
+        <%= f.check_box :use_md_money, :value => @product.use_md_money %>&nbsp;&nbsp;
+		 <%= f.label :use_md_money, "Use MD Money" %>
+        <%= f.error_message_on :use_md_money %>
+        <% end %>
+		
     </div>
     <div class="yui-u first">
         <% f.field_container :reviews do %>

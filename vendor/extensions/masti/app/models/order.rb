@@ -277,9 +277,9 @@ class Order < ActiveRecord::Base
   end
 
   def update_totals(force_adjustment_recalculation=false)
-    
+    md_money_access = self.line_items[0].nil? ? false :self.line_items[0].variant.product.use_md_money
     self.item_total  = self.line_items.total
-    if !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
+    if md_money_access and !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
       if total_amount < credit_amount
@@ -393,6 +393,7 @@ class Order < ActiveRecord::Base
   end
   
   def update_user_promotion
+    if self.line_items.first.variant.product.use_md_money
     unless self.user.user_promotion.nil?
       credit_amount = self.user.user_promotion.credit_amount
       total_amount = self.line_items.total
@@ -406,6 +407,7 @@ class Order < ActiveRecord::Base
         self.user.user_promotion.credit_amount = 0
       end
       self.user.user_promotion.save
+    end
     end
   end
 

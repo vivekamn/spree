@@ -15,7 +15,8 @@
       </div>
     <% end %>
     <div class="shoppinginner">
-         <%if !current_user.user_promotion.nil? and current_user_credit_amount>0%>
+          <% if @order.line_items[0].variant.product.use_md_money %>
+		 <%if !current_user.user_promotion.nil? and current_user_credit_amount>0%>
 		  <div style="margin-top:20px;">
              <% if current_user_credit_amount>50 and @order.line_items.total>50 %>
 	          You have <%= current_user_credit_amount %> MD Money in your account. 50 MD Money will be adjusted against the payment to be made for this purchasal.
@@ -23,6 +24,7 @@
 	          You have <%= current_user_credit_amount %> MD Money in your account. This will be adjusted against the payment to be made for this purchasal.
 	        <%end%>
 	      </div>
+		<%end%>
 		<%end%>
       <div class="shoptable" style="padding:0px">
         <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>

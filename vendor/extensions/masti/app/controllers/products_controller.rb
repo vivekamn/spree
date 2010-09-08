@@ -21,7 +21,7 @@ class ProductsController < Spree::BaseController
     count = 0
     oreders.each do |order|
       order.line_items.each do |line_item|
-        if line_item.variant.id ==  @product.variant.id
+        if line_item.variant.id ==  @product.master.id
           if order.state == "paid"
             count += line_item.quantity
           end
