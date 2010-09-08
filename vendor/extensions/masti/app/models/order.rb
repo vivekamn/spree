@@ -398,13 +398,15 @@ class Order < ActiveRecord::Base
       credit_amount = self.user.user_promotion.credit_amount
       total_amount = self.line_items.total
       if credit_amount > total_amount
-        if credit_amount>50 
+        if credit_amount>50 and self.line_items.total>50
            self.user.user_promotion.credit_amount -= 50
-        else
+        elsif current_user.user_promotion.credit_amount>50
+          current_user.user_promotion.credit_amount - @order.line_items.total.to_i
+         else
            self.user.user_promotion.credit_amount = 0
         end
       else 
-        self.user.user_promotion.credit_amount -= total_amount
+        self.user.user_promotion.credit_amount -= 50
       end
       self.user.user_promotion.save
     end
