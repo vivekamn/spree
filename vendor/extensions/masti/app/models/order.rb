@@ -289,7 +289,7 @@ class Order < ActiveRecord::Base
           self.item_total = 0  
         end
       else
-          self.item_total -= credit_amount  
+          self.item_total -= 50  
       end
     elsif !EMAIL_CAMP[self.user.source].nil?
       star_discount=nil
