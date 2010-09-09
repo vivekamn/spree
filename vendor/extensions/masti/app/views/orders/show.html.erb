@@ -27,7 +27,7 @@
     <% if @order.total>0 %>
 		<%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
 	      <input name="account_id" type="hidden" value="6246" />
-	      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?DR={DR}" />
+	      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?authenticity_token=<%=form_authenticity_token%>&DR={DR}" id="return_url" />
 	      <% if RAILS_ENV == 'development' %>
 	        <input name="mode" type="hidden" value="TEST" />
 	      <% else %>
