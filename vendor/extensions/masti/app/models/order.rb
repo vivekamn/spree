@@ -283,13 +283,19 @@ class Order < ActiveRecord::Base
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
       if total_amount < credit_amount
-        if credit_amount>50 and self.item_total>50
+        if credit_amount>50 and total_amount>50
           self.item_total -= 50
-        else
-          self.item_total = 0  
+        elsif credit_amount>50 or (credit_amount<50 and total_amount<50)
+          self.item_total = 0
+        elsif total_amount>50
+          self.item_total -= credit_amount
         end
       else
+        if credit_amount>50 and total_amount>50
           self.item_total -= 50  
+        else
+          self.item_total -= credit_amount  
+        end
       end
     elsif !EMAIL_CAMP[self.user.source].nil?
       star_discount=nil
@@ -397,17 +403,19 @@ class Order < ActiveRecord::Base
     unless self.user.user_promotion.nil?
       credit_amount = self.user.user_promotion.credit_amount
       total_amount = self.line_items.total
-      if credit_amount > total_amount
-        if credit_amount>50 and self.line_items.total>50
-           self.user.user_promotion.credit_amount -= 50
-        elsif current_user.user_promotion.credit_amount>50
-          current_user.user_promotion.credit_amount - @order.line_items.total.to_i
-         else
-           self.user.user_promotion.credit_amount = 0
-        end
-      else 
-        self.user.user_promotion.credit_amount -= 50
-      end
+      remaning =  total_amount - self.total
+      self.user.user_promotion.credit_amount -= remaning
+#      if credit_amount > total_amount
+#        if credit_amount>50 and self.line_items.total>50
+#           self.user.user_promotion.credit_amount -= 50
+#        elsif current_user.user_promotion.credit_amount>50
+#          current_user.user_promotion.credit_amount - @order.line_items.total.to_i
+#         else
+#           self.user.user_promotion.credit_amount = 0
+#        end
+#      else 
+#        self.user.user_promotion.credit_amount -= 50
+#      end
       self.user.user_promotion.save
     end
     end
