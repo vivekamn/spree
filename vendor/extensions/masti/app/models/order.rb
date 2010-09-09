@@ -282,12 +282,12 @@ class Order < ActiveRecord::Base
     if md_money_access and !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
-      if total_amount < credit_amount
-        if credit_amount>50 and total_amount>50
+      if credit_amount > total_amount 
+        if credit_amount>=50 and total_amount>=50
           self.item_total -= 50
-        elsif credit_amount>50 or (credit_amount<50 and total_amount<50)
+        elsif credit_amount>=50 or (credit_amount<50 and total_amount<50)
           self.item_total = 0
-        elsif total_amount>50
+        elsif total_amount>=50
           self.item_total -= credit_amount
         end
       else
