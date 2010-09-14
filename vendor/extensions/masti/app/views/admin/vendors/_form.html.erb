@@ -1,0 +1,58 @@
+ <%= f.label :name, t("name") %> <span class="required">*</span><br />
+    <%= f.text_field :name, :class => 'fullwidth title'  %>
+    <%= f.error_message_on :name %>
+  
+
+  <div class="yui-gb">
+    <div class="yui-u first">        
+          <%= f.label :email, t("email") %><span class="required">*</span><br />
+          <%= f.text_field :email%>
+          <%= f.error_message_on :email %>
+       
+     
+
+
+      <p>
+        <%= f.label :contact_person_name, t("contact_person_name") %><span class="required">*</span><br />
+       <%= f.text_field :contact_person_name%>
+          <%= f.error_message_on :contact_person_name %>
+      </p>
+
+    </div>
+    <div class="yui-u">     
+        <%= f.label :city, t("city")%> <br />
+        <%= f.text_field :city  %>
+        <%= f.error_message_on :city%>
+     
+
+      <p>
+        <%= f.label :state_id, t("state") %><span class="required">*</span><br />
+        <%= f.collection_select :state_id, State.all, :id, :name, :include_blank => true %><br />
+		<%= f.error_message_on :state_id%>
+      </p>
+
+
+    </div>
+    <div class="yui-u">
+
+     <%= f.label :address, t("address") %><br />
+       <%= f.text_field :address%>
+          <%= f.error_message_on :address %>
+      <p>
+        <%= f.label :zip, t("zip")%> <br />
+        <%= f.text_field :zip  %>
+        <%= f.error_message_on :zip%>
+      </p>
+	  
+	 
+    </div>    
+  </div>
+  <div class="yui-gb">
+    <div class="yui-u first">
+    <%= f.label :phone_no, t("phone_no")%> <span class="required">*</span><br />
+        <%= f.text_field :phone_no  %>
+        <%= f.error_message_on :phone_no%>         
+    </div>  	
+  </div>
+ 
+</fieldset>
