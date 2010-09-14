@@ -60,7 +60,7 @@ class Admin::VendorsController < Admin::BaseController
   def collection
     @search = Vendor.searchlogic(params[:search])
     @search.order ||= "descend_by_created_at"
-
+    @search.deleted_at_null = true
     # QUERY - get per_page from form ever???  maybe push into model
     # @search.per_page ||= Spree::Config[:orders_per_page]
 
