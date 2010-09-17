@@ -53,6 +53,7 @@ map.email_camp_hp '/email_camp_hp', :controller => "home", :action => "index"
 map.email_camp_scope '/email_camp_scope', :controller => "home", :action => "index"
 map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action => "index"
 map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
+map.email_camp_steria '/email_camp_steria', :controller => "home", :action => "index"
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
