@@ -17,13 +17,14 @@
 </style>
 <% @description = "Find all upcoming online deals, discount coupons and great shopping offers for your favorite online store at Masthideals.com" %>
 <% @keywords = "hot deals coupons, online discount deals, best spa resort deals chennai, great discount family resorts, restaurant discounts chennai, online shopping deals, restaurant coupons, special package deals, discount offers newdelhi, spa deals, restaurant offers, pubs discount, resorts coupons, best deals online packages, resort spa deals mumbai, spa and resort packages " %>
-<%if current_user and pay_affiliate_signup?(current_user) %>
-<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&&affiliate_id=<%=current_user.affiliate_id%>&idev_commission=<%=SIGN_UP_AFFILIATE_COMMISSION%>" width="1" height="1">
-<%pay_affiliate_signup(current_user) %>
-<%end %>
+<!--<%#if current_user and pay_affiliate_signup?(current_user) %>
+<img border="0" src="http://www.mustideals.com/sale.php?profile=72198&&affiliate_id=<#%=current_user.affiliate_id%>&idev_commission=<#%=SIGN_UP_AFFILIATE_COMMISSION%>" width="1" height="1">
+<%#pay_affiliate_signup(current_user) %>
+<%#end %>-->
 <div class="title" style="margin-left:20px;margin-top:10px;font-size:20px;font-weight:bold; color:#00a8ff;">
     <% unless @featured_product.name.nil? %>
-    <%=@featured_product.name %>
+    <br/>
+	<%=@featured_product.name %>
     <%end %>
 </div>
 <div class="bannerouter">
@@ -108,6 +109,9 @@
                     </td>
                     <td valign="top">
                         <a href="javascript:show_send_share_this();"><img src="http://w.sharethis.com/chicklets/email.gif" style="margin-bottom: 7px;"/></a>
+                    </td>
+					<td valign="top">
+                        <a href="javascript:show_mobile_share_this();"><img src="/images/tell_friends/mobile.jpg" style="margin-bottom: 7px;"/></a>
                     </td>
                     <td valign="top">
                         <div style="margin-top:-10px">
@@ -203,6 +207,9 @@
     <div id="share_this_div" style="display:none;width:500px;height:180px;">
         <%= render :partial => "popup", :locals =>{ :deal => @deal} %>
     </div>
+	<div id="share_this_mobile_div" style="display:none;width:300px;height:180px;">
+        <%= render :partial => "mob_popup", :locals =>{ :deal => @deal} %>
+    </div>
     <script type="text/javascript">
         function show_send_share_this(){
             showPop('share_this_div', 10, 200);
@@ -211,6 +218,14 @@
         function close_send_share_this(){
             hidePop('share_this_div');
         }
+		function show_mobile_share_this(){
+            showPop('share_this_mobile_div', 10, 200);
+        }
+        
+        function close_mobile_share_this(){
+            hidePop('share_this_mobile_div');
+        }
+		
     </script>
     <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
 </div>

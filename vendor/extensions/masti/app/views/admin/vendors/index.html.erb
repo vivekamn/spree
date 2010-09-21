@@ -1,10 +1,9 @@
 
-
 <div class='toolbar'>
   <ul class='actions'>
     <li id="new_ot_link">
-      <%= button_link_to_remote t("new_vendor"),
-                         {:url => new_object_url,
+      <%= button_link_to_remote "New Vendor",
+                         {:url => '/admin/vendors/new',
                          :method => :get,
                          :update => "new-vendor"}, :icon => 'add' %>
     </li>
@@ -12,13 +11,46 @@
   <br class='clear' />
 </div>
 
-<h1><%= "#{t("actions.listing")} #{t("products")}" %></h1>
+<h1><%= "#{t("actions.listing")} Vendors" %></h1>
 
 <%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
-<div id="new-product"></div>
+<div id="new-vendor"></div>
+<table class="index">
+  <tr>
+    <% hook :admin_products_index_headers do %>
+      <th>Name</th>
+      <th>Address</th>
+      <th>State</th>
+	  <th>City</th>
+	  <th>Contact Person</th>
+	  <th>Phone no</th>
+	  <th>E-mail</th>
+    <% end %>
+    <th>
+      <% hook :admin_products_index_header_actions %>
+    </th>
+  </tr>
+<% @collection.each do |product| %>
+  <tr <%= 'style="color:red;"' if product.deleted? %> id="<%= dom_id product %>">
+    <%- locals = {:product => product} -%>
+    <% hook :admin_products_index_rows, locals do %>
+      <td><%= product.name %></td>
+      <td><%= product.address %></td>
+      <td><%= product.state.name%></td>
+	  <td><%= product.city%></td>
+	  <td><%= product.contact_person_name%></td>
+	  <td><%= product.phone_no%></td>
+	  <td><%= product.email%></td>
+    <% end %>
+    <td class="actions">
+      <% hook :admin_products_index_row_actions, locals do %>
+         <%= link_to_edit product unless product.deleted?  %>
+        &nbsp;
+        <%= link_to_delete product unless product.deleted?  %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+<%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
-      
-
-
-
-      

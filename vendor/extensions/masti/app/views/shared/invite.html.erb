@@ -1,0 +1,66 @@
+<div class="flash errors" id="flash_error" style="display:none;">
+</div>
+<% form_for :uniq_url ,:url => {:controller =>'shared' , :action => 'reffer_friends'}, :html => {:id => "uniq_url"} do |f| %>
+<table width="100%">
+	<tr height="90px">
+		<td valign="top">
+			<span class="green">Invite Your </span><span class="blue">Friends</span>
+		</td>
+	</tr>
+	<tr height="120px">
+		<td align="center">
+			<table style="width:98%;">
+				<tr>
+					<td>
+						<p align="center">
+						Generate a referral link to share MasthiDeals with your beloved ones just by giving ur email id.
+						</p>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+    <tr height="150px">
+        <td align="center" valign="top">
+            <table id="EditTable" width="50%" border="0" cellpadding="2" cellspacing="0">
+                <tr>
+                    <td align="right">
+                        Your Email id
+                    </td>
+                    <td>
+                        :
+                    </td>
+                    <td colspan="4" align="left">
+                        <input type="text" id="email" name="email" size="38">
+                    </td>
+                </tr>
+                <tr height="85px">
+                    <td colspan="6" align="center">
+                        <div id="change_image_plaxo">
+                            <input type="button" onclick="return validate_verification();" value="Get My URL" class="forward_but" style="background-color: rgb(168, 208, 39);">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<% end %>
+<script type="text/javascript">
+	function email_check(giv_email){
+        var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+        email_value = EMAIL_REGEX.test(giv_email);
+        return email_value;
+    }
+	function validate_verification(){
+    var email = document.getElementById('email').value;
+	document.getElementById('flash_error').style.display = 'none'
+	 if(document.getElementById('email').value != '' && document.getElementById('email').value  != null && email_check(email)){
+	 	document.getElementById('uniq_url').submit();
+	 } else{
+	 	document.getElementById('flash_error').style.display = '';
+          document.getElementById('flash_error').innerHTML = "Invalid Email id.";
+	 }
+	}
+</script>

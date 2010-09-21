@@ -23,12 +23,12 @@ class MastiExtension < Spree::Extension
     {:name => 'validity_from', :only => [:product]},
     {:name => 'validity_to', :only => [:product]},
     {:name => 'catch_message', :only => [:product]},
-    {:name => 'location', :only => [:product]},        
+    {:name => 'location', :only => [:product]}
     ]
     
     Product.class_eval do
       belongs_to :vendor
-      attr_accessible :city_id,:star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
+      attr_accessible :use_md_money,:sms_share_text,:city_id,:star_discount,:side_deal_title,:gift_sms,:sms_notification,:max_vouchers,:meta_description,:meta_keywords,:deal_info,:voucher_text,:vendor_id,:minimum_number,:deal_expiry_date,:reviews,:currently_bought_count,:description, :catch_message, :validity_from, :validity_to, :name, :price, :sku, :count_on_hand, :available_on, :discount, :increased_count, :maximum_number
       attr_accessor :increased_count, :decreased_count
       validates_presence_of :deal_info
       validates_presence_of :side_deal_title
@@ -40,7 +40,7 @@ class MastiExtension < Spree::Extension
       validates_presence_of :validity_from
       validates_presence_of :validity_to        
       validates_presence_of :vendor_id
-      delegate_belongs_to :master, :count_on_hand
+      delegate_belongs_to :master, :count_on_hand,:sms_share_text
       validates_presence_of :count_on_hand       
       validate :minimum_less_than_maximum, :deal_expiry, :bought_count
       before_save :calc_count_on_hand
@@ -62,6 +62,8 @@ class MastiExtension < Spree::Extension
       def bought_count
         if currently_bought_count > maximum_number
           errors.add(:currently_bought_count, "should be less than maximum number")
+        else
+          self.master.count_on_hand = maximum_number - currently_bought_count
         end
       end
       def calc_count_on_hand
@@ -87,6 +89,8 @@ class MastiExtension < Spree::Extension
       has_one :verification_code
       has_one :user_promotion
       belongs_to :city
+      has_one :refferer
+      belongs_to :refferer
       after_create :call_count_mailer
       validates_numericality_of :phone_no, :message => "Phone No. must be numerals"
       validates_length_of :phone_no, :is=>10, :message => "is invalid"
@@ -129,7 +133,7 @@ class MastiExtension < Spree::Extension
       helper HomeHelper
       before_filter :call_logging,:call_pop
       before_filter :set_city
-      
+      require 'geoip'
       def call_pop
         if cookies[:time_remaining].nil? and cookies[:asked_email].nil?
           cookies[:time_remaining]=10
@@ -138,19 +142,31 @@ class MastiExtension < Spree::Extension
       
       def set_city
         if session[:city_id].nil?
-          session[:city_id] = 1
+          begin
+            db = GeoIP.new("#{RAILS_ROOT}/db/GeoLiteCity.dat") 
+            city_by_ip = db.country(request.remote_ip)
+            city = City.find_by_name(CITY_NAME[city_by_ip[7]]) if !city_by_ip.nil? and !city_by_ip[7].empty?
+            if city.nil?
+              session[:city_id] = 1
+            else
+              session[:city_id] = city.id
+            end
+          rescue Exception => e
+            logger.info "Error in setting city -----------#{e.to_s}"
+            session[:city_id] = 1
+          end
         end
       end
       
       def call_logging
         #if session[:city_id].to_s == '1'
-          url_split = request.request_uri.split('?')
-          if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore"
-            if url_split[1].nil? or url_split[1].empty? 
-              session[:src]=request.request_uri
-            else
-              session[:src]=url_split[0]
-            end
+        url_split = request.request_uri.split('?')
+        if session[:src].nil? and controller_name=="home" and action_name=="index" and request.request_uri!="/" and request.request_uri!="/registration-success" and request.request_uri!="/home" and request.request_uri!="/chennai" and url_split[0]!="/home/index" and url_split[0]!="/hyderabad" and url_split[0]!="/bangalore" and url_split[0]!="/"
+          if url_split[1].nil? or url_split[1].empty? 
+            session[:src]=request.request_uri
+          else
+            session[:src]=url_split[0]
+          end
           #end
         end
         unless params[:email].nil?

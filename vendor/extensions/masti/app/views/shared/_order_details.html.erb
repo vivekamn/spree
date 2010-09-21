@@ -34,12 +34,14 @@
         <% end %>
       </tr>
     <% end %>
-  <%if !@order.user.user_promotion.nil?%>
+  <%if @order.line_items[0].variant.product.use_md_money and !@order.user.user_promotion.nil? and @order.user.user_promotion.credit_amount>0%>
 	  <% hook :order_details_subtotal do %>
 	    <tbody id='subtotal'>
 	      <tr class="total" id="subtotal-row">
 	        <td colspan="3"><b><%= t('your_credit_amount') %>:</b></td>
-	        <td class="total"><span>Rs.<%=  @order.user.user_promotion.credit_amount.to_i -%></span></td>
+	        <td class="total"><span>Rs.
+		          <%=  @order.line_items.total - @order.total.to_i -%>
+			</span></td>
 	      </tr>
 	    </tbody>
 	  <% end %>

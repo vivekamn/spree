@@ -31,6 +31,9 @@ before_filter :find_and_set_affiliate, :only => :index
     unless params[:city_id].nil?
       session[:city_id] = params[:city_id]
     end
+    unless params[:r].nil?
+      session[:referer_code]=params[:r]
+    end
     if params[:side_deal_info].nil?
       @deal_param = 'side_deal'
       @deal = DealHistory.find(:first, :conditions =>['is_active = ? AND city_id = ?', true , session[:city_id]])
@@ -50,9 +53,12 @@ before_filter :find_and_set_affiliate, :only => :index
       redirect_to error_path
     else
       @featured_product = Product.find(:first, :conditions => ['id = ?',@deal.product_id])
+      variant = @featured_product.master
       @price = @featured_product.price.to_i
       @discount = @featured_product.discount
-      @saving = (@price*@discount/100).to_i
+      actual_discount = (variant.price-((variant.price*variant.product.discount)/100)).to_i
+      #@saving = ((@price*@discount/100).to_i
+      @saving = @price - actual_discount
       @bought_count = @featured_product.currently_bought_count
       unless params[:email].nil? and params[:product_id].nil?
         email_trace = EmailTrace.find(:first,:conditions=>['email = ? and product_id = ?',params[:email],params[:product_id]])
@@ -70,8 +76,11 @@ before_filter :find_and_set_affiliate, :only => :index
     @featured_product = Product.find_by_permalink(params[:id])
     @deal = DealHistory.find(:first, :conditions =>['(is_active = ? or is_side_deal = ? ) and product_id = ?', true,true,@featured_product.id])
     @price = @featured_product.price.to_i
+    variant = @featured_product.master
     @discount = @featured_product.discount
-    @saving = (@price*@discount/100).to_i
+    actual_discount = (variant.price-((variant.price*variant.product.discount)/100)).to_i
+    #@saving = ((@price*@discount/100).to_i
+    @saving = @price - actual_discount
     @bought_count = @featured_product.currently_bought_count
     if @deal.nil? or @deal.is_active
       @deal_param = 'side_deal'
@@ -159,13 +168,13 @@ before_filter :find_and_set_affiliate, :only => :index
           redirect_to invite_friends_path(:from=>"reg_complete")  
         else
           update_referer_promotion
-          user = User.find_by_email(current_user.refered_by)
+          user = Refferer.find(current_user.refferer_id)
           unless user.nil?
-            count= user.invited_count
+            count= user.invite_count
             UserMailer.deliver_success_invite(user.email,count,current_user.email,current_user)
             
           end
-          redirect_to invite_friends_path(:from=>"reg_complete_md_ref") 
+          redirect_to invite_friends_path(:from=>"reg_complete_md_ref")
         end
       else
         unless params[:md_user_ref].nil?
@@ -220,8 +229,8 @@ before_filter :find_and_set_affiliate, :only => :index
         redirect_to reg_complete_path
       end
     else
-      unless current_user.refered_by.nil? or current_user.refered_by.empty?
-        user = User.find_by_email(current_user.refered_by)
+      unless current_user.refferer_id.nil?
+        user = Refferer.find(current_user.refferer_id)
         unless user.nil?
           generate_code('true')
         else
@@ -282,7 +291,7 @@ before_filter :find_and_set_affiliate, :only => :index
     split_recipients.each do |recipient|
       UserMailer.deliver_share_this(recipient,from,product,params[:name])
     end
-    flash[:success]="Deal Shared to your friends"
+    flash[:success]="Thanks for sharing this deal with your friends"
     redirect_to :back 
   end
   
@@ -506,9 +515,11 @@ before_filter :find_and_set_affiliate, :only => :index
   
   def create
     @enquiry=Enquiry.new(params[:enquiry])
+    @enquiry.city= City.find(@enquiry.city_id).name
     begin
       @enquiry.save!
-      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly."      
+      flash[:success]="Thank you for request. We have customer support. They will get back you on this shortly." 
+      UserMailer.deliver_enquiries(@enquiry)
       redirect_to home_url    
     rescue Exception=>e
       flash[:error]=e.message      
@@ -541,6 +552,9 @@ before_filter :find_and_set_affiliate, :only => :index
   
   def recent_deals
     @bar_selected="recent_deals"
+    histories = DealHistory.find(:all,:include => {:product => {}},:conditions=>['is_active =0 and is_side_deal=0 and city_id= ? and is_sample=?',session[:city_id],false],:order=>"created_at desc")
+    @products = histories.collect{|x| x.product}
+    @products = @products.uniq
   end
   
   def upcoming_deals
@@ -639,9 +653,9 @@ before_filter :find_and_set_affiliate, :only => :index
     end
     current_user.mobile_verify=true
     current_user.save!
-    user=User.find_by_email(current_user.refered_by)
+    user=Refferer.find(current_user.refferer_id)
     unless user.nil?
-      user.invited_count +=1
+      user.invite_count +=1
       user.save!
     end
   end

@@ -277,14 +277,25 @@ class Order < ActiveRecord::Base
   end
 
   def update_totals(force_adjustment_recalculation=false)
+    md_money_access = self.line_items[0].nil? ? false :self.line_items[0].variant.product.use_md_money
     self.item_total  = self.line_items.total
-    if !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
+    if md_money_access and !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
-      if total_amount < credit_amount
-        self.item_total = 0
+      if credit_amount > total_amount 
+        if credit_amount>=50 and total_amount>=50
+          self.item_total -= 50
+        elsif credit_amount>=50 or (credit_amount<50 and total_amount<50)
+          self.item_total = 0
+        elsif total_amount>=50
+          self.item_total -= credit_amount
+        end
       else
-        self.item_total -= credit_amount
+        if credit_amount>50 and total_amount>50
+          self.item_total -= 50  
+        else
+          self.item_total -= credit_amount  
+        end
       end
     elsif !EMAIL_CAMP[self.user.source].nil?
       star_discount=nil
@@ -388,15 +399,25 @@ class Order < ActiveRecord::Base
   end
   
   def update_user_promotion
+    if self.line_items.first.variant.product.use_md_money
     unless self.user.user_promotion.nil?
       credit_amount = self.user.user_promotion.credit_amount
       total_amount = self.line_items.total
-      if credit_amount > total_amount
-        self.user.user_promotion.credit_amount -= total_amount
-      else 
-        self.user.user_promotion.credit_amount = 0
-      end
+      remaning =  total_amount - self.total
+      self.user.user_promotion.credit_amount -= remaning
+#      if credit_amount > total_amount
+#        if credit_amount>50 and self.line_items.total>50
+#           self.user.user_promotion.credit_amount -= 50
+#        elsif current_user.user_promotion.credit_amount>50
+#          current_user.user_promotion.credit_amount - @order.line_items.total.to_i
+#         else
+#           self.user.user_promotion.credit_amount = 0
+#        end
+#      else 
+#        self.user.user_promotion.credit_amount -= 50
+#      end
       self.user.user_promotion.save
+    end
     end
   end
 

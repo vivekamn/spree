@@ -1,4 +1,7 @@
-
+CITY_NAME = {}
+CITY_NAME['Madras']='Chennai'
+CITY_NAME['Bangalore']='Bengaluru'
+CITY_NAME['Hyderabad']='Hyderabad'
 
 #Email campain contants
 EMAIL_CAMP ={}
@@ -18,6 +21,7 @@ EMAIL_CAMP['email_camp_hp'] = 'HP'
 EMAIL_CAMP['/email_camp_ceequence'] = 'Ceequence'
 EMAIL_CAMP['/email_camp_scope']='Scope Intl'
 EMAIL_CAMP['/email_camp_hcl'] = 'HCL'
+EMAIL_CAMP['/email_camp_steria'] = 'Steria'
 
 #Email camp for facebook,orkut,adwords,email_camp,diff
 EMAIL_CAMP_ADD = {}

@@ -4,9 +4,73 @@ class SharedController < ApplicationController
     render :layout => false
   end
   
+  def invite
+   if params[:flag].nil?
+   if current_user or !cookies[:email].nil?
+     if params[:from].nil?
+        redirect_to refer_friends_path
+     else
+        redirect_to refer_friends_path(:from=>params[:from])  
+     end
+    end
+   end
+  end
+  
+  def reffer_friends
+#    begin
+#    email = params[:email].nil? ? current_user.email : params[:email]
+    if !current_user.nil?
+      @email = current_user.email
+    elsif !params[:email].nil?
+      @email = params[:email]
+    elsif !cookies[:email].nil?
+       @email = cookies[:email]     
+    end
+    unless @email.nil? or @email.empty?
+      invited_count=0
+      cookies[:email] = @email
+      user = User.find_by_email(@email)
+      unless user.nil?
+        user_id = user.id
+        invited_count = user.invited_count
+      end
+      @refferer = Refferer.find_by_email(@email)
+      @refferer = Refferer.genarate_code(@email,invited_count,user_id) if @refferer.nil?
+    else
+       redirect_to '/shared/invite'
+   end
+ 
+#  rescue Exception => e
+#     puts "#{e}--Exception from refer friends-->"
+#      redirect_to '/shared/invite'
+#    end
+  end
+  
   def affliate
     
   end
+  
+  def share_this_via_mobile
+    message = Variant.find(params[:variant_id]).sms_share_text
+    unless message.nil?
+      mobile_nos = params[:mob_recipients].split(",")
+      flag=1
+      qry_str=""
+      mobile_nos.each do |mobile_no|
+        if flag==1
+            qry_str = "('#{ mobile_no }','#{ message }',#{10})"
+          else
+            qry_str = qry_str + ", ('#{ mobile_no }','#{ message }',#{10})"
+          end
+          flag = 2
+      end
+      query = "INSERT INTO jenooutbox (mobilenumber,message,priority) VALUES #{qry_str};"
+      result = ActiveRecord::Base.connection.execute(query)
+      flash[:success]="Thanks for sharing this deal with your friends"
+    end
+    redirect_to :back
+  end
+  
   
   def create_affliate
     affliate = AffliateEnquiry.new(params[:affliate_enquiry])
@@ -101,6 +165,24 @@ class SharedController < ApplicationController
   def after_invite
     
   end
+  
+  def check_mobile_no
+    recipients = params[:mobile]
+    @trimmed_line = recipients.delete(' ').lstrip
+    split_recipients = @trimmed_line.split(",");    
+    count = 0
+    split_recipients.each do |s|        
+      if(s.match(/^([7-9]{1})([0-9]{9})+$/))
+          count+= 1;
+      end
+    end
+    if(split_recipients.size == count)
+      render(:text => "valid")
+    else
+      render(:text => "invalid")
+    end
+  end
+  
   
   def check_email_plaxo
     recipients = params[:recipients]

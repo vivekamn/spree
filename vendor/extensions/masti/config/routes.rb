@@ -20,11 +20,12 @@ map.classifieds '/classifieds',:controller => "home", :action => "index"
 map.directory '/directory',:controller => "home", :action => "index"
 map.bookmarking '/bookmarking',:controller => "home", :action => "index"
 map.blog '/blog',:controller => "home", :action => "index"
-map.invite_friends '/invite-your-friends',:controller => "home", :action => "invite_friends"
+map.invite_friends '/invite-your-friends',:controller => "shared", :action => "invite"
 map.verifiy_your_phone '/verifiy-your-phone',:controller => "home", :action => "verifiy_your_phone"
 map.generate_code '/generate-code',:controller => "home", :action => "generate_code"
 map.reg_complete '/registration-success',:controller => "home", :action => "index"
 map.affliate '/affiliate',:controller => "shared", :action => "affliate"
+map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_friends"
 
 # seo purpose & promotion
 map.orkut '/orkut', :controller=>"home", :action => "index"
@@ -52,6 +53,7 @@ map.email_camp_hp '/email_camp_hp', :controller => "home", :action => "index"
 map.email_camp_scope '/email_camp_scope', :controller => "home", :action => "index"
 map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action => "index"
 map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
+map.email_camp_steria '/email_camp_steria', :controller => "home", :action => "index"
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1

@@ -20,12 +20,22 @@ class UserMailer < ActionMailer::Base
     body           "email" => email,"count"=>count,"from1"=>from1,"source"=>source,"city"=>city
   end
   
+  def enquiries(enquiry)
+    content_type "text/html"
+    from           "customersupport@masthideals.com"
+    recipients    ["sathishideas2it@gmail.com","ramanavel@gmail.com"]
+    bcc           Spree::Config[:mail_bcc]
+    subject      "New Deal enquiry in masthideals.com #{enquiry.company}"
+    sent_on        Time.now.utc
+    body           "enquiry" => enquiry
+  end
+  
   def success_invite(referer,count,user,current_user)
     content_type "text/html"
     from           "lakshmi@masthideals.com"
     recipients    referer
     bcc           Spree::Config[:mail_bcc]
-    subject      "Thanks . You are close to winning the #{call_count(current_user)} Inox ticket(s)."
+    subject      "Thanks. You are close to winning the #{call_count(current_user)} Inox ticket(s)."
     sent_on        Time.now.utc
     body           "ref_email" => user,"count"=>count,"current_user"=>current_user
   end
@@ -37,7 +47,7 @@ class UserMailer < ActionMailer::Base
     bcc           Spree::Config[:mail_bcc]
     subject      "Become a part of MasthiDeals and earn #{money} MasthiDeals Money which you can use to buy any deal."
     sent_on        Time.now.utc
-    body           "name" => name,"from"=>from,"body"=>body,"money"=>money
+    body           "name" => name,"from"=>from,"body"=>body,"money"=>money,"code"=>get_code(from)
   end
   
   def share_this(recipient,from,product,name)
@@ -162,6 +172,10 @@ class UserMailer < ActionMailer::Base
    else
     "one" 
    end
+ end
+ 
+ def get_code(email)
+   Refferer.find_by_email(email).code
  end
  
 end

@@ -13,7 +13,7 @@ module HomeHelper
        if session[:city_id].to_s == '1'
           "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Best Deals Website - Masthideals.com" 
        elsif session[:city_id].to_s == '2'
-          "Bangalore Restaurant Deals | Good Spa Reviews | Online Shopping Discount | Movie Tickets Coupon - Masthideals.com"
+          "Bengaluru Restaurant Deals | Good Spa Reviews | Online Shopping Discount | Movie Tickets Coupon - Masthideals.com"
        elsif session[:city_id].to_s == '5'
           "Hyderabad Spa Discounts | Online Restaurant Coupons | Good Shopping Reviews | Adventure Sports Tickets - Masthideals.com"
        end
@@ -85,11 +85,14 @@ module HomeHelper
     countries<<[country.name, country.id]
   end
   
-#  def get_cities
-#    cities=[]
-#    city=City.find_by_state_id(1061493609)
-#    cities<<[city.name, city.name]
-#  end
+  def get_city_names
+    cities=[]
+    city=City.find(:all, :conditions => ['is_active = ? ',  true])
+    city.each do |cty|
+      cities<<[cty.name, cty.name]
+    end
+     cities 
+  end
   
   def get_city_bill_address
     cities=[]

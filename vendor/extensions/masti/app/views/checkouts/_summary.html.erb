@@ -25,17 +25,16 @@
       <td><strong><%= t('order_total') %>:</strong></td>
       <td><strong><span id='summary-order-total'>Rs. <%= @order.total.to_i %></span></strong></td>
     </tr>
+	 <% if @order.line_items[0].variant.product.use_md_money %>
 	<%if !current_user.user_promotion.nil? and current_user.user_promotion.credit_amount.to_i>0%>	
 	<tr>
       <td><strong>Balance MD Money:</strong></td>
       <td><strong><span id='summary-order-total'>Rs. 
-	  <%if current_user.user_promotion.credit_amount > @order.line_items.total.to_i%>
-      	<%=current_user.user_promotion.credit_amount - @order.line_items.total.to_i%>
-	  <%else %>
-       0
-    <%end%>
+	   <% remaining = @order.line_items.total - @order.total %>
+	   <%= current_user.user_promotion.credit_amount - remaining %>
 	  </span></strong></td>
 	</tr>
+	<%end%>
 	<%end%>
   </tbody>
 </table>
