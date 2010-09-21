@@ -36,8 +36,8 @@ test:
     server_alive_interval: 0
 
 production:
-  api_key: 
-  secret_key: 
+  api_key: dfffb492f276f96a6e1287d9924908ba
+  secret_key: 7f8900e6d1389192db357539c30dd711
   canvas_page_name: 
   callback_url: 
   set_asset_host_to_callback_url: true   
