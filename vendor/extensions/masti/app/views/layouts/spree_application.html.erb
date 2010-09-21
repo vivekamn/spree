@@ -87,6 +87,7 @@ var pageTracker = _gat._getTracker("UA-15344339-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
 <script type="text/javascript">
+	var api_key = "<%=API_KEY[RAILS_ENV]%>";	
 	//update_user_box();
 	function follow_connection(){		
 		//document.getElementById('fb_conformation').value = FB.Facebook.apiClient.get_session().uid;
@@ -120,7 +121,7 @@ pageTracker._trackPageview();
 		//follow_connection();
 	}
 	// firstnameonly='true' 
-	FB.init("2a89036079c0376ae8959076e5ef37ff", "/xd_receiver" ,{"ifUserConnected": update_user_box});
+	FB.init(api_key, "/xd_receiver" ,{"ifUserConnected": update_user_box});
   
   </script>
 </html>

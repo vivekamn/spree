@@ -15,8 +15,10 @@ class UserSessionsController < Spree::BaseController
     if @current_user           
       #      puts "going to creation"
    #@user_session = UserSession.new(@current_user)
-   #@user_session.save!   
+   #@user_session.save!  
+session[:fb_logged] = "true" 
    create_user_session(@current_user)
+   
     #redirect_to :controller=>'home', :action=>'index'
 #      @user_session = UserSession.new
 #      create

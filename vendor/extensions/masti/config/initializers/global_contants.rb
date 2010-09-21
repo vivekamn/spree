@@ -32,3 +32,6 @@ EMAIL_CAMP_ADD['/adwords'] = 'adwords'
 #EMAIL_CAMP_ADD['/email_camp_diff'] = 'diff'
 
 SIGN_UP_AFFILIATE_COMMISSION="25"
+API_KEY={}
+API_KEY['development']= '2a89036079c0376ae8959076e5ef37ff'
+API_KEY['production']= 'dfffb492f276f96a6e1287d9924908ba'
