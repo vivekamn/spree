@@ -88,13 +88,16 @@ else
                cookies[:email]=data[:login]
             end
             flash[:notice] = t("logged_in_succesfully") unless session[:return_to]
-            session[:needs_fb_linking]=nil
+            unless session[:needs_fb_linking].nil?
             unless fb_id_hid.nil?             
              user = @user_session.record if @user_session.record
             user.fb_user_id = fb_id_hid
             user.save!
-            end
-            session[:fb_logged] = "true" unless @user_session.record.fb_user_id.nil?            
+            session[:fb_logged] = "true" unless @user_session.record.fb_user_id.nil?
+          end
+          end
+          session[:needs_fb_linking]=nil
+                        
             redirect_back_or_default home_url
           }
           format.js {

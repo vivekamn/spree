@@ -4,7 +4,7 @@
 <% @body_id = 'login' %>
 <div id="existing-customer">
 	<%unless session[:needs_fb_linking].nil?%><br />
-	<div align = "center">Link my existing MasthiDeals account with my connected facebook account ( one time process, need not repeat next time )</div>
+	<div align = "center">Please link my existing MasthiDeals account with my connected facebook account ( one time process, need not repeat next time )</div>
 	<%end%>
   <% hook :login do %>
     <%= render :partial => 'shared/login' %>
