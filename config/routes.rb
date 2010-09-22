@@ -80,6 +80,7 @@ ActionController::Routing::Routes.draw do |map|
       product.resources :variants
       product.resources :option_types, :member => { :select => :get, :remove => :get}, :collection => {:available => :get, :selected => :get}
       product.resources :taxons, :member => {:select => :post, :remove => :post}, :collection => {:available => :post, :selected => :get}
+      product.resources :active_poll_questions
     end
     admin.resources :option_types
     admin.resources :properties, :collection => {:filtered => :get}
