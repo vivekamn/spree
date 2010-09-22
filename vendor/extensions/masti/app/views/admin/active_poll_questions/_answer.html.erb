@@ -1,0 +1,4 @@
+<% new_or_existing = answer.new_record? ? 'new' : 'existing' %>
+<% prefix = "active_poll_question[#{new_or_existing}_active_poll_answers_attributes][]"%>
+<div class='answer'><% fields_for prefix, answer do |answer_form| -%><p>Option: <%= answer_form.text_field :description %></p><% end-%></div>
+

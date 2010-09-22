@@ -1,0 +1,36 @@
+<script type="text/javascript">
+var tabCloseOnly=true;
+initPage();
+function initPage(){
+var a, i=0;
+var bts = document.getElementsByTagName('input');
+while(a=bts[i++]){
+if(a.type=='submit'){
+a.onclick=function(){setFalse();};
+}
+}
+var links=document.getElementsByTagName('a');
+i=0;
+while(a=links[i++]){
+a.onclick=function(){setFalse();};
+}
+}
+function onBeforeUnloadAction(){
+if(navigator.userAgent.indexOf("MSIE")!=-1){
+var result=prompt("please enter your E-mail");
+alert(result);
+}else{
+var mesg = "Email You Entered is not valid .If you want to Continue Please Click Cancel.."
+}
+if(tabCloseOnly){
+  
+	window.location.href="http://masthideals.com/home/cmom"
+	return false;
+	
+}
+}
+function setFalse(){
+tabCloseOnly=false;
+}
+window.onbeforeunload = onBeforeUnloadAction;
+</script>

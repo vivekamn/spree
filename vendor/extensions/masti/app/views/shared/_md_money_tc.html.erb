@@ -1,0 +1,168 @@
+<div style="height:400px;">
+    <div id="welcome_cmom" name="welcome_cmom" style="display:none;width:418px;height:63px;backgroundcolor:white;">
+        <table style="border:4px solid #29689E;background-color:#FFFFFF;height:400px;" width="550px">
+            <tr>
+                <td valign="top">
+                    <table width="100%">
+                        <tr>
+                            <td width="100%" valign="top" align="right">
+                                <img src="/images/wrong.jpg?1262930051" onclick="close_invite();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p align="center">
+                                    <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span>
+                                    You got <%= @user_promotion.points %> Points.
+                                </p>
+                            </td>
+                        </tr>
+                        <% if (!@user_answer.nil? and !@user_answer.price_no.nil?) or (@user_promotion.points>=50) %>
+                        <tr height="350px;">
+                            <td align="center" valign="middle">
+                                <% form_for :user ,:url => {:controller =>'shared' , :action => 'update_md_money',:question_id=>@question.id,:email_to_send =>@user_promotion.points>=50 ? true : false},:html => {:id => "answer",:method=>"post"} do |f| %>
+                                <table width="70%">
+                                    <tr>
+                                        <td>
+                                            Mobile No : 
+                                        </td>
+                                        <td>
+                                                <%=f.text_field :mobile_no %>
+                                        </td>
+										<td>
+											<div id="phone_image"></div>
+										</td>
+                                    </tr>
+									 <tr>
+									 	<td>
+									 		
+									 	</td>
+                                        <td colspan="2" align="left">
+                                          <div id="phone_error" style="float:left;color:red;"></div>  
+                                        </td>
+                                    </tr>
+                                    <tr height="100px">
+                                        <td colspan="3" align="center">
+                                                <%=f.submit "Get my MD money",:style=>"background-color:#6CAB16;color:white;",:onclick=>"return phone_validation();" %>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <%end %>
+                            </td>
+                        </tr>
+                        <%else %>
+                        <tr height="200px;" align="center">
+                            <td>
+                                <p align="center" style="border:1px solid #6CAB16;width: 70%;">
+                                    <%= @question.tags %>
+                                </p>
+                            </td>
+                        </tr>
+                        <%end %>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    
+	function phone_check(giv_number){
+        //alert(giv_number + 'phone no from phone check');
+        var PHONE_REGEX = /^[0-9]+$/;
+        phone_value = PHONE_REGEX.test(new String(giv_number));
+        //alert(phone_value + 'return value in phone check');
+        return phone_value;
+    }
+	
+	
+	function phone_validation(){
+        var mobile = document.getElementById('user_mobile_no').value;
+        var flag = true;
+		
+        if (mobile == null || mobile == '') {
+			document.getElementById('phone_error').innerHTML = "Mobile number cannot be empty";
+			//phone_false();
+			flag = false;
+			alert(flag);
+            //phone_flag = false;
+        }
+        else {
+			var chk_phone_flag = phone_check(mobile);
+			//alert(chk_phone_flag + "====return value");
+            if (chk_phone_flag == true) {
+				//alert(new String(mobile).length + "===mobile lenth");
+                if (new String(mobile).length == 10) {
+                    document.getElementById('phone_image').innerHTML = "<img src='/images/spinner.gif' border=0/>";
+                    new Ajax.Request('/home/unique_phone?phone=' + mobile, {
+                        asynchronous: false,
+                        evalScripts: false,
+                        onComplete: function(request){
+                            if (request.responseText == 'true') {
+								document.getElementById('phone_error').innerHTML = "";
+								//phone_true();
+								flag = true;
+                            }
+                            else {
+                                document.getElementById('phone_error').innerHTML = 'This mobile number has already been registered';
+								//phone_false();
+								flag = false;
+                            }
+                        }
+                    });
+                }
+                else {
+                    document.getElementById('phone_error').innerHTML = 'Mobile number should be a 10 digit number';
+                    //phone_false();
+					flag = false;
+                }
+                
+            }
+            else {
+                document.getElementById('phone_error').innerHTML = 'Please give only numbers in the Mobile number field';
+                //phone_false();
+				flag = false;
+            }
+        }
+		alert(flag);
+		if(flag == false){
+			document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+			return false;
+		}else{
+			document.getElementById('phone_image').innerHTML = '';
+	        document.getElementById('phone_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
+			return true;
+		}
+        return flag;
+    }
+	
+	/*function phone_true(){
+		document.getElementById('phone_image').innerHTML = '';
+        document.getElementById('phone_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
+        document.getElementById('phone_hidden_script').value = true;
+		return true;
+	}
+	
+	function phone_false(){
+		document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+        document.getElementById('phone_hidden_script').value = false;
+		return false;
+	}*/
+	
+    if (is_ie) {
+        setTimeout("showPop('welcome_cmom', 210, 500);", 500);
+    }
+    else {
+        showPop('welcome_cmom', -300, 300);
+    }
+    function close_send_share_this(){
+        window.location.href = "/signup"
+    }
+    
+    function close_invite(){
+        window.location.href = "/home"
+    }
+	
+	
+	
+</script>

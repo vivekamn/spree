@@ -1,0 +1,88 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Game"} %>
+
+
+<% unless @product.active_poll_question.nil?%>
+<table style="width:auto;">
+	<tr>
+		<td valign="top">	
+		Question 	
+		</td>
+		<td> : </td>
+		<td> <%= @product.active_poll_question.description %></td>
+	</tr>
+	<% @product.active_poll_question.active_poll_answers.each do |answer|%>
+	<%unless answer.description.nil? or answer.description.empty?%>
+	<tr>
+		<td valign="top">	
+		Option  	
+		</td>
+		<td> : </td>
+		<td> <%= answer.description %></td>
+	</tr>
+	<%end%>
+	<%end%>
+	<tr>
+		<td valign="top">	
+		Tip  	
+		</td>
+		<td> : </td>
+		<td> <%= @product.active_poll_question.tags %></td>
+	</tr>
+	
+	<tr height="10px"></tr>
+	<tr>
+		<tr>
+		<td valign="top">
+		<img src="/images/admin/icons/delete.png?1267165963" alt="Delete">&nbsp;&nbsp;
+		<%= link_to "Delete","/admin/products/#{@product.permalink}/active_poll_questions/#{@product.active_poll_question.id}", :confirm => 'Are you sure want to Delete this Game?', :method => :delete %>
+		</td>
+		<td> </td>
+		<td>
+		</td>
+	</tr>
+	</tr>
+	
+	
+</table>	
+<%else%>
+<div style="padding: 20px;">
+ <% form_for @active_poll_question,:url => collection_url,:html => { :method => :post } do |f| %>
+  <%= f.error_messages %>
+<table width= "100%">
+	<tr>
+		<td valign="top">	
+		<div>Question : </div>	
+		<%= f.text_field :description , :class => 'fullwidth title'%>
+		<input type="hidden" name="product_code" id="product_code" value="<%=@product.id%>">
+		
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">	
+		<div>Tip to show : </div>	
+		<%= f.text_field :tags , :class => 'fullwidth title'%>
+		
+		</td>
+	</tr>
+</table>
+		
+		<div id="ans">
+			<table width="100%">
+				<%2.times do%>
+				<tr>
+					<%2.times do%>
+					<td><%= render :partial => 'answer', :collection => @active_poll_question.active_poll_answers %></td>					
+					<%end%>
+				</tr>	
+				<%end%>			
+			</table>			
+			</div>
+
+		<div align ="center">
+		<%= f.submit "Submit" %></div>	
+  
+<% end %>
+</div>
+<%end%>
