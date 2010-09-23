@@ -1,51 +1,6 @@
 <div style="height:400px">
     <div id="welcome_cmom" name="welcome_cmom" style="display:none;width:418px;height:63px;backgroundcolor:white;">
-        <table style="border:4px solid #29689E;background-color:#FFFFFF;" height="250px" width="550px">
-            <tr>
-                <td width="100%" valign="top" align="right">
-                    <img src="/images/wrong.jpg?1262930051" onclick="close_invite();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
-                </td>
-            </tr>
-            <tr valign="middle">
-                <td>
-                    <p align="center">
-                        Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span>
-                        <span class='blue' style='font-size:18px;font-weight:bold;'>Deals!</span>
-                    </p>
-                </td>
-            </tr>
-            <tr >
-                <td align="center" valign="middle">
-                    <% form_for :answer ,:url => {:controller =>'shared' , :action => 'check_if_lucky'},:html => {:id => "answer",:method=>"post"} do |f| %>
-                    <table style="border:1px solid #6CAB16;width:70%;">
-                        <tr>
-                            <td>
-                                <%= @question.description %>
-                                <br/>
-                                <br/>
-                                <% @options.each do |answer| %>
-                                <%unless answer.description.nil? or answer.description.empty? %>
-                                <%= f.radio_button :user_answer, answer.id,:onclick=>"set_value(#{ answer.id });"%> <%= answer.description %>
-                                <br/>
-                                <%end %>
-                                <%end %>
-                                <input type="hidden" name="qusetion_id" id="qusetion_id" value="<%= @question.id %>">
-								
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
-                    <%=f.submit "Answer",:style=>"background-color:#6CAB16;color:white;",:onclick=>"return validate_form();"%>
-                </td>
-            </tr>
-			<%end %>
-        </table>
-        </td>
-    </tr>
-    </table>
+       <%= render :partial => "shared/qa_part" %>
 </div>
 </div>
  <input type="hidden" name="falg" id="falg" value="false">
@@ -64,14 +19,4 @@
     function close_invite(){
         window.location.href = "/home"
     }
-	function set_value(id){
-		flag = true;
-	}
-	function validate_form(){
-		if(flag == false)
-		{
-			alert("Choose Any one");
-		}
-		return flag;
-	}
 </script>

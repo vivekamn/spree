@@ -27,6 +27,11 @@ map.reg_complete '/registration-success',:controller => "home", :action => "inde
 map.affliate '/affiliate',:controller => "shared", :action => "affliate"
 map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_friends"
 
+#facebook urls
+
+map.fb_game '/fb_game', :controller=>"facebook", :action => "fb_game"
+
+
 # seo purpose & promotion
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
