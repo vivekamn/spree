@@ -131,6 +131,7 @@ class MastiExtension < Spree::Extension
     
     # make your helper avaliable in all views
     Spree::BaseController.class_eval do
+      helper :all
       helper HomeHelper
       before_filter :call_logging,:call_pop
       before_filter :set_city

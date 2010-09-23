@@ -5,8 +5,12 @@ class SharedController < ApplicationController
   end
   
   def affliate_user_question
-    unless params[:product_id].nil? and cookies[:email].nil?
-      product = Product.find(params[:product_id])
+    if current_user
+      cookies[:email] = current_user.email
+    end
+    if !cookies[:email].nil?
+      active_deal = DealHistory.find(:first, :conditions => ['is_active = ? AND city_id =?', true, session[:city_id]])
+      product = Product.find(active_deal.product_id)
       @question = product.active_poll_question
       user_answer = ActivePollUserAnswer.find(:all,:conditions=>["email = ? and active_poll_question_id = ?",cookies[:email],@question.id])
       if !user_answer.nil? and !user_answer.empty?
@@ -72,8 +76,11 @@ class SharedController < ApplicationController
     user = User.find(:first,:conditions=>['email = ? or phone_no= ?',cookies[:email],params[:user][:mobile_no]])
     question = ActivePollQuestion.find(params[:question_id])
     if user.nil? or user.empty?
-      user = User.new(:email=>cookies[:email].strip.downcase,:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>params[:user][:mobile_no])
+      user = User.new(:email=>cookies[:email].strip.downcase,:password=>"Test1234",:password_confirmation=>"Test1234",:phone_no=>params[:user][:mobile_no],:city_id=>session[:city_id])
       user.save!
+      UserMailer.deliver_success_sms_registration(user,question.product)
+      message="Thanks for registering with MasthiDeals.com. Your username/ pwd is emailed to you. You have earned 50 Rs which you can use to buy any deal in Masthideals..com"
+      send_sms(params[:mobile_no], message,100)
       user_promotion =  UserPromotion.find_by_email(user.email)
       params[:email_to_send] = user_promotion.nil? ? params[:email_to_send] : true
       unless params[:email_to_send]
@@ -116,9 +123,6 @@ class SharedController < ApplicationController
       user_promotion.credit_amount = 0 if user_promotion.credit_amount.nil?
       user_promotion.update_attributes(:credit_amount => user_promotion.credit_amount+(50 * ((user_promotion.points/50).to_i)),:points=> user_promotion.points>=50 ? user_promotion.points-(50 * ((user_promotion.points/50).to_i)) : 0,:user_id=>user.id)            
     end
-    UserMailer.deliver_success_sms_registration(user,product)
-    message="Thanks for registering with MasthiDeals.com. Your username/ pwd is emailed to you. You have earned 50 Rs which you can use to buy any deal in Masthideals..com"
-    send_sms(params[:mobile_no], message,100)
     flash[:success] = "Hurry You got 50 MD Money Right now....."
     redirect_to home_url  
   end

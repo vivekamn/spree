@@ -29,7 +29,7 @@ map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_f
 
 #facebook urls
 
-map.fb_game '/fb_game', :controller=>"facebook", :action => "fb_game"
+map.fb_game '/fb_game', :controller=>"shared", :action => "affliate_user_question"
 
 
 # seo purpose & promotion
