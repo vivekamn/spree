@@ -11,6 +11,7 @@ SPREE_GEM_VERSION = '0.10.99' unless defined? SPREE_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
  
 Spree::Initializer.run do |config|
+  config.action_controller.allow_forgery_protection = false
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

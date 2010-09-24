@@ -4,17 +4,21 @@ class SharedController < ApplicationController
     render :layout => false
   end
   
-  def affliate_user_question
+  def affliate_user_question    
     if current_user
       cookies[:email] = current_user.email
-    end
+    end    
     if !cookies[:email].nil?
       active_deal = DealHistory.find(:first, :conditions => ['is_active = ? AND city_id =?', true, session[:city_id]])
       product = Product.find(active_deal.product_id)
       @question = product.active_poll_question
       user_answer = ActivePollUserAnswer.find(:all,:conditions=>["email = ? and active_poll_question_id = ?",cookies[:email],@question.id])
       if !user_answer.nil? and !user_answer.empty?
-        flash[:error] = "Youy have already Answered......."
+        if params[:like_paid] == "true"
+          flash[:error] = "You have already Answered....But 50MD money credited for liking our facebook page....."
+        else
+          flash[:error] = "You have already Answered......."
+        end        
         redirect_to home_url
       end
       @options = @question.active_poll_answers
@@ -31,7 +35,7 @@ class SharedController < ApplicationController
       luck_no = [6,15,24,33,42,3,5,8,27,30]
       user_no = rand(50)
       logger.info "#{user_no}"
-#      user_no = 15
+     user_no = 15
       got_price = luck_no.include?(user_no)
       user = User.find_by_email(cookies[:email])
       price_got_count = ActivePollUserAnswer.count(:all,:conditions=>["price_no = ? and active_poll_question_id = ?",user_no,params[:qusetion_id]])
@@ -42,7 +46,7 @@ class SharedController < ApplicationController
           credit_points(cookies[:email],50,user)
           redirect_to "/shared/tip?phone_no=true&user_answer=#{user_answer.id}"
         else
-          credit_md_money(user,question.product)          
+          dir_credit_md_money(user,question.product)          
         end
       else
         user_answer.save!
@@ -122,6 +126,19 @@ class SharedController < ApplicationController
     else
       user_promotion.credit_amount = 0 if user_promotion.credit_amount.nil?
       user_promotion.update_attributes(:credit_amount => user_promotion.credit_amount+(50 * ((user_promotion.points/50).to_i)),:points=> user_promotion.points>=50 ? user_promotion.points-(50 * ((user_promotion.points/50).to_i)) : 0,:user_id=>user.id)            
+    end
+    flash[:success] = "Hurry You got 50 MD Money Right now....."
+    redirect_to home_url  
+  end
+  
+  def dir_credit_md_money(user,product,email=nil)
+    user_promotion = UserPromotion.find(:first,:conditions=>['user_id = ? or email= ? ',user.id,email])   
+    promotion_obj = UserPromotion.find_by_user_id(user.id)
+    if user_promotion.nil?
+      UserPromotion.create(:credit_amount => 50, :user_id => user.id)
+    else
+      user_promotion.credit_amount = 0 if user_promotion.credit_amount.nil?
+      user_promotion.update_attributes(:credit_amount => user_promotion.credit_amount+50)            
     end
     flash[:success] = "Hurry You got 50 MD Money Right now....."
     redirect_to home_url  

@@ -12,7 +12,7 @@ development:
   api_key: 2a89036079c0376ae8959076e5ef37ff
   secret_key: 29fed93ae506fb65474692fab561c0a8
   canvas_page_name:
-  callback_url: http://localhost:3003
+  callback_url: http://www.mastideal.com:3003
   pretty_errors: true
   set_asset_host_to_callback_url: true
   tunnel:
