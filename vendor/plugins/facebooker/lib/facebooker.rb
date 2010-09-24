@@ -40,7 +40,7 @@ module Facebooker
 
   class << self
 
-    def load_configuration(facebooker_yaml_file)
+    def load_configuration(facebooker_yaml_file)      
       return false unless File.exist?(facebooker_yaml_file)
       @raw_facebooker_configuration = YAML.load(ERB.new(File.read(facebooker_yaml_file)).result)
       if defined? RAILS_ENV
@@ -75,10 +75,9 @@ module Facebooker
       @facebooker_configuration
     end
 
-    def with_application(api_key, &block)
-      config = fetch_config_for( api_key )
-
-      unless config
+    def with_application(api_key, &block)      
+      config = fetch_config_for( api_key )      
+      unless config        
         self.logger.info "Can't find facebooker config: '#{api_key}'" if self.logger
         yield if block_given?
         return

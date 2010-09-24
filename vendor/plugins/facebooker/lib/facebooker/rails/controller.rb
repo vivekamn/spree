@@ -255,7 +255,8 @@ module Facebooker
       end
 
       def request_is_fb_ping?
-        !params['fb_sig'].blank?
+        puts "test...............#{(!params['fb_sig'].blank?) and params['exc'].blank?}"
+        (!params['fb_sig'].blank?) and params['exc'].blank?
       end
       
       def request_is_for_a_facebook_canvas?

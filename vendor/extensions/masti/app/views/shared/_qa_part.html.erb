@@ -9,8 +9,13 @@
 		    <tr valign="middle">
                 <td>
                     <p align="center">
+                    	<%if params[:like_paid]=="true"%>
+						Hurray, you have been rewared 50MD money for liking our facebook fan page. Now how about trying the below contest to earn more...
+						<%else%>
+						
                         Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span>
                         <span class='blue' style='font-size:18px;font-weight:bold;'>Deals!</span>
+						<%end%>
                     </p>
                 </td>
             </tr>
