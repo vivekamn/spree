@@ -55,7 +55,11 @@ module Rack
     private
 
     def fb_sig_and_params( params )
+      if params['exc']
+        return nil, []
+      end
       return nil, [] unless params['fb_sig']
+      
       return params['fb_sig'], extract_fb_sig_params(params)
     end
 
