@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Masthideals on Facebook</title>		
+	</head>
+	<body>
+		<%= javascript_include_tag "facebooker", "prototype"%>
+		
+			<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+		<div class="bannerouter">
+	      <% if flash[:success] %>
+	      <div class="flash notice" id="flash_notice"><%= flash[:success] %></div>
+	      <% end %>
+	      <% if flash[:error] %>
+	      <div class="flash errors" id="flasherrors"><%= flash[:error] %></div>
+	      <% end %>
+		   <% if flash[:invite] %>
+		   <div class="flash invite" id="flash_invite"><%= flash[:invite] %></div>
+		   <%end%>
+		   <div style="width:540px;margin : auto;">
+      	<%= yield %>
+		</div>
+ <script type = "text/javascript"> 
+	 FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init("0df39aa2d8076175a4e1470f86f765ad", "xd_receiver"); });
+ </script> 
+	</body>
+</html>
+		
