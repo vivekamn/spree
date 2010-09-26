@@ -22,7 +22,22 @@
       	<%= yield %>
 		</div>
  <script type = "text/javascript"> 
-	 FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init("0df39aa2d8076175a4e1470f86f765ad", "xd_receiver"); });
+ var api_key = "<%=API_KEY[RAILS_ENV]%>";
+ var wall_post = "Hi dudes, I tried this exciting smart shopper contest and thought of sharing this to you so that you can also be a benificient of great shopping deals and discounts plus a probable person for winning a free movie ticket for sathyam cinemas."
+	  FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init(api_key, "xd_receiver");});
+	  if (document.getElementById("wall_post")) {
+	  	FB_RequireFeatures(["XFBML"], function(){
+	  		FB.Facebook.init(api_key, "xd_receiver");
+	  		var attachment = {
+	  			'media': [{
+	  				'type': 'image',
+	  				'src': 'http://www.masthideals.com/images/logo.gif',
+	  				'href': 'http://apps.facebook.com/masthideals'
+	  			}]
+	  		};
+	  		FB.Connect.streamPublish(wall_post, attachment, null);
+	  	});
+	  } 
  </script> 
 	</body>
 </html>

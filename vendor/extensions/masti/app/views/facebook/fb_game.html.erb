@@ -4,6 +4,7 @@
                     <p align="center">
                         Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span>
                         <span class='blue' style='font-size:18px;font-weight:bold;'>Deals!</span>
+						Play Smart Shopper Prince' for four continous weeks and get popular among Facebook Users. You also get a chance to win a ticket for Satyam Cinemas!
                     </p>
                 </td>
             </tr>
@@ -23,7 +24,7 @@
                                 <%end %>
                                 <%end %>
                                 <input type="hidden" name="qusetion_id" id="qusetion_id" value="<%= @question.id %>">
-								<input type="hidden" name="fb_user_id" id="fb_user_id" value="<%= params[:fb_user_id] %>">
+								<input type="hidden" name="fb_user_id" id="fb_user_id" value="<%= params[:fb_sig_user] %>">
                             </td>
                         </tr>
                     </table>
@@ -38,6 +39,7 @@
         </table>
 		
 <script>
+	var flag = false;
 	function set_value(id){
 		flag = true;
 	}

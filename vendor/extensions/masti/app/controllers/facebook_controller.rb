@@ -3,13 +3,15 @@ class FacebookController < Spree::BaseController
   layout 'facebook'
   
   def fb_game
-    params[:fb_user_id] = 100000362520920
+    puts "user........."
+    facebook_id = params[:fb_sig_user]
+    #params[:fb_user_id] = 100000362520920
     active_deal = DealHistory.find(:first, :conditions => ['is_active = ? AND city_id =?', true, session[:city_id]])
     product = Product.find(active_deal.product_id)
     @question = product.active_poll_question
-    user_answer = ActivePollUserAnswer.find(:all,:conditions=>["fb_user_id = ? and active_poll_question_id = ?",params[:fb_user_id],@question.id])
+    user_answer = ActivePollUserAnswer.find(:all,:conditions=>["fb_user_id = ? and active_poll_question_id = ?",facebook_id,@question.id])
     if !user_answer.nil? and !user_answer.empty?
-      redirect_to error_page_path
+      redirect_to facebook_error_page_path
     end
     @options = @question.active_poll_answers
   end
@@ -22,21 +24,31 @@ class FacebookController < Spree::BaseController
       luck_no = [6,15,24,33,42,3,5,8,27,30]
       user_no = rand(50)
       logger.info "#{user_no}"
-      user_no = 27
+      user_no = 6
       got_price = luck_no.include?(user_no)
-      user = User.find_by_fb_user_id(params[:fb_user_id])
+      user = User.find_by_fb_user_id(params[:fb_user_id])      
       price_got_count = ActivePollUserAnswer.count(:all,:conditions=>["price_no = ? and active_poll_question_id = ?",user_no,params[:qusetion_id]])
       if got_price and (price_got_count.nil? or price_got_count<1)
         user_answer.price_no = user_no
+        user_answer.user = user unless user.nil?
+        user_answer.email = user.email unless user.nil?
         user_answer.save!
-        if !user.nil?
+        unless user.nil?
+          puts "to direct credit money....."
           dir_credit_md_money(user,question.product)
         else
           redirect_to "/facebook/tip?user_answer=#{user_answer.id}"
         end
       else
+        user_answer.user = user unless user.nil?
+        user_answer.email = user.email unless user.nil?
         user_answer.save!
-        redirect_to "/facebook/tip?user_answer=#{user_answer.id}"
+        unless user.nil?
+          puts "to direct credit money....."
+          credit_points(user,10)
+        else
+          redirect_to "/facebook/tip?user_answer=#{user_answer.id}"
+        end        
       end
     else
       redirect_to facebook_error_page_path
@@ -58,7 +70,7 @@ class FacebookController < Spree::BaseController
   
   def tip
     unless params[:user_answer].nil?
-      @user_answer = ActivePollUserAnswer.find(params[:user_answer])
+      @user_answer = ActivePollUserAnswer.find(params[:user_answer])      
       @question = ActivePollQuestion.find(@user_answer.active_poll_question_id)
     end
   end
@@ -149,5 +161,13 @@ class FacebookController < Spree::BaseController
       user.save   
     end
     redirect_to fb_game_path(:like_paid => like_paid)
+  end
+  
+  def wall_post
+    
+  end
+  
+  def invite_friends
+    
   end
 end
