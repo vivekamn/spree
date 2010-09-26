@@ -9,7 +9,7 @@
             </tr>
             <tr >
                 <td align="center" valign="middle">
-                    <% form_for :answer ,:url => {:controller =>'shared' , :action => 'check_if_lucky',:from=>'facebook'},:html => {:id => "answer",:method=>"post"} do |f| %>
+                    <% form_for :answer ,:url => {:controller =>'facebook' , :action => 'check_if_lucky'},:html => {:id => "answer",:method=>"post"} do |f| %>
                     <table style="border:1px solid #6CAB16;width:70%;">
                         <tr>
                             <td>
@@ -23,7 +23,7 @@
                                 <%end %>
                                 <%end %>
                                 <input type="hidden" name="qusetion_id" id="qusetion_id" value="<%= @question.id %>">
-								
+								<input type="hidden" name="fb_user_id" id="fb_user_id" value="<%= params[:fb_user_id] %>">
                             </td>
                         </tr>
                     </table>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td align="center">
-                    <%=f.submit "Answer",:style=>"background-color:#6CAB16;color:white;",:onclick=>"return validate_form();"%>
+                    <%=f.submit "Lock!",:style=>"background-color:#6CAB16;color:white;",:onclick=>"return validate_form();"%>
                 </td>
             </tr>
 			<%end %>
