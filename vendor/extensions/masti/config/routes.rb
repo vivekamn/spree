@@ -29,8 +29,9 @@ map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_f
 
 #facebook urls
 
-map.fb_game '/fb_game', :controller=>"shared", :action => "affliate_user_question"
-
+map.fb_game '/fb_game', :controller=>"facebook", :action => "fb_game"
+map.facebook_error_page '/facebook_error_page', :controller=>"facebook", :action => "error_page"
+map.get_email '/get_email', :controller=>"facebook", :action => "get_email"
 
 # seo purpose & promotion
 map.orkut '/orkut', :controller=>"home", :action => "index"

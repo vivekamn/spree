@@ -9,16 +9,30 @@
                                 <img src="/images/wrong.jpg?1262930051" onclick="close_invite();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
                             </td>
                         </tr>
-                        <tr>
+                       
+                        <% if (!@user_answer.nil? and !@user_answer.price_no.nil?) or (@user_promotion.points>=50) %>
+                         <tr align="center">
                             <td>
-                                <p align="center">
-                                    <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Hurray!</span>
-                                    You are one Smart Person! You have earned 10 MD Rewards points.
+                                <p align="center" style="border:1px solid #6CAB16;width: 85%;">
+                                    <%= @question.tags %>
                                 </p>
                             </td>
                         </tr>
-                        <% if (!@user_answer.nil? and !@user_answer.price_no.nil?) or (@user_promotion.points>=50) %>
-                        <tr height="350px;">
+						 <tr>
+                            <td style="padding-top:20px;">
+							    <p align="center">
+								  You are one Smart and lucky  Person! You have earned 50 MD Money.
+								</p>
+                            </td>
+                        </tr>
+						 <tr>
+                            <td style="padding-top:20px;">
+                                <p align="center">
+                                    Enter your mobile number to earn 50 MD Money.
+                                </p>
+                            </td>
+                        </tr>
+						<tr height="250px;">
                             <td align="center" valign="middle">
                                 <% form_for :user ,:url => {:controller =>'shared' , :action => 'update_md_money',:question_id=>@question.id,:email_to_send =>@user_promotion.points>=50 ? true : false},:html => {:id => "answer",:method=>"post"} do |f| %>
                                 <table width="70%">
@@ -51,9 +65,16 @@
                             </td>
                         </tr>
                         <%else %>
+						 <tr>
+                            <td>
+                                <p align="center">
+                                    <b>You are one Smart Person! You have earned 10 MD Rewards points.</b>
+                                </p>
+                            </td>
+                        </tr>
                         <tr height="200px;" align="center">
                             <td>
-                                <p align="center" style="border:1px solid #6CAB16;width: 70%;">
+                                <p align="center" style="border:1px solid #6CAB16;width: 85%;">
                                     <%= @question.tags %>
                                 </p>
                             </td>

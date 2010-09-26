@@ -35,7 +35,7 @@ class SharedController < ApplicationController
       luck_no = [6,15,24,33,42,3,5,8,27,30]
       user_no = rand(50)
       logger.info "#{user_no}"
-     user_no = 15
+      user_no = 15
       got_price = luck_no.include?(user_no)
       user = User.find_by_email(cookies[:email])
       price_got_count = ActivePollUserAnswer.count(:all,:conditions=>["price_no = ? and active_poll_question_id = ?",user_no,params[:qusetion_id]])
