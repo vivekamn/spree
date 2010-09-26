@@ -1,0 +1,27 @@
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+		<head>
+			
+		</head>
+		<body style="overflow:hidden;">
+		<input type="hidden" id = "wall_post" value="true" />
+		<p align="center">
+                Thanks Pal ! Now you have a chance to win a Sathyam ticket. Why not try inviting your friends also and have another chance?<a href="/facebook/invite_friends">Invite Now!</a>
+            </p>
+			<div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
+			<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>		
+			
+			
+
+<script type="text/javascript"> 
+var wall_post = "Hi dudes, I tried this exciting smart shopper contest and thought of sharing this to you so that you can also be a benificient of great shopping deals and discounts plus a probable person for winning a free movie ticket for sathyam cinemas."
+var api_key = "<%=API_KEY[RAILS_ENV]%>";	  
+ FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init(api_key, "xd_receiver");
+	      	var attachment = {'media': [{'type':'image',
+	                        'src':'http://www.sitterscout.com/images/sitterscout-logo.jpg',
+	                        'href':'http://apps.facebook.com/masthideals'}]};
+	      	FB.Connect.streamPublish(wall_post, attachment, null);});
+ </script>
+		</body>
+		</html>

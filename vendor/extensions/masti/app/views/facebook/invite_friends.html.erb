@@ -1,0 +1,29 @@
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+		<head>
+			
+		</head>
+		<body style="overflow:hidden;">
+			<div id="FB_HiddenIFrameContainer" style="display:none; position:absolute; left:-100px; top:-100px; width:0px; height: 0px;"></div>
+			<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+			
+			
+			<fb:serverfbml style="width: 1000px;">  
+<script type="text/fbml"> 	
+<fb:request-form action="index" invite="true" type="Masthi Deals" content="I tried my Smart Shopper Game. You also try it and enjoy.<%=h"<fb:req-choice url=\"index\"label=\"Join match\"/>"%>">
+  <fb:multi-friend-selector showborder="false" actiontext="Invite your friends to this contest and you may be a lucky winner for a sathyam ticket."></fb:multi-friend-selector>
+</fb:request-form>
+</script>
+</fb:serverfbml> 
+
+<script type="text/javascript"> 
+var api_key = "<%=API_KEY[RAILS_ENV]%>";
+	  FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init(api_key, "xd_receiver");
+	  
+
+	  
+ });
+ </script>
+		</body>
+		</html>
