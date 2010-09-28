@@ -111,7 +111,15 @@
 		
 		<script type="text/javascript">
     
-	function phone_check(giv_number){
+	function email_check(giv_email){
+        //alert(giv_email + 'email check given email');
+        var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
+        email_value = EMAIL_REGEX.test(giv_email);
+        //alert(email_value + 'return value in email check');
+        return email_value;
+    }
+    
+    function phone_check(giv_number){
         //alert(giv_number + 'phone no from phone check');
         var PHONE_REGEX = /^[0-9]+$/;
         phone_value = PHONE_REGEX.test(new String(giv_number));
@@ -120,41 +128,66 @@
     }
 	
 	
+	
 	function phone_validation(){
-		//alert("called");
         var mobile = document.getElementById('user_mobile_no').value;
-        var flag = true;
+		var email = document.getElementById('user_email').value;
+        var email_flag = true;
+		var phone_flag = true;
+		
+		if(email == null || email == ''){
+			document.getElementById('email_error').innerHTML= "Email cannot be empty";
+			email_flag = false;
+		}else{
+			var chk_email_flag = email_check(email);
+			if (chk_email_flag == true){
+				document.getElementById('email_error').innerHTML= "";
+			}else{
+				document.getElementById('email_error').innerHTML= "Email should be valid format";
+				email_flag = false;
+			}
+		}
 		
         if (mobile == null || mobile == '') {
 			document.getElementById('phone_error').innerHTML = "Mobile number cannot be empty";
-			flag = false;
+			phone_flag = false;
         }
         else {
 			var chk_phone_flag = phone_check(mobile);
             if (chk_phone_flag == true) {
                 if (new String(mobile).length == 10) {
-                   return true;
+					document.getElementById('phone_error').innerHTML = "";
                 }
                 else {
                     document.getElementById('phone_error').innerHTML = 'Mobile number should be a 10 digit number';
-					flag = false;
+					phone_flag = false;
                 }
-                
             }
             else {
                 document.getElementById('phone_error').innerHTML = 'Please give only numbers in the Mobile number field';
-				flag = false;
+				phone_flag = false;
             }
         }
-		if(flag == false){
-			document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
-			return false;
-		}else{
+		
+		if(phone_flag == true){
 			document.getElementById('phone_image').innerHTML = '';
-	        document.getElementById('phone_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
-			return true;
+			document.getElementById('phone_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
+		}else{
+			document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
 		}
-        return flag;
+		
+		if(email_flag == true){
+			document.getElementById('email_image').innerHTML = '';
+	        document.getElementById('email_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
+		}else{
+			document.getElementById('email_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+		}
+		
+		if(phone_flag == true && email_flag == true){
+			return true;
+		}else{
+			return false;			
+		}
     }
 	
 	
