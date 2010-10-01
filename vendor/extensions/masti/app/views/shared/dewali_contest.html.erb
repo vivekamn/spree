@@ -1,0 +1,125 @@
+<div style="height:400px">
+    <div id="welcome_cmom" name="welcome_cmom" style="display:none;width:418px;height:63px;backgroundcolor:white;">
+      
+	   <table style="border:4px solid #29689E;background-color:#FFFFFF;" height="350px" width="735px">
+		    <tr>
+                <td width="100%" valign="top" align="right">
+                    <img src="/images/wrong.jpg?1262930051" onclick="close_invite();" id="change_image_cancel_share_this" class="cursor_pointer" alt="wrong">
+                </td>
+            </tr>
+		    <tr valign="middle">
+                <td>
+                    <p align="center">
+						
+                        <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Welcome to Smart Shopper </span>
+                        <span class='blue' style='font-size:18px;font-weight:bold;'>Prince Contest</span>
+                    </p>
+                </td>
+            </tr>
+			 <tr valign="middle">
+                <td>
+                    <p align="center" style="font-size: 16px;">
+                       Guess the Diwali Dhamaaka Deal and win a Gift Box from Standard Fire Works<sp><font style="color:red;">*</font></sp>! 
+                    </p>
+                </td>
+            </tr>
+            <tr >
+                <td align="center" valign="middle">
+                     <div id="game_div">
+					<% form_for :answer ,:url => {:controller =>'shared' , :action => 'record_answer'},:html => {:id => "answer",:method=>"post"} do |f| %>
+                    <table style="border:1px solid #6CAB16;width:90%;height: 200px;">
+                        <tr>
+                            <td align="center" style="font-size: 16px; line-height: 38px;">
+								Discount to be offered by MasthiDeals.com on Standard Fire Crackers is <%= f.select "user_answer",1..100%> %
+                            </td>
+                        </tr>
+						
+							<!--<tr>
+								<td align="center">
+									<div id="email_div" style="display:none;">
+									<% if cookies[:email].nil?%>
+									Please Give your Email id : <input type="text" name="email" id="email">
+									<%end%>
+									</div> 
+								</td>
+							</tr>-->
+						
+						<tr>
+			                <td align="center" style="padding-bottom: 25px;">
+								<div id="button_div">
+			                    	<input type="button" value="Lock!" style="background-color:#6CAB16;color:white;" onclick="javascript:validate_form();">
+								</div>
+			                </td>
+			            </tr>
+                    </table>
+					</div>
+					<div id="result_div" style="display:none;">
+						 <table style="border:1px solid #6CAB16;width:90%;height: 200px;">
+                        <tr>
+                            <td align="center" style="font-size: 16px; line-height: 38px;">
+								<div id="sucess_div" style="display:none;">
+									Let us hope you got it correct. We will know shortly.  
+								</div>
+								<div id="fail_div" style="display:none;">
+									Oops! You have already paricipated. Let us wait for the Deal to know the result.
+								</div>
+                            </td>
+                        </tr>
+						<tr>
+			                <td align="center" style="padding-bottom: 25px;">
+			                    	<input type="button" value="Close" style="background-color:#6CAB16;color:white;" onclick="javascript:close_invite();">
+			                </td>
+			            </tr>
+					</table>
+					</div>
+                </td>
+            </tr>
+            
+			<%end %>
+        </table>
+		
+
+</div>			
+</div>
+
+ <input type="hidden" name="falg" id="falg" value="false">
+<script type="text/javascript">
+    var flag = false;
+    if (is_ie) {
+        setTimeout("showPop('welcome_cmom', 210, 500);", 500);
+    }
+    else {
+        showPop('welcome_cmom', -300, 300);
+    }
+    function close_send_share_this(){
+        window.location.href = "/signup"
+    }
+    
+    function close_invite(){
+        window.location.href = "/home"
+    }
+	function check_email(){
+		document.getElementById("email_div").style.display = "block";
+	}
+	function validate_form(){
+		var percent = document.getElementById("answer_user_answer").value;
+		document.getElementById("button_div").innerHTML = "<img src='/images/spinner.gif' border=0/>";
+		 new Ajax.Request('/shared/user_answer?percent=' + percent, {
+                    asynchronous: true,
+                    evalScripts: true,
+                    onComplete: function(request){
+						document.getElementById("game_div").style.display = "none";
+						document.getElementById("result_div").style.display = "block";
+                        if (request.responseText == 'success') {
+							document.getElementById("fail_div").style.display = "none";
+							document.getElementById("sucess_div").style.display = "block";
+                        }
+                        else {
+							document.getElementById("sucess_div").style.display = "none";
+							document.getElementById("fail_div").style.display = "block";
+                        }
+						
+                    }
+                });
+	}
+</script>

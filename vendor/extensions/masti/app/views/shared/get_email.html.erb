@@ -1,0 +1,72 @@
+<div style="height:400px">
+    <div id="welcome_cmom" name="welcome_cmom" style="display:none;width:418px;height:63px;backgroundcolor:white;">
+<table style="border:4px solid #29689E;background-color:#FFFFFF;" height="250px" width="550px">
+		    <tr valign="middle">
+                <td>
+                    <p align="center">
+                    	<%if params[:like_paid]=="true"%>
+						Hurray, you have been rewared 50MD money for liking our facebook fan page. Now how about trying the below contest to earn more...
+						<%else%>
+						
+                        Hello! Welcome to <span class='green' style='margin-left:0px;font-size:18px;font-weight:bold;'>Masthi</span>
+                        <span class='blue' style='font-size:18px;font-weight:bold;'>Deals!</span>
+						<%end%>
+                    </p>
+                </td>
+            </tr>
+            <tr >
+                <td align="center" valign="middle">
+                    <% form_for :answer ,:url => {:controller =>'shared' , :action => 'dewali_contest'},:html => {:id => "answer",:method=>"post"} do |f| %>
+                    <table style="width:auto;">
+                        <tr>
+                        	 <td>
+                              Email : 
+                            </td>
+                            <td>
+                              <input type="text" id="email" name="email" value="<%= cookies[:email] %>">
+                            </td>
+							
+                        </tr>
+						<% if !params[:error].nil?%>
+						<tr>
+							<td></td>
+                        	 <td  style="color:red;">
+                              <div id="error_email">
+							      Invalid Email
+                              </div>
+							</td>
+                        </tr>
+						<%end%>
+						<tr height="20px"></tr>
+						   <tr>
+			                <td colspan="2" align="center">
+			                    <%=f.submit "Am Ready! Start The Game",:style=>"background-color:#6CAB16;color:white;",:onclick=>"return call_validate();"%>
+			                </td>
+			            </tr>
+                    </table>
+                </td>
+            </tr>
+         
+			<%end %>
+        </table>
+	</div>
+</div>
+<script>
+	function call_validate(){
+		user_email = document.getElementById("email").value;
+		if (user_email == '' || user_email == null) {
+			document.getElementById('error_email').innerHTML = "Email cannot be empty";
+			return false;
+        }
+		else{
+			return true;
+		}
+	}
+	  var flag = false;
+    if (is_ie) {
+        setTimeout("showPop('welcome_cmom', 210, 500);", 500);
+    }
+    else {
+        showPop('welcome_cmom', -300, 300);
+    }
+</script>		
