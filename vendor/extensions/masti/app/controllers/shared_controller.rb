@@ -1,5 +1,36 @@
 class SharedController < ApplicationController
  
+   def dewali_contest
+    if current_user
+      cookies[:email] = current_user.email
+    end
+     if cookies[:email].nil?
+      redirect_to get_email_path
+     end
+   end
+ 
+  def get_email
+    if !cookies[:email].nil?
+      redirect_to dewali_contest_path
+    end  
+  end
+  
+  def user_answer
+    user_answer = ActivePollUserAnswer.find(:all,:conditions=>["email = ? and active_poll_question_id = ?",cookies[:email],10110])
+    if user_answer.nil? or user_answer.empty?
+      ActivePollUserAnswer.create(:active_poll_question_id=>10110,:direct_answer=>params[:percent],:email=>cookies[:email])
+      render(:text=>"success")
+    else
+      render(:text=>"failure")
+    end
+  end
+  
+  def api
+   render :layout=>false
+#   redirect_to "https://secure.ebs.in/pg/ma/sale/pay/?account_id=#{params[:account_id]}&return_url=#{params[:return_url]}&mode=#{params[:mode]}&reference_no=#{params[:reference_no]}&amount=#{params[:amount]}&description=#{params[:description]}&name=#{params[:name]}&address=#{params[:address]}&city=#{params[:city]}&state=#{params[:state]}&postal_code=#{params[:postal_code]}&country=#{params[:country]}&email=#{params[:email]}&phone=#{params[:phone]}&ship_name=#{params[:ship_name]}&ship_address=#{params[:ship_address]}&ship_city=#{params[:ship_city]}&ship_state=#{params[:ship_state]}&ship_postal_code=#{params[:ship_postal_code]}&ship_country=#{params[:ship_country]}&ship_phone=#{params[:ship_phone]}"
+  end
+ 
+ 
    def plaxo_cb
     render :layout => false
   end

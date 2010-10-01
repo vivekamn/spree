@@ -27,6 +27,11 @@ map.reg_complete '/registration-success',:controller => "home", :action => "inde
 map.affliate '/affiliate',:controller => "shared", :action => "affliate"
 map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_friends"
 
+#game urls
+map.get_email '/get_email', :controller=>"shared", :action => "get_email"
+map.dewali_contest '/dewali_contest', :controller=>"shared", :action => "dewali_contest"
+
+
 # seo purpose & promotion
 map.orkut '/orkut', :controller=>"home", :action => "index"
 map.adwords '/adwords', :controller=>"home", :action => "index"
