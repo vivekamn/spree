@@ -48,9 +48,15 @@
         </div>
         <%end %>
         <div class="dealbg">
-            Value: Rs.<%= @price %> Discount: <%= @discount %>% 
+              <% if @featured_product.id= 1060500642 %>
+			Value: Unlimited Discount: 100% 
+            <br/>
+            You save: Unlimited
+			<%else%>
+			Value: Rs.<%= @price %> Discount: <%= @discount %>% 
             <br/>
             You save: Rs.<%= @saving %>
+			<%end%>
         </div>
         <div class="bought" id="bought" style="display:none;">
             <div class="bought1">
