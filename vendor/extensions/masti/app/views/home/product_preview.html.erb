@@ -210,31 +210,8 @@
             </div>
         </div>
     </div>
-    <div id="share_this_div" style="display:none;width:500px;height:180px;">
-        <%= render :partial => "popup", :locals =>{ :deal => @deal} %>
-    </div>
-	<div id="share_this_mobile_div" style="display:none;width:300px;height:180px;">
-        <%= render :partial => "mob_popup", :locals =>{ :deal => @deal} %>
-    </div>
-    <script type="text/javascript">
-        function show_send_share_this(){
-            showPop('share_this_div', 10, 200);
-        }
-        
-        function close_send_share_this(){
-            hidePop('share_this_div');
-        }
-		function show_mobile_share_this(){
-            showPop('share_this_mobile_div', 10, 200);
-        }
-        
-        function close_mobile_share_this(){
-            hidePop('share_this_mobile_div');
-        }
-		
-    </script>
+  
     <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
-</div>
 <script>
         	function show_chat()
         	{
