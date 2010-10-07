@@ -28,7 +28,7 @@ class Admin::DealsController < ApplicationController
     new_deal.is_active = 1
     new_deal.city_id = city_id
     new_deal.save
-#    new_deal.deal_notify(session[:city_id])
+    new_deal.deal_notify(session[:city_id])
     redirect_to admin_products_url(:city_id => city_id)
   end
   
@@ -40,6 +40,11 @@ class Admin::DealsController < ApplicationController
     active_deal.sold_out = 1
     active_deal.save
     redirect_to admin_products_url(:flag=>'sold_out')
+  end
+  
+  def sample_mail
+    @product = Product.find_by_permalink(params[:id])
+    render :layout => false
   end
   
   def manual_send_mail
