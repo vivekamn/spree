@@ -101,10 +101,10 @@
 </div> 
                 </td>
                 <td valign="top" style="width: 400px;">
-    <table bgcolor="#9ed534" width="233px" height="60px" cellspacing="0" cellpadding="0">
+    <table bgcolor="#9ed534" width="247px" height="60px" cellspacing="0" cellpadding="0">
                     <tbody><tr>
                       <td style="padding-left: 15px; color: rgb(255, 255, 255); font-family: Helvetica,Arial,sans-serif; font-size: 28px;">
-                        <div>                           Rs <%= (@product.variant.price-((@product.discount/100)*@product.variant.price)).to_i %>                      </div>
+                        <div>                           Rs 50<%# (@product.variant.price-((@product.discount/100)*@product.variant.price)).to_i %>                      </div>
                       </td>
                       <td style="padding-top: 5px;">
 <table style="border: 1px solid rgb(24, 118, 167); font-weight: bold; color: white; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px; cursor: pointer; background-color: rgb(24, 118, 167);">
@@ -124,7 +124,7 @@
                     </tr>
                   </tbody></table>
                   <div style="padding-left: 0px;">
-                    <table width="233px" cellspacing="0" cellpadding="0">
+                    <table width="247px" cellspacing="0" cellpadding="0">
                       <tbody><tr style="background-color: rgb(24, 118, 167);">
                         <td align="center" width="33%" style="border-left: 1px solid rgb(24, 118, 167); margin: 0pt; padding: 10px 0pt 5px; font-size: 12px; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">
 
@@ -141,9 +141,9 @@
                         </td>
                       </tr>
                       <tr style="background-color: rgb(24, 118, 167);">
-                        <td align="center" width="33%" style="border-left: 1px solid rgb(24, 118, 167); border-bottom: 1px solid rgb(24, 118, 167); margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                             Rs <%= @product.variant.price.to_i%>                         </td>
-                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                            <%= @product.discount%>%                         </td>
-                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">Rs <%= ((@product.discount/100)*@product.variant.price).to_i %></td>
+                        <td align="center" width="33%" style="border-left: 1px solid rgb(24, 118, 167); border-bottom: 1px solid rgb(24, 118, 167); margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                             Unlimited<%# @product.variant.price.to_i%>                         </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">                            100<%# @product.discount%>%                         </td>
+                        <td align="center" width="33%" style="margin: 0pt; padding: 0pt 0pt 5px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); font-family: Helvetica,Arial,sans-serif;">Unlimited<%# ((@product.discount/100)*@product.variant.price).to_i %></td>
                       </tr>
                     </tbody></table>
                   </div>
