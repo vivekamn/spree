@@ -39,10 +39,12 @@
         <div class="bought2">
             <%= link_to "<img src='/images/buydeal.gif' border=0 width='357' height='96'/>", @featured_product %>
         </div>
+		<%if @featured_product.show_gift%>
         <div style="text-align:center">
             <%= link_to "<span style='font-size: 20px; color: #00A8FF;'> Gift This Deal <img src='/images/gift_box.png' border=0 /> </span>", "/products/#{@featured_product.permalink}?type=gift" %>
         </div>
-        <%else %>
+        <%end%>
+		<%else %>
         <div class='sold_out'>
             <span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px' %></span>
         </div>

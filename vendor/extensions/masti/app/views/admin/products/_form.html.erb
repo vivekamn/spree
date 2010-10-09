@@ -118,6 +118,7 @@
             <%= @product.maximum_number %>
         </p>
         <%end %>
+		
         <!--ul id="shipping-specs">
         <li>
         <%= f.label :weight, t("weight")%>
@@ -185,7 +186,11 @@
 		 <%= f.label :use_md_money, "Use MD Money" %>
         <%= f.error_message_on :use_md_money %>
         <% end %>
-		
+		<% f.field_container :show_gift do %>
+        <%= f.check_box :show_gift, :value => @product.show_gift %>&nbsp;&nbsp;
+		 <%= f.label :show_gift, "Show Gift this Deal" %>
+        <%= f.error_message_on :show_gift %>
+        <% end %>
     </div>
     <div class="yui-u first">
         <% f.field_container :reviews do %>
