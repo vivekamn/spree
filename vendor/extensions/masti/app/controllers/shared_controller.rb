@@ -157,9 +157,9 @@ class SharedController < ApplicationController
             sms_notify.name = params[:name]
             sms_notify.mobile_no = mobile_no
             sms_notify.save
+            message = "Hi, Congrats! You have successfully registered with MasthiDeals.com. We will inform you about the new deals we lauch.For more details, please logon to www.masthideals.com - Lakshmi, MasthiDeals Team."
+            send_sms(params[:mobile_no], message,100)
           end
-          message = "Hi, Congrats! You have successfully registered with MasthiDeals.com. We will inform you about the new deals we lauch.For more details, please logon to www.masthideals.com - Lakshmi, MasthiDeals Team."
-          send_sms(params[:mobile_no], message,100)
           redirect_to home_url
       end
     else
