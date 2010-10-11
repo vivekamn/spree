@@ -76,9 +76,10 @@
 	<span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(108, 171, 22); font-weight: bold;">The</span> <span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(33, 77, 118); font-weight: bold;">Details<hr style="margin-right: 30px; color: rgb(229, 229, 229);"></span>
 </div>
 <div>
+	<% description = @product.description.gsub('<p','<li')%>
 <div style="width: 380px;">
   <ul style="padding: 15px 0pt 5px 5px; line-height: 24px;">
-   <%=@product.description%>
+   <%=description.gsub('</p>','</li>')%>
 
   </ul>
 </div></div>
@@ -88,9 +89,10 @@
 	<span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(108, 171, 22); font-weight: bold;">The</span> <span style="font-family: Tahoma,Geneva,sans-serif; font-size: 17px; color: rgb(33, 77, 118); font-weight: bold;">Catch<hr style="margin-right: 30px; color: rgb(229, 229, 229);"></span>
 </div>
 <div>
+<% catch_message = @product.catch_message.gsub('<p','<li')%>	
 <div style="width: 380px;">
   <ul style="padding: 15px 0pt 5px 5px; line-height: 24px;">
-    	 <%=@product.catch_message%>
+    	 <%=catch_message.gsub('</p>','</li>')%>
   </ul>
 </div></div>
 
