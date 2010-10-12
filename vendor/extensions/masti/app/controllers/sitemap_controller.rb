@@ -17,7 +17,7 @@ class SitemapController < ApplicationController
     @deals = DealHistory.find(:all, :conditions =>['is_active = ? or is_side_deal= ?', true , true])
     product_ids = []
     product_ids = @deals.collect{|x| x.product_id}
-    @products = Product.find(:all,:conditions=>['id in (?)', product_ids],:order=>"created_at")
+    @products = Product.find(:all,:conditions=>['id in (?)', product_ids],:order=>"created_at desc")
     @last = DealHistory.find(:last)
      respond_to do |format|
       format.xml 
