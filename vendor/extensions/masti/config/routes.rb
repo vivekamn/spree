@@ -78,9 +78,10 @@ end
 map.order_failure 'orders/order_failure', :controller=>'orders', :action=>'failure'
 
 map.connect "sitemap.xml", :controller => "sitemap", :action => "sitemap"
-map.connect "chennai_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 1
-map.connect "bangaluru_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 2
-map.connect "hyderabad_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 5
-map.connect "chennai_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 1
-map.connect "bangaluru_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 2
-map.connect "hyderabad_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 5
+map.connect "deals.xml", :controller => "sitemap", :action => "deals"
+#map.connect "chennai_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 1
+#map.connect "bangaluru_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 2
+#map.connect "hyderabad_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 5
+#map.connect "chennai_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 1
+#map.connect "bangaluru_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 2
+#map.connect "hyderabad_sub_deal.xml", :controller => "sitemap", :action => "sub_deal", :city_id => 5

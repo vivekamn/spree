@@ -181,6 +181,13 @@
         <%= f.text_field :star_discount, :value => @product.star_discount %>
         <%= f.error_message_on :star_discount %>
         <% end %>
+		
+		<% f.field_container :category do %>
+        <%= f.label :category, "Category" %>
+        <br/>
+        <%= f.text_field :category, :value => @product.category %>
+        <%= f.error_message_on :category %>
+        <% end %>
 		<% f.field_container :use_md_money do %>
         <%= f.check_box :use_md_money, :value => @product.use_md_money %>&nbsp;&nbsp;
 		 <%= f.label :use_md_money, "Use MD Money" %>
