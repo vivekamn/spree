@@ -44,8 +44,9 @@ xml.deals do
           xml.street_address address_arr[0] unless address_arr.empty?
           xml.extended_address address_arr[1] unless address_arr[1].nil? or address_arr[1]== address_arr.last
           area = address_arr.empty? ? "" : address_arr.last.split(',')[0]
-          xml.locality "#{area},#{product.vendor.city}"
-          xml.region product.vendor.state
+          city = City.find(product.city_id)
+          xml.locality "#{area},#{city.name}"
+          xml.region city.state.name
           xml.postal_code product.vendor.zip
           xml.country "India"
           xml.geo do
