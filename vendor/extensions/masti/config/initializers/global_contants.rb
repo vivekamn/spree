@@ -22,6 +22,19 @@ EMAIL_CAMP['/email_camp_ceequence'] = 'Ceequence'
 EMAIL_CAMP['/email_camp_scope']='Scope Intl'
 EMAIL_CAMP['/email_camp_hcl'] = 'HCL'
 EMAIL_CAMP['/email_camp_steria'] = 'Steria'
+EMAIL_CAMP['email_camp_alsec'] = 'Alsec'
+EMAIL_CAMP['/email_camp_flextronics'] = 'Flextronics'
+EMAIL_CAMP['/email_camp_hdfc']='HDFC'
+EMAIL_CAMP['/email_camp_icici'] = 'ICICI'
+EMAIL_CAMP['/email_camp_nokia'] = 'Nokia'
+EMAIL_CAMP['email_camp_perot'] = 'Perot'
+EMAIL_CAMP['/email_camp_siemens'] = 'Siemens'
+EMAIL_CAMP['/email_camp_virtusa']='Virtusa'
+EMAIL_CAMP['/email_camp_bosch'] = 'Bosch'
+EMAIL_CAMP['/email_camp_gentpac'] = 'Gentpac'
+EMAIL_CAMP['/email_camp_patni'] = 'Patni Computers'
+EMAIL_CAMP['/email_camp_samsung'] = 'Samsung'
+
 
 #Email camp for facebook,orkut,adwords,email_camp,diff
 EMAIL_CAMP_ADD = {}
