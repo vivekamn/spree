@@ -26,6 +26,7 @@ map.generate_code '/generate-code',:controller => "home", :action => "generate_c
 map.reg_complete '/registration-success',:controller => "home", :action => "index"
 map.affliate '/affiliate',:controller => "shared", :action => "affliate"
 map.refer_friends '/refer_friends',:controller => "shared", :action => "reffer_friends"
+map.deal_preview '/deal_preview',:controller => "admin/deals", :action => "deal_preview"
 
 #game urls
 map.get_email '/get_email', :controller=>"shared", :action => "get_email"

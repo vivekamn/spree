@@ -21,6 +21,11 @@
         <%= link_to t("variants"),  admin_product_variants_url(@product)  %>
       </li>
     <% end %>
+	 <% if url_options_authenticate?(:controller => 'admin/variants') %>
+      <li<%= ' class="active"' if current == "Preview" %>>
+        <%= link_to "Previews",  deal_preview_path(:id=>@product.permalink)  %>
+      </li>
+    <% end %>
     <% if url_options_authenticate?(:controller => 'admin/option_types') %>
       <li<%= ' class="active"' if current == "Option Types" %>>
         <%= link_to t("option_types"), selected_admin_product_option_types_url(@product) %>

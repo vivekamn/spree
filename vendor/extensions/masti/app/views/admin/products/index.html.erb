@@ -82,7 +82,7 @@
             		<%= link_to "Make online",:controller => 'admin/deals', :action => "make_online",:city_id => session[:city_id], :id => product.id  unless product.deleted? %>
             	<%end %>
             <%end %>
-            &nbsp; <%= link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
+            <%# link_to 'Preview', "/home/product_preview/#{product.permalink}" %>
             &nbsp;<%= link_to_edit product unless product.deleted? %>
             &nbsp;<%= link_to_clone product %>
             &nbsp;<%= link_to_delete product unless product.deleted? %>

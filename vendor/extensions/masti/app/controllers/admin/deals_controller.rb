@@ -1,4 +1,4 @@
-class Admin::DealsController < ApplicationController
+class Admin::DealsController < Admin::BaseController
 
   def make_online
     city_id = params[:city_id]
@@ -40,6 +40,15 @@ class Admin::DealsController < ApplicationController
     active_deal.sold_out = 1
     active_deal.save
     redirect_to admin_products_url(:flag=>'sold_out')
+  end
+  
+  def deal_preview
+    @product = Product.find_by_permalink(params[:id])
+  end
+  
+  def sample_voucher
+    @product = Product.find_by_permalink(params[:id])
+    render :layout => false
   end
   
   def sample_mail
