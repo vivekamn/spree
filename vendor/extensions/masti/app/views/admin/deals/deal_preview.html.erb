@@ -1,0 +1,27 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Preview"} %>
+
+<div style="padding: 50px;">
+<p>
+	<%= link_to ' Home Page Preview', "/home/product_preview/#{@product.permalink}",:target=>"_balnk" %>
+</p>
+<p>
+	<%= link_to 'Mail Preview', "/admin/deals/sample_mail/#{@product.permalink}",:target=>"_balnk" %>
+</p>
+<p>
+	<%= link_to 'Voucher Preview', "/admin/deals/sample_voucher/#{@product.permalink}",:target=>"_balnk" %>
+</p>
+<p>
+	<strong>SMS Notification To the Users:</strong>
+</p>
+<p>
+	<%= @product.sms_notification%>
+</p>
+<p>
+	<strong>Gift Notification:</strong>
+</p>
+<p>
+	Hi, SampleName has gifted you <%= @product.gift_sms%> Please check your email for further details.
+</p>
+</div>
