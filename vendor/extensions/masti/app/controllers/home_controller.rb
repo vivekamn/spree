@@ -84,10 +84,10 @@ before_filter :find_and_set_affiliate, :only => :index
     @bought_count = @featured_product.currently_bought_count
     if @deal.nil? or @deal.is_active
       @deal_param = 'side_deal'
-      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ?', true])
+      @side_deal = DealHistory.find(:first, :conditions => ['is_side_deal = ? AND city_id = ?', true, session[:city_id]])
     elsif @deal.is_side_deal
       @deal_param = 'main_deal'
-      @side_deal = DealHistory.find(:first, :conditions => ['is_active = ?', true])
+      @side_deal = DealHistory.find(:first, :conditions => ['is_active = ?  AND city_id = ?', true,session[:city_id]])
     end
   end
   
