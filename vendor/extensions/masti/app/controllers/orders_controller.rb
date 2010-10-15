@@ -32,7 +32,6 @@ class OrdersController < Spree::BaseController
        if arr[0]=="quantity"
          variant_id = arr[1]
          quantity = param[1].to_i
-         puts "#{param[0]}---------#{quantity}"
          @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
        end
    end
