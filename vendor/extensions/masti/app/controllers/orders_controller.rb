@@ -15,13 +15,32 @@ class OrdersController < Spree::BaseController
   def index
     create
   end
-  
+ 
   # override the default r_c behavior (remove flash - redirect to edit details instead of show)
   create do
     flash nil 
     success.wants.html {redirect_to edit_order_url(@order)}
     failure.wants.html { render :template => "orders/edit" }
   end 
+  
+  def multiple_variant_update
+    begin
+#  puts "#{params[:variant].inspect}-------->"
+   @order = Order.create(:state=>"new",:created_at=>Time.now,:user_id=>current_user.id)
+   params[:variant].each do |param|
+       arr = param[0].split"_"
+       variant_id = arr[1]
+       quantity = param[1].to_i
+       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
+   end
+   session[:order_token] = @order.token
+   @order.save!
+ rescue Exception=>e
+   puts "save exception.......................#{e.message}"
+   end
+   redirect_to edit_order_checkout_url(@order)
+  end
+  
   
   #index.before :create_before
   
@@ -89,6 +108,7 @@ class OrdersController < Spree::BaseController
   
   def create_before
     quantity=1      
+    params[:variants] = params[:variant] unless params[:variant].nil?
     product=Product.find(params[:product])    
     params[:products].each do |product_id,variant_id|     
       quantity = params[:quantity].to_i if !params[:quantity].is_a?(Array)
@@ -96,7 +116,7 @@ class OrdersController < Spree::BaseController
       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
     end if params[:products]    
     params[:variants].each do |variant_id, quantity|   
-      quantity = quantity.to_i
+      quantity = quantity.to_i unless quantity.nil?
       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
     end if params[:variants]    
     @order.add_variant(Variant.find(product.master.id), quantity) if quantity > 0

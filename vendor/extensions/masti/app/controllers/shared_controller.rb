@@ -1,4 +1,9 @@
 class SharedController < ApplicationController
+  require 'csv' 
+  require 'logger'
+
+
+  DATA_DIRECTORY = File.join(RAILS_ROOT, "lib", "tasks", "sample")
  
    def dewali_contest
     if current_user
@@ -80,6 +85,51 @@ class SharedController < ApplicationController
   def affliate
     
   end
+  
+  
+  def diwali_crackers_list
+    logger = Logger.new STDOUT
+    logger.debug "loading diwali crackers list information  #{DATA_DIRECTORY} ..."
+    Dir.glob("#{DATA_DIRECTORY}/deevalis1.csv").each  do |file|
+      diwali_crackers_list_file file
+    end
+    flash[:success] = "successfully rake task completed................."
+    redirect_to home_url
+  end
+  
+  def diwali_crackers_list_file file_name 
+  logger = Logger.new STDOUT
+  logger.debug "loading diwali crackers list information  #{file_name} ..."
+  filename = File.join(file_name)
+  CSV.open(filename, "r") do |row|
+    next if row.size ==0 || row[0] == nil || row[0].blank? #empty lines are ignored
+    next if row[0] == 'code' and row[1] == 'catergory' and row[2] == 'crackersname' and row[3] == 'rate' and row[4] == 'unit'
+    begin 
+      variants = Variant.find(:first, :conditions => ['c_name = ?', row[3]]) 
+      if variants.nil?
+        variants = Variant.new
+        logger.debug "Added diwali crackers list information  for :  "+ row[1].to_s + "............."
+      else
+        logger.debug "Updated diwali cracker list information for : "+ variants.sku.to_s + "------------"
+      end
+      variants.sku = row[0]
+      variants.category = row[1]
+      variants.c_name = row[2].capitalize
+      variants.price = row[3]
+      variants.unit = row[4]
+      variants.product_id = 1060500647
+      variants.count_on_hand = 30
+      variants.image_url = row[5]
+      variants.c_description = row[6]
+      variants.save!
+    rescue Exception => e
+      logger.error "not able to load diwali cracker list " + row[1] + e.to_s
+      next
+    end
+  end
+  logger.debug "successfully Added diwali cracker list information ..............."
+end
+  
   
   def share_this_via_mobile
     message = Variant.find(params[:variant_id]).sms_share_text

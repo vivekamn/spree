@@ -13,9 +13,12 @@ class ProductsController < Spree::BaseController
   end
   
   def show
-#    puts "#its comming to the product show============================id:==========#{}======="
-#    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
-#    @product = Product.find_by_permalink(params[:id])
+    @product = Product.find(:first, :conditions => ['permalink = ? ', params[:id]])
+    @variants_obj = Variant.find(:all,:conditions=>['product_id = ? and is_master = 0  AND deleted_at IS NULL',@product.id])
+    if @variants_obj.size <=1
+    puts "#its comming to the product show============================id:==========#{}======="
+    deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
+    @product = Product.find_by_permalink(params[:id])
     @product = Product.find(:first, :conditions => ['permalink = ? AND city_id =? ', params[:id],session[:city_id]])
     oreders = current_user.orders
     count = 0
@@ -35,7 +38,7 @@ class ProductsController < Spree::BaseController
       flash[:error] = "You have already bought the maximum allowed number of purchases in this deal.  We implement the maximum number of purchases per user to ensure that a large number of users can use this offer."
       redirect_to :back
     end
-    
+    end
   end
   
   include Spree::Search

@@ -1,29 +1,216 @@
-<% @body_id = 'product-details' %>
-<h1><%= @product.name %></h1>
-
-<div id="product-images">
-  <div id="main-image">
-    <%= render 'image' -%>
-  </div>
-  <div id="thumbnails">
-    <%= render 'thumbnails', :product => @product -%>
-  </div>
+<div class="bannerouter">
+    <div class="tiles" >
+        <table width="90%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;">
+            <tr>
+                <td>
+                    <span class="green">Product </span>
+                    <span class="blue">Selection</span>
+                </td>
+            </tr>
+        </table>
+<%form_for :variant , :url => {:controller=>"orders",:action=>"multiple_variant_update", :product => @product.id} ,:html => {:id => "dewali_order_form" ,:method => :post} do |f| %>		
+        <table style="margin-bottom: 80px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
+            <tr>
+                <td>
+                    <table border="1" width="100%">
+                        <tr>
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                            <th>
+                                Quantity
+                            </th>
+							<th>
+								Total
+							</th>
+							<th>View Image</th>
+							<th>More Details</th>
+                        </tr>
+                        
+                        <% @variants_obj.each_with_index do |variant_obj,index| %>
+                        <tr>
+                            <td align="center">
+                                <%= index+1 %>
+                            </td>
+                            <td align="center">
+                                <%= variant_obj.c_name %>
+                            </td>
+							<%price =  (variant_obj.price-((variant_obj.price*variant_obj.product.discount)/100)).to_i%>
+							
+                            <td align="center">
+                                <%# variant_obj.cost_price.to_i %>
+								<%= price %>
+                            </td>
+                            <td align="center">
+                                <%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
+								<%= f.hidden_field "price_#{variant_obj.id}", :value=> price %>
+                            </td>
+							<td align="center">
+								<div id="total_<%= variant_obj.id %>"></div>
+							</td>
+							<td align="center">
+								<%=link_to "View Image","javascript:call_imagepopup('#{variant_obj.image_url}');" unless variant_obj.image_url.nil?%>
+							</td>
+							<td align="center">
+								<% unless variant_obj.c_description.nil?%>
+								<%=link_to "More Details","javascript:call_descpopup('#{variant_obj.id}');" %>
+								<div id="desc_popup_<%= variant_obj.id%>" style="display:none;width:50px;height:50px;">
+								<div style="width:620px;background-color:#FFFFFF;border: 5px solid #29689E;">
+								<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								        <tr>
+								            <td align="right">
+								                <%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_desc_popup('#{variant_obj.id}');" %>
+								            </td>
+								        </tr>
+										<tr>
+											<td align="center">
+												<div id="description_div_<%= variant_obj.id%>"><%=variant_obj.c_description %></div>
+											</td>
+										</tr>
+										<tr>
+											<td align="center">
+												<input type="button" onclick="close_desc_popup('<%= variant_obj.id %>');" value="close">
+											</td>
+										</tr>
+								</table>		
+								</div>
+								</div>
+								<%end%>
+							</td>
+                        </tr>
+                        <%end %>
+                    </table>
+					<table width="100%">
+						<tr>
+							<td align="right">
+								<input type="submit" value="BUY" onclick="return check_submit();">
+							</td>
+						</tr>
+					</table>
+					
+					<%end %>
+					
+                </td>
+            </tr>
+        </table>
+	</div>	
 </div>
-
-<div id="product-description">
-  <% hook :product_description do %>
-    <%= product_description(@product) rescue t("product_has_no_description") %>
-  <% end %>
-  <% hook :product_properties do %>
-    <%= render 'properties' %>
-  <% end %>
+<div id="imagepopup" style="display:none;width:100px;height:100px;">
+<div style="width:355px;background-color:#FFFFFF;border: 5px solid #29689E;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="right">
+                <%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_imagepopup();" %>
+            </td>
+        </tr>
+		<tr>
+			<td align="center">
+				<div id="image_div"></div>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="button" onclick="close_imagepopup();" value="close">
+			</td>
+		</tr>
+</table>		
 </div>
-
-<% hook :cart_form do %>
-  <div id="cart-form">
-    <%= render 'cart_form' %>
-  </div>
-<% end %>
-
-<%= render 'taxons' %>
-
+</div>
+<div id="Descriptionpopup" style="display:none;width:100px;height:100px;">
+<div style="width:355px;background-color:#FFFFFF;border: 5px solid #29689E;">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="right">
+                <%= image_tag "wrong.jpg", :alt => 'wrong', :class  => "cursor_pointer" ,:id => "change_image_cancel_share_this", :onclick => "close_desc_popup();" %>
+            </td>
+        </tr>
+		<tr>
+			<td align="center">
+				<div id="description_div_#{}"></div>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<input type="button" onclick="close_desc_popup();" value="close">
+			</td>
+		</tr>
+</table>		
+</div>
+</div>
+<input type="hidden" value="<%= @variants_obj.size%>" id="var_size" name="var_size">
+<script>
+	function call_imagepopup(url){
+		var str = "<img src='"+url+"'>";
+		document.getElementById("image_div").innerHTML=str;
+		showPop('imagepopup', 10, 200);
+	}
+	
+	function close_imagepopup(){
+		hidePop('imagepopup');
+	}
+	
+	function call_descpopup(id){
+		var str = "desc_popup_"+id;
+		showPop(str, 10, 200);
+	}
+	
+	function close_desc_popup(id){
+		var str = "desc_popup_"+id;
+	hidePop(str);
+	}
+	
+	function update_price(price,variant_id){
+		var str = "variant_quantity_"+variant_id;
+		var quantity = document.getElementById(str).value;
+		var total = quantity * price;
+		document.getElementById("total_"+variant_id).innerHTML = ""+total;
+	}
+	
+	function check_submit(){
+		var flag = true;
+		var count = 0;
+		var i = 0;
+		var price_count = 0;
+		var variant_ids = new Array();
+		var variant_size = document.getElementById('var_size').value;
+		variant_ids = [<% @variants_obj.each do |s| %> "<%= s.id %>", <% end %>];
+		for (i = 0;i < variant_size; i++){
+			var quantity_str = "variant_quantity_"+variant_ids[i];
+			var price_str = "variant_price_"+variant_ids[i];
+			
+			var quantity = document.getElementById(quantity_str).value;
+			var price = document.getElementById(price_str).value;
+			if(quantity == 0){
+				count = count + 1;
+			}else{
+				var price_detail = price * quantity;
+				price_count = price_count + price_detail;
+				
+			}
+		}
+		if (count == variant_size){
+			flag = false;
+			alert('select atleast one');
+		}else{
+			if (price_count >= 500){
+				flag = true;
+			}else{
+				flag = false;
+				alert('amount should be more than 500');
+			}
+		}
+		if(flag == true){
+			return true;	
+		}else{
+			return false;
+		}
+	}
+	
+	
+</script>

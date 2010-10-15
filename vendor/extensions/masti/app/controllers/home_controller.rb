@@ -511,6 +511,10 @@ before_filter :find_and_set_affiliate, :only => :index
       @item=item
       @product=item.variant.product
     end
+     if @order.state!="paid"
+      flash[:error]="Voucher cannot be Displayed.Due to Order is not Paid"
+      redirect_to home_url
+    end
   end
   
   def create
