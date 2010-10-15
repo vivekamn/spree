@@ -29,9 +29,12 @@ class OrdersController < Spree::BaseController
    @order = Order.create(:state=>"new",:created_at=>Time.now,:user_id=>current_user.id)
    params[:variant].each do |param|
        arr = param[0].split"_"
-       variant_id = arr[1]
-       quantity = param[1].to_i
-       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
+       if arr[0]=="quantity"
+         variant_id = arr[1]
+         quantity = param[1].to_i
+         puts "#{param[0]}---------#{quantity}"
+         @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
+       end
    end
    session[:order_token] = @order.token
    @order.save!
