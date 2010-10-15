@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
   
   def count_to_admin(count,email,from1,source,city)
     content_type "text/html"
-    from           "customersupport@masthideals.com"
+    from           "customerservice@masthideals.com"
     recipients    ["akvsaran@gmail.com","akvmurlai@gmail.com"]
     subject      " #{from1} User Count in Masthideals.com: #{count}"
     sent_on        Time.now.utc
@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
   
   def enquiries(enquiry)
     content_type "text/html"
-    from           "customersupport@masthideals.com"
+    from           "customerservice@masthideals.com"
     recipients    ["sathishideas2it@gmail.com","ramanavel@gmail.com"]
     bcc           Spree::Config[:mail_bcc]
     subject      "New Deal enquiry in masthideals.com #{enquiry.company}"
@@ -62,7 +62,7 @@ class UserMailer < ActionMailer::Base
   
   def already_registered(user,product)
 #   content_type "text/html"
-    from           "customersupport@masthideals.com"
+    from           "customerservice@masthideals.com"
     recipients    user.email
     bcc           Spree::Config[:mail_bcc]
     subject        "Welcome to MasthiDeals community. You have already registered with us." 
@@ -74,7 +74,7 @@ class UserMailer < ActionMailer::Base
  
   def success_sms_registration(user,product)
 #   content_type "text/html"
-    from           "customersupport@masthideals.com"
+    from           "customerservice@masthideals.com"
     recipients    user.email
     bcc           Spree::Config[:mail_bcc]
     subject        "Welcome to MasthiDeals community. Now you have 100 Rs to spend!" 
@@ -87,7 +87,7 @@ class UserMailer < ActionMailer::Base
   
   def registration(user,product)
     content_type "text/html"
-    from           "customersupport@masthideals.com"
+    from           "customerservice@masthideals.com"
     recipients    user.email
     bcc           Spree::Config[:mail_bcc]
     subject        "Welcome to MasthiDeals community" 
@@ -97,7 +97,7 @@ class UserMailer < ActionMailer::Base
   
   def users_deal_notify(recipients,product)
 #   content_type "text/html"
-   from           "customersupport@masthideals.com"
+   from           "customerservice@masthideals.com"
    bcc            recipients
    subject        "New product in Masti Deals - #{product.name}" 
    sent_on        Time.now.utc
@@ -129,7 +129,7 @@ class UserMailer < ActionMailer::Base
  def notify_users_deal_cancel(user_emails, product)
    content_type "text/html"
     bcc user_emails
-    from       "customersupport@masthideals.com"
+    from       "customerservice@masthideals.com"
     sent_on    Time.now.utc
     subject    "MasthiDeals: deal cancel notification" 
     body       "product" => product.name 
@@ -139,7 +139,7 @@ class UserMailer < ActionMailer::Base
  def users_notify_deal_on(user_emails, product)
    content_type "text/html"
     bcc        user_emails
-    from       "customersupport@masthideals.com"
+    from       "customerservice@masthideals.com"
     sent_on    Time.now.utc
     subject    "MasthiDeals: deal on notification"
     body       "product" => product.name 
@@ -149,7 +149,7 @@ class UserMailer < ActionMailer::Base
  def users_notify_deal_over(user_emails, product)
    content_type "text/html"
     bcc        user_emails
-    from       "customersupport@masthideals.com"
+    from       "customerservice@masthideals.com"
     sent_on    Time.now.utc
     subject    "MasthiDeal: deal_over_notification"
     body       "product" => product.name 
