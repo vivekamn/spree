@@ -122,6 +122,8 @@ class SharedController < ApplicationController
       variants.image_url = row[5]
       variants.c_description = row[6]
       variants.save!
+      query = "INSERT INTO option_values_variants (variant_id,option_value_id) VALUES (#{variants.id},979459986);"
+      result = ActiveRecord::Base.connection.execute(query)
     rescue Exception => e
       logger.error "not able to load diwali cracker list " + row[1] + e.to_s
       next
