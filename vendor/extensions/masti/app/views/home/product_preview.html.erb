@@ -49,8 +49,9 @@
             <span style ="margin-left:90px; margin-top: -90px"><%= image_tag "soldout3.png", :width=>'200px', :height=>'150px' %></span>
         </div>
         <%end %>
+        <% unless @featured_product.id== 1060500647 %>
         <div class="dealbg">
-            <% if @featured_product.id == 1060500642 %>
+              <% if @featured_product.id== 1060500642 %>
 			Value: Unlimited Discount: 100% 
             <br/>
             You save: Unlimited
@@ -60,6 +61,7 @@
             You save: Rs.<%= @saving %>
 			<%end%>
         </div>
+		<%end%>
         <div class="bought" id="bought" style="display:none;">
             <div class="bought1">
                 <span style="color:#969696; font-family:Tahoma, Geneva, sans-serif; font-size:15px; font-weight:bold;"><%= @bought_count %> Bought</span>
