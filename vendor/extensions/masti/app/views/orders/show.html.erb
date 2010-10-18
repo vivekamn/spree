@@ -34,8 +34,13 @@
 	        <input name="mode" type="hidden" value="LIVE" />
 	      <% end %>
 	      <input name="reference_no" type="hidden" value="<%=@order.number%>" />
-	      <input name="amount" type="hidden" value="<%=@order.total%>"/>
-	      <input name="description" type="hidden" value="<%=@order.state%>" />
+		  <%if @order.line_items[0].variant.product_id == 1060500614%>
+		  <% final_amount = (@order.total.to_i / 10).to_i%>
+	      <input name="amount" type="hidden" value="<%=final_amount%>"/>
+	      <%else%>
+		  <input name="amount" type="hidden" value="<%=@order.total%>"/>
+		  <%end%>
+		  <input name="description" type="hidden" value="<%=@order.state%>" />
 	      <input name="name" type="hidden" maxlength="255" value="<%=@order.checkout.bill_address.name%>" />
 	      <input name="address" type="hidden" value="<%=@order.checkout.bill_address.address1%>" />
 	      <input name="city" type="hidden" value="<%=@order.checkout.bill_address.city%>" />

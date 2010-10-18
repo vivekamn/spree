@@ -90,7 +90,27 @@
       <% end %>
     </tbody>
   <% end %>
+  <%if @order.line_items[0].variant.product_id == 1060500614%>
+  <% final_amount = (@order.total.to_i / 10).to_i%>
+  <% balance_amount = @order.total.to_i - final_amount.to_i%>
   <% hook :order_details_total do %>
+    <tbody id='order-total'>
+      <tr class="total">
+        <td colspan="3"><b><%= t('order_total') %>:</b></td>
+        <td class="total"><span id="order_total">Rs. <%=@order.total.to_i -%></span></center></td>
+      </tr>
+	   <tr class="total">
+        <td colspan="3"><b>Amount to be paid After Delivery:</b></td>
+        <td class="total"><span id="order_total">Rs. <%=balance_amount -%></span></center></td>
+      </tr>
+	   <tr class="total">
+        <td colspan="3"><b>Amount to be paid in MasthiDeals:</b></td>
+        <td class="total"><span id="order_total">Rs. <%=final_amount-%></span></center></td>
+      </tr>
+    </tbody>
+  <% end %>
+  <%else%>
+    <% hook :order_details_total do %>
     <tbody id='order-total'>
       <tr class="total">
         <td colspan="3"><b><%= t('order_total') %>:</b></td>
@@ -98,4 +118,5 @@
       </tr>
     </tbody>
   <% end %>
+  <%end%>
 </table>
