@@ -12,7 +12,7 @@
         <table style="margin-bottom: 80px;margin-left: 30px;width:880px;border-top:1px solid #ABABAB;border-left:1px solid #ABABAB;border-right:1px solid #ABABAB;border-bottom:1px solid #ABABAB;float:left;" width="95%" border="0" cellpadding="0" cellspacing="10" align="center">
             <tr>
                 <td>
-                    <table border="1" width="100%">
+                    <table border="1" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <th>
                                 S.No
@@ -20,6 +20,7 @@
                             <th>
                                 Name
                             </th>
+							<th></th>
                             <th>
                                 Price
                             </th>
@@ -38,14 +39,24 @@
                             <td align="center">
                                 <%= index+1 %>
                             </td>
-                            <td align="center">
+							<%if variant_obj.category == "GIFT BOXES"%>
+                            <td align="left">
+								<img border="0" src="/images/gift_box.png">
                                 <%= variant_obj.c_name %>
                             </td>
+							<%else%>
+							<td align="left" style="padding-left:35px;">
+                                <%= variant_obj.c_name %>
+                            </td>
+							<%end%>
+							<td>
+								<%= variant_obj.unit%>
+							</td>
 							<%price =  (variant_obj.price-((variant_obj.price*variant_obj.product.discount)/100)).to_i%>
 							
                             <td align="center">
                                 <%# variant_obj.cost_price.to_i %>
-								<%= price %>
+								Rs.<%= price %>
                             </td>
                             <td align="center">
                                 <%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
@@ -169,7 +180,7 @@
 		var str = "variant_quantity_"+variant_id;
 		var quantity = document.getElementById(str).value;
 		var total = quantity * price;
-		document.getElementById("total_"+variant_id).innerHTML = ""+total;
+		document.getElementById("total_"+variant_id).innerHTML = "Rs."+total;
 	}
 	
 	function check_submit(){
@@ -196,13 +207,13 @@
 		}
 		if (count == variant_size){
 			flag = false;
-			alert('select atleast one');
+			alert('Select atleast one');
 		}else{
 			if (price_count >= 500){
 				flag = true;
 			}else{
 				flag = false;
-				alert('amount should be more than 500');
+				alert('Amount should be more than 500');
 			}
 		}
 		if(flag == true){

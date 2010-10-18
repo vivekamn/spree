@@ -34,7 +34,7 @@
 	        <input name="mode" type="hidden" value="LIVE" />
 	      <% end %>
 	      <input name="reference_no" type="hidden" value="<%=@order.number%>" />
-		  <%if @order.line_items[0].variant.product_id == 1060500614%>
+		  <%if @order.line_items[0].variant.product_id == 1060500648%>
 		  <% final_amount = (@order.total.to_i / 10).to_i%>
 	      <input name="amount" type="hidden" value="<%=final_amount%>"/>
 	      <%else%>

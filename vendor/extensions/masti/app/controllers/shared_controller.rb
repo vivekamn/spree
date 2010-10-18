@@ -90,10 +90,10 @@ class SharedController < ApplicationController
   def diwali_crackers_list
     logger = Logger.new STDOUT
     logger.debug "loading diwali crackers list information  #{DATA_DIRECTORY} ..."
-    Dir.glob("#{DATA_DIRECTORY}/deevalis1.csv").each  do |file|
+    Dir.glob("#{DATA_DIRECTORY}/deevali3.csv").each  do |file|
       diwali_crackers_list_file file
     end
-    flash[:success] = "successfully rake task completed................."
+    
     redirect_to home_url
   end
   
@@ -102,25 +102,24 @@ class SharedController < ApplicationController
   logger.debug "loading diwali crackers list information  #{file_name} ..."
   filename = File.join(file_name)
   CSV.open(filename, "r") do |row|
-    next if row.size ==0 || row[0] == nil || row[0].blank? #empty lines are ignored
-    next if row[0] == 'code' and row[1] == 'catergory' and row[2] == 'crackersname' and row[3] == 'rate' and row[4] == 'unit'
+    next if row.size ==0 || row[1] == nil || row[1].blank? #empty lines are ignored
+    next if row[0] == 'catergory' and row[1] == 'crackersname' and row[2] == 'unit' and row[3] == 'rate' 
     begin 
-      variants = Variant.find(:first, :conditions => ['c_name = ?', row[3]]) 
+      variants = Variant.find(:first, :conditions => ['c_name = ? AND product_id = ? ', row[1],1060500648]) 
       if variants.nil?
         variants = Variant.new
         logger.debug "Added diwali crackers list information  for :  "+ row[1].to_s + "............."
       else
-        logger.debug "Updated diwali cracker list information for : "+ variants.sku.to_s + "------------"
+        logger.debug "Updated diwali cracker list information for : "+ variants.c_name.to_s + "------------"
       end
-      variants.sku = row[0]
-      variants.category = row[1]
-      variants.c_name = row[2].capitalize
+      variants.category = row[0]
+      variants.c_name = row[1].capitalize
+      variants.unit = row[2]
       variants.price = row[3]
-      variants.unit = row[4]
-      variants.product_id = 1060500647
-      variants.count_on_hand = 30
-      variants.image_url = row[5]
-      variants.c_description = row[6]
+      variants.product_id = 1060500648
+      variants.count_on_hand = 100
+      variants.image_url = row[4]
+      variants.c_description = row[5]
       variants.save!
       query = "INSERT INTO option_values_variants (variant_id,option_value_id) VALUES (#{variants.id},979459986);"
       result = ActiveRecord::Base.connection.execute(query)

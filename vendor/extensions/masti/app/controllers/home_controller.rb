@@ -430,6 +430,10 @@ before_filter :find_and_set_affiliate, :only => :index
     unless @order.user.user_promotion.nil?
       @order.update_user_promotion
     end
+     if @order.line_items[0].variant.product_id == 1060500648
+       product = @order.line_items[0].variant.product
+       product.master.update_attribute(:count_on_hand,(product.maximum_number - product.currently_bought_count))
+     end
   end
   
   def sitemap
@@ -534,6 +538,7 @@ before_filter :find_and_set_affiliate, :only => :index
   def progress_bar
     current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
     variant=current_deal.master
+    puts "#{variant.count_on_hand}---->"
     if variant.count_on_hand==0
       bought_percent = 300
     else

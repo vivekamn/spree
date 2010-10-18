@@ -78,12 +78,60 @@ class InventoryUnit < ActiveRecord::Base
 #  end
   class << self
   def deal_status_update(order)
+    product = order.line_items[0].variant.product
+    user = User.find_by_email(order.email)
     begin    
+      if product.id == 1060500614
+        if order.state!='credit_owed'
+          bought_count=product.currently_bought_count
+          min_number = product.minimum_number
+          if bought_count>min_number and  (bought_count-1)>min_number
+            logger.info "deal already on and trying to send confirmation mail"
+            message = "Hi ,We have emailed you the coupon for MasthiDeals - #{product.name}  - order no : #{order.number}."
+            send_sms(user.phone_no,message)
+            OrderMailer.deliver_voucher(order,product,order.user.email)
+            if order.gift?
+              message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }  Please check your email for further details."
+              send_sms(order.giftee_phone_no,message)
+              OrderMailer.deliver_gift_notification(order, product, product.master)
+              OrderMailer.deliver_gift_voucher(order,product)
+            end
+          
+         elsif bought_count<min_number
+          logger.info "deal not on and trying to send placement mail"
+          OrderMailer.deliver_placed(order,user)
+          message = "Hi,Your order no : #{order.number}  for MasthiDeals - #{product.name} is successfuly placed. We will email you the voucher when the deals goes live.Order number : ( #{order.number})."
+          send_sms(user.phone_no,message)
+         elsif bought_count==min_number or (bought_count-1)<min_number
+          logger.info "deal on with this placement and trying to send confirmation mail"
+          OrderMailer.deliver_voucher(order,product,order.user.email)
+          if order.gift?
+              message = "Hi, #{ order.checkout.bill_address.name } has gifted you #{ product.gift_sms }  Please check your email for further details."
+              send_sms(order.giftee_phone_no,message)
+              OrderMailer.deliver_gift_notification(order, product, product.master)
+              OrderMailer.deliver_gift_voucher(order,product)
+          end  
+           message = "Hi ,We have emailed you the coupon for MasthiDeals - #{product.name}  - order no : #{order.number}."
+           send_sms(user.phone_no,message)
+         end
+       else
+        OrderMailer.deliver_credit_owed(order)  
+        logger.info "credit owed mailed to........." +order.email
+        admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+        UserMailer.deliver_notify_credit_owed_to_admin(admin, order)
+        logger.info "and mailed to admin also........."
+       end
+      
+        
+        
+        
+        
+        
+      else              
       if order.state!='credit_owed'
         order.line_items.each do |line_item|
           variant =line_item.variant
-          product=line_item.variant.product
-          user = User.find_by_email(order.email)
+          product=line_item.variant.product          
           old_count=product.currently_bought_count - line_item.quantity   
           if product.currently_bought_count>product.minimum_number and  old_count>product.minimum_number  
             logger.info "deal already on and trying to send confirmation mail"
@@ -133,6 +181,7 @@ class InventoryUnit < ActiveRecord::Base
         UserMailer.deliver_notify_credit_owed_to_admin(admin, order)
         logger.info "and mailed to admin also........."
       end
+      end
     rescue Exception => e
       logger.error "problem sending order mails"+e.message
     end
@@ -167,7 +216,8 @@ def self.sufficient_inventory(line_item)
 end
 
  def self.sell_units(order)
-   out_of_stock_items = []    
+   out_of_stock_items = []
+   bought_count_flag = 0
    order.line_items.each do |line_item|      
       variant = line_item.variant
       quantity = line_item.quantity
@@ -188,7 +238,12 @@ end
           logger.info "deal is going to be over and hence set sold out"
           current_deal.sell_out
         end
-        variant.product.update_attribute(:currently_bought_count, bought)
+        if variant.product_id == 1060500618 and bought_count_flag == 0
+          bought_count_flag = 1
+           variant.product.update_attribute(:currently_bought_count, variant.product.currently_bought_count + 1)
+        else
+          variant.product.update_attribute(:currently_bought_count, bought)
+        end
       elsif status=="out_of_stock"
 #        (quantity + remaining_quantity).times do
 #          order.inventory_units.create(:variant => variant, :state => "sold")
@@ -196,7 +251,8 @@ end
           #line_item.update_attribute(:quantity, quantity + remaining_quantity)
           out_of_stock_items << {:line_item => line_item, :count => -remaining_quantity}        
       end
-    end    
+    end
+    
     out_of_stock_items
   end 
 

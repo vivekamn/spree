@@ -180,8 +180,8 @@ class Order < ActiveRecord::Base
   def add_variant(variant, quantity=1)    
     current_item = contains?(variant)
     if current_item
-      current_item.increment_quantity unless quantity > 1
-      current_item.quantity = (current_item.quantity + quantity) if quantity > 1
+      current_item.increment_quantity unless quantity >= 1
+      current_item.quantity = (current_item.quantity + quantity) if quantity >= 1
       current_item.save
     else
       current_item = LineItem.new(:quantity => quantity)
@@ -279,6 +279,7 @@ class Order < ActiveRecord::Base
   def update_totals(force_adjustment_recalculation=false)
     md_money_access = self.line_items[0].nil? ? false :self.line_items[0].variant.product.use_md_money
     self.item_total  = self.line_items.total
+    puts "item total................#{item_total}"
     if md_money_access and !self.user.user_promotion.nil? and self.user.user_promotion.credit_amount.to_i>0
       credit_amount = self.user.user_promotion.credit_amount unless self.user.user_promotion.nil?
       total_amount = self.item_total
