@@ -81,7 +81,7 @@ class InventoryUnit < ActiveRecord::Base
     product = order.line_items[0].variant.product
     user = User.find_by_email(order.email)
     begin    
-      if product.id == 1060500614
+      if product.id == 1060500648
         if order.state!='credit_owed'
           bought_count=product.currently_bought_count
           min_number = product.minimum_number
@@ -238,7 +238,7 @@ end
           logger.info "deal is going to be over and hence set sold out"
           current_deal.sell_out
         end
-        if variant.product_id == 1060500618 and bought_count_flag == 0
+        if variant.product_id == 1060500648 and bought_count_flag == 0
           bought_count_flag = 1
            variant.product.update_attribute(:currently_bought_count, variant.product.currently_bought_count + 1)
         else
