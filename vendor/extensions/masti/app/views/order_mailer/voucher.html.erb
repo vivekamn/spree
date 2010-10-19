@@ -96,12 +96,12 @@ MasthiDeals team<br/><br/>
         
                             <td align="left" width="48%" valign="top" height="20">Quantity</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" width="52%" valign="top"><%= @order.line_items[0].quantity %></td>
+                            <td align="left" width="52%" valign="top"><% if @product.id==1060500648%>1<%else%><%= @order.line_items[0].quantity %><%end%></td>
                           </tr>
                           <tr>
                             <td align="left" valign="top" height="20">Purchased:</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" valign="top" height="19"><% if @product.id==1060500648%>1<%else%><%=@order.created_at.strftime '%d/%m/%Y'%><%end%></td>
+                            <td align="left" valign="top" height="19"><%=@order.created_at.strftime '%d/%m/%Y'%></td>
                           </tr>
                           <tr>
                             <td align="left" valign="top" height="20">Expires On:</td>
