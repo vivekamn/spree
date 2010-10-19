@@ -100,6 +100,14 @@
 					<table width="100%">
 						<tr>
 							<td align="right">
+								<div id="total_div"></div>
+							</td>
+						</tr>
+					</table>
+					
+					<table width="100%">
+						<tr>
+							<td align="right">
 								<input type="submit" value="BUY" onclick="return check_submit();">
 							</td>
 						</tr>
@@ -156,6 +164,8 @@
 </div>
 <input type="hidden" value="<%= @variants_obj.size%>" id="var_size" name="var_size">
 <script>
+	
+	var total = 0;
 	function call_imagepopup(url){
 		var str = "<img src='"+url+"'>";
 		document.getElementById("image_div").innerHTML=str;
@@ -181,6 +191,7 @@
 		var quantity = document.getElementById(str).value;
 		var total = quantity * price;
 		document.getElementById("total_"+variant_id).innerHTML = "Rs."+total;
+		calc_total();
 	}
 	
 	function check_submit(){
@@ -221,6 +232,34 @@
 		}else{
 			return false;
 		}
+	}
+	calc_total();
+	function calc_total(){
+		var count = 0;
+		var i = 0;
+		var price_count = 0;
+		var variant_ids = new Array();
+		var variant_size = document.getElementById('var_size').value;
+		variant_ids = [<% @variants_obj.each do |s| %> "<%= s.id %>", <% end %>];
+		for (i = 0;i < variant_size; i++){
+			var quantity_str = "variant_quantity_"+variant_ids[i];
+			var price_str = "variant_price_"+variant_ids[i];
+			
+			var quantity = document.getElementById(quantity_str).value;
+			var price = document.getElementById(price_str).value;
+			if(quantity == 0){
+				count = count + 1;
+			}else{
+				var price_detail = price * quantity;
+				price_count = price_count + price_detail;
+				
+			}
+		}
+		if (count == variant_size){
+			document.getElementById("total_div").innerHTML = "";
+		}else{
+			document.getElementById("total_div").innerHTML = "Total : "+price_count;
+	}
 	}
 	
 	

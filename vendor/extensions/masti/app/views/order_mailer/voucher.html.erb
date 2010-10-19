@@ -101,7 +101,7 @@ MasthiDeals team<br/><br/>
                           <tr>
                             <td align="left" valign="top" height="20">Purchased:</td>
 							<td align="left" valign="top" height="20">:&nbsp;</td>
-                            <td align="left" valign="top" height="19"><%=@order.created_at.strftime '%d/%m/%Y'%></td>
+                            <td align="left" valign="top" height="19"><% if @product.id==1060500648%>1<%else%><%=@order.created_at.strftime '%d/%m/%Y'%><%end%></td>
                           </tr>
                           <tr>
                             <td align="left" valign="top" height="20">Expires On:</td>

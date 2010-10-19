@@ -238,9 +238,12 @@ end
           logger.info "deal is going to be over and hence set sold out"
           current_deal.sell_out
         end
-        if variant.product_id == 1060500648 and bought_count_flag == 0
-          bought_count_flag = 1
-           variant.product.update_attribute(:currently_bought_count, variant.product.currently_bought_count + 1)
+        if variant.product_id == 1060500648
+          if bought_count_flag == 0
+            puts "coming if"
+            bought_count_flag = 1
+            variant.product.update_attribute(:currently_bought_count, variant.product.currently_bought_count + 1)  
+          end
         else
           variant.product.update_attribute(:currently_bought_count, bought)
         end

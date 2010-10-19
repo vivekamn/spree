@@ -71,14 +71,18 @@
                                                         Dear <%=@order.checkout.bill_address.name %>,
                                                         <br/>
                                                         <br/>
-                                                        Thanks for buying at MasthiDeals. Your order is placed for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>". If the deal goes live, we will send you the printed voucher for "<% @order.line_items.each do |item| %><%= item.variant.product.name %><% end %>" <% if @order.gift? %>that you gifted to <%= @order.giftee_name %>.<% end %>
+                                                        Thanks for buying at MasthiDeals. Your order is placed for "<%= @order.line_items[0].variant.product.name %>". If the deal goes live, we will send you the printed voucher for "<%= @order.line_items[0].variant.product.name %>" <% if @order.gift? %>that you gifted to <%= @order.giftee_name %>.<% end %>
                                                         <br/>
                                                         <br/>
                                                         Please save the following order details for further reference. <%=@url %>
+														<br/>
                                                         <br/>
-                                                        <br/>
-                                                        Your voucher quantity : <%=@order.line_items[0].quantity %>
-                                                        <br/>
+                                                        <% if @order.line_items[0].variant.product.id==1060500648%>
+														Your voucher quantity : 1
+                                                        <%else%>
+														Your voucher quantity : <%=@order.line_items[0].quantity %>
+														<%end%>
+														<br/>
                                                         <br/>
                                                         <br/>
                                                         Order Number : <%=@order.number %>
