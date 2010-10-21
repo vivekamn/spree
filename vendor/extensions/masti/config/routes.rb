@@ -71,6 +71,10 @@ map.email_camp_three_dot '/email_camp_three_dot', :controller => "home", :action
 map.email_camp_computers_international '/email_camp_computers_international', :controller => "home", :action => "index"
 map.email_camp_tychon '/email_camp_tychon', :controller => "home", :action => "index"
 map.email_camp_openwave '/email_camp_openwave', :controller => "home", :action => "index"
+map.email_camp_sword '/email_camp_sword', :controller => "home", :action => "index"
+map.email_camp_owe '/email_camp_owe', :controller => "home", :action => "index"
+
+
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
 map.hyderabad '/hyderabad', :controller=>'home', :action=>'index', :city_id => 5
