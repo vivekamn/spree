@@ -73,7 +73,7 @@ map.email_camp_tychon '/email_camp_tychon', :controller => "home", :action => "i
 map.email_camp_openwave '/email_camp_openwave', :controller => "home", :action => "index"
 map.email_camp_sword '/email_camp_sword', :controller => "home", :action => "index"
 map.email_camp_owe '/email_camp_owe', :controller => "home", :action => "index"
-
+map.email_camp_hexaware '/email_camp_hexaware', :controller => "home", :action => "index"
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1

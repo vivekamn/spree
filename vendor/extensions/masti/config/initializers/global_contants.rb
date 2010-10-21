@@ -45,7 +45,7 @@ EMAIL_CAMP['/email_camp_tychon'] = 'Tychon'
 EMAIL_CAMP['/email_camp_openwave'] = 'Openwave'
 EMAIL_CAMP['/email_camp_sword'] = 'Sword'
 EMAIL_CAMP['/email_camp_owe'] = 'OWE GLobal Solutions'
-
+EMAIL_CAMP['/email_camp_hexaware'] = 'Hexaware'
 
 #Email camp for facebook,orkut,adwords,email_camp,diff
 EMAIL_CAMP_ADD = {}
