@@ -61,6 +61,16 @@ map.email_camp_ceequence '/email_camp_ceequence', :controller => "home", :action
 map.email_camp_hcl '/email_camp_hcl', :controller => "home", :action => "index"
 map.email_camp_steria '/email_camp_steria', :controller => "home", :action => "index"
 map.email_camp_paypal '/email_camp_paypal', :controller => "home", :action => "index"
+
+map.email_camp_bay_talkitec '/email_camp_bay_talkitec', :controller => "home", :action => "index"
+map.email_camp_helios '/email_camp_helios', :controller => "home", :action => "index"
+map.email_camp_impiger '/email_camp_impiger', :controller => "home", :action => "index"
+map.email_camp_jeevan_technologies '/email_camp_jeevan_technologies', :controller => "home", :action => "index"
+map.email_camp_scintel '/email_camp_scintel', :controller => "home", :action => "index"
+map.email_camp_three_dot '/email_camp_three_dot', :controller => "home", :action => "index"
+map.email_camp_computers_international '/email_camp_computers_international', :controller => "home", :action => "index"
+map.email_camp_tychon '/email_camp_tychon', :controller => "home", :action => "index"
+map.email_camp_openwave '/email_camp_openwave', :controller => "home", :action => "index"
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
 map.hyderabad '/hyderabad', :controller=>'home', :action=>'index', :city_id => 5

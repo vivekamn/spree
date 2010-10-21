@@ -34,8 +34,15 @@ EMAIL_CAMP['/email_camp_bosch'] = 'Bosch'
 EMAIL_CAMP['/email_camp_gentpac'] = 'Gentpac'
 EMAIL_CAMP['/email_camp_patni'] = 'Patni Computers'
 EMAIL_CAMP['/email_camp_samsung'] = 'Samsung'
-
-
+EMAIL_CAMP['/email_camp_bay_talkitec'] = 'Bay Talkitec'
+EMAIL_CAMP['/email_camp_helios']='Helios'
+EMAIL_CAMP['/email_camp_impiger'] = 'Impiger'
+EMAIL_CAMP['/email_camp_jeevan_technologies'] = 'Jeevan Technologies'
+EMAIL_CAMP['/email_camp_scintel'] = 'Scintel'
+EMAIL_CAMP['/email_camp_three_dot'] = 'Three Dot Solutions'
+EMAIL_CAMP['/email_camp_computers_international'] = 'Computers International'
+EMAIL_CAMP['/email_camp_tychon'] = 'Tychon'
+EMAIL_CAMP['/email_camp_openwave'] = 'Openwave'
 #Email camp for facebook,orkut,adwords,email_camp,diff
 EMAIL_CAMP_ADD = {}
 EMAIL_CAMP_ADD['/facebook'] = 'facebook'
