@@ -48,7 +48,7 @@
 							<td align="left" style="padding-left:35px;">
                                 <%= variant_obj.c_name %>
                             </td>
-							<%end%>
+							<%end%> 
 							<td>
 								<%= variant_obj.unit%>
 							</td>
@@ -59,7 +59,11 @@
 								Rs.<%= price %>
                             </td>
                             <td align="center">
-                                <%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
+                            	<%if variant_obj.category == "GIFT BOXES"%>
+								<select><option value="0">0</option></select>
+								<%else%>
+								<%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
+								<%end%>
 								<%= f.hidden_field "price_#{variant_obj.id}", :value=> price %>
                             </td>
 							<td align="center">
