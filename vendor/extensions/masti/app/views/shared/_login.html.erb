@@ -1,55 +1,69 @@
 <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
-<div class="shoppingout">
-<div class="shoppingleft" style="padding-top:15px;">
-	<% form_tag user_sessions_path do  %>
-  <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
+<table width="100%" height="100%">
     <tr>
-      <td height="51" colspan="3" style="padding-bottom: 28px;"><span style="font-size:35px;color:#6CAB16;font:Times;">Existing </span><span style="font-size:35px;color:#214D76;font:Times;">Customer</span><!--<img src="images/newcustomer.gif" width="233" height="35" />-->
-	  </td>
-      </tr>
-    <tr>
-      <td width="30%" height="35" valign="middle"  style="margin-top:20px;">Email</td>
-	  <td width="4%" height="35"> :</td>
-      <td width="66%" valign="middle"><%= text_field :user_session, 'login', :class=>"textbox" ,:value=> cookies[:email] %>
+        <td width="80%" height="100%">
+            <div style="background:url(../images/line1.gif) no-repeat scroll 100% 10% transparent; background-position:left center bottom; padding-top:20px;">
+                <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
+                    <% form_tag user_sessions_path do %>
+                    <tr>
+                        <td height="51" colspan="3" style="padding-bottom: 28px;">
+                            <span class="green">Existing </span>
+                            <span class="blue">Customer</span>
+                            <!--<img src="images/newcustomer.gif" width="233" height="35" />-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" height="35" valign="middle" style="margin-top:20px;">
+                            Email
+                        </td>
+                        <td width="4%" height="35">
+                            :
+                        </td>
+                        <td width="66%" valign="middle">
+                            <%= text_field :user_session, 'login', :class=>"textbox" ,:value=> cookies[:email] %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" height="35">
+                            Password
+                        </td>
+                        <td width="4%" height="35">
+                            :
+                        </td>
+                        <td width="66%">
+                            <%= password_field :user_session, 'password', :class=>"textbox" %>
+                            <%unless session[:needs_fb_linking].nil? %>
+                            <input id="fb_id_hid" type="hidden" name="fb_id_hid" /><%end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%" height="35">
+                        </td>
+                        <td width="4%" height="35">
+                        </td>
+                        <td height="61" width="66%">
+                            <label>
+                                <%= check_box :user_session, :remember_me %>
+                                <%= label :user_session, :remember_me, t('remember_me') %>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="61" colspan="3" align="right" style="padding-right:100px">
+                            <%= image_submit_tag "submit1.gif", :class => 'button' %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="61" colspan="3" align="right" style="padding-right:100px">
+                            <%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </table>
+            </div>
+        </td>
+        <td width="20%" height="100%">
+            <img src="/images/shopping.gif" width="403" height="305" />
         </td>
     </tr>
-    <tr>
-      <td width="30%" height="35">Password</td>
-	  <td width="4%" height="35"> :</td>
-      <td width="66%"><%= password_field :user_session, 'password', :class=>"textbox"  %>
-	  <%unless session[:needs_fb_linking].nil?%>
-	  <input id="fb_id_hid" type="hidden" name="fb_id_hid" />
-	  <%end%>
-        </td>
-    </tr>
-	<tr>
-		<td width="30%" height="35"></td>
-	    <td width="4%" height="35"></td>
-		<td height="61" width="66%">
-			<label>
-		      <%= check_box :user_session, :remember_me %>
-		      <%= label :user_session, :remember_me, t('remember_me') %>
-		   </label>
-		</td>
-	</tr>	
-    <tr>
-      <td height="61" colspan="3" align="right" style="padding-right:42px"><p><%= image_submit_tag "submit1.gif", :class => 'button' %> </p>
-        </td>
-		</tr>
-		<tr>
-			<td height="61" colspan="3" align="right" style="padding-right:42px">
-				<%= link_to "<span class='green' style='font-size:16px'>Sign Up with</span> <span class='blue' style='font-size:16px'>MasthiDeals</span>", signup_path %>
-			</td>
-		</tr>
-		
-	  
-<% end %>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-	  <td>&nbsp;</td>
-    </tr>
-  </table>
-</div>  
-<div class="shoppingright"><img src="/images/shopping.gif" width="403" height="305" /></div>
-</div>
+</table>

@@ -1,29 +1,39 @@
+<link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
 <%= javascript_include_tag "prototype" %>
 <div class="flash errors" id="flash_error" style="display:none;">
 </div>
-	<% unless session[:needs_fb_linking].nil?%><br /><br /><div align="center">
-		We need the following information to activate your MasthiDeals Account</div>
-		<%end%>
-    <div class="shoppingout">
-        <div class="shoppingleft" style="width:475px;">
-		
+<% unless session[:needs_fb_linking].nil? %>
+<br/>
+<br/>
+<div align="center">
+    We need the following information to activate your MasthiDeals Account
+</div>
+<%end %>
+<table width="100%" height="100%">
+    <tr>
+        <td width="80%" height="100%">
+        	<div style="background:url(../images/line1.gif) no-repeat scroll 100% 10% transparent; background-position:left center bottom; padding-top:20px;">
             <table width="100%" height="230" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="51" colspan="4" style="padding-bottom: 28px;">
-                        <img src="/images/newcustomer.gif" width="233" height="35" />
+							<span class="green">New </span>
+                            <span class="blue">Customer</span>
+                        <!--img src="/images/newcustomer.gif" width="233" height="35" /-->
                     </td>
                 </tr>
-				<tr>
-                    <td></td>
-                    <td></td>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
                     <td colspan="2">
                         <div id="email_error" style="float:left;color:red;">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" height="35"`>
-                        Email 
+                    <td width="40%" height="35"`>
+ 						Email
                         <font color="red">
                             *
                         </font>
@@ -31,24 +41,26 @@
                     <td width="4%" height="35">
                         :
                     </td>
-                    <td width="66%" height="35">
+                    <td width="56%" height="35">
                         <div style="float:left;">
                             <%= f.text_field :email, :class=>"textbox",:onblur=>"javascript:email_validation();" %>
                         </div>
-						<div id="email_image" >
+                        <div id="email_image">
                         </div>
                     </td>
                 </tr>
-				<tr>
-                    <td></td>
-                    <td></td>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
                     <td colspan="2">
                         <div id="password_error" style="float:left;color:red;">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" height="35">
+                    <td width="40%" height="35">
                         Password 
                         <font color="red">
                             *
@@ -57,24 +69,26 @@
                     <td width="4%" height="35">
                         :
                     </td>
-                    <td width="66%" height="35">
+                    <td width="56%" height="35">
                         <div id="password-credentials" style="<%=password_style(@user)%>;float:left;">
                             <%= f.password_field :password, :class=>"textbox",:onblur=>"javascript:password_validation();" %>
                         </div>
-						<div id="password_image">
+                        <div id="password_image">
                         </div>
                     </td>
                 </tr>
-				<tr>
-                    <td></td>
-                    <td></td>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
                     <td colspan="2">
                         <div id="conform_error" style="float:left;color:red;">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" height="35">
+                    <td width="40%" height="35">
                         Confirm Password
                         <font color="red">
                             *
@@ -83,25 +97,26 @@
                     <td width="4%" height="35">
                         :
                     </td>
-                    <td width="60%" height="35">
+                    <td width="56%" height="35">
                         <div id="password-credentials" style="<%=password_style(@user)%>;float:left;">
                             <%= f.password_field :password_confirmation,:class=>"textbox",:onblur=>"javascript:conformpassword_validation();" %>
                         </div>
-						<div id="conform_image">
+                        <div id="conform_image">
                         </div>
                     </td>
                 </tr>
-				
-				<tr>
-                    <td></td>
-                    <td></td>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
                     <td colspan="2">
                         <div id="phone_error" style="float:left;color:red;">
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td width="30%" height="35">
+                    <td width="40%" height="35">
                         Moblie 
                         <font color="red">
                             *
@@ -110,70 +125,70 @@
                     <td width="4%" height="35">
                         :+91
                     </td>
-                    <td width="66%" height="35">
+                    <td width="56%" height="35">
                         <div style="float:left;">
-							<%= f.text_field :phone_no, :class=>"textbox",:onblur=>"javascript:phone_validation();" %>
-						</div>
-						<div id="phone_image">
+                            <%= f.text_field :phone_no, :class=>"textbox",:onblur=>"javascript:phone_validation();" %>
+                        </div>
+                        <div id="phone_image">
                         </div>
                     </td>
                 </tr>
-				<tr>
-                    <td width="30%" height="35">
+                <tr>
+                    <td width="40%" height="35">
                         City 
                         <font color="red">
                             *
                         </font>
                     </td>
                     <td width="4%" height="35">
-                       :
-                    </td>
-                    <td width="66%" height="35">
-                        <div style="float:left;">
-							<%= f.select :city_id, get_cities, {}, :class => 'textbox' -%>
-							<% unless session[:needs_fb_linking].nil?%>
-							<%=f.hidden_field :fb_user_id%>
-							<%end%>
-						</div>
-						<div id="phone_image">
-                        </div>
-                    </td>
-                </tr>
-				<!--
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td colspan="2">
-                        <div id="referedby_error" style="float:left;color:red;">
-                        </div>
-                    </td>
-                </tr>
-				<tr>
-                    <td width="30%" height="35">
-                        Reffered By
-                        <br>
-                        (E-mail)
-                        <font color="red">
-                        </font>
-                    </td>
-                    <td width="4%" height="35">
                         :
                     </td>
-                    <td width="66%" height="35">
+                    <td width="56%" height="35">
                         <div style="float:left;">
-                            <%= f.text_field :refered_by, :class=>"textbox",:onblur=>"javascript:referedby_validation();" %>
+                            <%= f.select :city_id, get_cities, {}, :class => 'textbox' -%>
+                            <% unless session[:needs_fb_linking].nil? %>
+                            <%=f.hidden_field :fb_user_id %>
+                            <%end %>
+                        </div>
+                        <div id="phone_image">
                         </div>
                     </td>
-					<td height="35">
-						<div id="referedby_image" style="float:right;">
-                        </div>
-					</td>
                 </tr>
-				-->
+                <!--
                 <tr>
-                	<td>
-                	</td>
-                    <td height="61" colspan="3" align="center" style="padding-right:115px">
+                <td></td>
+                <td></td>
+                <td colspan="2">
+                <div id="referedby_error" style="float:left;color:red;">
+                </div>
+                </td>
+                </tr>
+                <tr>
+                <td width="30%" height="35">
+                Reffered By
+                <br>
+                (E-mail)
+                <font color="red">
+                </font>
+                </td>
+                <td width="4%" height="35">
+                :
+                </td>
+                <td width="66%" height="35">
+                <div style="float:left;">
+                <%= f.text_field :refered_by, :class=>"textbox",:onblur=>"javascript:referedby_validation();" %>
+                </div>
+                </td>
+                <td height="35">
+                <div id="referedby_image" style="float:right;">
+                </div>
+                </td>
+                </tr>
+                -->
+                <tr>
+                    <td>
+                    </td>
+                    <td height="61" colspan="3" align="center" style="padding-right:45px">
                         <p>
                             <%= image_submit_tag "submit1.gif", :alt => 'submit_btn', :class  => "cursor_pointer", :id => "submit_btn",:onclick => "return on_submit_validation();" %>
                         </p>
@@ -192,24 +207,20 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div class="shoppingright" style="padding-left:1px;width:413px;">
+			</div>
+        </td>
+        <td width="20%">
             <img src="/images/shopping.gif" width="403" height="305" />
-        </div>
-    </div>
-<input type="hidden" id="ref" name="ref" value='<%= params[:ref]%>'>
-<input type="hidden" id="email_hidden_script" name="email_hidden_script">
-<input type="hidden" id="phone_hidden_script" name="phone_hidden_script">
-<input type="hidden" id="password_hidden_script" name="password_hidden_script">
-<input type="hidden" id="conform_hidden_script" name="conform_hidden_script">
-<input type="hidden" id="referedby_hidden_script" name="referedby_hidden_script" value="true">
-<%if !params[:ref].nil?%>
-	<script type="text/javascript">
-		document.getElementById('user_refered_by').value = document.getElementById("ref").value;
-	</script>
-<%end%>
+        </td>
+    </tr>
+</table>
+<input type="hidden" id="ref" name="ref" value='<%= params[:ref]%>'><input type="hidden" id="email_hidden_script" name="email_hidden_script"><input type="hidden" id="phone_hidden_script" name="phone_hidden_script"><input type="hidden" id="password_hidden_script" name="password_hidden_script"><input type="hidden" id="conform_hidden_script" name="conform_hidden_script"><input type="hidden" id="referedby_hidden_script" name="referedby_hidden_script" value="true"><%if !params[:ref].nil? %>
 <script type="text/javascript">
-	
+    document.getElementById('user_refered_by').value = document.getElementById("ref").value;
+</script>
+<%end %>
+<script type="text/javascript">
+    
     function email_check(giv_email){
         //alert(giv_email + 'email check given email');
         var EMAIL_REGEX = /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i;
@@ -234,33 +245,33 @@
         //var msg = '';
         
         if (user_email == '' || user_email == null) {
-			//email_flag = false;
+            //email_flag = false;
             //msg += '<br/>E-mail can not be empty';
-			document.getElementById('email_error').innerHTML = "Email cannot be empty";
-			email_false();
+            document.getElementById('email_error').innerHTML = "Email cannot be empty";
+            email_false();
         }
         else {
             var ver_email_flag = email_check(user_email);
-			//alert(ver_email_flag +"verify email flag");
+            //alert(ver_email_flag +"verify email flag");
             if (ver_email_flag == true) {
                 document.getElementById('email_image').innerHTML = "<img src='/images/spinner.gif' border=0/>";
-				//alert(user_email + 'email before ajax');
+                //alert(user_email + 'email before ajax');
                 new Ajax.Request('/home/unique_email?email=' + user_email, {
                     asynchronous: true,
                     evalScripts: true,
                     onComplete: function(request){
                         if (request.responseText == 'true') {
                             //email_flag = true;
-							document.getElementById('email_error').innerHTML ="";
-							//alert('return value if'+ request.responseText);
-							email_true();
+                            document.getElementById('email_error').innerHTML = "";
+                            //alert('return value if'+ request.responseText);
+                            email_true();
                         }
                         else {
                             //email_flag = false;
-							//alert('return value else   '+ request.responseText);
+                            //alert('return value else   '+ request.responseText);
                             //msg += 'Email has already been registered.<a href="password_resets/new">Forgot Password?</a>';
-							document.getElementById('email_error').innerHTML = "Email has already been registered. <a href='password_resets/new'>Forgot Password?</a>";
-							email_false();
+                            document.getElementById('email_error').innerHTML = "Email has already been registered. <a href='password_resets/new'>Forgot Password?</a>";
+                            email_false();
                         }
                     }
                 });
@@ -268,32 +279,32 @@
             else {
                 //email_flag = false;
                 //msg += '<br/>E-mail is invalid';
-				document.getElementById('email_error').innerHTML = "E-mail is not in valid format";
-				email_false();
+                document.getElementById('email_error').innerHTML = "E-mail is not in valid format";
+                email_false();
             }
         }
-		//return email_flag;
-		
-		//alert(email_flag + 'before pring the image');
+        //return email_flag;
+    
+        //alert(email_flag + 'before pring the image');
         //return email_flag;
     }
     
-	function email_true(){
-		document.getElementById('email_image').innerHTML = '';
+    function email_true(){
+        document.getElementById('email_image').innerHTML = '';
         document.getElementById('email_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('email_hidden_script').value = true;
-		//alert(document.getElementById('referedby_hidden_script').value);
-		if(document.getElementById('referedby_hidden_script').value == 'false'){
-			//alert('given value is false');
-			referedby_validation();
-		}
-	}
+        //alert(document.getElementById('referedby_hidden_script').value);
+        if (document.getElementById('referedby_hidden_script').value == 'false') {
+            //alert('given value is false');
+            referedby_validation();
+        }
+    }
     
-	function email_false(){
-		document.getElementById('email_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+    function email_false(){
+        document.getElementById('email_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
         document.getElementById('email_hidden_script').value = false;
-	}
-	
+    }
+    
     function phone_validation(){
         var mobile = document.getElementById('user_phone_no').value;
         //var phone_flag = true;
@@ -301,15 +312,15 @@
         //alert(mobile + " no in phone validaiton method");
         if (mobile == null || mobile == '') {
             //msg += '<br/>';
-			document.getElementById('phone_error').innerHTML = "Mobile number cannot be empty";
-			phone_false();
+            document.getElementById('phone_error').innerHTML = "Mobile number cannot be empty";
+            phone_false();
             //phone_flag = false;
         }
         else {
-			var chk_phone_flag = phone_check(mobile);
-			//alert(chk_phone_flag + "====return value");
+            var chk_phone_flag = phone_check(mobile);
+            //alert(chk_phone_flag + "====return value");
             if (chk_phone_flag == true) {
-				//alert(new String(mobile).length + "===mobile lenth");
+                //alert(new String(mobile).length + "===mobile lenth");
                 if (new String(mobile).length == 10) {
                     document.getElementById('phone_image').innerHTML = "<img src='/images/spinner.gif' border=0/>";
                     new Ajax.Request('/home/unique_phone?phone=' + mobile, {
@@ -317,12 +328,12 @@
                         evalScripts: true,
                         onComplete: function(request){
                             if (request.responseText == 'true') {
-								document.getElementById('phone_error').innerHTML = "";
+                                document.getElementById('phone_error').innerHTML = "";
                                 phone_true();
                             }
                             else {
                                 document.getElementById('phone_error').innerHTML = 'This mobile number has already been registered';
-								phone_false();
+                                phone_false();
                             }
                         }
                     });
@@ -341,56 +352,58 @@
         
         //return phone_flag;
     }
-	
-	
-	function phone_true(){
-		document.getElementById('phone_image').innerHTML = '';
+    
+    
+    function phone_true(){
+        document.getElementById('phone_image').innerHTML = '';
         document.getElementById('phone_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('phone_hidden_script').value = true;
-	}
-	
-	function phone_false(){
-		document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+    }
+    
+    function phone_false(){
+        document.getElementById('phone_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
         document.getElementById('phone_hidden_script').value = false;
-	}
-	
-	function password_validation(){
-		var password = document.getElementById('user_password').value;
-		var pass_str = new String(password);
-		//alert(password + '==password validation');
-		
-		if (password == '' || password == null ) {
-			document.getElementById('password_error').innerHTML='Password cannot be empty';
-			password_false();
-		}else{
-			if(pass_str.length >= 4){
-				document.getElementById('password_error').innerHTML='';
-				password_true();
-			}else{
-				document.getElementById('password_error').innerHTML='Password should be atleast 4 characters';
-				password_false();
-			}
-		}
-		
-	}
-	
-	function password_true(){
-		document.getElementById('password_image').innerHTML = '';
+    }
+    
+    function password_validation(){
+        var password = document.getElementById('user_password').value;
+        var pass_str = new String(password);
+        //alert(password + '==password validation');
+        
+        if (password == '' || password == null) {
+            document.getElementById('password_error').innerHTML = 'Password cannot be empty';
+            password_false();
+        }
+        else {
+            if (pass_str.length >= 4) {
+                document.getElementById('password_error').innerHTML = '';
+                password_true();
+            }
+            else {
+                document.getElementById('password_error').innerHTML = 'Password should be atleast 4 characters';
+                password_false();
+            }
+        }
+        
+    }
+    
+    function password_true(){
+        document.getElementById('password_image').innerHTML = '';
         document.getElementById('password_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('password_hidden_script').value = true;
-		//alert(document.getElementById('conform_hidden_script').value);
-		if(document.getElementById('conform_hidden_script').value == 'false'){
-			//alert('inside of password false');
-			conformpassword_validation();
-		}
-	}
-	
-	function password_false(){
-		document.getElementById('password_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+        //alert(document.getElementById('conform_hidden_script').value);
+        if (document.getElementById('conform_hidden_script').value == 'false') {
+            //alert('inside of password false');
+            conformpassword_validation();
+        }
+    }
+    
+    function password_false(){
+        document.getElementById('password_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
         document.getElementById('password_hidden_script').value = false;
-	}
-	
-	
+    }
+    
+    
     function conformpassword_validation(){
         var password = document.getElementById('user_password').value;
         var confirm = document.getElementById('user_password_confirmation').value;
@@ -399,66 +412,68 @@
         
         var pass_str = new String(password);
         if (password == '' || password == null || confirm == '' || confirm == null || pass_str.length < 4) {
-			document.getElementById('conform_error').innerHTML='Confirm Password should be atleast 4 characters';
-			conform_false();
-		}
-		else{
-			if (password == confirm) {
-				document.getElementById('conform_error').innerHTML='';
+            document.getElementById('conform_error').innerHTML = 'Confirm Password should be atleast 4 characters';
+            conform_false();
+        }
+        else {
+            if (password == confirm) {
+                document.getElementById('conform_error').innerHTML = '';
                 conform_true();
-            }else{
-				document.getElementById('conform_error').innerHTML= 'Password and confirm password doesnot match';
+            }
+            else {
+                document.getElementById('conform_error').innerHTML = 'Password and confirm password doesnot match';
                 conform_false();
-			}
-		}	
-       
-       // return password_flag;
+            }
+        }
+        
+        // return password_flag;
     }
     
-	function conform_true(){
-		document.getElementById('conform_image').innerHTML = '';
+    function conform_true(){
+        document.getElementById('conform_image').innerHTML = '';
         document.getElementById('conform_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('conform_hidden_script').value = true;
-	}
-	
-	function conform_false(){
+    }
+    
+    function conform_false(){
         document.getElementById('conform_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
         document.getElementById('conform_hidden_script').value = false;
-	}
-	
+    }
+    
     function referedby_validation(){
-		//alert('tis comming');
+        //alert('tis comming');
         var refered_by = document.getElementById('user_refered_by').value.trim();
         var user_email = document.getElementById('user_email').value.trim();
-		
+        
         //alert(refered_by+ "======reference=============" + user_email);
         //alert(document.getElementById('email_hidden_script').value +"  == email hidden valise");
         if ((document.getElementById('email_hidden_script').value) == 'true') {
-			//alert('email referring');
-			if(refered_by == null || refered_by == ''){
-				document.getElementById('referedby_error').innerHTML = '';
-				document.getElementById('referedby_image').innerHTML = '';
-            	document.getElementById('referedby_hidden_script').value = true;
-			}else{
-				var email_check_flag = email_check(refered_by);
-				//alert(email_check_flag + "email validation");
-	            if (email_check_flag == true) {
-					//alert(user_email == refered_by);
-	                if (user_email == refered_by) {
-	                    document.getElementById('referedby_error').innerHTML =  'Referred E-mail and Email should not be same';
-	                    referedby_false();
-						
-	                }
-	                else {
-						document.getElementById('referedby_error').innerHTML ="";
-	                    referedby_true();
-	                }
-	            }
-	            else {
-	                document.getElementById('referedby_error').innerHTML =  'Referred E-mail is not in valid format';
-	                referedby_false();
-	            }
-			}
+            //alert('email referring');
+            if (refered_by == null || refered_by == '') {
+                document.getElementById('referedby_error').innerHTML = '';
+                document.getElementById('referedby_image').innerHTML = '';
+                document.getElementById('referedby_hidden_script').value = true;
+            }
+            else {
+                var email_check_flag = email_check(refered_by);
+                //alert(email_check_flag + "email validation");
+                if (email_check_flag == true) {
+                    //alert(user_email == refered_by);
+                    if (user_email == refered_by) {
+                        document.getElementById('referedby_error').innerHTML = 'Referred E-mail and Email should not be same';
+                        referedby_false();
+                        
+                    }
+                    else {
+                        document.getElementById('referedby_error').innerHTML = "";
+                        referedby_true();
+                    }
+                }
+                else {
+                    document.getElementById('referedby_error').innerHTML = 'Referred E-mail is not in valid format';
+                    referedby_false();
+                }
+            }
         }
         else {
             document.getElementById('referedby_error').innerHTML = 'First enter your email id before entering referrer email';
@@ -467,26 +482,26 @@
         
     }
     
-	function referedby_true(){
-		document.getElementById('referedby_image').innerHTML = '';
+    function referedby_true(){
+        document.getElementById('referedby_image').innerHTML = '';
         document.getElementById('referedby_image').innerHTML = "<img src='/images/tick.jpg' border=0/>";
         document.getElementById('referedby_hidden_script').value = true;
-	}
-	
-	function referedby_false(){
-		document.getElementById('referedby_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
+    }
+    
+    function referedby_false(){
+        document.getElementById('referedby_image').innerHTML = "<img src='/images/wrong.jpg' border=0/>";
         document.getElementById('referedby_hidden_script').value = false;
-	}
-	
-	
+    }
+    
+    
     function on_submit_validation(){
         var email = document.getElementById('email_hidden_script').value;
         var phone = document.getElementById('phone_hidden_script').value;
         var password = document.getElementById('password_hidden_script').value;
-		var conform = document.getElementById('conform_hidden_script').value;
+        var conform = document.getElementById('conform_hidden_script').value;
         var referedby = document.getElementById('referedby_hidden_script').value;
-		
-		//alert("email==="+email + "-phone==="+phone + "-password==="+password+ "-conform==="+conform+ "-refer==="+referedby);
+        
+        //alert("email==="+email + "-phone==="+phone + "-password==="+password+ "-conform==="+conform+ "-refer==="+referedby);
         
         if (email == 'true' && phone == 'true' && password == 'true' && conform == 'true') {
             return true;
@@ -496,5 +511,4 @@
         }
         
     }
-    
 </script>
