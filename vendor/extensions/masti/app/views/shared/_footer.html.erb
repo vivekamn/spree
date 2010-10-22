@@ -1,124 +1,43 @@
-<div class="bannerouter">
-    <div class="footertop1">
-        <b>Company</b>
-        <br/>
-        <a href="<%=about_us_path%>" class="company">About Us</a>
-        <br/>
-        <a href="<%=contact_us_path%>" class="company">Contact Us</a>
-        <br/>
-        <!--<a href="#" class="company">Jobs</a><br/>--><a href="<%=terms_conditions_path%>" class="company">Terms, Privacy</a>
-    </div>
-    <div class="footertop2">
-        <b>Learn More</b>
-        <br/>
-        <a href="<%=how_masti_works_path%>" class="company">How MasthiDeals Works</a>
-        <br/>
-        <!--<a href="#" class="company">Deals you missed</a><br/>--><a href="<%=faq_path%>" class="company">FAQ</a>
-        <br/>
-        <a href="<%=sitemap_path%>" class="company">Sitemap</a>
-		<br/>
-        <a href="<%=affliate_path%>" class="company">Affiliate</a>
-    </div>
-    <div class="footertop3">
-        <b>Cities</b>
-        <br/>
-		<a href="<%= chennai_path %>" class="company">Chennai</a>
-        <br/>
-		<a href="<%= bangalore_path %>" class="company">Bengaluru</a>
-        <br/>
-		<a href="<%= hyderabad_path %>" class="company">Hyderabad</a>
-        <br/>
-    </div>
-    <div class="footertop4">
-        <table border="0" width="100%" style="margin-left: -20px;">
-            <tr>
-                <td colspan="4">
-                    <b>Follow Us</b>
-                </td>
-            </tr>
-            <tr>
-                <td width="25%">
-                    <a href="http://www.facebook.com/masthideal" class="company" target="_blank"><img src="/images/follow-us/facebook.png" border="0"/></a>
-                </td>
-                <td width="25%">
-                    <a href="http://twitter.com/masthideals" class="company" target="_blank"><img src="/images/follow-us/twitter.png" border="0"/></a>
-                </td>
-                <td width="25%">
-                    <a href="http://www.orkut.co.in/Main#Community?cmm=102824332" class="company" target="_blank"><img src="/images/follow-us/orkut.png" border="0"/></a>
-                </td>
-                <td width="25%">
-                    <a href="http://masthideals.blogspot.com" class="company" target="_blank"><img src="/images/follow-us/blogger.png" border="0"/></a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="footertop5">
-        © 2010 Masthideals.
-        <br/>
-        All Rights Reserved.
-    </div>
-</div>
-</div>
-</div>
-<%# if cookies[:close].nil? or cookies[:close].empty? %>
-<%# render :partial => "/shared/close_script" %>
-<%#end %>
-<%if cookies[:asked_email].nil? and current_user.nil?%>
-<div id="email_ask_div" style="display:none;width:500px;height:180px;">
-  <%= render :partial => "shared/email_ask"%>
-</div>
-<script>
-	call_pop();
-	function call_pop(){
-		var x=get_cookie("time_remaining");
-		if(parseInt(x)<=0)
-		{
-			set_cookie ("asked_email", "true");
-			showPop('email_ask_div', 350,400);
-			
-		}
-		else{
-			//alert("coming here");
-			var time= parseInt(x)-1;
-			//alert(time);
-		    set_cookie ("time_remaining",time);
-			setTimeout('call_pop()', 1000);		
-		}
-		
-		
-	}
-	
-	
-	function set_cookie ( name, value, exp_y, exp_m, exp_d, path, domain, secure )
-	{
-	  var cookie_string = name + "=" + escape ( value );
-	
-	  if ( exp_y )
-	  {
-	    var expires = new Date ( exp_y, exp_m, exp_d );
-	    cookie_string += "; expires=" + expires.toGMTString();
-	  }
-	
-	  if ( path )
-	        cookie_string += "; path=" + escape ( path );
-	
-	  if ( domain )
-	        cookie_string += "; domain=" + escape ( domain );
-	  
-	  if ( secure )
-	        cookie_string += "; secure";
-	  
-	  document.cookie = cookie_string;
-	}
-	
-	function get_cookie ( cookie_name )
-	{
-	  var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
-	
-	  if ( results )
-	    return ( unescape ( results[2] ) );
-	  else
-	    return null;
-	}
-</script>
-<%end%>
+<div id="footer">
+  	<div id="footer_inner">
+   	  <div id="mediapartners" class="footer_lefted">
+      	<p class="footerpara">Media Partners</p>
+        <a href="#"><img src="/images/new_images/bigfm_logo.jpg" alt="big fm" width="45" height="23" border="0"  style="margin-right:10px;"/></a><a href="#"><img src="/images/new_images/timesofindia_logo.jpg" alt="times of india" width="67" height="23" border="0" /></a>
+      <div id="copyrights_container" class="clear_for_all" style="padding-top:50px;">Site Design By <a href="http://onemg.in" target="_blank">OneMG</a> | Copyrights reserved</div>
+   	  </div>
+      <div id="mediapartners" class="footer_lefted" style="width:100px;">
+       	<p class="footerpara" style="padding-top:0px;">Follow Us</p> 
+        <div id="followus" class="clear_for_all"><a href="#"><img src="/images/new_images/twitter_footer_icon.png" alt="twitter icon" width="16" height="15" border="0"  style="margin-right:3px;"/></a><a href="#"><img src="/images/new_images/facebook_footer_icon.png" alt="facebook" width="16" height="15" border="0" style="margin-right:3px;" /></a><a href="#"><img src="/images/new_images/blog_icon.png" alt="blog" width="16" height="15" border="0" style="margin-right:3px;" /></a><a href="#"><img src="/images/new_images/in_icon.png" alt="in" width="15" height="15" border="0" style="margin-right:3px;" /></a><a href="#"><img src="/images/new_images/rss_icon.png" alt="rss icon" width="15" height="15" border="0" /></a></div>
+      </div>
+      <div id="mediapartners" class="footer_lefted" style="width:505px; margin-left:15px;">
+      		<ul class="footer_unordered" style="padding-left:0px;">
+      		  <li><a href="<%=about_us_path%>">About us</a></li>
+      		  <li><a href="<%=how_masti_works_path%>">How Masthi Deals Works</a></li>
+      		  <li><a href="<%=faq_path%>">FAQ</a></li>
+	    </ul>
+        <ul class="footer_unordered">
+      		<li><a href="<%= get_featured_path %>">Get Featured </a></li>
+      		<li><a href="<%=affliate_path%>">Partner with Us</a></li>
+      		<li><a href="<%=contact_us_path%>">Contact Us</a></li>
+	    </ul>
+        <ul class="footer_unordered">
+   		  <!--<li><a href="#">Last minute deals</a></li>
+      	  <li><a href="#">Featured deals</a></li>-->
+      	  <li><a href="<%= upcoming_path %>">Upcoming deals</a></li>
+          <li><a href="<%= recent_path %>">Past deals</a></li>
+	    </ul>
+        <ul class="footer_unordered">
+   		  <li><a href="<%=terms_conditions_path%>">Terms & Privacy </a></li>
+      	  <li><a href="<%=sitemap_path%>">Sitemap</a></li>
+      	  <li><a href="<%=contact_us_path%>">Contact us</a></li>
+	    </ul>
+        <ul class="footer_unordered" style="padding-right:0px; border:none;">
+   		  <li><a href="#">Cities</a></li>
+      	  <li><a href="<%= chennai_path %>">Chennai</a></li>
+      	  <li><a href="<%= bangalore_path %>">Bangalore</a></li>
+          <li><a href="<%= hyderabad_path %>">Hyderabad </a></li>
+	    </ul>
+      </div>
+      <div id="footer_clear" class="clear_for_all"></div>
+  	</div>
+  </div>

@@ -1,7 +1,6 @@
 <%= javascript_include_tag "prototype" %>
 <div class="flash errors" id="flash_error" style="display:none;">
 </div>
-<div class="bannerouter">
 	<% unless session[:needs_fb_linking].nil?%><br /><br /><div align="center">
 		We need the following information to activate your MasthiDeals Account</div>
 		<%end%>
@@ -198,7 +197,6 @@
             <img src="/images/shopping.gif" width="403" height="305" />
         </div>
     </div>
-</div>
 <input type="hidden" id="ref" name="ref" value='<%= params[:ref]%>'>
 <input type="hidden" id="email_hidden_script" name="email_hidden_script">
 <input type="hidden" id="phone_hidden_script" name="phone_hidden_script">
