@@ -76,7 +76,7 @@ map.email_camp_owe '/email_camp_owe', :controller => "home", :action => "index"
 map.email_camp_hexaware '/email_camp_hexaware', :controller => "home", :action => "index"
 map.email_camp_virtusa '/email_camp_virtusa', :controller => "home", :action => "index"
 map.email_camp_rrdonnelley '/email_camp_rrdonnelley', :controller => "home", :action => "index"
-
+map.email_camp_isoft '/email_camp_isoft', :controller => "home", :action => "index"
 
 #city path
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
