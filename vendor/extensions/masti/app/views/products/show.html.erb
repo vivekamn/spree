@@ -60,7 +60,7 @@
                             </td>
                             <td align="center">
                             	<%if variant_obj.category == "GIFT BOXES"%>
-								<select><option value="0">0</option></select>
+								<select name="variant[quantity_<%=variant_obj.id%>]" id="variant_quantity_<%=variant_obj.id%>"><option value="0">0</option></select>
 								<%else%>
 								<%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
 								<%end%>
