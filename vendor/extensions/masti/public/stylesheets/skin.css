@@ -1,0 +1,215 @@
+.jcarousel-container {
+    position: relative;
+}
+
+.jcarousel-clip {
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.jcarousel-list {
+	z-index: 1;
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	height: 224px;
+}
+
+.jcarousel-list li,
+.jcarousel-item {
+    float: left;
+    list-style: none;
+    /* We set the width/height explicitly. No width/height causes infinite loops. */
+    width: 75px;
+    height: 75px;
+}
+
+/**
+ * The buttons are added dynamically by jCarousel before
+ * the <ul> list (inside the <div> described above) and
+ * have the classnames "jcarousel-next" and "jcarousel-prev".
+ */
+.jcarousel-next {
+    z-index: 3;
+    display: none;
+}
+
+.jcarousel-prev {
+    z-index: 3;
+    display: none;
+}
+
+.jcarousel-control {
+	text-align: right;
+	z-index: 9999;
+	position: absolute;
+	top: 195px;
+	left: 420px;
+	padding-top: 4px;
+}
+
+.jcarousel-control a {
+	font-size: 9px;
+	text-decoration: none;
+	color:#333;
+	background-image: url(..//images/new_images/numberbg.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 12px;
+	width: 12px;
+	display: block;
+	float: left;
+	margin-right: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.jcarousel-control a:hover{
+	color: #633623;
+	background-image: url(..//images/new_images/numberbg.png);
+}
+
+.jcarousel-control a.carousel-on{
+	color: #333;
+	height: 12px;
+	width: 12px;
+	background-image: url(..//images/new_images/numberbg.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	text-align: center;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+}
+
+
+
+.jcarousel-control a:focus,
+.jcarousel-control a:active {
+	background-image: url(..//images/new_images/numberbg.png);
+}
+
+.jcarousel-scroll {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.jcarousel-scroll form {
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel-scroll select {
+    font-size: 75%;
+}
+
+#mycarousel-next,
+#mycarousel-prev {
+    cursor: pointer;
+    margin-bottom: -10px;
+    text-decoration: underline;
+    font-size: 11px;
+}
+
+
+.jcarousel-skin-tango .jcarousel-container {
+/*    background: #F0F6F9;
+    border: 1px solid black;*/
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+	width: 475px;
+}
+
+
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+	width:  475px;
+	height: 224px;
+	overflow: hidden;
+}
+
+
+.jcarousel-skin-tango .jcarousel-item {
+	width: 475px;
+	height: 294px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-horizontal {
+    margin-right: 10px;
+}
+
+.jcarousel-skin-tango .jcarousel-item-placeholder {
+    background: #fff;
+    color: #000;
+}
+
+.silver .content{
+    margin-top:-50px;
+    position:relative;
+    z-index:1; 
+    width: 421px;
+    background-color: #333333;
+    height: 34px;
+    padding: 5px 10px;
+    opacity: 0.7;
+}
+
+.silver .content p{
+	font-size: 12px;
+	color: white;
+	width: 440px;
+}
+
+
+#nav {
+    position: relative;
+    z-index:9999;
+	margin-bottom: -6px;
+	margin-top: 3px;
+}
+
+
+#nav a {
+    font-size: 75%;
+    text-decoration: none;
+    margin: 0 0px 5px 3px;
+    background-color:#FFFFFF;
+    border:1px solid #000000;
+    color:#000000;
+    font-weight: bold;
+    display: block;
+    float: left;
+    text-align: center;
+    padding: 1px 2px 2px;
+    width: 16px;
+    opacity: 0.6;
+}
+
+#nav a:hover{
+	color: #e51c32;
+	border: 1px solid #e51c32;
+	
+}
+
+#nav a.activeSlide{
+	background-color: black;
+	border: 1px solid #fff;
+	color: white;
+}
