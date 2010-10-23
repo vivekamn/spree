@@ -14,6 +14,7 @@
     img {
         border: 0;
     }
+
 </style>
 
 <div id="content_firstleft">
@@ -57,7 +58,7 @@
             <%=@featured_product.name %>
             <%end %>
         </p>
-        <a href="javascript:call_extra_details();" class="knowmore">click to know more</a>
+        <div id="detail_div"><a href="javascript:call_extra_details();" class="knowmore">click to know more</a></div>
         <div id="extra_details" style="display:none; padding-top:50px;">
             <h2 class="heading_bg">Deal Info</h2>
             <div class="points">
@@ -72,6 +73,14 @@
                 <ul style="line-height:24px;">
                     <% unless @featured_product.description.nil? %>
                     <%= @featured_product.description %>
+                    <%end %>
+                </ul>
+            </div>
+			<h2 class="heading_bg">The Catch</h2>
+            <div class="points" >
+                <ul style="line-height:24px;">
+                    <% unless @featured_product.catch_message.nil? %>
+                    <%= @featured_product.catch_message %>
                     <%end %>
                 </ul>
             </div>
@@ -112,14 +121,13 @@
             </div>
         </div>
         <div id="buynow">
-            <%= link_to "<img src='/images/new_images/buynow.png' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
+            <%= link_to "<img src='/images/new_images/buy-now-button.jpg' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
         </div>
         <div id="people">
            <p>
                 <span style="font-size:20px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
-            <br/>
             <div style="padding-left:10px;">
                 <div class="progress_bar">
                     <div class="progress_barred" id="progress" style="float:left;">
@@ -140,7 +148,7 @@
             <p class="rightdeal_para" style="float:left; padding-top:5px;">
                 Share / invite friends 
             </p>
-            <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0" style="margin-right:4px; margin-left:3px;"/></a><a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;"/></a><a href="#"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
+            <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0" style="margin-right:4px; margin-left:3px;"/></a><a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;"/></a><a href="javascript:show_send_share_this();"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
         </div>
         <div id="gift">
             <a href="/products/<%=@featured_product.permalink%>?type=gift">
@@ -156,7 +164,7 @@
             </div>
             <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a>
         </div>
-    </div><% side_deal_product = active_side_deal(@side_deal.product_id) %>
+    </div><% side_deal_product = active_side_deal(@side_deal.product_id) unless @side_deal.nil? %>
     <%unless side_deal_product.nil? %>
     <div id="todayssidedeal_container">
         <h2 class="heading_bg" style="width:160px;"><%if @deal_param == "side_deal" %>
@@ -289,12 +297,36 @@
 </div>
 <div id="container_clear" class="clear_for_all">
 </div>
+   <div id="share_this_div" style="display:none;width:500px;height:180px;">
+        <%= render :partial => "popup", :locals =>{ :deal => @deal} %>
+    </div>
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
 
 <script type="text/javascript">
-	
+        function show_send_share_this(){
+            showPop('share_this_div', 10, 200);
+        }
+        
+        function close_send_share_this(){
+            hidePop('share_this_div');
+        }
+		function show_mobile_share_this(){
+            showPop('share_this_mobile_div', 10, 200);
+        }
+        
+        function close_mobile_share_this(){
+            hidePop('share_this_mobile_div');
+        }
+		
 function call_extra_details(){
 	document.getElementById('extra_details').style.display='block';
+	document.getElementById('detailsandcatche_container').style.height='auto';
+	document.getElementById('detail_div').innerHTML='<a href="javascript:hide_extra_details();" class="knowmore">Hide More Details</a>';
+}
+function hide_extra_details(){
+	document.getElementById('extra_details').style.display='none';
+	document.getElementById('detailsandcatche_container').style.height='455px';
+	document.getElementById('detail_div').innerHTML='<a href="javascript:call_extra_details();" class="knowmore">click to know more</a>';
 }
 function show_chat()
 	{
