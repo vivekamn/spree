@@ -131,11 +131,9 @@ module HomeHelper
      order.line_items[0].variant.product
   end
 
-  def active_side_deal(side_deal_product_id,deal_info)
-    
-    side_deal_product = Product.find(:first, :conditions => ['id = ? AND city_id = ?',side_deal_product_id,session[:city_id] ])
-#    puts "#{side_deal.product_id}============#{side_deal_product.id}==================="
-    render :file => "#{RAILS_ROOT}/vendor/extensions/masti/app/views/home/show_side_deal.html.erb", :use_full_path => false,:locals => { :side_deal_product => side_deal_product, :deal_info => deal_info}
+  def active_side_deal(side_deal_product_id)
+    side_deal = Product.find(:first, :conditions => ['id = ? AND city_id = ?',side_deal_product_id,session[:city_id] ])
+   return side_deal
   end
   
   def pay_affiliate_signup?(user)    

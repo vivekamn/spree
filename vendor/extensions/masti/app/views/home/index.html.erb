@@ -29,7 +29,26 @@
 			<%=@featured_product.name %>
 	    <%end %> 
 	</p>
-      <a href="#" class="knowmore">click to know more</a></div>
+      <a href="javascript:call_extra_details();" class="knowmore">click to know more</a>
+	  <div id="extra_details" style="display:none; padding-top:50px;">
+	  	<h2 class="heading_bg">Deal Info</h2>
+		<div class="points">
+	        <ul style="line-height:24px;">
+	            <% unless @featured_product.deal_info.nil? %>
+	            <%= @featured_product.deal_info %>
+	            <%end %>
+	        </ul>
+	    </div>
+		<h2 class="heading_bg">The Details</h2>
+		<div class="points">
+	        <ul style="line-height:24px;">
+	            <% unless @featured_product.description.nil? %>
+	            <%= @featured_product.description %>
+	            <%end %>
+	        </ul>
+	    </div>
+	  </div>
+	  </div>
     </div>
     <div id="content_middle">
    	  <div id="deal_container">
@@ -74,13 +93,97 @@
 			</div>
         <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a></div>
    	  </div>
-	  <%if side_deal_product.nil?%>
+	  <% side_deal_product = active_side_deal(@side_deal.product_id)%>
+	  <%unless side_deal_product.nil?%>
       <div id="todayssidedeal_container">
-      	<h2 class="heading_bg" style="width:160px;">Todays Side Deal</h2>
+      	<h2 class="heading_bg" style="width:160px;">
+		<%if @deal_param == "side_deal"%>
+			Todays Deal
+		<%else%>	
+			Todays Side Deal
+		<%end%>
+		</h2>
         <img src="<%= side_deal_product.images.first.attachment.url(:product)%>" width="66" height="58" alt="todays side deal"  class="sidealimg_thumb"/>
-        <p class="commonpara">Mohit Tattoo Studio aims at providing the most rewarding</p>
-        <p class="commonpara"> experience to its clients with its distinct tattoo art. The tattoo artists here are carefully..</p>
-        <a href="#" class="knowmore">click to know more</a>
+        <p class="commonpara"><%=side_deal_product.side_deal_title %></p>
+        <p class="commonpara">
+        	<% unless side_deal_product.id == 1060500648 %>
+            <%if side_deal_product.id == 1060500649%>
+			<table width="70%">
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">Value </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;">unlimited</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">Discount </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;">40%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">You Save </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;">unlimited</span>
+                    </td>
+                </tr>
+            </table>
+			<%else%>
+			  <table width="70%">
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">Value </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;"><%= side_deal_product.price.to_i %></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">Discount </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;"><%= side_deal_product.discount %>%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">You Save </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
+                    </td>
+                    <td>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;"><%= ((side_deal_product.price.to_i * side_deal_product.discount)/100).to_i %></span>
+                    </td>
+                </tr>
+            </table>
+			<%end%>
+			<%end%>
+			
+        </p>
+        <a href="/home/index?side_deal_info=<%= @deal_param %><%unless session[:affiliate].nil?%>&idev_id=<%=session[:affiliate]%><%end%>" class="knowmore">click to know more</a>
       </div>
     <%end%>
 	</div>
@@ -100,7 +203,7 @@
         <h3 class="rightsubheading" style="float:left;">Refer Friends and get<br />
 a deal for free</h3>
       <a href="<%= invite_friends_path %>"><img src="/images/new_images/referfriends_icon.png" alt="refer friends" width="24" height="21" border="0" class="iconimage"/></a></div>
-      <div id="voteforaredeal_container">
+      <!--<div id="voteforaredeal_container">
       	<h3 class="rightsubheading">Vote for a re-deal</h3>
       	<p style="padding-top:5px;"><span style="font-size:13px; font-weight:bold;">50 %</span> off on<br />
 INOX movie ticket</p>
@@ -111,14 +214,22 @@ INOX movie ticket</p>
           <label style="font-size:12px; color:#4D4D4D;">No</label> 
           <input type="radio" name="radio" id="yes" value="yes" /></p>
        
-      </div>
-      <div id="brandasociate_container">
-      	<h3 class="rightsubheading" style="padding-bottom:15px;">Brands associated with Masthi Deals</h3>
-      <a href="#"><img src="/images/new_images/inox_logo.jpg" alt="inox" width="59" height="33" border="0"  style="margin-right:5px;"/></a><a href="#"><img src="/images/new_images/vlcc_logo.jpg" alt="vlcc" width="59" height="33" border="0" style="margin-right:5px;" /></a><a href="#"><img src="/images/new_images/mb_logo.jpg" alt="mb" width="59" height="33" border="0" /></a></div>
+      </div>-->
+	  <div style="margin-top: 10px; padding-left: 40px;">
+      	<img src="/images/ebs.gif">
+	  </div>
+      <!--<div id="brandasociate_container">
+      	<img src="/images/ebs.gif">
+		<h3 class="rightsubheading" style="padding-bottom:15px;">Brands associated with Masthi Deals</h3>
+      <a href="#"><img src="/images/new_images/inox_logo.jpg" alt="inox" width="59" height="33" border="0"  style="margin-right:5px;"/></a><a href="#"><img src="/images/new_images/vlcc_logo.jpg" alt="vlcc" width="59" height="33" border="0" style="margin-right:5px;" /></a><a href="#"><img src="/images/new_images/mb_logo.jpg" alt="mb" width="59" height="33" border="0" /></a>
+	  </div>-->
     </div>
     <div id="container_clear" class="clear_for_all"></div>
 	<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
 	<script>
+		function call_extra_details(){
+			document.getElementById('extra_details').style.display='block';
+		}
 		function show_chat()
         	{
         		//document.getElementById('chat_text_div').style.display='none';

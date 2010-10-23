@@ -55,22 +55,28 @@ margin-top:20px;
           </tr>
         <% end %>
         <tr height='20px'><td></td></tr>
-        <tr align="center">
-          <% hook :cart_items_headers do %>
-            <th width="16%" height="34" class="bd"><%= t("item") %></th>
-            <th width="44%" class="bd1">Description</th>
-            <th width="15%" class="bd1"><%= t("price_with_discount") %></th>
-            <th width="9%" class="bd1"><%= t("qty") %></th>
-            <th width="16%" class="bd1"><%= t("total") %></th>        
-          <% end %>
-        </tr>  
-
-       
+        
+		<tr align="center">
+          <td colspan="5">
+		  <table width="100%" border="1" cellpadding="0" cellspacing="0">
+          	<tr>
+			  <% hook :cart_items_headers do %>
+	            <th width="16%" height="34" class="bd"><%= t("item") %></th>
+	            <th width="44%" class="bd1">Description</th>
+	            <th width="15%" class="bd1"><%= t("price_with_discount") %></th>
+	            <th width="9%" class="bd1"><%= t("qty") %></th>
+	            <th width="16%" class="bd1"><%= t("total") %></th>        
+	          <% end %>
+		  	</tr>
           <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+		   </table>
+        </td>
+		</tr>  
+
         <% end %>
         <tr align="center">	                
           <td colspan=5 align="right">
-            <div id='buy' align="right">
+            <div id='buy' align="right" style="padding-right:10px;">
              <% if @order.gift? %> 
 			  <%# if @order.giftee_name %>
                 <%= link_to image_tag('/images/buy_gift.png', :border=>0,:style => "margin-right:0px;"), "javascript:update_order();",:style => 'text-decoration:none;' %>

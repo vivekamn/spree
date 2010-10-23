@@ -100,7 +100,7 @@
 </style>
  <div id="header">
   	<div id="header_inner">
-   	  <div id="logo_container"><h1>Masthi Deals</h1><img src="/images/new_images/masthideals_logo.png" width="223" height="42" alt="masthi deals" /></div>
+   	  <div id="logo_container"><h1>Masthi Deals</h1><a href="<%= home_url%>"><img src="/images/new_images/masthideals_logo.png" width="223" height="42" alt="masthi deals" /></a></div>
       <div id="header_right">
        
 		<div id="header_login">
@@ -109,8 +109,8 @@
 			  <%= text_field :user_session, 'login', :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
 	             <%= password_field :user_session, 'password', :class=>"logintextfield",:value=>"Password" %>
 	              <input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" />
-	            <img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" /> 
-	            <p style="padding-left:105px;"><a href="#" class="login_forgotpass">forgot password ?|</a><a class="login_forgotpass" href="#"> register</a></p>
+	            <!--<img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" />--> 
+	            <p style="padding-left:105px;"><a href="password_resets/new" class="login_forgotpass">forgot password ?|</a><a class="login_forgotpass" href="/signup"> register</a></p>
 			  <% end %>
           <%else%>
 		  	Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>&nbsp;&nbsp;

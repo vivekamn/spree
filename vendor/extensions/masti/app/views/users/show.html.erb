@@ -13,9 +13,6 @@
 	</tr>
 </table>-->
 <%= error_messages_for :user %>
-<div class="bannerouter">
-<div class="shoppingout2">
-<div class="shoppinginner">
 	
 	<div style="float:left;"><span class="green">MY </span><span class="blue">ACCOUNT</span></div>
 	<div style="float:right;">
@@ -49,10 +46,7 @@
 	</div>
 	
 
-</div>
-<div class="shoppinginner"><div class="shoptable" style="margin-left:-21px;">
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">       <tr>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:50px;">       <tr>
            <td colspan='2' width="100%">
 			<% hook :account_summary do %>
 			<table>
@@ -121,41 +115,9 @@
 		</td>
 	</tr>
 </table>
-</div>
-</div>
-</div>
-</div>
-<!--
-
-<table width="97%" style="margin-bottom: 10px; margin-left: 20px;margin-top: 20px;margin-right:20px;float:left;border:0px;">
-	<tr>
-		<td>
-			<h1><%= t("my_orders") %></h1>
-		</td>
-		<td align="right">
-			<% if admin?%>
-				<%=link_to "View all Orders","/admin/orders" %>&nbsp;&nbsp;&nbsp;&nbsp;<%=link_to "View all Products","/admin/products" %>
-			<%end%>
-		</td>
-	</tr>
-	<tr >
-		<td colspan="2">
-			<img src="/images/bg1.gif" />
-			<%# image_tag "bg1.gif",:border=>"0px", :alt => 'Peek-A-Boo Patterns',:width=>"250px"%>
-		</td>
-	</tr>
-</table>
--->
-<div class="bannerouter">
-<div class="shoppingout1" style="padding:0 40px 0;">
-<div class="shoppinginner">
-	<!--<img src="/images/iworuld.gif" width="303" height="41" />-->
-	<span class="green">MY </span><span class="blue">ORDERS</span>
-</div>
-<div class="shoppinginner"><div class="shoptable" style="margin-left:-62px;">
-
+<div style="float:left;"><span class="green">MY </span><span class="blue">ORDERS</span></div>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-
+	
        <tr>
            <td colspan='2' width="100%" align="center">
 			<% hook :account_my_orders do %>
@@ -198,12 +160,3 @@
 		</td>
 	</tr>
 </table>
-<table style="margin-top:20px;"><tr height="10px"></tr><td><div style="height:10px;"></div></td></table>
-</div>
-</div>
-</div>
-</div>
-
-
-
-

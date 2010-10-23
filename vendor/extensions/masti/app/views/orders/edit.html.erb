@@ -1,8 +1,6 @@
 <% @body_id = 'cart' %>
 <%= error_messages_for :order  %>
 
-<div class="bannerouter">
-  <div class="shoppingout1">
     <% if @order.gift? %>
       <div>
         <%= image_tag '/images/iwouldgift.gif', :border => '0'%> 
@@ -11,10 +9,8 @@
         </div>
       </div>
     <% else %> 
-      <div class="shoppinginner"><img src="/images/iworuld.gif" width="303" height="41" />
-      </div>
+      <img src="/images/iworuld.gif" width="303" height="41" />
     <% end %>
-    <div class="shoppinginner">
           <% if @order.line_items[0].variant.product.use_md_money %>
 		 <%if !current_user.user_promotion.nil? and current_user_credit_amount>0%>
 		  <div style="margin-top:20px;">
@@ -40,9 +36,6 @@
           <% end %>
         <% end -%>
       </div>
-    </div>
-  </div>
-</div>
 <input type="hidden" id="price" value="<%= order_price(@order).to_i %>">
 <script type="text/javascript">
   function update_price() {
