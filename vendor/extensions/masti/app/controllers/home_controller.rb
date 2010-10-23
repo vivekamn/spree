@@ -536,13 +536,14 @@ before_filter :find_and_set_affiliate, :only => :index
   end
   
   def progress_bar
+    puts "#==========================progress bar-->"
     current_deal = Product.find(:first, :conditions => ['id = ?',params[:id]])
     variant=current_deal.master
     puts "#{variant.count_on_hand}---->"
     if variant.count_on_hand==0
-      bought_percent = 300
+      bought_percent = 150
     else
-      bought_percent = (current_deal.currently_bought_count*300)/(current_deal.currently_bought_count+variant.count_on_hand)
+      bought_percent = (current_deal.currently_bought_count*150)/(current_deal.currently_bought_count+variant.count_on_hand)
     end
     render(:text =>bought_percent)
   end
