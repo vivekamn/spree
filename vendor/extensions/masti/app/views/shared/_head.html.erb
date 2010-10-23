@@ -1,17 +1,121 @@
+<%= javascript_include_tag "prototype" %>
+<%= javascript_include_tag "getRealPopup" %>
+<%= javascript_include_tag "effects" %>
+<%= javascript_include_tag "dragdrop" %>
+<%= javascript_include_tag "utils" %>
+<script>
+    function adjustNotes(){
+        var default_notes_top = 160;
+        var default_screen_width = 430;
+        var home_coordinates = getElementOffsetScrollable(document.getElementById("menu"));
+        var pageY;
+        if (typeof(window.pageYOffset) == 'number') {
+            pageY = window.pageYOffset;
+        }
+        else {
+            pageY = document.documentElement.scrollTop;
+        }
+        
+        if (pageY > 70) 
+            default_notes_top = 0;
+        
+        if (document.getElementById("notes_div")) {
+            document.getElementById("notes_div").style.top = default_notes_top + "px";
+            document.getElementById("notes_div").style.left = default_screen_width + home_coordinates.left + "px";
+            
+        }
+    }
+    
+    window.onscroll = adjustNotes;
+    window.onload = adjustNotes;
+    window.onresize = adjustNotes;
+</script>
+<script type="text/javascript">
+    <!--
+    function MM_preloadImages(){ //v3.0
+        var d = document;
+        if (d.images) {
+            if (!d.MM_p) 
+                d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments;
+            for (i = 0; i < a.length; i++) 
+                if (a[i].indexOf("#") != 0) {
+                    d.MM_p[j] = new Image;
+                    d.MM_p[j++].src = a[i];
+                }
+        }
+    }
+    
+    function MM_swapImgRestore(){ //v3.0
+        var i, x, a = document.MM_sr;
+        for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) 
+            x.src = x.oSrc;
+    }
+    
+    function MM_findObj(n, d){ //v4.01
+        var p, i, x;
+        if (!d) 
+            d = document;
+        if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document;
+            n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) 
+            x = d.all[n];
+        for (i = 0; !x && i < d.forms.length; i++) 
+            x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) 
+            x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) 
+            x = d.getElementById(n);
+        return x;
+    }
+    
+    function MM_swapImage(){ //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments;
+        document.MM_sr = new Array;
+        for (i = 0; i < (a.length - 2); i += 3) 
+            if ((x = MM_findObj(a[i])) != null) {
+                document.MM_sr[j++] = x;
+                if (!x.oSrc) 
+                    x.oSrc = x.src;
+                x.src = a[i + 2];
+            }
+    }
+    
+    //-->
+</script>
+<style>
+    a {
+        text-decoration: none;
+    }
+    
+    img {
+        border: 0;
+    }
+</style>
  <div id="header">
   	<div id="header_inner">
    	  <div id="logo_container"><h1>Masthi Deals</h1><img src="/images/new_images/masthideals_logo.png" width="223" height="42" alt="masthi deals" /></div>
       <div id="header_right">
-        <div id="header_login">
-          <form action="header_login" method="get">
-              <input name="username" type="text"  class="logintextfield" id="username" value="Username"/>
-              <input name="password" type="text"  class="logintextfield" id="password" value="Password"/>
-              <input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" />
-            <img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" /> 
-            <p style="padding-left:105px;"><a href="#" class="login_forgotpass">forgot password ?|</a><a class="login_forgotpass" href="#"> register</a></p>
-          </form>
-        </div>
-        <div id="menu">
+       
+		<div id="header_login">
+        <% if !current_user %>
+			  <% form_tag user_sessions_path do  %>
+			  <%= text_field :user_session, 'login', :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
+	             <%= password_field :user_session, 'password', :class=>"logintextfield",:value=>"Password" %>
+	              <input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" />
+	            <img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" /> 
+	            <p style="padding-left:105px;"><a href="#" class="login_forgotpass">forgot password ?|</a><a class="login_forgotpass" href="#"> register</a></p>
+			  <% end %>
+          <%else%>
+		  	Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>&nbsp;&nbsp;
+			 <%= link_to 'Account', user_path(current_user) %>&nbsp;&nbsp;
+			 <%= link_to 'Logout', logout_path %>
+		  <%end%>
+		</div>
+        
+		<div id="menu">
    		  <ul class="topnav">
                        <li style="height:40px;">
                            <a href="<%= home_url%>"  class="thedeal_btn" style="width:70px; padding-left:3px">The Deal</a>
@@ -25,7 +129,7 @@
                       <li style="width:160px;">
                             <a href="<%=how_masti_works_path%>" class="howmasthidealsworks_btn" style="width:160px; text-align:center;">How Masthi Deals Works</a>
            			 </li>
-                     <li><a href="#" style="width:73px; text-align:center; margin-right:9px;" class="review_btn">Reviews</a></li>
+                    <!-- <li><a href="#" style="width:73px; text-align:center; margin-right:9px;" class="review_btn">Reviews</a></li>-->
                      <li style="width:110px;">
                             <a href="#" class="selectyourcity_btn" style="width:107px; padding-left:3px;">Select Your City</a>
                             <ul style="left:-64px;" class="subnav">
@@ -40,3 +144,71 @@
       </div>
   	</div>
   </div>
+  
+<!--Exta Items like chat and whos amoung us widgets-->
+<% if admin? %>
+<div style='position:absolute;left:0px;top:390px;'>
+    <%= render :partial => "/shared/whos_among_us" %>
+</div>
+<% else %>
+<div style='display:none'>
+    <%= render :partial => "/shared/whos_among_us" %>
+</div>
+<% end %> 
+
+<table border=0 cellpadding=5 cellspacing=0 style="position:absolute;top:100px;right:0px;" id="notes_div">
+    <tr>
+        <td>
+            <div id="chat_div" style="display:none;">
+                <table align="right" cellpadding="0px" cellspacing="0px">
+                    <tr>
+                        <td align="right">
+                        	<%if session[:city_id].to_s == '1'%>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! -->
+                            	<object width="190" height="275">
+                                	<param name="movie" value="http://widget.meebo.com/mm.swf?qvCKkeqqgT"/>
+                                	<embed src="http://widget.meebo.com/mm.swf?qvCKkeqqgT" type="application/x-shockwave-flash" width="190" height="275">
+                                	</embed>
+                            	</object>
+							<%elsif session[:city_id].to_s == '2' %>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
+								<object width="190" height="275" >
+									<param name="movie" value="http://widget.meebo.com/mm.swf?URcgUwoRMI"/>
+									<embed src="http://widget.meebo.com/mm.swf?URcgUwoRMI" type="application/x-shockwave-flash" width="190" height="275">
+									</embed>
+								</object>
+							<%elsif session[:city_id].to_s == '5'%>
+								<!-- Beginning of meebo me widget code. Want to talk with visitors on your page? Go to http://www.meebome.com/ and get your widget! --> 
+								<object width="190" height="275" >
+									<param name="movie" value="http://widget.meebo.com/mm.swf?htmPUDSLst"/>
+									<embed src="http://widget.meebo.com/mm.swf?htmPUDSLst" type="application/x-shockwave-flash" width="190" height="275">
+									</embed>
+								</object> 
+							<%end%>
+                            
+                        </td>
+                        <td valign="top" width="18px">
+                            <%= image_tag "wrong.jpg", :alt => 'Close', :class  => "cursor_pointer" ,:id => "change_image_cancel_fwd_blog" ,:align => "right" ,:onclick => "javascript:close_chat();" %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+<script type="text/javascript">
+    
+    function clear_email(){
+	if (document.getElementById('deals_notification_email').value == "E-mail id"){
+        document.getElementById('deals_notification_email').value = "";
+	}
+    }
+    
+    function load_email(){
+        if (document.getElementById('deals_notification_email').value == "") {
+            document.getElementById('deals_notification_email').value = "E-mail id";
+        }
+    }
+</script>

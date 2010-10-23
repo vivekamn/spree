@@ -35,49 +35,71 @@
    	  <div id="deal_container">
       	<div id="timeleft">
         <p class="rightdeal_para">Time left</p>
-        <p class="timeleft_number">06</p>
+        <div id="days" class="timeleft_number">0</div>
         <p class="timeleft_text">Days</p>
-        <p class="timeleft_number">08</p>
+        <div id="hrs" class="timeleft_number">0</div>
         <p class="timeleft_text">Hrs</p>
-        <p class="timeleft_number">15</p>
+        <div id="mins" class="timeleft_number">0</div>
         <p class="timeleft_text">Mins</p>
-        <p class="timeleft_number">37</p>
+        <div id="secs" class="timeleft_number">0</div>
         <p class="timeleft_text">Secs</p>
         <div id="timeleft_clear" class="clear_for_all"></div>
       	</div>
-        <div id="buynow"><a href="#"><img src="/images/new_images/buynow.png" alt="buy now this deal" width="116" height="36" border="0" /></a></div>
+        <div id="buynow">
+        	 <%= link_to "<img src='/images/new_images/buynow.png' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
+			</div>
         <div id="people">
-          <p><span style="font-size:20px; float:left;">75</span> of people bought the deal</p>
-        <img src="/images/new_images/bought_percentage.png" width="75" height="24" alt="bought percentage"  style="margin-left:15px;"/> <p style="padding-left:40px;">25 more to avail this 			            offer. </p></div>
+          <p><span style="font-size:20px; float:left;"><%= @bought_count %></span> people bought the deal</p>
+        <img src="/images/new_images/bought_percentage.png" width="75" height="24" alt="bought percentage"  style="margin-left:15px;"/> <p style="padding-left:40px;">
+		<%if @deal and deal_live @deal, @featured_product %>
+	        <%if deal_on @featured_product %>
+			 	Hurray, the deal is already on.
+			 <%else %>
+			 	<%= @featured_product.minimum_number - @bought_count %> more to avail this offer. 
+	         <%end %>
+		<%end%>
+		
+		</p></div>
         <div id="share">
           <p class="rightdeal_para" style="float:left; padding-top:5px;">Share / invite friends </p>
-          <a href="#"><img src="/images/new_images/twitter_icon.png" alt=            "twitter" width="14" height="19" border="0"  style="margin-right:4px; margin-left:3px;"/></a><a href="#"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;" /></a><a href="#"><img src=            "/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
+          <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0"  style="margin-right:4px; margin-left:3px;"/></a>
+		  <a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;" /></a>
+		  <a href="#"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
         </div>
-        <div id="gift"><p class="rightdeal_para" style="float:left; padding-top:5px; padding-right:85px;">Gift this deal</p>
-        <a href="#"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0"  style="margin-top:3px;"/></a></div>
-        <div id="callustopay"><p class="rightdeal_para" style="float:left; padding-top:5px;padding-right:38px;">Call Us to pay by cash</p>
+        <div id="gift"><a href="/products/<%=@featured_product.permalink%>?type=gift"><p class="rightdeal_para" style="float:left; padding-top:5px; padding-right:85px;">Gift this deal</p></a>
+        <a href="/products/<%=@featured_product.permalink%>?type=gift"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0"  style="margin-top:3px;"/></a></div>
+        <div id="callustopay">
+        	<div onmousemove="javascript:document.getElementById('call_by_Cash').innerHTML='044-455 300 50'" id="call_by_Cash" class="rightdeal_para" style="float:left; padding-top:5px;padding-right:38px;">
+				Call Us to pay by cash
+			</div>
         <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a></div>
    	  </div>
+	  <%if side_deal_product.nil?%>
       <div id="todayssidedeal_container">
       	<h2 class="heading_bg" style="width:160px;">Todays Side Deal</h2>
-        <img src="/images/new_images/todaysdeal_thumb.jpg" width="66" height="58" alt="todays side deal"  class="sidealimg_thumb"/>
+        <img src="<%= side_deal_product.images.first.attachment.url(:product)%>" width="66" height="58" alt="todays side deal"  class="sidealimg_thumb"/>
         <p class="commonpara">Mohit Tattoo Studio aims at providing the most rewarding</p>
         <p class="commonpara"> experience to its clients with its distinct tattoo art. The tattoo artists here are carefully..</p>
         <a href="#" class="knowmore">click to know more</a>
       </div>
-    </div>
+    <%end%>
+	</div>
+	
     <div id="content_rightmost">
    	  <div id="emailme_container">
       		<h3 class="rightsubheading">Email me each day’s deal</h3>
-            <input name="subscribe" type="text"  class="subscribe"/><input name="subscribe" type="image" src="/images/new_images/subscribe_btn.png" />
+            <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f| %>
+				<%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"subscribe",:style=>"font-size:9px;font-family:Arial,Helvetica,sans-serif;" %>
+				<%= image_submit_tag "new_images/subscribe_btn.png",:border=>0,:onclick=>"return email_validate_head();" %>
+			<%end%>
       </div>
       <div id="rightimagecontainer"><a href="#"><img src="/images/new_images/homepage_rightimage.png" alt="homepage right image" width="206" height="99" border="0" /></a></div>
-      <div id="livechat_container" class="livechat_refer_container"><h3 class="rightsubheading" style="float:left;">Live chat</h3>
+      <div id="livechat_container" class="livechat_refer_container" onclick="javascript:show_chat();"><h3 class="rightsubheading" style="float:left;">Live chat</h3>
       <a href="#"><img src="/images/new_images/livechat_icon.png" alt="live chat icon" width="31" height="17" border="0"  class="iconimage"/></a></div>
-      <div id="referfriends_container" class="livechat_refer_container">
+      <div id="referfriends_container" class="livechat_refer_container" onclick="javascript:window.location.href='<%= invite_friends_path %>'">
         <h3 class="rightsubheading" style="float:left;">Refer Friends and get<br />
 a deal for free</h3>
-      <a href="#"><img src="/images/new_images/referfriends_icon.png" alt="refer friends" width="24" height="21" border="0" class="iconimage"/></a></div>
+      <a href="<%= invite_friends_path %>"><img src="/images/new_images/referfriends_icon.png" alt="refer friends" width="24" height="21" border="0" class="iconimage"/></a></div>
       <div id="voteforaredeal_container">
       	<h3 class="rightsubheading">Vote for a re-deal</h3>
       	<p style="padding-top:5px;"><span style="font-size:13px; font-weight:bold;">50 %</span> off on<br />
@@ -95,3 +117,54 @@ INOX movie ticket</p>
       <a href="#"><img src="/images/new_images/inox_logo.jpg" alt="inox" width="59" height="33" border="0"  style="margin-right:5px;"/></a><a href="#"><img src="/images/new_images/vlcc_logo.jpg" alt="vlcc" width="59" height="33" border="0" style="margin-right:5px;" /></a><a href="#"><img src="/images/new_images/mb_logo.jpg" alt="mb" width="59" height="33" border="0" /></a></div>
     </div>
     <div id="container_clear" class="clear_for_all"></div>
+	<input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
+	<script>
+		function show_chat()
+        	{
+        		//document.getElementById('chat_text_div').style.display='none';
+        		document.getElementById('chat_div').style.display='';
+        		
+        	}
+        	function close_chat(){
+        		document.getElementById('chat_div').style.display='none';
+        	//	document.getElementById('chat_text_div').style.display='';
+        	}
+var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+          	updateTime();
+          	function updateTime() {
+          		today = new Date();
+          		expiry_datetime = document.getElementById("end_time").value;
+          		var todayy = today.getYear();
+          		if (todayy < 1000)
+        			todayy+=1900;
+          			var curr=montharray[today.getMonth()]+" "+today.getDate()+", "+todayy+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+           			var exp = montharray[<%= @featured_product.deal_expiry_date.month %>-1]+" "+<%=@featured_product.deal_expiry_date.day%>+", "+<%= @featured_product.deal_expiry_date.year %>+" "+<%= @featured_product.deal_expiry_date.hour %>+":"+<%= @featured_product.deal_expiry_date.min %>+":"+<%= @featured_product.deal_expiry_date.sec %>;
+          			timeLeft = Date.parse(exp)-Date.parse(curr);
+          			msPerDay = 24 * 60 * 60 * 1000 ;  
+          			if (timeLeft > 0 && document.getElementById("deal_live_status").value=='true') {
+          				e_daysLeft = timeLeft / msPerDay;
+          				daysLeft = Math.floor(e_daysLeft);
+          				e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+          				hrsLeft = Math.floor(e_hrsLeft);
+          				e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+          				minsLeft = Math.floor(e_minsLeft);
+          				scesLeft = Math.floor((e_minsLeft - minsLeft) * 60);
+						document.getElementById("days").innerHTML = daysLeft;
+						document.getElementById("hrs").innerHTML = hrsLeft;
+						document.getElementById("mins").innerHTML = minsLeft;
+						document.getElementById("secs").innerHTML = scesLeft;
+						//document.getElementById("countdown_time").innerHTML ="<table border=0 width='160px'><tr><td align='right'>"+ daysLeft +"</td><td align='left'  colsapn='2'>Days</td> <td align='right'>"+ hrsLeft +"</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>"+ minsLeft +"</td><td align='left' colsapn='2'>Mins</td><td align='right'>"+ scesLeft +"</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
+          				setTimeout('updateTime()', 1000);
+          			}
+         			else if(timeLeft>=-3000 && document.getElementById("deal_live_status").value=='true'){		
+        				window.location.reload();
+        			} 
+          			else{
+					    document.getElementById("days").innerHTML = "0";
+						document.getElementById("hrs").innerHTML = "0";
+						document.getElementById("mins").innerHTML ="0";
+						document.getElementById("secs").innerHTML = "0";
+          				//document.getElementById("countdown_time").innerHTML = "<table border=0 width='160px'><tr><td align='right'>0</td><td align='left'  colsapn='2'>Days</td> <td align='right'>0</td><td align='left' colsapn='2'>Hours</td></tr><tr><td align='right'>0</td><td align='left' colsapn='2'>Mins</td><td align='right'>0</td><td align='left' colsapn='2'>Secs</td></tr></tbody></table>";
+          			}
+        	}
+</script>

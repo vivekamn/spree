@@ -213,3 +213,29 @@
 	border: 1px solid #fff;
 	color: white;
 }
+.flash.notice {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#CCDDFF url(../images/shadow_top.png) repeat-x scroll 0 -50px;
+border:1px solid #99AACC;
+color:#556699;
+}
+.flash.errors {
+-moz-background-clip:border;
+-moz-background-inline-policy:continuous;
+-moz-background-origin:padding;
+background:#F3991F url(../images/shadow_top.png) repeat-x scroll 0 -50px;
+border:1px solid #000000;
+color:#000000;
+}
+
+.flash {
+-moz-border-radius-bottomleft:5px;
+-moz-border-radius-bottomright:5px;
+-moz-border-radius-topleft:5px;
+-moz-border-radius-topright:5px;
+font-size:1.3em;
+margin-bottom:1em;
+padding:0.8em;
+}
