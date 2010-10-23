@@ -15,13 +15,6 @@
 <%if controller!="home" and action_name!="index"%>
   <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />  
 <%end%>
-<%# javascript_include_tag 'new_js/jquery_002','new_js/jquery_003', 'new_js/jquery-latest', 'new_js/swfobject_002' %>
-<script type="text/javascript" src="http://localhost:3003/javascripts/new_js/jquery-latest.js"></script>
-<script type="text/javascript" src="/javascripts/new_js/swfobject_002.js"></script>
-<script type="text/javascript" src="/javascripts/new_js/jquery_002.js"></script>
-<script type="text/javascript" src="/javascripts/new_js/jquery_003.js"></script>
-<script type="text/javascript" src="/javascripts/new_js/all.js"></script>
-
 <% unless I18n.locale.to_s[0..1] == 'en' -%>
   <%= javascript_include_tag ['localization/messages_', I18n.locale.to_s[0..1], '.js'].join %>
 <% end -%>

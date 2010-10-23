@@ -9,21 +9,21 @@
 		    wmode: "transparent"
 		};
 	    swfobject.embedSWF("/takeover/media/webbys.swf", "myContent", "400", "300", "9.0.0", flashvars, params, attributes);
-	    $(document).ready(function(){
-	        $("#close-flash").hide();
-	        $("#close-flash").delay(6000).show("slow");
+	    jQuery(document).ready(function(){
+	        jQuery("#close-flash").hide();
+	        jQuery("#close-flash").delay(6000).show("slow");
 	        
-	        $("#close-flash").click(function(event){
+	        jQuery("#close-flash").click(function(event){
 	            event.preventDefault();
-	            $("#bottom").hide("slide", { direction: "down" }, 1000);
+	            jQuery.("#bottom").hide("slide", { direction: "down" }, 1000);
 	        });
 	        
 	        positionFooter(); 
 			function positionFooter(){
-				$("#bottom").css({bottom:0,position: "absolute",top:($(window).scrollTop()+$(window).height()-$("#bottom").height())+"px"})	
+				jQuery("#bottom").css({bottom:0,position: "absolute",top:(jQuery(window).scrollTop()+jQuery(window).height()-jQuery("#bottom").height())+"px"})	
 			}
 		 
-			$(window)
+			jQuery(window)
 				.scroll(positionFooter)
 				.resize(positionFooter)
 			
@@ -94,25 +94,25 @@
 		
 		
 		
-$(document).ready(function(){
+jQuery(document).ready(function(){
 
-	$("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled - Adds empty span tag after ul.subnav
+	jQuery("ul.subnav").parent().append("<span></span>"); //Only shows drop down trigger when js is enabled - Adds empty span tag after ul.subnav
 	
-	$("ul.topnav li a").hover(function() { //When trigger is clicked...
+	jQuery("ul.topnav li a").hover(function() { //When trigger is clicked...
 		
 		//Following events are applied to the subnav itself (moving subnav up and down)
-		$(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
+		jQuery(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
 
-		$(this).parent().hover(function() {
+		jQuery(this).parent().hover(function() {
 		}, function(){	
-			$(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
+			jQuery(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
 		});
 
 		//Following events are applied to the trigger (Hover events for the trigger)
 		}).hover(function() { 
-			$(this).addClass("subhover"); //On hover over, add class "subhover"
+			jQuery(this).addClass("subhover"); //On hover over, add class "subhover"
 		}, function(){	//On Hover Out
-			$(this).removeClass("subhover"); //On hover out, remove class "subhover"
+			jQuery(this).removeClass("subhover"); //On hover out, remove class "subhover"
 	});
 
 });
