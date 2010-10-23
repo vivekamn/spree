@@ -52,7 +52,7 @@
     </div>
     <div id="detailsandcatche_container">
         <h2 class="heading_bg">Details & Catch</h2>
-        <p class="commonpara" style="width:450px; padding-left:5px;">
+        <p class="points" style="width:450px; padding-left:5px;line-height: 24px; color: black;">
             <% unless @featured_product.name.nil? %>
             <br/>
             <%=@featured_product.name %>
@@ -128,7 +128,7 @@
                 <span style="font-size:20px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
-            <div style="padding-left:10px;">
+            <div style="padding-left: 10px; padding-top: 10px;">
                 <div class="progress_bar">
                     <div class="progress_barred" id="progress" style="float:left;">
                     </div>
