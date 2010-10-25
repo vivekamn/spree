@@ -56,7 +56,7 @@
 	    <tbody id='subtotal'>
 	      <tr class="total" id="subtotal-row">
 	        <td colspan="3"><b><%= t('star_customer_discount') %>:</b></td>
-	        <td class="total"><span>Rs.<%= (((@order.line_items[0].price * @order.line_items[0].quantity)) - @order.item_total.to_i).to_i %></span></td>
+	        <td class="total"><span>Rs.<%= (@order.line_items.total - @order.total).to_i %></span></td>
 	      </tr>
 	    </tbody>
 	  <% end %>
