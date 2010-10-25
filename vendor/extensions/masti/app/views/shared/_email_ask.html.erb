@@ -12,7 +12,7 @@
     	border:2px solid #E5E5E5;
     }
 </style>
-<div style="height:420px;width:950px;background-color:#FFFFFF;border: 5px solid #29689E;">
+<div style="height:450px;width:950px;background-color:#FFFFFF;border: 5px solid #983F96;">
     <table style="width:950px;">
         <tr>
             <td align="right">
@@ -87,7 +87,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="7">
+                                <td colspan="7" style="padding-left:30px;">
                                     <ul>
                                         <li style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
                                             1. Subscribe for email alerts/mobile alerts or register.
@@ -153,7 +153,7 @@
                                         Email Id<span style="color: red;">*</span>
                                     </td>
                                     <td align="left" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px;">
-                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="<%= cookies[:email] unless cookies[:email].nil?%>">
+                                        <input type="text" class="textfield1" id="email_ask_email" name="email_ask[email]" onblur="load_email();" onfocus="clear_email();" onkeypress="submitForm_on_enter(event,'deals_notification')" size="30" value="<%= cookies[:email].nil? ? 'E-mail id' : cookies[:email]%>">
                                     </td>
                                 </tr>
 								 <tr>
@@ -206,7 +206,10 @@
 <script type="text/javascript">
     
     function clear_email(){
-        document.getElementById('email_ask_email').value = "";
+		if(document.getElementById('email_ask_email').value == "E-mail id"){
+			document.getElementById('email_ask_email').value = "";	
+		}
+       
     }
     
     function load_email(){

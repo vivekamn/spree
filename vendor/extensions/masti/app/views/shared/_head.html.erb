@@ -106,8 +106,8 @@
 		<div id="header_login">
         <% if !current_user %>
 			  <% form_tag user_sessions_path do  %>
-			  <%= text_field :user_session, 'login', :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
-	             <%= password_field :user_session, 'password', :class=>"logintextfield",:value=>"Password" %>
+			  <%= text_field :user_session, 'login',:onfocus=>"clear_username();",:onblur=>"load_username();", :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
+	             <%= password_field :user_session, 'password',:onfocus=>"clear_password();", :class=>"logintextfield",:value=>"Password" %>
 	              <input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" />
 	            <!--<img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" />--> 
 	            <p style="padding-left:105px;"><a href="password_resets/new" class="login_forgotpass">forgot password ?|</a><a class="login_forgotpass" href="/signup"> register</a></p>
@@ -215,4 +215,21 @@
             document.getElementById('deals_notification_email').value = "E-mail id";
         }
     }
+	 function clear_username(){
+	if (document.getElementById('user_session_login').value == "User name"){
+        document.getElementById('user_session_login').value = "";
+	}
+    }
+    
+    function load_username(){
+        if (document.getElementById('user_session_login').value == "") {
+            document.getElementById('user_session_login').value = "User name";
+        }
+    }
+	 function clear_password(){
+		if (document.getElementById('user_session_password').value == "Password"){
+	        document.getElementById('user_session_password').value = "";
+		}
+    }
+    
 </script>

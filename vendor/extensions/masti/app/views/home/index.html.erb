@@ -159,10 +159,19 @@
             <a href="/products/<%=@featured_product.permalink%>?type=gift"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/></a>
         </div>
         <div id="callustopay">
-            <div onmousemove="javascript:document.getElementById('call_by_Cash').innerHTML='044-455 300 50'" id="call_by_Cash" class="rightdeal_para" style="float:left; padding-top:5px;padding-right:38px;padding-left:10px;">
+            <table width="100%">
+            	<tr>
+            		<td>
+			<div onmousemove="javascript:document.getElementById('call_by_Cash').innerHTML='044-455 300 50'" id="call_by_Cash" class="rightdeal_para" style="float:left; padding-top:5px;">
                 Call Us to pay by cash
             </div>
-            <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a>
+			</td>
+					<td align="right" style="padding-right:17px;">
+						  <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a>
+					</td>
+            	</tr>
+            </table>
+          
         </div>
     </div><% side_deal_product = active_side_deal(@side_deal.product_id) unless @side_deal.nil? %>
     <%unless side_deal_product.nil? %>
