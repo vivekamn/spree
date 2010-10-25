@@ -168,8 +168,8 @@
     <%unless side_deal_product.nil? %>
     <div id="todayssidedeal_container">
         <h2 class="heading_bg" style="width:160px;"><%if @deal_param == "side_deal" %>
-            Todays Deal<%else %>
-            Todays Side Deal<%end %>
+            Todays Side Deal<%else %>
+            Todays Deal<%end %>
         </h2>
         <img src="<%= side_deal_product.images.first.attachment.url(:product)%>" width="66" height="58" alt="todays side deal" class="sidealimg_thumb"/>
         <p class="commonpara">
