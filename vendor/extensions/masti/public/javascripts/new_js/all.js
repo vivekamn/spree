@@ -1,7 +1,7 @@
 /**
  * @author ramanavel
  */
- var flashvars = {
+var flashvars = {
 		};
 		var params = {
 		};
