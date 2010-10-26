@@ -38,11 +38,11 @@
 							<%if variant_obj.category == "GIFT BOXES"%>
                             <td align="left">
 								<img border="0" src="/images/gift_box.png">
-                                <%= variant_obj.c_name %> - SOLD OUT
+                                <%= variant_obj.c_name %> <%if variant_obj.count_on_hand == 0%>- SOLD OUT<%end%>
                             </td>
 							<%else%>
 							<td align="left" style="padding-left:35px;">
-                                <%= variant_obj.c_name %>
+                                <%= variant_obj.c_name %> <%if variant_obj.count_on_hand == 0%>- SOLD OUT<%end%>
                             </td>
 							<%end%> 
 							<td>
@@ -55,10 +55,10 @@
 								Rs.<%= price %>
                             </td>
                             <td align="center">
-                            	<%if variant_obj.category == "GIFT BOXES"%>
+                            	<%if variant_obj.count_on_hand == 0%>
 								<select name="variant[quantity_<%=variant_obj.id%>]" id="variant_quantity_<%=variant_obj.id%>"><option value="0">0</option></select>
 								<%else%>
-								<%= f.select "quantity_#{variant_obj.id}",0..10,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
+								<%= f.select "quantity_#{variant_obj.id}",0..variant_obj.count_on_hand,{},:onchange=>"update_price(#{price},#{variant_obj.id});"%>
 								<%end%>
 								<%= f.hidden_field "price_#{variant_obj.id}", :value=> price %>
                             </td>
