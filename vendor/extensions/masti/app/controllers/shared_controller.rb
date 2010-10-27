@@ -90,7 +90,7 @@ class SharedController < ApplicationController
   def diwali_crackers_list
     logger = Logger.new STDOUT
     logger.debug "loading diwali crackers list information  #{DATA_DIRECTORY} ..."
-    Dir.glob("#{DATA_DIRECTORY}/deevali3.csv").each  do |file|
+    Dir.glob("#{DATA_DIRECTORY}/diwali4.csv").each  do |file|
       diwali_crackers_list_file file
     end
     
@@ -115,11 +115,11 @@ class SharedController < ApplicationController
       variants.category = row[0]
       variants.c_name = row[1].capitalize
       variants.unit = row[2]
-      variants.price = row[3]
+      variants.price = row[5]
       variants.product_id = 1060500648
-      variants.count_on_hand = 100
-      variants.image_url = row[4]
-      variants.c_description = row[5]
+      variants.count_on_hand = row[4]
+#      variants.image_url = row[4]
+#      variants.c_description = row[5]
       variants.save!
       query = "INSERT INTO option_values_variants (variant_id,option_value_id) VALUES (#{variants.id},979459986);"
       result = ActiveRecord::Base.connection.execute(query)

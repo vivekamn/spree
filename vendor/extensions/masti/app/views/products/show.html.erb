@@ -31,7 +31,8 @@
                         </tr>
                         
                         <% @variants_obj.each_with_index do |variant_obj,index| %>
-                        <tr>
+                        <%unless variant_obj.count_on_hand == 0%>
+						<tr>
                             <td align="center">
                                 <%= index+1 %>
                             </td>
@@ -95,6 +96,7 @@
 								<%end%>
 							</td>
                         </tr>
+						<%end%>
                         <%end %>
                     </table>
 					<table width="100%">
