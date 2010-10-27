@@ -1,7 +1,7 @@
 /**
  * @author ramanavel
  */
- var flashvars = {
+var flashvars = {
 		};
 		var params = {
 		};
@@ -15,7 +15,7 @@
 	        
 	        jQuery("#close-flash").click(function(event){
 	            event.preventDefault();
-	            jQuery.("#bottom").hide("slide", { direction: "down" }, 1000);
+	            jQuery("#bottom").hide("slide", { direction: "down" }, 1000);
 	        });
 	        
 	        positionFooter(); 
