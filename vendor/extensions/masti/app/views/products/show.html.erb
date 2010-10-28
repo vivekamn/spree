@@ -30,7 +30,8 @@
 							<th>More Details</th>
                         </tr>
                         
-                        <% @variants_obj.each_with_index do |variant_obj,index| %>
+                        <% @variants_obj.each do |variant_obj| %>
+						<%index=0%>
                         <%unless variant_obj.count_on_hand == 0%>
 						<tr>
                             <td align="center">
@@ -201,13 +202,14 @@
 		var price_count = 0;
 		var variant_ids = new Array();
 		var variant_size = document.getElementById('var_size').value;
-		variant_ids = [<% @variants_obj.each do |s| %> "<%= s.id %>", <% end %>];
+		variant_ids = [<% @variants_obj.each do |s| %><%if s.count_on_hand!=0%>"<%= s.id %>",<% end %><% end %>];
 		for (i = 0;i < variant_size; i++){
 			var quantity_str = "variant_quantity_"+variant_ids[i];
 			var price_str = "variant_price_"+variant_ids[i];
 			
 			var quantity = document.getElementById(quantity_str).value;
 			var price = document.getElementById(price_str).value;
+			
 			if(quantity == 0){
 				count = count + 1;
 			}else{
@@ -240,7 +242,7 @@
 		var price_count = 0;
 		var variant_ids = new Array();
 		var variant_size = document.getElementById('var_size').value;
-		variant_ids = [<% @variants_obj.each do |s| %> "<%= s.id %>", <% end %>];
+		variant_ids = [<% @variants_obj.each do |s| %><%if s.count_on_hand!=0%>"<%= s.id %>",<% end %><% end %>];
 		for (i = 0;i < variant_size; i++){
 			var quantity_str = "variant_quantity_"+variant_ids[i];
 			var price_str = "variant_price_"+variant_ids[i];

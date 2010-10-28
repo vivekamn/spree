@@ -117,7 +117,9 @@
     </head>
     <body>
         <div id="wrapper">
-            <%= render :partial => "shared/head" %>
+        	<%= render :partial => "shared/head" %>
+        	<div id="container">
+            
             <% if flash[:success] %>
             <div class="flash notice" id="flash_notice">
                 <%= flash[:success] %>
@@ -134,8 +136,10 @@
             </div>
             <%end %>
             <%= yield %>
-            <%= render :partial => 'shared/footer' %>
+           
         </div>
+		 <%= render :partial => 'shared/footer' %>
+		</div>
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
