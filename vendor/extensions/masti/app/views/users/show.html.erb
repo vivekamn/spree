@@ -135,8 +135,11 @@
 			  </thead>
 			  <tbody>
 			  <% @orders.each do |order| %>
+			  <%flag=true%>
 			  <% order.line_items.each do |item| %>
-			    <tr class="<%= cycle('even', 'odd') %>">
+			    <%if flag%>
+				<%flag=false%>
+				<tr class="<%= cycle('even', 'odd') %>">
 			      <td width="55%"><%= item.variant.product.name %></td>
 			      <td><%=order.created_at.to_date%></td>
 			      <td><%= t(order.state).titleize %></td>
@@ -150,6 +153,7 @@
 				</td>
 				  <%end%>
 			    </tr>
+				<% end %>
 			  <% end %>
 			  </tbody>
 			</table>
