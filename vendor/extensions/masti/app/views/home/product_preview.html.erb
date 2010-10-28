@@ -291,9 +291,6 @@
 </div>
 <div id="container_clear" class="clear_for_all">
 </div>
-<div id="share_this_div" style="display:none;width:500px;height:180px;">
-    <%= render :partial => "popup", :locals =>{ :deal => @deal} %>
-</div>
 <input type="hidden" name="end_time" id="end_time" value="<%= @featured_product.deal_expiry_date.to_s %>"><input type="hidden" name="deal_live_status" id="deal_live_status" value="<%=@deal and deal_live @deal, @featured_product%>">
 <script type="text/javascript">
                         	
