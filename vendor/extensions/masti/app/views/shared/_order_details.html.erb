@@ -90,7 +90,7 @@
       <% end %>
     </tbody>
   <% end %>
-  <%if @order.line_items[0].variant.product_id == 1060500648%>
+  <%if @order.line_items[0].variant.product_id == 1060500648 and @order.advance_paid%>
   <% final_amount = (@order.total.to_i / 10).to_i%>
   <% balance_amount = @order.total.to_i - final_amount.to_i%>
   <% hook :order_details_total do %>

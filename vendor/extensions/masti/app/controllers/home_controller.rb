@@ -433,6 +433,9 @@ before_filter :find_and_set_affiliate, :only => :index
      if @order.line_items[0].variant.product_id == 1060500648
        product = @order.line_items[0].variant.product
        product.master.update_attribute(:count_on_hand,(product.maximum_number - product.currently_bought_count))
+       if @response_txt['Mode']=="TEST"
+         @order.update_attribute(:advance_paid,false)
+       end
      end
   end
   
