@@ -30,8 +30,7 @@
 							<th>More Details</th>
                         </tr>
                         
-                        <% @variants_obj.each do |variant_obj| %>
-						<%index=0%>
+                        <% @variants_obj.each_with_index do |variant_obj,index| %>
                         <%unless variant_obj.count_on_hand == 0%>
 						<tr>
                             <td align="center">
