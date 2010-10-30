@@ -22,6 +22,13 @@ class Admin::OrdersController < Admin::BaseController
     # TODO - possible security check here but right now any admin can before any transition (and the state machine
     # itself will make sure transitions are not applied in the wrong state)
     event = params[:e]
+    if event=="cancel"
+      line_items = @order.line_items
+      line_items.each do |item|
+        variant = Variant.find(item.variant_id)
+        variant.update_attribute(:count_on_hand,variant.count_on_hand+item.quantity)
+      end
+    end
     Order.transaction do
       @order.send("#{event}!")
     end
