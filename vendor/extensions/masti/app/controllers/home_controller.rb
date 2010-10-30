@@ -319,6 +319,7 @@ before_filter :find_and_set_affiliate, :only => :index
     @response_txt['ResponseMessage']='Transaction Successful'
     @response_txt['ResponseCode']="0"
     @response_txt['PaymentID']=nil
+    @response_txt['Mode']=="TEST"
     @response_txt['DateCreated']=Time.now.to_s
     @order=Order.find_by_number(@response_txt['MerchantRefNo']) # the merchant ref no is the order no for which payment occurred
     begin
@@ -365,6 +366,13 @@ before_filter :find_and_set_affiliate, :only => :index
     unless @order.user.user_promotion.nil?
       @order.update_user_promotion
     end
+    if @order.line_items[0].variant.product_id == 1060500648
+       product = @order.line_items[0].variant.product
+       product.master.update_attribute(:count_on_hand,(product.maximum_number - product.currently_bought_count))
+       if @response_txt['Mode']=="TEST"
+         @order.update_attribute(:advance_paid,false)
+       end
+     end
   end
   
   
