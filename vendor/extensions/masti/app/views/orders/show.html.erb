@@ -24,7 +24,7 @@
     <div id="order">
       <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
     </div>      
-    <% if @order.total>0 %>
+    <% if @order.total>0 and @order.line_items[0].variant.product_id != 1060500648%>
 		<%form_for "frmTransaction" , :url => 'https://secure.ebs.in/pg/ma/sale/pay/' ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
 	      <input name="account_id" type="hidden" value="6246" />
 	      <input name="return_url" type="hidden" size="60" value="<%=payment_response_url%>?authenticity_token=<%=form_authenticity_token%>&DR={DR}" id="return_url" />
@@ -62,7 +62,12 @@
 	  <%else%>
 		  	 <%form_for "frmTransaction" ,:url=>{:controller=>"home",:action=>"zero_payment"} ,:html => {:id => "frmTransaction" ,:method => :post} do |f|%>
 			 	<input name="reference_no" type="hidden" value="<%=@order.number%>" />
-	      		<input name="amount" type="hidden" value="<%=@order.total%>"/>
+				 <%if @order.line_items[0].variant.product_id == 1060500648%>
+				  <% final_amount = (@order.total.to_i / 10).to_i%>
+			      <input name="amount" type="hidden" value="<%=final_amount%>"/>
+			      <%else%>
+				  <input name="amount" type="hidden" value="<%=@order.total%>"/>
+				  <%end%>
 				<div align="center" style="margin-right: 40px;"><%= image_submit_tag "proceed.gif"%> </div>
 			 <%end%>	
 	  <%end%>
