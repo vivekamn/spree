@@ -28,6 +28,10 @@ class Admin::OrdersController < Admin::BaseController
         variant = Variant.find(item.variant_id)
         variant.update_attribute(:count_on_hand,variant.count_on_hand+item.quantity)
       end
+      product = line_items[0].variant.product
+      master = product.master
+      master.update_attribute(:count_on_hand,master.count_on_hand+1)
+      product.update_attribute(:currently_bought_count,product.currently_bought_count-1)
     end
     Order.transaction do
       @order.send("#{event}!")
