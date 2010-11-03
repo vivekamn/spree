@@ -121,11 +121,15 @@
             </div>
         </div>
         <div id="buynow">
-            <%= link_to "<img src='/images/new_images/buy-now-button.jpg' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
+            <%if @deal and deal_live @deal, @featured_product %>
+				<%= link_to "<img src='/images/new_images/buy-now-button.jpg' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
+			<%else%>
+				Sold Out
+			<%end%>
         </div>
         <div id="people">
             <p>
-                <span style="font-size:20px; float:left;"><%= @bought_count %></span>&nbsp;
+                <span style="font-size:18px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
             <div style="padding-left: 10px; padding-top: 10px;">
@@ -149,14 +153,16 @@
             </p>
             <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0" style="margin-right:4px; margin-left:3px;"/></a><a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;"/></a><a href="javascript:show_send_share_this();"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
         </div>
+		<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
         <div id="gift">
-            <a href="/products/<%=@featured_product.permalink%>?type=gift">
+		    <a href="/products/<%=@featured_product.permalink%>?type=gift">
                 <p class="rightdeal_para" style="float:left; padding-top:5px; padding-right:85px;">
                     Gift this deal
                 </p>
             </a>
             <a href="/products/<%=@featured_product.permalink%>?type=gift"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/></a>
-        </div>
+		</div>
+		 <%end %>
         <div id="callustopay">
             <table>
                 <tr>
@@ -281,7 +287,7 @@
     <div id="referfriends_container" class="livechat_refer_container" onclick="javascript:window.location.href='<%= invite_friends_path %>'">
         <h3 class="rightsubheading" style="float:left;">Refer Friends and get
             <br/>
-            a deal for free
+            a Inox Movie Ticket for free
         </h3>
         <a href="<%= invite_friends_path %>"><img src="/images/new_images/referfriends_icon.png" alt="refer friends" width="24" height="21" border="0" class="iconimage"/></a>
     </div>
