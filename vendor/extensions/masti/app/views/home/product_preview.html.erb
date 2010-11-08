@@ -32,7 +32,7 @@
                                         <a href="#"><%= image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") %></a>
                                     </li>
                                     <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-2 jcarousel-item-2-horizontal">
-                                        <a href="#"><%= image_tag(@featured_product.images.second.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") unless @featured_product.images.second.nil? %></a>
+                                        <a href="#"><%= @featured_product.images.second.nil? ? image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") : image_tag(@featured_product.images.second.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") %></a>
                                     </li>
                                 </ul>
                             </div>
@@ -125,7 +125,7 @@
         </div>
         <div id="people">
             <p>
-                <span style="font-size:20px; float:left;"><%= @bought_count %></span>&nbsp;
+                <span style="font-size:16px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
             <div style="padding-left: 10px; padding-top: 10px;">
@@ -150,13 +150,21 @@
             <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0" style="margin-right:4px; margin-left:3px;"/></a><a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;"/></a><a href="javascript:show_send_share_this();"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
         </div>
         <div id="gift">
-            <a href="/products/<%=@featured_product.permalink%>?type=gift">
+        	<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
+		    <a href="/products/<%=@featured_product.permalink%>?type=gift">
+		    	<%end%>
                 <p class="rightdeal_para" style="float:left; padding-top:5px; padding-right:85px;">
                     Gift this deal
                 </p>
+			<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>	
             </a>
-            <a href="/products/<%=@featured_product.permalink%>?type=gift"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/></a>
-        </div>
+			<a href="/products/<%=@featured_product.permalink%>?type=gift">
+			<%end%>	
+			<img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/>
+			<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
+			</a>
+			<%end%>
+		</div>
         <div id="callustopay">
             <table>
                 <tr>

@@ -102,6 +102,7 @@
 	padding-right: 5px;
 	padding-bottom: 5px;
 	padding-left: 5px;
+	height:459px;
 }
 .clear_for_all {
 	clear: both;
@@ -248,7 +249,7 @@
 	margin-top: 5px;
 	background-color: #FEF0EC;
 	padding: 10px;
-	height: 180px;
+	height: 183px;
 }
 #emailme_container {
 	height: 35px;

@@ -53,8 +53,6 @@ class LineItem < ActiveRecord::Base
   end
   
   def total
-    puts "line item price............#{self.price}"
-    puts "line item quantity.........#{self.quantity}"
     self.price * self.quantity  
   end
   alias amount total

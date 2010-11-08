@@ -15,7 +15,7 @@ class ProductsController < Spree::BaseController
   def show
     @product = Product.find(:first, :conditions => ['permalink = ? ', params[:id]])
     @variants_obj = Variant.find(:all,:conditions=>['product_id = ? and is_master = 0 and count_on_hand!=0 AND deleted_at IS NULL',@product.id])
-    if @variants_obj.size <=1
+    if @variants_obj.size<1
     deal = DealHistory.find(:first, :conditions =>['is_active = ?', true])
     @product = Product.find_by_permalink(params[:id])
     @product = Product.find(:first, :conditions => ['permalink = ? AND city_id =? ', params[:id],session[:city_id]])

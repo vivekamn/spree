@@ -32,7 +32,7 @@
                                         <a href="#"><%= image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") %></a>
                                     </li>
                                     <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-2 jcarousel-item-2-horizontal">
-                                        <a href="#"><%= image_tag(@featured_product.images.second.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") unless @featured_product.images.second.nil? %></a>
+                                        <a href="#"><%= @featured_product.images.second.nil? ? image_tag(@featured_product.images.first.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") : image_tag(@featured_product.images.second.attachment.url(:large),:alt=> @featured_product.name,:width=>"465",:height=>"224") %></a>
                                     </li>
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
     </div>
     <div id="detailsandcatche_container">
         <h2 class="heading_bg">Details & Catch</h2>
-        <p class="points" style="padding-left:5px;line-height: 24px; color: black;">
+        <p style="width: 450px; padding-left: 5px;font-size:12px;line-height:24px;" class="commonpara">
             <% unless @featured_product.name.nil? %>
             <br/>
             <%=@featured_product.name %>
@@ -129,7 +129,7 @@
         </div>
         <div id="people">
             <p>
-                <span style="font-size:18px; float:left;"><%= @bought_count %></span>&nbsp;
+                <span style="font-size:16px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
             <div style="padding-left: 10px; padding-top: 10px;">
@@ -153,16 +153,23 @@
             </p>
             <a href="http://twitter.com/home?status=<%= @featured_product.name.gsub('%','percent') %>--www.masthideals.com" title="Click to send this page to Twitter!" target="_blank"><img src="/images/new_images/twitter_icon.png" alt="twitter" width="14" height="19" border="0" style="margin-right:4px; margin-left:3px;"/></a><a href="http://www.facebook.com/sharer.php?u=www.masthideals.com&t=<%= page_title %>" target="_blank"><img src="/images/new_images/facebook_icon.png" alt="facebook" width="9" height="20" border="0" style="margin-right:4px;"/></a><a href="javascript:show_send_share_this();"><img src="/images/new_images/message_icon.png" alt="message" width="26" height="18" border="0" /></a>
         </div>
-		<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
+		
         <div id="gift">
+        	<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
 		    <a href="/products/<%=@featured_product.permalink%>?type=gift">
+		    	<%end%>
                 <p class="rightdeal_para" style="float:left; padding-top:5px; padding-right:85px;">
                     Gift this deal
                 </p>
+			<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>	
             </a>
-            <a href="/products/<%=@featured_product.permalink%>?type=gift"><img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/></a>
+			<a href="/products/<%=@featured_product.permalink%>?type=gift">
+			<%end%>	
+			<img src="/images/new_images/gift_icon.png" alt="gift this deal" width="17" height="17" border="0" style="margin-top:3px;"/>
+			<%if (@deal and deal_live @deal, @featured_product) and @featured_product.show_gift%>
+			</a>
+			<%end%>
 		</div>
-		 <%end %>
         <div id="callustopay">
             <table width="100%">
                 <tr>
@@ -189,7 +196,7 @@
             <%=side_deal_product.side_deal_title %>
         </p>
         <p class="commonpara">
-            <% unless side_deal_product.id == 1060500648 %>
+            <% unless side_deal_product.id == 1060500618 %>
             <%if side_deal_product.id == 1060500649 %>
             <table width="70%">
                 <tr>
@@ -278,7 +285,7 @@
         <%end %>
     </div>
     <div id="rightimagecontainer">
-        <a href="#"><img src="/images/new_images/homepage_rightimage.png" alt="homepage right image" width="200" height="99" border="0" /></a>
+        <a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/new_images/cmoms.jpg" alt="homepage right image" width="200" height="99" border="0" /></a>
     </div>
     <div id="livechat_container" class="livechat_refer_container" onclick="javascript:show_chat();">
         <h3 class="rightsubheading" style="float:left;">Live chat</h3>

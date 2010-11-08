@@ -25,7 +25,6 @@ class OrdersController < Spree::BaseController
   
   def multiple_variant_update
     begin
-#  puts "#{params[:variant].inspect}-------->"
    @order = Order.create(:state=>"new",:created_at=>Time.now,:user_id=>current_user.id)
    params[:variant].each do |param|
        arr = param[0].split"_"

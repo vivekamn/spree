@@ -1,3 +1,7 @@
+
+<table class="static_page" width="95%"  border="0" cellpadding="0" cellspacing="10" align="center" >
+       <tr>
+           <td colspan='2' width="100%">
 <% @body_id = 'cart' %>
 <%= error_messages_for :order  %>
 
@@ -37,6 +41,9 @@
         <% end -%>
       </div>
 <input type="hidden" id="price" value="<%= order_price(@order).to_i %>">
+</td>
+</tr>
+</table>
 <script type="text/javascript">
   function update_price() {
     document.getElementById('buy').style.display='none';    

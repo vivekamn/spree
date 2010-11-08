@@ -75,14 +75,14 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><%= product.name%></span>
+                                                                        <span style="color:blue;"><a href="/home/product_preview/<%= product.permalink %>"><%= product.name%></a></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td width="126" valign="top">
                                                                     </td>
                                                                     <td align="right" width="250" valign="top" class="link" >
-                                                                        <img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>">
+                                                                       <a href="/home/product_preview/<%= product.permalink %>"> <img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>"></a>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -110,14 +110,14 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="left" class="coupon_text" colspan="2">
-                                                                        <span style="color:blue;"><%= product.name%></span>
+                                                                        <span style="color:blue;"><a href="/home/product_preview/<%= product.permalink %>"><%= product.name%></a></span>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td width="126" valign="top">
                                                                     </td>
                                                                     <td align="right" width="250" valign="top" class="link" >
-                                                                        <img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>">
+                                                                       <a href="/home/product_preview/<%= product.permalink %>"><img class="image" border="0" title="<%= product.side_deal_title.nil? ? product.permalink : product.side_deal_title %>" alt="<%= product.permalink %>" src="<%= product.images.first.attachment.url(:product) if product.images and product.images.first %>"></a>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
