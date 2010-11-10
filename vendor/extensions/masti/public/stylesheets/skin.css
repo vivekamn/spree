@@ -245,11 +245,11 @@ padding:0.8em;
 }
 .points ul{ width:380px; padding:5px 0 5px 5px; margin:0;
 }
-.points ul li{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+.points ul li{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.png) no-repeat left top; list-style:none;
 }
-.points p{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+.points p{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.png) no-repeat left top; list-style:none;
 }
 .textfield1{ border:1px solid #e5e5e5; height:18px; width:178px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#848484;
 }
-.commonpara p{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.gif) no-repeat left top; list-style:none;
+.commonpara p{ width:350px; padding:4px 0 4px 15px; background:url(../images/bullet.png) no-repeat left top; list-style:none;
 }
