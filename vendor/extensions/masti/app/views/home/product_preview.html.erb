@@ -52,7 +52,7 @@
         <h2 class="heading_bg">Highlights & Catch</h2>
         <div style="width: 450px; padding-left: 5px;font-size:12px;line-height:24px;" class="commonpara">
 			<% unless @featured_product.deal_info.nil? %>
-	        <%= @featured_product.deal_info.gsub('<li>','<p>').gsub('</li>','</p>').gsub('<li style="line-height: 24px; color: black;">','<p>') %>
+	       <%= @featured_product.deal_info.gsub('<li','<p').gsub('</li>','</p>').gsub('<li style="line-height: 24px; color: black;">','<p>') %>
 	        <%end %>
         </div>
         <div id="detail_div">
@@ -187,7 +187,7 @@
             <%=side_deal_product.side_deal_title %>
         </p>
         <p class="commonpara">
-            <% unless side_deal_product.id == 1060500618 %>
+            <% unless side_deal_product.id == 1060500648 %>
             <%if side_deal_product.id == 1060500649 %>
             <table width="70%">
                 <tr>
