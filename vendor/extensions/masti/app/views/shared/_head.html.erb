@@ -29,7 +29,7 @@
                 <% end %>
                 <%else %>
 					<%unless session[:fb_logged].nil?%>
-							<table class="login_forgotpass">
+							<table>
 								<tr>
 									<td valign="top">
 										<fb:profile-pic uid='loggedinuser' facebook-logo='true' size="square" width="48px" height="48px"></fb:profile-pic>
@@ -38,10 +38,10 @@
 										<fb:name uid='loggedinuser' useyou='false' linked='false' ></fb:name>
 									</td>
 									<td valign="top">
-										<%= link_to 'Account', user_path(current_user),:class=>"login_forgotpass"%>
+										<%= link_to 'Account', user_path(current_user)%>
 									</td>
 									<td valign="top">
-										<a href = '#' onclick ="FB.Connect.logoutAndRedirect('/logout'); return(false);" class="login_forgotpass"><img id = 'fb_logout_image' src = 'http://static.ak.fbcdn.net/images/fbconnect/logout-buttons/logout_small.gif' alt = 'Connect' border='0' /></a>
+										<a href = '#' onclick ="FB.Connect.logoutAndRedirect('/logout'); return(false);"><img id = 'fb_logout_image' src = 'http://static.ak.fbcdn.net/images/fbconnect/logout-buttons/logout_small.gif' alt = 'Connect' border='0' /></a>
 									</td>
 								</tr>
 							</table>
