@@ -103,7 +103,7 @@ jQuery(document).ready(function(){
 		//Following events are applied to the subnav itself (moving subnav up and down)
 		jQuery(this).parent().find("ul.subnav").slideDown('fast').show(); //Drop down the subnav on click
 
-		jQuery(this).parent().find("ul.subnav").hover(function() {
+		jQuery("ul.topnav").hover(function() {
 		}, function(){	
 			jQuery(this).parent().find("ul.subnav").slideUp('slow'); //When the mouse hovers out of the subnav, move it back up
 		});
