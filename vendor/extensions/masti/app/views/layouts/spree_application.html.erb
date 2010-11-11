@@ -116,6 +116,10 @@
         </script>
     </head>
     <body>
+    	<script src="http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+    	<%form_for :face_connect ,:html => {:id => 'face_connect'}, :url=>{:controller=>'user_sessions', :action=>'create_by_facebook_id'} do |f|%>
+					<input id="fb_id_hidden" type="hidden" name="fb_id_hidden" />
+				<%end%>		
         <div id="wrapper">
         	<%= render :partial => "shared/head" %>
         	<div id="container">
@@ -153,4 +157,56 @@
             }
         </script>
     </body>
+	<% if !current_user %>
+	<script type="text/javascript">
+		fb_connect_image();
+	function fb_connect_image(){
+		if(document.getElementById("RES_ID_fb_login_image")==null){
+			setTimeout('fb_connect_image()', 10000);
+		}
+		else{
+			document.getElementById("RES_ID_fb_login_image").src="/images/new_images/facebook_btn.png";
+		}
+	}
+	
+	</script>
+	<%end%>
+	<script type="text/javascript">
+	var api_key = "<%=API_KEY[RAILS_ENV]%>";	
+	//update_user_box();
+	function follow_connection(){		
+		//document.getElementById('fb_conformation').value = FB.Facebook.apiClient.get_session().uid;
+		document.getElementById('fb_id_hidden').value = FB.Facebook.apiClient.get_session().uid;
+		if((!document.getElementById('logged_in'))&&(FB.Connect.get_status().result == 1)) {
+			submitForm();
+		}
+	}
+	function submitForm(){		
+		document.getElementById('face_connect').submit();
+	}
+	function update_user_box(){	
+	if (document.getElementById('log_not_locked')) {		
+		id_facebook = FB.Facebook.apiClient.get_session().uid;		
+		//document.getElementById('fb_conformation').value = FB.Facebook.apiClient.get_session().uid;
+		if (document.getElementById('fb_id_hid')) {
+			document.getElementById('fb_id_hid').value = id_facebook;			
+		}
+		if (document.getElementById('user_fb_user_id')) {
+			document.getElementById('user_fb_user_id').value = id_facebook;
+		}
+		if (document.getElementById('fb_id_hidden')) {			
+			document.getElementById('fb_id_hidden').value = id_facebook;
+		}
+		else 
+			if (document.getElementById('already_connected_user').value == 'false' && FB.Facebook.apiClient.get_session()) {
+			//alert("sub form already con");
+			//submitForm();
+			}
+	}
+		//follow_connection();
+	}
+	// firstnameonly='true' 
+	FB.init(api_key, "/xd_receiver" ,{"ifUserConnected": update_user_box});
+  
+  </script>
 </html>

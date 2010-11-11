@@ -20,20 +20,41 @@
                 <%= text_field :user_session, 'login',:onfocus=>"clear_username();",:onblur=>"load_username();", :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
                 <%= password_field :user_session, 'password',:onfocus=>"clear_password();", :class=>"logintextfield",:value=>"Password" %>
                 <input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" /><!--<img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" />-->
-                <p style="padding-left:105px;">
+                <fb:login-button size="medium" onlogin="javascript:follow_connection();">
+                </fb:login-button>
+				<p style="padding-left:105px;">
                     <a href="password_resets/new" class="login_forgotpass">forgot password ? |</a>
                     <a class="login_forgotpass" href="/signup"> register</a>
                 </p>
                 <% end %>
                 <%else %>
-                Logged in as <span style="font-weight:bold;color:#196FA0;"><%= current_user.email %></span>&nbsp;&nbsp;<%= link_to 'Account', user_path(current_user) %>&nbsp;&nbsp;<%= link_to 'Logout', logout_path %>
+					<%unless session[:fb_logged].nil?%>
+							<table class="login_forgotpass">
+								<tr>
+									<td valign="top">
+										<fb:profile-pic uid='loggedinuser' facebook-logo='true' size="square" width="48px" height="48px"></fb:profile-pic>
+									</td>
+									<td valign="top">
+										<fb:name uid='loggedinuser' useyou='false' linked='false' ></fb:name>
+									</td>
+									<td valign="top">
+										<%= link_to 'Account', user_path(current_user),:class=>"login_forgotpass"%>
+									</td>
+									<td valign="top">
+										<a href = '#' onclick ="FB.Connect.logoutAndRedirect('/logout'); return(false);" class="login_forgotpass"><img id = 'fb_logout_image' src = 'http://static.ak.fbcdn.net/images/fbconnect/logout-buttons/logout_small.gif' alt = 'Connect' border='0' /></a>
+									</td>
+								</tr>
+							</table>
+				<%else%>
+	                Logged in as <span style="font-weight:bold;"><%= current_user.email %></span>&nbsp;&nbsp;<%= link_to 'Account', user_path(current_user) %>&nbsp;&nbsp;<%= link_to 'Logout', logout_path %>
+				<%end%>
                 <%end %>
             </div>
             <div id="menu">
                 <ul class="topnav">
-                    <li style="height:40px;">
+                    <li style="height:40px;" id="topnav1">
                         <a href="<%= home_url%>" class="thedeal_btn" style="width:70px; padding-left:3px">The Deal</a>
-                        <ul class="subnav">
+                        <ul class="subnav" id="subnav1">
                             <!--<li><a href="#">Last minute deals </a></li>
                             <li><a href="#">Ongoing Deals </a></li>-->
                             <li>
@@ -48,9 +69,9 @@
                         <a href="<%=how_masti_works_path%>" class="howmasthidealsworks_btn" style="width:160px; text-align:center;">How Masthi Deals Works</a>
                     </li>
                     <!-- <li><a href="#" style="width:73px; text-align:center; margin-right:9px;" class="review_btn">Reviews</a></li>-->
-                    <li style="width:110px;">
+                    <li style="width:110px;" id="topnav2">
                         <a href="#" class="selectyourcity_btn" style="width:107px; padding-left:3px;">Select Your City</a>
-                        <ul style="left:-64px;" class="subnav">
+                        <ul style="left:0px;" class="subnav" id="subnav2">
                             <li>
                                 <a href="<%= chennai_path %>">Chennai</a>
                             </li>
