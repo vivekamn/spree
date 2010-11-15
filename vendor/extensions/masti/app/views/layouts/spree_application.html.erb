@@ -162,7 +162,7 @@
 		fb_connect_image();
 	function fb_connect_image(){
 		if(document.getElementById("RES_ID_fb_login_image")==null){
-			setTimeout('fb_connect_image()', 10000);
+			setTimeout('fb_connect_image()', 7500);
 		}
 		else{
 			document.getElementById("RES_ID_fb_login_image").src="/images/new_images/facebook_btn.png";
@@ -189,7 +189,8 @@
 		id_facebook = FB.Facebook.apiClient.get_session().uid;		
 		//document.getElementById('fb_conformation').value = FB.Facebook.apiClient.get_session().uid;
 		if (document.getElementById('fb_id_hid')) {
-			document.getElementById('fb_id_hid').value = id_facebook;			
+			document.getElementById('fb_id_hid').value = id_facebook;
+			document.getElementById('fb_id_hid_head').value = id_facebook;
 		}
 		if (document.getElementById('user_fb_user_id')) {
 			document.getElementById('user_fb_user_id').value = id_facebook;

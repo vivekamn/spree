@@ -9,27 +9,23 @@ class UserSessionsController < Spree::BaseController
   def new
     @user_session = UserSession.new
   end
+  
   def create_by_facebook_id  
-    facebook_id=params[:fb_id_hidden]    
+    facebook_id=params[:fb_id_hidden]
     @current_user = already_connected?(facebook_id)  
     if @current_user           
-      #      puts "going to creation"
-   #@user_session = UserSession.new(@current_user)
-   #@user_session.save!  
-session[:fb_logged] = "true" 
-   create_user_session(@current_user)
-   
-    #redirect_to :controller=>'home', :action=>'index'
-#      @user_session = UserSession.new
-#      create
-else
-  session[:needs_fb_linking]="true"
+      session[:fb_logged] = "true" 
+      create_user_session(@current_user)
+   else
+      session[:needs_fb_linking]="true"
       redirect_to :controller=>'user_sessions', :action=>'new'
     end
   end
+  
   def already_connected?(facebook_id)
     User.find_by_fb_user_id(facebook_id)    
   end
+  
   def create    
     not_need_user_auto_creation = 
         user_without_openid(params[:user_session]) ||
