@@ -23,7 +23,7 @@ class UserMailer < ActionMailer::Base
   def enquiries(enquiry)
     content_type "text/html"
     from           "customerservice@masthideals.com"
-    recipients    ["sathishideas2it@gmail.com","ramanavel@gmail.com"]
+    recipients    "ramanavel@gmail.com"
     bcc           Spree::Config[:mail_bcc]
     subject      "New Deal enquiry in masthideals.com #{enquiry.company}"
     sent_on        Time.now.utc
