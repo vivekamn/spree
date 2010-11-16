@@ -52,7 +52,7 @@
         <h2 class="heading_bg">Highlights & Catch</h2>
         <div style="width: 450px; padding-left: 5px;font-size:12px;line-height:24px;" class="commonpara">
 			<% unless @featured_product.deal_info.nil? %>
-	       <%= @featured_product.deal_info.gsub('<li','<p').gsub('</li>','</p>').gsub('<li style="line-height: 24px; color: black;">','<p>') %>
+	         <%= @featured_product.deal_info.gsub('<li','<p').gsub('</li>','</p>').gsub('<li style="line-height: 24px; color: black;">','<p>') %>
 	        <%end %>
         </div>
         <div id="detail_div">
@@ -134,7 +134,7 @@
                 <%if @deal and deal_live @deal, @featured_product %>
                 <%if deal_on @featured_product %>
                 Hurray, the deal is already on.<%else %>
-                <%= @featured_product.minimum_number - @bought_count %>more to avail this offer. <%end %>
+                <%= @featured_product.minimum_number - @bought_count %> more to avail this offer. <%end %>
                 <%end %>
             </p>
         </div>
@@ -165,12 +165,12 @@
             <table width="100%">
                 <tr>
                     <td>
-                        <div onmousemove="javascript:document.getElementById('call_by_Cash').innerHTML='044-455 300 50'" id="call_by_Cash" class="rightdeal_para" style="float:left; padding-top:5px;">
+                        <div onmousemove="javascript:document.getElementById('call_by_Cash').innerHTML='044-455 300 50'" id="call_by_Cash" class="rightdeal_para" style="float:left; padding-top:5px;cursor:pointer;">
                             Call Us to pay by cash
                         </div>
                     </td>
                     <td align="right" style="padding-right:17px;">
-                        <a href="#"><img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" /></a>
+                        <img src="/images/new_images/paycash_icon.png" alt="call us to pay by cash" width="17" height="17" border="0" />
                     </td>
                 </tr>
             </table>
@@ -269,7 +269,7 @@
 </div>
 <div id="content_rightmost">
     <div id="emailme_container">
-        <h3 class="rightsubheading">Email me each day’s deal</h3>
+        <h3 class="rightsubheading" style="padding-bottom:3px;">Email me each day’s deal</h3>
         <%form_for :deals_notification , :url => {:controller => "home" ,:action => "email_deal_notify"} ,:html => {:id => "deals_notification"} do |f| %>
         <%=f.text_field :email,:value=>"E-mail id",:onfocus=>"clear_email();",:onblur=>"load_email();",:class=>"subscribe",:style=>"font-size:9px;font-family:Arial,Helvetica,sans-serif;" %>
         <%= image_submit_tag "new_images/subscribe_btn.png",:border=>0,:onclick=>"return email_validate_head();" %>
@@ -279,13 +279,13 @@
         <a href="http://www.chennaimoms.com/?from=masthideals" target="_blank"><img src="/images/new_images/cmoms.jpg" alt="homepage right image" width="200" height="99" border="0" /></a>
     </div>
     <div id="livechat_container" class="livechat_refer_container" onclick="javascript:show_chat();">
-        <h3 class="rightsubheading" style="float:left;">Live chat</h3>
+        <h3 class="rightsubheading" style="float:left;padding-top: 6px;">Ask Us</h3>
         <a href="#"><img src="/images/new_images/livechat_icon.png" alt="live chat icon" width="31" height="17" border="0" class="iconimage"/></a>
     </div>
     <div id="referfriends_container" class="livechat_refer_container" onclick="javascript:window.location.href='<%= invite_friends_path %>'">
         <h3 class="rightsubheading" style="float:left;">Refer Friends and get
             <br/>
-            a Inox Movie Ticket for free
+            an Inox Movie Ticket for free
         </h3>
         <a href="<%= invite_friends_path %>"><img src="/images/new_images/referfriends_icon.png" alt="refer friends" width="24" height="21" border="0" class="iconimage"/></a>
     </div>
@@ -317,11 +317,18 @@
         	document.getElementById('extra_details').style.display='block';
         	document.getElementById('detailsandcatche_container').style.height='auto';
         	document.getElementById('detail_div').innerHTML='<a href="javascript:hide_extra_details();" class="knowmore">Hide More Details</a>';
+			var height = document.getElementById("detailsandcatche_container").offsetHeight;
+			var side_deal = height-15;
+			var right_side = height+260;
+			document.getElementById("content_rightmost").style.height = right_side+"px";
+			document.getElementById("todayssidedeal_container").style.height = side_deal+"px";
         }
         function hide_extra_details(){
         	document.getElementById('extra_details').style.display='none';
         	document.getElementById('detailsandcatche_container').style.height='200px';
         	document.getElementById('detail_div').innerHTML='<a href="javascript:call_extra_details();" class="knowmore">click to know more</a>';
+			document.getElementById("content_rightmost").style.height = "479px";
+			document.getElementById("todayssidedeal_container").style.height = "203px";
         }
         function show_chat()
         {
