@@ -188,7 +188,7 @@
         </p>
         <p class="commonpara">
             <% unless side_deal_product.id == 1060500648 %>
-            <%if side_deal_product.id == 1060500649 %>
+            <%if (!side_deal_product.show_master_price) or (side_deal_product.id == 1060500649)%>
             <table width="70%">
                 <tr>
                     <td>
