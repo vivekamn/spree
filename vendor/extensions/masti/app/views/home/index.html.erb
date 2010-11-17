@@ -188,7 +188,7 @@
         </p>
         <p class="commonpara">
             <% unless side_deal_product.id == 1060500648 %>
-            <%if side_deal_product.id == 1060500649 %>
+            <%if (!side_deal_product.show_master_price) or (side_deal_product.id == 1060500649)%>
             <table width="70%">
                 <tr>
                     <td>
@@ -209,7 +209,7 @@
                         <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
                     </td>
                     <td>
-                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;">40%</span>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;"><%= side_deal_product.discount %>%</span>
                     </td>
                 </tr>
                 <tr>

@@ -198,6 +198,11 @@
 		 <%= f.label :show_gift, "Show Gift this Deal" %>
         <%= f.error_message_on :show_gift %>
         <% end %>
+		<% f.field_container :show_master_price do %>
+        <%= f.check_box :show_master_price, :value => @product.show_master_price %>&nbsp;&nbsp;
+		 <%= f.label :show_master_price, "Show Master Price" %>
+        <%= f.error_message_on :show_master_price %>
+        <% end %>
     </div>
     <div class="yui-u first">
         <% f.field_container :reviews do %>
