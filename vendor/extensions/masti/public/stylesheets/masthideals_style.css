@@ -23,7 +23,7 @@
 	width: 900px;
 	margin-right: auto;
 	margin-left: auto;
-	height: 84px;
+	height: 80px;
 }
 #logo_container h1 {
 	display: none;
@@ -37,10 +37,10 @@
 	float: left;
 	width: 425px;
 	padding-top: 5px;
-	height: 78px;
+	height: 75px;
 }
 #header_login {
-	height: 38px;
+	height: 37px;
 	padding-left: 0px;
 	font-size:13px;
 }
@@ -249,7 +249,7 @@
 	margin-top: 5px;
 	background-color: #FEF0EC;
 	padding: 10px;
-	height: 203px;
+	height: 200px;
 }
 #emailme_container {
 	height: 35px;
@@ -373,7 +373,7 @@ body {
 .footer_unordered li {
 	list-style-type: none;
 }
-.footer_unordered li a {
+.footer_unordered p a {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #333333;
@@ -394,7 +394,7 @@ ul.topnav {
 	width: 425px;
 	font-size: 1.2em;
 	background-image: url(Sexy%20Drop%20Down%20Menu%20with%20CSS%20&%20jQuery%20-%20Tutorial%20by%20Soh%20Tanaka%20-%20www.SohTanaka.com_files//images/new_images/menu_bg.png);
-	height: 40px;
+	height: 34px;
 	padding-top: 20;
 	padding-bottom: 0;
 	display: block;
@@ -548,7 +548,7 @@ html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 	height: 224px;
 	overflow: hidden;
 }#menu {
-	height: 42px;
+	height: 30px;
 }
 .listitem {
 	border-top-style: none;

@@ -20,13 +20,15 @@
                 <% form_tag user_sessions_path do %>
                 <%= text_field :user_session, 'login',:onfocus=>"clear_username();",:onblur=>"load_username();", :class=>"logintextfield" ,:value=> cookies[:email].nil? ? "User name" : cookies[:email] %>
                 <%= password_field :user_session, 'password',:onfocus=>"clear_password();", :class=>"logintextfield",:value=>"Password" %>
-                <%unless session[:needs_fb_linking].nil?%>
+                <div style="display:none;float:right;width:150px;" id="fb_button">
+					<fb:login-button size="small" onlogin="javascript:follow_connection();">
+    	            </fb:login-button>
+				</div> 
+				<%unless session[:needs_fb_linking].nil?%>
 				  <input id="fb_id_hid_head" type="hidden" name="fb_id_hid" />
 				  <%end%>
 				<input name="sign in" type="image" value="sign in" src="/images/new_images/login_btnbg.png" /><!--<img src="/images/new_images/facebook_btn.png" width="128" height="15" alt="connect with facebook" />-->
-                <fb:login-button size="medium" onlogin="javascript:follow_connection();">
-                </fb:login-button>
-				<p style="padding-left:105px;">
+				<p style="padding-left:0px;">
                     <a href="password_resets/new" class="login_forgotpass">forgot password ? |</a>
                     <a class="login_forgotpass" href="/signup"> register</a>
                 </p>
@@ -56,9 +58,9 @@
             </div>
             <div id="menu">
                 <ul class="topnav">
-                    <li style="height:40px;" id="topnav1">
+                    <li id="topnav1">
                         <a href="<%= home_url%>" class="thedeal_btn" style="width:70px; padding-left:3px">The Deal</a>
-                        <ul class="subnav" id="topnav1">
+                        <ul class="subnav" id="topnav1" style="left:0px;">
                             <!--<li><a href="#">Last minute deals </a></li>
                             <li><a href="#">Ongoing Deals </a></li>-->
                             <li>

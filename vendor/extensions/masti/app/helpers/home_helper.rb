@@ -1,4 +1,23 @@
 module HomeHelper
+  
+  def web_browser
+      ua = request.env["HTTP_USER_AGENT"]
+      return "Firefox3" if ua[/Firefox\/3/]=="Firefox/3"
+      return "Firefox2" if ua[/Firefox\/2/]=="Firefox/2"
+      return "MSIE6" if ua[/MSIE 6/]=="MSIE 6"
+      return "MSIE7" if ua[/MSIE 7/]=="MSIE 7"
+      return "MSIE8" if ua[/MSIE 8/]=="MSIE 8"
+      return "Opera" if ua[/Opera/]=="Opera"
+    end
+      
+    def ie_check
+       ua = web_browser()
+      if ua == "MSIE6" or ua == "MSIE7"
+        return true
+      else
+        return false
+      end
+    end
 
   def progress_bar current_deal
       if current_deal.currently_bought_count>=current_deal.minimum_number

@@ -79,8 +79,9 @@
     </div>
 </div>
 <div id="content_middle">
-    <div id="deal_container">
-        <div id="timeleft">
+    <div id="deal_container" style="padding-top: <%if ie_check%>2<%else%>6<%end%>px;">
+        
+		<div id="timeleft">
             <p class="rightdeal_para">
                 Time left
             </p>
@@ -115,22 +116,26 @@
             <%if @deal and deal_live @deal, @featured_product %>
 				<%= link_to "<img src='/images/new_images/buy-now-button.jpg' alt='buy now this deal' width='116' height='36' border='0' />", @featured_product %>
 			<%else%>
-				<img alt="Sold Out" title="Sold Out" src="/images/new_images/Sold-Out.png">
+				<%if ie_check%>
+					<img alt="Sold Out" title="Sold Out" src="/images/new_images/Sold-Out-with_bg.png" height="36px" style="height:36px;width:90%">
+				<%else%>
+					<img alt="Sold Out" title="Sold Out" src="/images/new_images/Sold-Out.png">
+				<%end%>
 			<%end%>
         </div>
-        <div id="people">
+        <div id="people" style="line-height: 20px;">
             <p>
                 <span style="font-size:16px; float:left;"><%= @bought_count %></span>&nbsp;
                 people bought the deals
             </p>
-            <div style="padding-left: 10px; padding-top: 10px;">
+             <div style="padding-left: 15px; font-size: 8px;">
                 <div class="progress_bar">
                     <div class="progress_barred" id="progress" style="float:left;">
                     </div>
                 </div>
             </div>
-            <!--img src="/images/new_images/bought_percentage.png" width="75" height="24" alt="bought percentage" style="margin-left:15px;"/-->
-            <p style="padding-left:40px;padding-bottom:10px;">
+          <!-- img src="/images/new_images/bought_percentage.png" width="75" height="24" alt="bought percentage" style="margin-left:15px;"/-->
+            <p style="padding-left:40px;">
                 <%if @deal and deal_live @deal, @featured_product %>
                 <%if deal_on @featured_product %>
                 Hurray, the deal is already on.<%else %>
@@ -209,7 +214,7 @@
                         <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#983F96; font-weight:bold;">: </span>
                     </td>
                     <td>
-                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;">40%</span>
+                        <span style="font-family:Tahoma, Geneva, sans-serif; font-size:12px; color:#F59628; font-weight:bold;"><%= side_deal_product.discount %>%</span>
                     </td>
                 </tr>
                 <tr>
@@ -318,7 +323,7 @@
         	document.getElementById('detailsandcatche_container').style.height='auto';
         	document.getElementById('detail_div').innerHTML='<a href="javascript:hide_extra_details();" class="knowmore">Hide More Details</a>';
 			var height = document.getElementById("detailsandcatche_container").offsetHeight;
-			var side_deal = height-15;
+			var side_deal = height-12;
 			var right_side = height+260;
 			document.getElementById("content_rightmost").style.height = right_side+"px";
 			document.getElementById("todayssidedeal_container").style.height = side_deal+"px";
@@ -328,7 +333,7 @@
         	document.getElementById('detailsandcatche_container').style.height='200px';
         	document.getElementById('detail_div').innerHTML='<a href="javascript:call_extra_details();" class="knowmore">click to know more</a>';
 			document.getElementById("content_rightmost").style.height = "479px";
-			document.getElementById("todayssidedeal_container").style.height = "203px";
+			document.getElementById("todayssidedeal_container").style.height = "200px";
         }
         function show_chat()
         {
