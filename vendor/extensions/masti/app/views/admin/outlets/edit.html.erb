@@ -1,0 +1,43 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Outlets"} %>
+<h1>Editing outlet</h1>
+
+<% form_for(@outlet, :url => object_url, :html => { :method => :put }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :address1 %><br />
+    <%= f.text_field :address1 %>
+  </p>
+  <p>
+    <%= f.label :address2 %><br />
+    <%= f.text_field :address2 %>
+  </p>
+  <p>
+    <%= f.label :area %><br />
+    <%= f.text_field :area %>
+  </p>
+  <p>
+    <%= f.label :city_id %><br />
+   <%= f.select :city_id, get_city_names, {} -%>
+  </p>
+  <p>
+    <%= f.label :pincode %><br />
+    <%= f.text_field :pincode %>
+  </p>
+  <p>
+    <%= f.label :contact_person %><br />
+    <%= f.text_field :contact_person %>
+  </p>
+  <p>
+    <%= f.label :contact_no %><br />
+    <%= f.text_field :contact_no %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', admin_product_outlet_url(@product,@outlet) %> |
+<%= link_to 'Back', admin_product_outlets_url(@product) %>

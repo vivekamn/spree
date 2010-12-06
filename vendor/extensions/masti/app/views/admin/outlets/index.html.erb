@@ -1,0 +1,35 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Outlets"} %>
+<h1>Listing outlets</h1>
+
+<table>
+  <tr>
+    <th>Address1</th>
+    <th>Address2</th>
+	<th>Area</th>
+    <th>City</th>
+    <th>Pincode</th>
+    <th>Contact person</th>
+    <th>Contact no</th>
+  </tr>
+
+<% for outlet in @outlets %>
+  <tr>
+    <td><%=h outlet.address1 %></td>
+    <td><%=h outlet.address2 %></td>
+	<td><%=h outlet.area %></td>
+    <td><%=h outlet.city.name %></td>
+    <td><%=h outlet.pincode %></td>
+    <td><%=h outlet.contact_person %></td>
+    <td><%=h outlet.contact_no %></td>
+    <td><%= link_to 'Show', admin_product_outlet_url(@product,outlet) %></td>
+    <td><%= link_to_edit(outlet)%></td>
+    <td><%= link_to_delete(outlet) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New outlet', new_admin_product_outlet_url(@product) %>
