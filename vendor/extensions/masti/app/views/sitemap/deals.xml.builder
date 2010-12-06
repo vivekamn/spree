@@ -12,7 +12,7 @@ xml.deals do
       xml.guid product.id
       xml.link "http://www.masthideals.com/"
       xml.image "http://www.masthideals.com#{product.images.first.attachment.url(:large)}"  
-      xml.image-small "http://www.masthideals.com#{product.images.first.attachment.url(:small)}"
+      xml.image_small "http://www.masthideals.com#{product.images.first.attachment.url(:small)}"
       xml.title product.name
       xml.description do 
         xml.cdata! product.description.gsub(/<\/?[^>]*>/, "")
