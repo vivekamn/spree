@@ -93,8 +93,16 @@ map.bangalore '/bangalore', :controller=>'home', :action=>'index', :city_id => 2
 map.error '/nodeal', :controller => 'home', :action=> 'error'
 
 map.namespace :admin do |admin|
+    admin.resources :products, :member => {:clone => :get}, :has_many => [:product_properties, :images] do |product|
+      product.resources :variants
+      product.resources :option_types, :member => { :select => :get, :remove => :get}, :collection => {:available => :get, :selected => :get}
+      product.resources :taxons, :member => {:select => :post, :remove => :post}, :collection => {:available => :post, :selected => :get}
+      product.resources :outlets
+    end
    admin.resources :vendors
-end  
+end 
+
+
 map.order_failure 'orders/order_failure', :controller=>'orders', :action=>'failure'
 
 map.connect "sitemap.xml", :controller => "sitemap", :action => "sitemap"

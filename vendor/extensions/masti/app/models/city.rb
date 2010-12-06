@@ -3,4 +3,5 @@ class City < ActiveRecord::Base
   has_many :users
   has_many :deals_notifications
   has_many :sms_notifies
+  has_many :outlets
 end

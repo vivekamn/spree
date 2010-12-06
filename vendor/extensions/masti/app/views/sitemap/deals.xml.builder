@@ -12,7 +12,7 @@ xml.deals do
       xml.guid product.id
       xml.link "http://www.masthideals.com/"
       xml.image "http://www.masthideals.com#{product.images.first.attachment.url(:large)}"  
-      xml.image_small "http://www.masthideals.com#{product.images.first.attachment.url(:small)}"
+      xml.image-small "http://www.masthideals.com#{product.images.first.attachment.url(:small)}"
       xml.title product.name
       xml.description do 
         xml.cdata! product.description.gsub(/<\/?[^>]*>/, "")
@@ -44,9 +44,9 @@ xml.deals do
           xml.street_address address_arr[0] unless address_arr.empty?
           xml.extended_address address_arr[1] unless address_arr[1].nil? or address_arr[1]== address_arr.last
           area = address_arr.empty? ? "" : address_arr.last.split(',')[0]
-          city = City.find(product.city_id)
-          xml.locality "#{area},#{city.name}"
-          xml.region city.state.name
+          city = product.vendor.city
+          xml.locality "#{area},#{product.vendor.city}"
+          xml.region product.vendor.state.name
           xml.postal_code product.vendor.zip
           xml.country "India"
           xml.geo do
@@ -58,6 +58,25 @@ xml.deals do
             xml.number " +91-44-45530050"
           end
         end
+        product.outlets.each do |outlet|
+        xml.outlet do
+          xml.name product.vendor.name
+          xml.street_address outlet.address1
+          xml.extended_address outlet.address2
+          city = outlet.city
+          xml.locality "#{outlet.area},#{city.name}"
+          xml.region city.state.name
+          xml.postal_code outlet.pincode
+          xml.country "India"
+          xml.geo do
+            xml.latitude ""
+            xml.longitude ""
+          end
+          xml.phones do
+            xml.number outlet.contact_no
+          end
+        end
+      end
       end
       xml.reviews do
         xml.review do

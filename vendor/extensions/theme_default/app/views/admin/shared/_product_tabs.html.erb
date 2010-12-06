@@ -16,6 +16,11 @@
         <%= link_to t("images"), admin_product_images_url(@product) %>
       </li>
     <% end %>
+	<% if url_options_authenticate?(:controller => 'admin/outlets') %>
+      <li<%= ' class="active"' if current == "Outlets" %>>
+        <%= link_to "Outlets", admin_product_outlets_url(@product) %>
+      </li>
+    <% end %>
     <% if url_options_authenticate?(:controller => 'admin/variants') %>
       <li<%= ' class="active"' if current == "Variants" %>>
         <%= link_to t("variants"),  admin_product_variants_url(@product)  %>
