@@ -11,7 +11,7 @@ xml.rss :version => "2.0" do
         xml.Image_Link "http://www.masthideals.com#{product.images.first.attachment.url(:large)}"
         xml.Offer_Detail product.side_deal_title.nil? ? "" : product.side_deal_title 
         xml.Discount product.discount
-        xml.actual_price  product.master.price
+        xml.Actual_Price  product.master.price
         xml.Saving(product.master.price - (product.master.price-((product.master.price*product.master.product.discount)/100)).to_i)
         xml.City_ID call_city_for_xml(product.city_id)
         xml.Offer_Url "http://www.masthideals.com/home/product_preview/#{product.permalink}"
