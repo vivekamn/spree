@@ -1,5 +1,10 @@
 module HomeHelper
   
+  def call_city_for_xml(city_id)
+    city_array = ['0','5','3','1','2','7']
+    return city_array[city_id]
+  end
+  
   def web_browser
       ua = request.env["HTTP_USER_AGENT"]
       return "Firefox3" if ua[/Firefox\/3/]=="Firefox/3"
