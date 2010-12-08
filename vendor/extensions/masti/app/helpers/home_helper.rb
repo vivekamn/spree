@@ -1,5 +1,22 @@
 module HomeHelper
   
+  def call_category_for_xml(category)
+    category_arr = {}
+    category_arr['Health, Beauty & Spa']=1
+    category_arr['Food & Dining']=2
+    category_arr['Entertainment']=3
+    category_arr['Electronics']=4
+    category_arr['Computers']=5
+    category_arr['Mobile']=6
+    category_arr['Gifts & Toys']=7
+    category_arr['Furniture & Furnishing']=8
+    category_arr['Books & Stationery']=9
+    category_arr['Automobiles']=10
+    category_arr['Travel & Holiday']=11
+    return category_arr[category].nil? ? "3" : category_arr[category]
+  end
+  
+  
   def call_city_for_xml(city_id)
     city_array = ['0','5','3','1','2','7']
     return city_array[city_id]

@@ -1,12 +1,12 @@
 xml.instruct! :xml, :version => '1.0', :encoding => 'UTF-8'
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.timestamp (Time.now).to_i
+    xml.timestamp Time.now.to_i
     xml.Merchant_ID("masthideals.com")
     
     @products.each do |product|
       xml.item do
-        xml.Category_ID product.category.nil? ? "" : product.category 
+        xml.Category_ID product.category.nil? ? "3" : call_category_for_xml(product.category) 
         xml.Image_Link do
           xml.cdata! "http://www.masthideals.com#{product.images.first.attachment.url(:large)}"
         end 
