@@ -18,7 +18,13 @@ xml.rss :version => "2.0" do
         xml.Saving(product.master.price - (product.master.price-((product.master.price*product.master.product.discount)/100)).to_i)
         xml.City_ID call_city_for_xml(product.city_id)
         xml.Offer_Url do 
-          xml.cdata! "http://www.masthideals.com/home/product_preview/#{product.permalink}"
+          if product.city_id==1
+            xml.cdata! "http://www.mustideals.com/idevaffiliate.php?id=107_15_1_49"  
+          elsif product.city_id==2
+            xml.cdata! "http://www.mustideals.com/idevaffiliate.php?id=107_16_1_51"
+          else
+            xml.cdata! "http://www.mustideals.com/idevaffiliate.php?id=107_17_1_50"
+          end
         end
       end
     end
