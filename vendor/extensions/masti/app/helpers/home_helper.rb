@@ -13,6 +13,8 @@ module HomeHelper
     category_arr['Books & Stationery']=9
     category_arr['Automobiles']=10
     category_arr['Travel & Holiday']=11
+    category_arr['Fashion & Accessories']=13
+    category_arr['Art & Hobby']=14
     return category_arr[category].nil? ? "3" : category_arr[category]
   end
   
