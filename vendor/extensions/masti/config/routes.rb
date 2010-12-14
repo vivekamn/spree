@@ -108,7 +108,7 @@ map.order_failure 'orders/order_failure', :controller=>'orders', :action=>'failu
 map.connect "sitemap.xml", :controller => "sitemap", :action => "sitemap"
 map.connect "deals.xml", :controller => "sitemap", :action => "deals"
 map.rss_feed_deals '/current_deals.xml', :controller => 'sitemap', :action => 'current_deals', :format => 'rss'
-
+map.rss_feed_deals_sunday '/current_deals_30sunday.xml', :controller => 'sitemap', :action => 'current_deals', :format => 'rss'
 #map.connect "chennai_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 1
 #map.connect "bangaluru_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 2
 #map.connect "hyderabad_deal.xml", :controller => "sitemap", :action => "main_deal", :city_id => 5
