@@ -26,7 +26,7 @@ xml.rss :version => "2.0" do
          xml.City_ID call_city_for_xml(product.city_id)
         end
         xml.Offer_Url do 
-          if request.request_uri=="/current_deals_30sunday.xml"
+          if request.request_uri!="/current_deals_30sunday.xml"
             if product.city_id==1
               xml.cdata! "http://www.mustideals.com/idevaffiliate.php?id=107_15_1_49"  
             elsif product.city_id==2
