@@ -98,6 +98,8 @@ ActionMailer::Base.delivery_method = :smtp
 Time::DATE_FORMATS[:date_time24] = "%Y-%m-%d %H:%M"
 Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
  
+ENV['INLINEDIR'] = File.join(RAILS_ROOT,'tmp')
+
 # Add new inflection rules using the following format
 # (all these examples are active by default):
 # Inflector.inflections do |inflect|
