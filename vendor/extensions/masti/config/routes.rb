@@ -84,10 +84,11 @@ map.email_camp_zylog '/email_camp_zylog', :controller => "home", :action => "ind
 map.chennai '/chennai', :controller=>'home', :action=>'index', :city_id => 1
 map.hyderabad '/hyderabad', :controller=>'home', :action=>'index', :city_id => 5
 map.bangalore '/bangalore', :controller=>'home', :action=>'index', :city_id => 2
-#map.chennai '/chennai', :controller=>'home', :action=>'index'
-#map.delhi '/delhi', :controller=>'home', :action=>'other_cities'
-#map.mumbai '/mumbai', :controller=>'home', :action=>'other_cities'
-#map.bangalore '/bangalore', :controller=>'home', :action=>'other_cities'
+map.delhi '/delhi', :controller=>'home', :action=>'index', :city_id => 6
+map.mumbai '/mumbai', :controller=>'home', :action=>'index', :city_id => 3
+map.kolkotta '/kolkotta', :controller=>'home', :action=>'index', :city_id => 7
+map.pune '/pune', :controller=>'home', :action=>'index', :city_id => 8
+map.chandigarh '/chandigarh', :controller=>'home', :action=>'index', :city_id => 9
 
 #error path
 map.error '/nodeal', :controller => 'home', :action=> 'error'
