@@ -57,8 +57,18 @@ module HomeHelper
           "Daily Deals in Chennai | Cheap Deals Discount | Great Discount Coupons | Best Deals Website - Masthideals.com" 
        elsif session[:city_id].to_s == '2'
           "Bengaluru Restaurant Deals | Good Spa Reviews | Online Shopping Discount | Movie Tickets Coupon - Masthideals.com"
+       elsif session[:city_id].to_s == '3'
+          "Best Deals on Restaurants, Saloons, Gyms, Entertainment in Mumbai, India - Masthideals.com"   
        elsif session[:city_id].to_s == '5'
           "Hyderabad Spa Discounts | Online Restaurant Coupons | Good Shopping Reviews | Adventure Sports Tickets - Masthideals.com"
+       elsif session[:city_id].to_s == '6'
+          "Hot Deals on Spas, Restaurants, Movie Tickets, Jewellery in Delhi-NCR, India - Masthideals.com"
+       elsif session[:city_id].to_s == '7'
+          "Online Shopping Discounts on Pubs, Spas, Health, Hotels in Kolkata, India - Masthideals.com"   
+       elsif session[:city_id].to_s == '8'
+          "Daily Good Deals on Gyms, Beauty Salons, Food Coupons in Pune, India - Masthideals.com"
+       elsif session[:city_id].to_s == '9'
+          "Great Discount Deals on Hotels, Movies, Adventure Sports in Chandigarh, India - Masthideals.com"   
        end
     else
       @page_title

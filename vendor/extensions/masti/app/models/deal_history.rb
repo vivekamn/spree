@@ -40,8 +40,10 @@ class DealHistory < ActiveRecord::Base
           end
           flag = 2
       end
-      query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
-      result = ActiveRecord::Base.connection.execute(query)
+      unless qry_str==""
+        query = "INSERT INTO jenooutbox (mobilenumber,message) VALUES #{qry_str};"
+        result = ActiveRecord::Base.connection.execute(query)
+      end       
       all_emails = all_deals_notify_email.concat(all_user_email)
       all_emails = all_emails.uniq
       all_email_arr = []
