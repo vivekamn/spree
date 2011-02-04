@@ -59,7 +59,7 @@ class Admin::OrdersController < Admin::BaseController
   def collection
 #    @search = Order.searchlogic(params[:search])
     unless params[:search].nil?
-      params[:search][:city_id]= session[:city_id]
+#      params[:search][:city_id]= session[:city_id]
       @search = Order.searchlogic(params[:search])
     else
      @search = Order.searchlogic(:city_id => session[:city_id]) 
